@@ -3,7 +3,7 @@
  * Plugin Name:       Stats4U
  * Plugin URI:        https://www.stats4u.net/
  * Description:       Puts a Stats4U counter on your site - as the shortcode [stats4u] or automatically in the footer. One image, no script, no cookie.
- * Version:           1.3.0
+ * Version:           1.3.1
  * Requires at least: 5.8
  * Requires PHP:      7.4
  * Author:            LW IT Solutions Company
@@ -211,13 +211,132 @@ function stats4u_kurzcode() {
     return wp_kses(stats4u_html(), stats4u_erlaubt());
 }
 
-// --- Automatisch im Fuss ---------------------------------------------------
-add_action('wp_footer', 'stats4u_fuss');
+// --- Automatisch unter dem Fussbereich des Themes ---------------------------
+//
+// BIS 1.3.0 hing der Zaehler an wp_footer, also direkt vor </body>. Das geht
+// nur gut, solange <body> ein gewoehnlicher Block ist. Auf lukaswojcik.com
+// (eigenes Theme, body { display: flex; align-items: center }) wurde er zur
+// zweiten Spalte NEBEN der ganzen Seite, auf halber Hoehe - gemessen am
+// 24.09.2026 bei x = 1124, y = 3456 von 6937 px. Im HTML stand er richtig;
+// sehen konnte man es erst auf einem Foto der Seite.
+//
+// Seit 1.3.1: die Ausgabe ab dem Ende von wp_head puffern (das ruft jedes
+// Theme; wp_body_open fehlt z. B. auf lukaswojcik.com) und den Zaehler bei
+// wp_footer direkt HINTER das </footer> des Seitenfusses setzen. Dort steht er
+// im selben Behaelter wie der Fussbereich und folgt dessen Fluss. Findet sich
+// kein Seitenfuss oder liegt inzwischen ein fremder Puffer obenauf, bleibt es
+// beim alten Platz vor </body> - schlechter als bis 1.3.0 wird es nie.
+
+function stats4u_fuss_aktiv() {
+    static $aktiv = null;
+    if ($aktiv === null) {
+        $e = stats4u_einstellungen();
+        $aktiv = !empty($e['fuss']) && $e['id'] !== '' && !is_admin() && !is_feed()
+              && !is_embed() && !wp_doing_ajax() && !(defined('REST_REQUEST') && REST_REQUEST);
+    }
+    return $aktiv;
+}
+
+// Vorrang PHP_INT_MAX: als letzter in wp_head, damit Puffer, die andere
+// Plugins dort oeffnen, UNTER dem eigenen liegen.
+add_action('wp_head', 'stats4u_puffer_start', PHP_INT_MAX);
+
+// Vorrang 0: Elementor Pro gibt seinen Fussbereich IN einem get_footer-Handler
+// aus und ruft dort auch wp_footer() - so liegt das schon im Puffer.
+add_action('get_footer', 'stats4u_puffer_fuss', 0);
+function stats4u_puffer_fuss() {
+    global $stats4u_puffer;
+    stats4u_puffer_start();
+    // Merken, wo im Puffer der Fussbereich des Themes beginnt.
+    if (!empty($stats4u_puffer) && $stats4u_puffer['fuss'] === null
+        && ob_get_level() === $stats4u_puffer['stufe']) {
+        $stats4u_puffer['fuss'] = (int) ob_get_length();
+    }
+}
+
+function stats4u_puffer_start() {
+    global $stats4u_puffer;
+    if (!empty($stats4u_puffer) || did_action('wp_footer') || !stats4u_fuss_aktiv()) { return; }
+    ob_start();
+    $stats4u_puffer = array('stufe' => ob_get_level(), 'fuss' => null);
+}
+
+/**
+ * Weist sich ein <footer ...>-Tag als Seitenfuss aus? Namen als ganze Woerter:
+ * "entry-footer" ist nicht "footer".
+ */
+function stats4u_ist_seitenfuss($tag) {
+    if (preg_match('/(?<![\w-])role\s*=\s*["\']?contentinfo\b/i', $tag)) { return true; }
+    $namen = array('colophon', 'footer', 'site-footer', 'main-footer', 'page-footer', 'global-footer',
+                   'wp-block-template-part', 'elementor-location-footer');
+    foreach (array('id', 'class') as $attr) {
+        if (preg_match('/(?<![\w-])' . $attr . '\s*=\s*(?:"([^"]*)"|\'([^\']*)\'|([^\s>]+))/i', $tag, $m)) {
+            $wert = strtolower(($m[1] ?? '') . ($m[2] ?? '') . ($m[3] ?? ''));
+            if (array_intersect(preg_split('/\s+/', trim($wert)), $namen)) { return true; }
+        }
+    }
+    return false;
+}
+
+/**
+ * Die Stelle direkt hinter dem </footer> des Seitenfusses, oder null.
+ *
+ * Erste Wahl ist das letzte <footer>, das sich als Seitenfuss ausweist
+ * (stats4u_ist_seitenfuss). Sonst das erste <footer> ab get_footer() - aber
+ * NUR dort: davor stehen Beitraege mit <footer class="entry-footer">.
+ */
+function stats4u_hinter_fuss($html, $fuss_ab) {
+    if (!preg_match_all('/<footer(?=[\s>\/])[^>]*>/i', $html, $auf, PREG_OFFSET_CAPTURE)) { return null; }
+    $start = null;
+    foreach ($auf[0] as $tag) {
+        if (stats4u_ist_seitenfuss($tag[0])) { $start = $tag[1]; }
+    }
+    if ($start === null && $fuss_ab !== null) {
+        foreach ($auf[0] as $tag) {
+            if ($tag[1] >= $fuss_ab) { $start = $tag[1]; break; }
+        }
+    }
+    if ($start === null) { return null; }
+    // Das passende </footer> suchen, verschachtelte mitgezaehlt.
+    if (!preg_match_all('/<(\/?)footer(?=[\s>\/])[^>]*>/i', $html, $tags, PREG_OFFSET_CAPTURE | PREG_SET_ORDER, $start)) { return null; }
+    $tiefe = 0;
+    foreach ($tags as $t) {
+        $tiefe += ($t[1][0] === '') ? 1 : -1;
+        if ($tiefe === 0) { return $t[0][1] + strlen($t[0][0]); }
+    }
+    return null;
+}
+
+// Vorrang PHP_INT_MIN: den eigenen Puffer schliessen, bevor irgendein anderer
+// wp_footer-Handler etwas ausgibt oder einen Puffer anfasst.
+add_action('wp_footer', 'stats4u_fuss', PHP_INT_MIN);
 function stats4u_fuss() {
-    $e = stats4u_einstellungen();
-    if (empty($e['fuss']) || $e['id'] === '') { return; }
-    echo '<div class="stats4u-fuss" style="text-align:center;margin:1em 0">'
-       . wp_kses(stats4u_html(), stats4u_erlaubt()) . '</div>';
+    global $stats4u_puffer;
+    static $fertig = false;
+    if ($fertig || !stats4u_fuss_aktiv()) { return; }
+    $fertig = true;
+
+    // clear: hinter gefloateten Fussbereichen; grid-column: in einem Raster ueber
+    // die volle Breite statt in die naechste freie Zelle.
+    $zaehler = '<div class="stats4u-fuss" style="clear:both;grid-column:1/-1;text-align:center;margin:1em 0">'
+             . wp_kses(stats4u_html(), stats4u_erlaubt()) . '</div>';
+
+    if (!empty($stats4u_puffer) && $stats4u_puffer['stufe'] > 0
+        && ob_get_level() === $stats4u_puffer['stufe']) {
+        $fuss_ab = $stats4u_puffer['fuss'];
+        $stats4u_puffer = array('stufe' => -1, 'fuss' => null);
+        $html = (string) ob_get_clean();
+        $stelle = stats4u_hinter_fuss($html, $fuss_ab);
+        if ($stelle !== null) {
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the theme's own, already rendered footer HTML, handed back unchanged; $zaehler is built with wp_kses() above
+            echo substr($html, 0, $stelle) . $zaehler . substr($html, $stelle);
+            return;
+        }
+        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the theme's own, already rendered footer HTML, handed back unchanged
+        echo $html;
+    }
+    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built with wp_kses() above
+    echo $zaehler;
 }
 
 // --- Einstellungsseite -----------------------------------------------------

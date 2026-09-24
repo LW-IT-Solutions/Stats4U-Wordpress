@@ -4,7 +4,7 @@ Tags: counter, hit counter, visitor counter, statistics, privacy
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,14 @@ They only apply to design 950, the adjustable counter. Pick them in the
 creator at stats4u.net and copy the names out of the image address. There are
 far too many to list here, and a list here would go stale.
 
+= Where exactly does the automatic counter appear? =
+
+Right below your theme's footer - behind the `<footer>` element that the theme
+outputs for its site footer. If the theme has no such element, it goes to the
+end of the page. If it lands somewhere odd anyway, untick the automatic
+option and put the shortcode `[stats4u]` where you want it, for example in a
+footer widget.
+
 = Does deleting the plugin delete my counter? =
 
 No. Deleting the plugin removes its single option from your database and
@@ -117,6 +125,11 @@ should not disappear because you tried a plugin and removed it again.
 2. The counter in the footer of a site.
 
 == Changelog ==
+
+= 1.3.1 =
+* The automatic counter now sits right below your theme's footer instead of
+  at the very end of the page. Themes that lay out <body> as a flex or grid
+  container showed it beside the page, halfway down.
 
 = 1.3.0 =
 * 16 more interface languages, 19 in total - the same as stats4u.net.
@@ -147,6 +160,9 @@ should not disappear because you tried a plugin and removed it again.
 * First release: shortcode, footer, dark mode, settings page.
 
 == Upgrade Notice ==
+
+= 1.3.1 =
+The automatic counter now works with themes that lay out the page body as a flex or grid container.
 
 = 1.3.0 =
 The settings page now speaks 19 languages.
