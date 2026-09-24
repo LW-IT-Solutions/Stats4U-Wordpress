@@ -1,0 +1,8 @@
+# Nicht in "git archive" / Release-ZIPs: nur fuer GitHub und die wordpress.org-Seite.
+/.wordpress-org export-ignore
+/.gitattributes export-ignore
+/.gitignore export-ignore
+/README.md export-ignore
+* text=auto eol=lf
+*.png binary
+*.mo binary

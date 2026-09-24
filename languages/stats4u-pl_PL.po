@@ -1,0 +1,78 @@
+# Stats4U Visitor Counter - pl_PL
+# Diese Datei liegt beim Plugin, damit die Uebersetzung auch ohne
+# wordpress.org mitkommt.
+msgid ""
+msgstr ""
+"Project-Id-Version: Stats4U Visitor Counter 1.2.0\n"
+"Report-Msgid-Bugs-To: https://www.stats4u.net/\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pl_PL\n"
+"X-Generator: von Hand, ohne gettext-Werkzeuge\n"
+
+msgid "A paragraph for your privacy policy is at %s."
+msgstr "Akapit do Twojej polityki prywatności znajdziesz pod %s."
+
+msgid "Counter number"
+msgstr "Numer licznika"
+
+msgid "Dark mode"
+msgstr "Tryb ciemny"
+
+msgid "Design"
+msgstr "Wzór"
+
+msgid "Otherwise put the shortcode [stats4u] wherever you like."
+msgstr "Albo wstaw krótki kod [stats4u] w dowolnym miejscu."
+
+msgid "Palette"
+msgstr "Paleta"
+
+msgid "Preview"
+msgstr "Podgląd"
+
+msgid "Puts a Stats4U counter on your site - as the shortcode [stats4u] or automatically in the footer. One image, no script, no cookie."
+msgstr "Wstawia licznik Stats4U na stronę – jako krótki kod [stats4u] albo automatycznie w stopce. Jeden obrazek, żadnego skryptu, żadnych ciasteczek."
+
+msgid "Shape"
+msgstr "Kształt"
+
+msgid "Shape and palette only apply to design 950. Pick them in the creator at %s and copy the names out of the address - there are far too many to list here, and a list here would go stale."
+msgstr "Kształt i paleta działają tylko dla wzoru 950. Ustaw je w kreatorze na %s i przepisz nazwy z adresu — jest ich o wiele za dużo, żeby je tu wypisywać, a spis w tym miejscu i tak by się zestarzał."
+
+msgid "Stats4U Visitor Counter"
+msgstr "Stats4U Licznik odwiedzin"
+
+msgid "The number from the gallery. 950 is the adjustable counter."
+msgstr "Numer z galerii. 950 to licznik, który da się ustawić."
+
+msgid "Visitor counter"
+msgstr "Licznik odwiedzin"
+
+msgid "Where to show it"
+msgstr "Gdzie pokazać"
+
+msgid "You need a counter number first. Get one at %s - no sign-up."
+msgstr "Najpierw potrzebujesz numeru licznika. Weź go na %s — bez zakładania konta."
+
+msgid "always dark"
+msgstr "zawsze ciemny"
+
+msgid "always light"
+msgstr "zawsze jasny"
+
+msgid "follow the device"
+msgstr "zgodnie z urządzeniem"
+
+msgid "show automatically in the footer"
+msgstr "pokazuj automatycznie w stopce"
+
+msgid "Link"
+msgstr "Link"
+
+msgid "link the counter to its public statistics page on stats4u.net"
+msgstr "linkuj licznik do jego publicznej strony statystyk na stats4u.net"
+
+msgid "Off by default. Visitors who click the counter then see your statistics."
+msgstr "Domyślnie wyłączone. Po włączeniu kliknięcie licznika pokazuje odwiedzającym Twoje statystyki."
