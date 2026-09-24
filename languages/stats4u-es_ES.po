@@ -2,69 +2,129 @@
 # Liegt beim Plugin, damit die Uebersetzung auch ohne wordpress.org mitkommt.
 msgid ""
 msgstr ""
-"Project-Id-Version: Stats4U 1.3.0\n"
+"Project-Id-Version: Stats4U 1.4.0\n"
 "Report-Msgid-Bugs-To: https://www.stats4u.net/\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: es_ES\n"
 
-msgid "A paragraph for your privacy policy is at %s."
-msgstr "Tienes un párrafo para tu política de privacidad en %s."
+msgid "This is a globe or map widget. The plugin shows image counters - pick an image design on stats4u.net."
+msgstr "Esto es un widget de globo o de mapa. El plugin muestra contadores en imagen: elige un diseño de imagen en stats4u.net."
 
-msgid "Counter number"
-msgstr "Número de contador"
+msgid "This is a link to a statistics page with a custom name. Paste the counter code instead - or just the counter number."
+msgstr "Esto es un enlace a una página de estadísticas con un nombre personalizado. Pega mejor el código del contador, o solo el número del contador."
 
-msgid "Dark mode"
-msgstr "Modo oscuro"
-
-msgid "Design"
-msgstr "Diseño"
-
-msgid "Otherwise put the shortcode [stats4u] wherever you like."
-msgstr "Si no, coloca el shortcode [stats4u] donde quieras."
-
-msgid "Palette"
-msgstr "Paleta"
-
-msgid "Preview"
-msgstr "Vista previa"
-
-msgid "Puts a Stats4U counter on your site - as the shortcode [stats4u] or automatically in the footer. One image, no script, no cookie."
-msgstr "Coloca un contador Stats4U en tu sitio: con el shortcode [stats4u] o automáticamente en el pie de página. Una imagen, sin script, sin cookies."
-
-msgid "Shape"
-msgstr "Forma"
-
-msgid "Shape and palette only apply to design 950. Pick them in the creator at %s and copy the names out of the address - there are far too many to list here, and a list here would go stale."
-msgstr "La forma y la paleta solo se aplican al diseño 950. Elígelas en el asistente de %s y copia los nombres de la dirección: son demasiados para enumerarlos aquí, y una lista aquí se quedaría anticuada."
-
-msgid "Stats4U Visitor Counter"
-msgstr "Stats4U Contador de visitas"
-
-msgid "The number from the gallery. 950 is the adjustable counter."
-msgstr "El número de la galería. 950 es el contador configurable."
+msgid "No Stats4U counter found in what you pasted. Paste the code from stats4u.net - or just the counter number."
+msgstr "No se ha encontrado ningún contador de Stats4U en lo que has pegado. Pega el código de stats4u.net, o solo el número del contador."
 
 msgid "Visitor counter"
 msgstr "Contador de visitas"
 
-msgid "Where to show it"
-msgstr "Dónde mostrarlo"
+msgid "Stats4U counter"
+msgstr "Contador Stats4U"
 
-msgid "You need a counter number first. Get one at %s - no sign-up."
-msgstr "Primero necesitas un número de contador. Consíguelo en %s, sin registro."
+msgid "Your visitor counter from stats4u.net."
+msgstr "Tu contador de visitas de stats4u.net."
 
-msgid "always dark"
-msgstr "siempre oscuro"
+msgid "Set up your counter first under Settings > Stats4U."
+msgstr "Primero configura tu contador en Ajustes > Stats4U."
 
-msgid "always light"
-msgstr "siempre claro"
+msgid "Stats4U"
+msgstr "Stats4U"
+
+msgid "Settings"
+msgstr "Ajustes"
+
+msgid "Your consent tool decides per service: add a service named \"%s\" there, in its statistics category - or enter the name you already use."
+msgstr "Tu herramienta de consentimiento decide por servicio: añade allí un servicio llamado «%s», en su categoría de estadísticas, o introduce el nombre que ya utilizas."
+
+msgid "Enter the ID your consent tool uses for statistics - its settings show it. Until then the counter does not load."
+msgstr "Introduce el ID que usa tu herramienta de consentimiento para las estadísticas; lo encontrarás en sus ajustes. Hasta entonces, el contador no se carga."
+
+msgid "Uses the category \"%s\" of your consent tool. Change it only if yours is called differently."
+msgstr "Usa la categoría «%s» de tu herramienta de consentimiento. Cámbiala solo si la tuya se llama de otra forma."
+
+msgid "Stats4U Visitor Counter"
+msgstr "Stats4U Contador de visitas"
+
+msgid "%s needs the ID it uses for statistics (see \"Category or service\" below). Until you enter it, the counter does not load."
+msgstr "%s necesita el ID que usa para las estadísticas (consulta «Categoría o servicio» más abajo). Hasta que lo introduzcas, el contador no se carga."
+
+msgid "Received from stats4u.net: counter %1$s, design %2$s. Click \"Save Changes\" to use it."
+msgstr "Recibido de stats4u.net: contador %1$s, diseño %2$s. Haz clic en «Guardar cambios» para usarlo."
+
+msgid "Paste the code you got on stats4u.net below - or create a free counter there first. No sign-up."
+msgstr "Pega abajo el código que obtuviste en stats4u.net, o crea antes allí un contador gratuito. Sin registro."
+
+msgid "Your counter"
+msgstr "Tu contador"
+
+msgid "Counter"
+msgstr "Contador"
+
+msgid "Counter %1$s, design %2$s"
+msgstr "Contador %1$s, diseño %2$s"
+
+msgid "Preview - not counted."
+msgstr "Vista previa: no se cuenta."
+
+msgid "Code from stats4u.net"
+msgstr "Código de stats4u.net"
+
+msgid "Paste your code"
+msgstr "Pega tu código"
+
+msgid "Use a different counter or code"
+msgstr "Usar otro contador u otro código"
+
+msgid "Paste the HTML, BBCode or image address from stats4u.net - or just the counter number. Design, colors, size and everything else you set there come along."
+msgstr "Pega el HTML, el BBCode o la dirección de la imagen de stats4u.net, o solo el número del contador. El diseño, los colores, el tamaño y todo lo demás que hayas configurado allí se conservan."
+
+msgid "Create a free counter on stats4u.net"
+msgstr "Crear un contador gratuito en stats4u.net"
+
+msgid "At the end, a button brings the code back here."
+msgstr "Al final, un botón trae el código de vuelta aquí."
+
+msgid "Appearance"
+msgstr "Apariencia"
+
+msgid "Size"
+msgstr "Tamaño"
+
+msgid "Sharp at any size for the modern designs. The classic pixel designs keep their original size."
+msgstr "Nítido a cualquier tamaño en los diseños modernos. Los diseños clásicos en píxeles mantienen su tamaño original."
+
+msgid "Language of the counter"
+msgstr "Idioma del contador"
+
+msgid "as set on stats4u.net"
+msgstr "como esté configurado en stats4u.net"
+
+msgid "the language of each page"
+msgstr "el idioma de cada página"
+
+msgid "Dark mode"
+msgstr "Modo oscuro"
 
 msgid "follow the device"
 msgstr "según el dispositivo"
 
-msgid "show automatically in the footer"
-msgstr "mostrar automáticamente en el pie de página"
+msgid "always light"
+msgstr "siempre claro"
+
+msgid "always dark"
+msgstr "siempre oscuro"
+
+msgid "Count"
+msgstr "Contar"
+
+msgid "every page view"
+msgstr "cada vista de página"
+
+msgid "unique visitors"
+msgstr "visitantes únicos"
 
 msgid "Link"
 msgstr "Enlace"
@@ -74,3 +134,99 @@ msgstr "enlazar el contador con su página pública de estadísticas en stats4u.
 
 msgid "Off by default. Visitors who click the counter then see your statistics."
 msgstr "Desactivado por defecto. Quien haga clic en el contador verá tus estadísticas."
+
+msgid "Placement"
+msgstr "Ubicación"
+
+msgid "Where to show it"
+msgstr "Dónde mostrarlo"
+
+msgid "below your theme's footer (recommended)"
+msgstr "debajo del pie de página de tu tema (recomendado)"
+
+msgid "inside your theme's footer, at its end"
+msgstr "dentro del pie de página de tu tema, al final"
+
+msgid "at the very end of the page"
+msgstr "al final de la página"
+
+msgid "below the content of posts and pages"
+msgstr "debajo del contenido de entradas y páginas"
+
+msgid "fixed in the bottom right corner"
+msgstr "fijo en la esquina inferior derecha"
+
+msgid "fixed in the bottom left corner"
+msgstr "fijo en la esquina inferior izquierda"
+
+msgid "nowhere automatically - I place it myself"
+msgstr "en ningún sitio automáticamente: lo coloco yo"
+
+msgid "To place it yourself, use the block \"Stats4U counter\" or the shortcode [stats4u] - for example in a footer widget."
+msgstr "Para colocarlo tú mismo, usa el bloque «Contador Stats4U» o el shortcode [stats4u], por ejemplo en un widget del pie de página."
+
+msgid "Alignment"
+msgstr "Alineación"
+
+msgid "left"
+msgstr "izquierda"
+
+msgid "center"
+msgstr "centro"
+
+msgid "right"
+msgstr "derecha"
+
+msgid "On which pages"
+msgstr "En qué páginas"
+
+msgid "on all pages"
+msgstr "en todas las páginas"
+
+msgid "only on the front page"
+msgstr "solo en la página de inicio"
+
+msgid "only on single posts and pages"
+msgstr "solo en entradas y páginas individuales"
+
+msgid "Consent"
+msgstr "Consentimiento"
+
+msgid "Load the counter"
+msgstr "Cargar el contador"
+
+msgid "right away - I use no consent tool"
+msgstr "de inmediato: no uso ninguna herramienta de consentimiento"
+
+msgid "Found on this site"
+msgstr "Encontradas en este sitio"
+
+msgid "after consent in %s"
+msgstr "tras el consentimiento en %s"
+
+msgid "Consent tools"
+msgstr "Herramientas de consentimiento"
+
+msgid "after consent in another tool - enter its attributes"
+msgstr "tras el consentimiento en otra herramienta: introduce sus atributos"
+
+msgid "With a consent tool, visitors who decline are not counted - your numbers will be lower."
+msgstr "Con una herramienta de consentimiento, los visitantes que lo rechazan no se cuentan: tus cifras serán más bajas."
+
+msgid "Category or service"
+msgstr "Categoría o servicio"
+
+msgid "Leave empty for the usual one of your tool. If your tool works with named services, enter the name you gave Stats4U there."
+msgstr "Déjalo vacío para usar la habitual de tu herramienta. Si tu herramienta funciona con servicios con nombre, introduce el nombre que allí le diste a Stats4U."
+
+msgid "Attributes"
+msgstr "Atributos"
+
+msgid "What your consent tool wants on a script it should only run after consent. Allowed: type, class and data-* attributes."
+msgstr "Lo que tu herramienta de consentimiento necesita en un script que solo debe ejecutarse tras el consentimiento. Se permiten los atributos type, class y data-*."
+
+msgid "A paragraph for your privacy policy is at %s."
+msgstr "Tienes un párrafo para tu política de privacidad en %s."
+
+msgid "Puts a Stats4U visitor counter on your site. Paste the code from stats4u.net, choose where it appears and, if you use a consent banner, let it decide when the counter loads."
+msgstr "Añade a tu sitio un contador de visitas de Stats4U. Pega el código de stats4u.net, elige dónde aparece y, si usas un banner de consentimiento, deja que decida cuándo se carga el contador."

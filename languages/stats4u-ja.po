@@ -2,69 +2,129 @@
 # Liegt beim Plugin, damit die Uebersetzung auch ohne wordpress.org mitkommt.
 msgid ""
 msgstr ""
-"Project-Id-Version: Stats4U 1.3.0\n"
+"Project-Id-Version: Stats4U 1.4.0\n"
 "Report-Msgid-Bugs-To: https://www.stats4u.net/\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ja\n"
 
-msgid "A paragraph for your privacy policy is at %s."
-msgstr "プライバシーポリシーに載せる文例は %s にあります。"
+msgid "This is a globe or map widget. The plugin shows image counters - pick an image design on stats4u.net."
+msgstr "これは地球儀または地図のウィジェットです。このプラグインで表示できるのは画像カウンターです。stats4u.net で画像のデザインを選んでください。"
 
-msgid "Counter number"
-msgstr "カウンター番号"
+msgid "This is a link to a statistics page with a custom name. Paste the counter code instead - or just the counter number."
+msgstr "これは独自の名前を付けた統計ページへのリンクです。代わりにカウンターのコード、またはカウンター番号だけを貼り付けてください。"
 
-msgid "Dark mode"
-msgstr "ダークモード"
-
-msgid "Design"
-msgstr "デザイン"
-
-msgid "Otherwise put the shortcode [stats4u] wherever you like."
-msgstr "または、ショートコード [stats4u] を好きな場所に入れてください。"
-
-msgid "Palette"
-msgstr "配色"
-
-msgid "Preview"
-msgstr "プレビュー"
-
-msgid "Puts a Stats4U counter on your site - as the shortcode [stats4u] or automatically in the footer. One image, no script, no cookie."
-msgstr "サイトに Stats4U のカウンターを設置します。ショートコード [stats4u] で入れるか、フッターに自動で表示します。画像ひとつだけで、スクリプトもクッキーも使いません。"
-
-msgid "Shape"
-msgstr "形"
-
-msgid "Shape and palette only apply to design 950. Pick them in the creator at %s and copy the names out of the address - there are far too many to list here, and a list here would go stale."
-msgstr "形と配色はデザイン 950 にだけ適用されます。%s の作成画面で選び、アドレスから名前を書き写してください。数が多すぎてここには並べきれませんし、ここに一覧を置いてもすぐ古くなります。"
-
-msgid "Stats4U Visitor Counter"
-msgstr "Stats4U アクセスカウンター"
-
-msgid "The number from the gallery. 950 is the adjustable counter."
-msgstr "ギャラリーの番号です。950 は細かく設定できるカウンターです。"
+msgid "No Stats4U counter found in what you pasted. Paste the code from stats4u.net - or just the counter number."
+msgstr "貼り付けた内容に Stats4U カウンターが見つかりません。stats4u.net のコード、またはカウンター番号だけを貼り付けてください。"
 
 msgid "Visitor counter"
 msgstr "アクセスカウンター"
 
-msgid "Where to show it"
-msgstr "表示する場所"
+msgid "Stats4U counter"
+msgstr "Stats4U カウンター"
 
-msgid "You need a counter number first. Get one at %s - no sign-up."
-msgstr "まずカウンター番号が必要です。%s で取得できます。登録は不要です。"
+msgid "Your visitor counter from stats4u.net."
+msgstr "stats4u.net のアクセスカウンターを表示します。"
 
-msgid "always dark"
-msgstr "常にダーク"
+msgid "Set up your counter first under Settings > Stats4U."
+msgstr "まず「設定 > Stats4U」でカウンターを設定してください。"
 
-msgid "always light"
-msgstr "常にライト"
+msgid "Stats4U"
+msgstr "Stats4U"
+
+msgid "Settings"
+msgstr "設定"
+
+msgid "Your consent tool decides per service: add a service named \"%s\" there, in its statistics category - or enter the name you already use."
+msgstr "同意管理ツールはサービスごとに判断します。ツールの統計カテゴリーに「%s」という名前のサービスを追加するか、すでに使っている名前を入力してください。"
+
+msgid "Enter the ID your consent tool uses for statistics - its settings show it. Until then the counter does not load."
+msgstr "同意管理ツールが統計に使う ID を入力してください（ツールの設定画面に表示されています）。入力するまでカウンターは読み込まれません。"
+
+msgid "Uses the category \"%s\" of your consent tool. Change it only if yours is called differently."
+msgstr "同意管理ツールのカテゴリー「%s」を使います。お使いのツールで名前が異なる場合のみ変更してください。"
+
+msgid "Stats4U Visitor Counter"
+msgstr "Stats4U アクセスカウンター"
+
+msgid "%s needs the ID it uses for statistics (see \"Category or service\" below). Until you enter it, the counter does not load."
+msgstr "%s には統計用の ID が必要です（下の「カテゴリーまたはサービス」を参照）。入力するまでカウンターは読み込まれません。"
+
+msgid "Received from stats4u.net: counter %1$s, design %2$s. Click \"Save Changes\" to use it."
+msgstr "stats4u.net から受け取りました：カウンター %1$s、デザイン %2$s。使用するには「変更を保存」をクリックしてください。"
+
+msgid "Paste the code you got on stats4u.net below - or create a free counter there first. No sign-up."
+msgstr "stats4u.net で取得したコードを下に貼り付けてください。まだの場合は、先に stats4u.net で無料のカウンターを作成できます。登録は不要です。"
+
+msgid "Your counter"
+msgstr "お使いのカウンター"
+
+msgid "Counter"
+msgstr "カウンター"
+
+msgid "Counter %1$s, design %2$s"
+msgstr "カウンター %1$s、デザイン %2$s"
+
+msgid "Preview - not counted."
+msgstr "プレビュー（カウントされません）"
+
+msgid "Code from stats4u.net"
+msgstr "stats4u.net のコード"
+
+msgid "Paste your code"
+msgstr "コードを貼り付ける"
+
+msgid "Use a different counter or code"
+msgstr "別のカウンターまたはコードを使う"
+
+msgid "Paste the HTML, BBCode or image address from stats4u.net - or just the counter number. Design, colors, size and everything else you set there come along."
+msgstr "stats4u.net の HTML、BBCode、画像の URL、またはカウンター番号だけを貼り付けてください。デザイン、色、サイズなど、そこで設定した内容はすべて引き継がれます。"
+
+msgid "Create a free counter on stats4u.net"
+msgstr "stats4u.net で無料のカウンターを作成"
+
+msgid "At the end, a button brings the code back here."
+msgstr "最後にボタンを押すと、コードがこのページに戻ってきます。"
+
+msgid "Appearance"
+msgstr "外観"
+
+msgid "Size"
+msgstr "サイズ"
+
+msgid "Sharp at any size for the modern designs. The classic pixel designs keep their original size."
+msgstr "モダンなデザインはどのサイズでもくっきり表示されます。クラシックなピクセルデザインは元のサイズのままです。"
+
+msgid "Language of the counter"
+msgstr "カウンターの言語"
+
+msgid "as set on stats4u.net"
+msgstr "stats4u.net の設定どおり"
+
+msgid "the language of each page"
+msgstr "各ページの言語に合わせる"
+
+msgid "Dark mode"
+msgstr "ダークモード"
 
 msgid "follow the device"
 msgstr "端末に合わせる"
 
-msgid "show automatically in the footer"
-msgstr "フッターに自動で表示する"
+msgid "always light"
+msgstr "常にライト"
+
+msgid "always dark"
+msgstr "常にダーク"
+
+msgid "Count"
+msgstr "カウント対象"
+
+msgid "every page view"
+msgstr "すべてのページビュー"
+
+msgid "unique visitors"
+msgstr "ユニーク訪問者"
 
 msgid "Link"
 msgstr "リンク"
@@ -74,3 +134,99 @@ msgstr "カウンターを stats4u.net の公開統計ページにリンクす�
 
 msgid "Off by default. Visitors who click the counter then see your statistics."
 msgstr "初期状態ではオフです。オンにすると、カウンターをクリックした訪問者があなたの統計を見られます。"
+
+msgid "Placement"
+msgstr "設置場所"
+
+msgid "Where to show it"
+msgstr "表示する場所"
+
+msgid "below your theme's footer (recommended)"
+msgstr "テーマのフッターの下（推奨）"
+
+msgid "inside your theme's footer, at its end"
+msgstr "テーマのフッター内の末尾"
+
+msgid "at the very end of the page"
+msgstr "ページの一番最後"
+
+msgid "below the content of posts and pages"
+msgstr "投稿と固定ページの本文の下"
+
+msgid "fixed in the bottom right corner"
+msgstr "右下に固定"
+
+msgid "fixed in the bottom left corner"
+msgstr "左下に固定"
+
+msgid "nowhere automatically - I place it myself"
+msgstr "自動では表示しない（自分で配置する）"
+
+msgid "To place it yourself, use the block \"Stats4U counter\" or the shortcode [stats4u] - for example in a footer widget."
+msgstr "自分で配置するには、「Stats4U カウンター」ブロックまたはショートコード [stats4u] を使います（例：フッターのウィジェット内）。"
+
+msgid "Alignment"
+msgstr "配置"
+
+msgid "left"
+msgstr "左揃え"
+
+msgid "center"
+msgstr "中央揃え"
+
+msgid "right"
+msgstr "右揃え"
+
+msgid "On which pages"
+msgstr "表示するページ"
+
+msgid "on all pages"
+msgstr "すべてのページ"
+
+msgid "only on the front page"
+msgstr "フロントページのみ"
+
+msgid "only on single posts and pages"
+msgstr "個別の投稿と固定ページのみ"
+
+msgid "Consent"
+msgstr "同意"
+
+msgid "Load the counter"
+msgstr "カウンターの読み込み"
+
+msgid "right away - I use no consent tool"
+msgstr "すぐに読み込む（同意管理ツールは使っていない）"
+
+msgid "Found on this site"
+msgstr "このサイトで検出"
+
+msgid "after consent in %s"
+msgstr "%s で同意を得た後"
+
+msgid "Consent tools"
+msgstr "同意管理ツール"
+
+msgid "after consent in another tool - enter its attributes"
+msgstr "他のツールで同意を得た後（属性を入力）"
+
+msgid "With a consent tool, visitors who decline are not counted - your numbers will be lower."
+msgstr "同意管理ツールを使うと、拒否した訪問者はカウントされないため、数値は少なくなります。"
+
+msgid "Category or service"
+msgstr "カテゴリーまたはサービス"
+
+msgid "Leave empty for the usual one of your tool. If your tool works with named services, enter the name you gave Stats4U there."
+msgstr "空欄にすると、ツールの標準のカテゴリーを使います。ツールが名前付きのサービスで管理している場合は、そこで Stats4U に付けた名前を入力してください。"
+
+msgid "Attributes"
+msgstr "属性"
+
+msgid "What your consent tool wants on a script it should only run after consent. Allowed: type, class and data-* attributes."
+msgstr "同意後にのみ実行するスクリプトに、同意管理ツールが求める属性です。使用できるのは type、class、data-* 属性です。"
+
+msgid "A paragraph for your privacy policy is at %s."
+msgstr "プライバシーポリシーに載せる文例は %s にあります。"
+
+msgid "Puts a Stats4U visitor counter on your site. Paste the code from stats4u.net, choose where it appears and, if you use a consent banner, let it decide when the counter loads."
+msgstr "サイトに Stats4U アクセスカウンターを設置します。stats4u.net のコードを貼り付けて表示場所を選べます。同意バナーを使っている場合は、カウンターを読み込むタイミングをバナーに任せられます。"

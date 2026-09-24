@@ -2,69 +2,129 @@
 # Liegt beim Plugin, damit die Uebersetzung auch ohne wordpress.org mitkommt.
 msgid ""
 msgstr ""
-"Project-Id-Version: Stats4U 1.3.0\n"
+"Project-Id-Version: Stats4U 1.4.0\n"
 "Report-Msgid-Bugs-To: https://www.stats4u.net/\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ar\n"
 
-msgid "A paragraph for your privacy policy is at %s."
-msgstr "تجد فقرة جاهزة لسياسة الخصوصية لديك على %s."
+msgid "This is a globe or map widget. The plugin shows image counters - pick an image design on stats4u.net."
+msgstr "هذه أداة ودجت لكرة أرضية أو خريطة. تعرض الإضافة عدادات على شكل صور – اختر تصميمًا مصوَّرًا على stats4u.net."
 
-msgid "Counter number"
-msgstr "رقم العداد"
+msgid "This is a link to a statistics page with a custom name. Paste the counter code instead - or just the counter number."
+msgstr "هذا رابط لصفحة إحصائيات باسم مخصص. الصق كود العداد بدلًا منه – أو رقم العداد فقط."
 
-msgid "Dark mode"
-msgstr "الوضع الداكن"
-
-msgid "Design"
-msgstr "التصميم"
-
-msgid "Otherwise put the shortcode [stats4u] wherever you like."
-msgstr "أو ضع الكود المختصر [stats4u] في أي مكان تريده."
-
-msgid "Palette"
-msgstr "لوحة الألوان"
-
-msgid "Preview"
-msgstr "معاينة"
-
-msgid "Puts a Stats4U counter on your site - as the shortcode [stats4u] or automatically in the footer. One image, no script, no cookie."
-msgstr "يضع عداد Stats4U على موقعك، بالكود المختصر [stats4u] أو تلقائيًا في التذييل. صورة واحدة، بلا سكربت وبلا ملفات تعريف ارتباط."
-
-msgid "Shape"
-msgstr "الشكل"
-
-msgid "Shape and palette only apply to design 950. Pick them in the creator at %s and copy the names out of the address - there are far too many to list here, and a list here would go stale."
-msgstr "لا ينطبق الشكل ولوحة الألوان إلا على التصميم 950. اخترهما في أداة الإنشاء على %s وانسخ اسميهما من العنوان، فهي أكثر بكثير من أن تُسرد هنا، وأي قائمة هنا ستتقادم سريعًا."
-
-msgid "Stats4U Visitor Counter"
-msgstr "Stats4U عداد الزوار"
-
-msgid "The number from the gallery. 950 is the adjustable counter."
-msgstr "الرقم من المعرض. التصميم 950 هو العداد القابل للتخصيص."
+msgid "No Stats4U counter found in what you pasted. Paste the code from stats4u.net - or just the counter number."
+msgstr "لم يُعثر على عداد Stats4U فيما لصقته. الصق الكود من stats4u.net – أو رقم العداد فقط."
 
 msgid "Visitor counter"
 msgstr "عداد الزوار"
 
-msgid "Where to show it"
-msgstr "مكان العرض"
+msgid "Stats4U counter"
+msgstr "عداد Stats4U"
 
-msgid "You need a counter number first. Get one at %s - no sign-up."
-msgstr "تحتاج أولًا إلى رقم عداد. احصل عليه من %s دون تسجيل."
+msgid "Your visitor counter from stats4u.net."
+msgstr "عداد الزوار الخاص بك من stats4u.net."
 
-msgid "always dark"
-msgstr "داكن دائمًا"
+msgid "Set up your counter first under Settings > Stats4U."
+msgstr "أعِدّ العداد أولًا من الإعدادات > Stats4U."
 
-msgid "always light"
-msgstr "فاتح دائمًا"
+msgid "Stats4U"
+msgstr "Stats4U"
+
+msgid "Settings"
+msgstr "الإعدادات"
+
+msgid "Your consent tool decides per service: add a service named \"%s\" there, in its statistics category - or enter the name you already use."
+msgstr "تقرر أداة الموافقة لديك لكل خدمة على حدة: أضف هناك خدمة باسم «%s» ضمن فئة الإحصائيات – أو أدخل الاسم الذي تستخدمه بالفعل."
+
+msgid "Enter the ID your consent tool uses for statistics - its settings show it. Until then the counter does not load."
+msgstr "أدخل المعرّف الذي تستخدمه أداة الموافقة لديك للإحصائيات – تجده في إعداداتها. وإلى أن تُدخله لن يُحمَّل العداد."
+
+msgid "Uses the category \"%s\" of your consent tool. Change it only if yours is called differently."
+msgstr "تُستخدم الفئة «%s» من أداة الموافقة لديك. غيّرها فقط إذا كان اسمها لديك مختلفًا."
+
+msgid "Stats4U Visitor Counter"
+msgstr "Stats4U عداد الزوار"
+
+msgid "%s needs the ID it uses for statistics (see \"Category or service\" below). Until you enter it, the counter does not load."
+msgstr "تحتاج %s إلى المعرّف الذي تستخدمه للإحصائيات (انظر «الفئة أو الخدمة» أدناه). لن يُحمَّل العداد إلى أن تُدخله."
+
+msgid "Received from stats4u.net: counter %1$s, design %2$s. Click \"Save Changes\" to use it."
+msgstr "تم الاستلام من stats4u.net: العداد %1$s، التصميم %2$s. انقر على «حفظ التغييرات» لاستخدامه."
+
+msgid "Paste the code you got on stats4u.net below - or create a free counter there first. No sign-up."
+msgstr "الصق أدناه الكود الذي حصلت عليه من stats4u.net – أو أنشئ هناك عدادًا مجانيًا أولًا. دون تسجيل."
+
+msgid "Your counter"
+msgstr "عدادك"
+
+msgid "Counter"
+msgstr "العداد"
+
+msgid "Counter %1$s, design %2$s"
+msgstr "العداد %1$s، التصميم %2$s"
+
+msgid "Preview - not counted."
+msgstr "معاينة – لا تُحتسب."
+
+msgid "Code from stats4u.net"
+msgstr "الكود من stats4u.net"
+
+msgid "Paste your code"
+msgstr "الصق الكود الخاص بك"
+
+msgid "Use a different counter or code"
+msgstr "استخدم عدادًا أو كودًا آخر"
+
+msgid "Paste the HTML, BBCode or image address from stats4u.net - or just the counter number. Design, colors, size and everything else you set there come along."
+msgstr "الصق كود HTML أو BBCode أو عنوان الصورة من stats4u.net – أو رقم العداد فقط. ينتقل معه التصميم والألوان والحجم وكل ما ضبطته هناك."
+
+msgid "Create a free counter on stats4u.net"
+msgstr "أنشئ عدادًا مجانيًا على stats4u.net"
+
+msgid "At the end, a button brings the code back here."
+msgstr "في النهاية يعيد زرٌّ الكود إلى هنا."
+
+msgid "Appearance"
+msgstr "المظهر"
+
+msgid "Size"
+msgstr "الحجم"
+
+msgid "Sharp at any size for the modern designs. The classic pixel designs keep their original size."
+msgstr "حادّ بأي حجم في التصاميم الحديثة. أما تصاميم البكسل الكلاسيكية فتحتفظ بحجمها الأصلي."
+
+msgid "Language of the counter"
+msgstr "لغة العداد"
+
+msgid "as set on stats4u.net"
+msgstr "كما هي مضبوطة على stats4u.net"
+
+msgid "the language of each page"
+msgstr "لغة كل صفحة"
+
+msgid "Dark mode"
+msgstr "الوضع الداكن"
 
 msgid "follow the device"
 msgstr "يتبع الجهاز"
 
-msgid "show automatically in the footer"
-msgstr "عرض تلقائي في التذييل"
+msgid "always light"
+msgstr "فاتح دائمًا"
+
+msgid "always dark"
+msgstr "داكن دائمًا"
+
+msgid "Count"
+msgstr "ما يُحتسب"
+
+msgid "every page view"
+msgstr "كل مشاهدة صفحة"
+
+msgid "unique visitors"
+msgstr "الزوار الفريدون"
 
 msgid "Link"
 msgstr "الرابط"
@@ -74,3 +134,99 @@ msgstr "ربط العداد بصفحة إحصائياته العامة على st
 
 msgid "Off by default. Visitors who click the counter then see your statistics."
 msgstr "معطّل افتراضيًا. عند تفعيله، يرى الزوار الذين ينقرون على العداد إحصائياتك."
+
+msgid "Placement"
+msgstr "الموضع"
+
+msgid "Where to show it"
+msgstr "مكان العرض"
+
+msgid "below your theme's footer (recommended)"
+msgstr "أسفل تذييل القالب (موصى به)"
+
+msgid "inside your theme's footer, at its end"
+msgstr "داخل تذييل القالب، في نهايته"
+
+msgid "at the very end of the page"
+msgstr "في نهاية الصفحة تمامًا"
+
+msgid "below the content of posts and pages"
+msgstr "أسفل محتوى المقالات والصفحات"
+
+msgid "fixed in the bottom right corner"
+msgstr "ثابت في الزاوية السفلية اليمنى"
+
+msgid "fixed in the bottom left corner"
+msgstr "ثابت في الزاوية السفلية اليسرى"
+
+msgid "nowhere automatically - I place it myself"
+msgstr "لا مكان تلقائيًا – سأضعه بنفسي"
+
+msgid "To place it yourself, use the block \"Stats4U counter\" or the shortcode [stats4u] - for example in a footer widget."
+msgstr "لوضعه بنفسك استخدم المكوّن «عداد Stats4U» أو الرمز المختصر [stats4u] – في ودجت التذييل مثلًا."
+
+msgid "Alignment"
+msgstr "المحاذاة"
+
+msgid "left"
+msgstr "يسار"
+
+msgid "center"
+msgstr "وسط"
+
+msgid "right"
+msgstr "يمين"
+
+msgid "On which pages"
+msgstr "في أي الصفحات"
+
+msgid "on all pages"
+msgstr "في كل الصفحات"
+
+msgid "only on the front page"
+msgstr "في الصفحة الرئيسية فقط"
+
+msgid "only on single posts and pages"
+msgstr "في المقالات والصفحات المفردة فقط"
+
+msgid "Consent"
+msgstr "الموافقة"
+
+msgid "Load the counter"
+msgstr "تحميل العداد"
+
+msgid "right away - I use no consent tool"
+msgstr "فورًا – لا أستخدم أداة موافقة"
+
+msgid "Found on this site"
+msgstr "موجودة على هذا الموقع"
+
+msgid "after consent in %s"
+msgstr "بعد الموافقة في %s"
+
+msgid "Consent tools"
+msgstr "أدوات الموافقة"
+
+msgid "after consent in another tool - enter its attributes"
+msgstr "بعد الموافقة في أداة أخرى – أدخل سماتها"
+
+msgid "With a consent tool, visitors who decline are not counted - your numbers will be lower."
+msgstr "مع أداة الموافقة لا يُحتسب الزوار الذين يرفضون – ستكون أرقامك أقل."
+
+msgid "Category or service"
+msgstr "الفئة أو الخدمة"
+
+msgid "Leave empty for the usual one of your tool. If your tool works with named services, enter the name you gave Stats4U there."
+msgstr "اتركه فارغًا لاستخدام الفئة المعتادة في أداتك. وإذا كانت أداتك تعمل بخدمات مسمّاة، فأدخل الاسم الذي أعطيته لـ Stats4U هناك."
+
+msgid "Attributes"
+msgstr "السمات"
+
+msgid "What your consent tool wants on a script it should only run after consent. Allowed: type, class and data-* attributes."
+msgstr "ما تطلبه أداة الموافقة لديك على سكربت يجب ألا يعمل إلا بعد الموافقة. المسموح: السمات type وclass وdata-*."
+
+msgid "A paragraph for your privacy policy is at %s."
+msgstr "تجد فقرة جاهزة لسياسة الخصوصية لديك على %s."
+
+msgid "Puts a Stats4U visitor counter on your site. Paste the code from stats4u.net, choose where it appears and, if you use a consent banner, let it decide when the counter loads."
+msgstr "يضيف عداد زوار Stats4U إلى موقعك. الصق الكود من stats4u.net واختر مكان ظهوره، وإن كنت تستخدم لافتة موافقة على ملفات تعريف الارتباط فدعها تقرر متى يُحمَّل العداد."

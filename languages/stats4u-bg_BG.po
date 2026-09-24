@@ -2,69 +2,129 @@
 # Liegt beim Plugin, damit die Uebersetzung auch ohne wordpress.org mitkommt.
 msgid ""
 msgstr ""
-"Project-Id-Version: Stats4U 1.3.0\n"
+"Project-Id-Version: Stats4U 1.4.0\n"
 "Report-Msgid-Bugs-To: https://www.stats4u.net/\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: bg_BG\n"
 
-msgid "A paragraph for your privacy policy is at %s."
-msgstr "Абзац за вашата политика за поверителност ще намерите на %s."
+msgid "This is a globe or map widget. The plugin shows image counters - pick an image design on stats4u.net."
+msgstr "Това е джаджа с глобус или карта. Разширението показва броячи-изображения – изберете дизайн с изображение на stats4u.net."
 
-msgid "Counter number"
-msgstr "Номер на брояча"
+msgid "This is a link to a statistics page with a custom name. Paste the counter code instead - or just the counter number."
+msgstr "Това е връзка към страница със статистика с потребителско име. Поставете вместо това кода на брояча – или само номера на брояча."
 
-msgid "Dark mode"
-msgstr "Тъмен режим"
-
-msgid "Design"
-msgstr "Дизайн"
-
-msgid "Otherwise put the shortcode [stats4u] wherever you like."
-msgstr "Или поставете краткия код [stats4u] където пожелаете."
-
-msgid "Palette"
-msgstr "Палитра"
-
-msgid "Preview"
-msgstr "Преглед"
-
-msgid "Puts a Stats4U counter on your site - as the shortcode [stats4u] or automatically in the footer. One image, no script, no cookie."
-msgstr "Поставя брояч на Stats4U на сайта ви – като кратък код [stats4u] или автоматично в долния колонтитул. Едно изображение, без скрипт, без бисквитки."
-
-msgid "Shape"
-msgstr "Форма"
-
-msgid "Shape and palette only apply to design 950. Pick them in the creator at %s and copy the names out of the address - there are far too many to list here, and a list here would go stale."
-msgstr "Формата и палитрата важат само за дизайн 950. Изберете ги в съветника на %s и копирайте имената от адреса – те са твърде много, за да бъдат изброени тук, а и такъв списък бързо би остарял."
-
-msgid "Stats4U Visitor Counter"
-msgstr "Stats4U Брояч на посещенията"
-
-msgid "The number from the gallery. 950 is the adjustable counter."
-msgstr "Номерът от галерията. 950 е броячът, който може да се настройва."
+msgid "No Stats4U counter found in what you pasted. Paste the code from stats4u.net - or just the counter number."
+msgstr "В поставения текст не е открит брояч на Stats4U. Поставете кода от stats4u.net – или само номера на брояча."
 
 msgid "Visitor counter"
 msgstr "Брояч на посещенията"
 
-msgid "Where to show it"
-msgstr "Къде да се показва"
+msgid "Stats4U counter"
+msgstr "Брояч Stats4U"
 
-msgid "You need a counter number first. Get one at %s - no sign-up."
-msgstr "Първо ви трябва номер на брояч. Вземете си на %s – без регистрация."
+msgid "Your visitor counter from stats4u.net."
+msgstr "Вашият брояч на посещенията от stats4u.net."
 
-msgid "always dark"
-msgstr "винаги тъмен"
+msgid "Set up your counter first under Settings > Stats4U."
+msgstr "Първо настройте брояча си в Настройки > Stats4U."
 
-msgid "always light"
-msgstr "винаги светъл"
+msgid "Stats4U"
+msgstr "Stats4U"
+
+msgid "Settings"
+msgstr "Настройки"
+
+msgid "Your consent tool decides per service: add a service named \"%s\" there, in its statistics category - or enter the name you already use."
+msgstr "Вашият инструмент за съгласие решава за всяка услуга поотделно: добавете там услуга с име „%s“ в категорията за статистика – или въведете името, което вече използвате."
+
+msgid "Enter the ID your consent tool uses for statistics - its settings show it. Until then the counter does not load."
+msgstr "Въведете ID, което вашият инструмент за съгласие използва за статистика – ще го видите в настройките му. Дотогава броячът не се зарежда."
+
+msgid "Uses the category \"%s\" of your consent tool. Change it only if yours is called differently."
+msgstr "Използва се категорията „%s“ на вашия инструмент за съгласие. Променете я само ако при вас се казва другояче."
+
+msgid "Stats4U Visitor Counter"
+msgstr "Stats4U Брояч на посещенията"
+
+msgid "%s needs the ID it uses for statistics (see \"Category or service\" below). Until you enter it, the counter does not load."
+msgstr "%s се нуждае от ID, което използва за статистика (вижте „Категория или услуга“ по-долу). Докато не го въведете, броячът не се зарежда."
+
+msgid "Received from stats4u.net: counter %1$s, design %2$s. Click \"Save Changes\" to use it."
+msgstr "Получено от stats4u.net: брояч %1$s, дизайн %2$s. Щракнете върху „Запазване на промените“, за да го използвате."
+
+msgid "Paste the code you got on stats4u.net below - or create a free counter there first. No sign-up."
+msgstr "Поставете по-долу кода, който получихте на stats4u.net – или първо създайте там безплатен брояч. Без регистрация."
+
+msgid "Your counter"
+msgstr "Вашият брояч"
+
+msgid "Counter"
+msgstr "Брояч"
+
+msgid "Counter %1$s, design %2$s"
+msgstr "Брояч %1$s, дизайн %2$s"
+
+msgid "Preview - not counted."
+msgstr "Преглед – не се отчита."
+
+msgid "Code from stats4u.net"
+msgstr "Код от stats4u.net"
+
+msgid "Paste your code"
+msgstr "Поставете кода си"
+
+msgid "Use a different counter or code"
+msgstr "Използване на друг брояч или код"
+
+msgid "Paste the HTML, BBCode or image address from stats4u.net - or just the counter number. Design, colors, size and everything else you set there come along."
+msgstr "Поставете HTML, BBCode или адреса на изображението от stats4u.net – или само номера на брояча. Дизайнът, цветовете, размерът и всичко останало, което сте задали там, се пренасят заедно с него."
+
+msgid "Create a free counter on stats4u.net"
+msgstr "Създайте безплатен брояч на stats4u.net"
+
+msgid "At the end, a button brings the code back here."
+msgstr "Накрая бутон ще върне кода тук."
+
+msgid "Appearance"
+msgstr "Външен вид"
+
+msgid "Size"
+msgstr "Размер"
+
+msgid "Sharp at any size for the modern designs. The classic pixel designs keep their original size."
+msgstr "Модерните дизайни са остри при всякакъв размер. Класическите пикселни дизайни запазват оригиналния си размер."
+
+msgid "Language of the counter"
+msgstr "Език на брояча"
+
+msgid "as set on stats4u.net"
+msgstr "както е зададено на stats4u.net"
+
+msgid "the language of each page"
+msgstr "езикът на всяка страница"
+
+msgid "Dark mode"
+msgstr "Тъмен режим"
 
 msgid "follow the device"
 msgstr "следва устройството"
 
-msgid "show automatically in the footer"
-msgstr "автоматично показване в долния колонтитул"
+msgid "always light"
+msgstr "винаги светъл"
+
+msgid "always dark"
+msgstr "винаги тъмен"
+
+msgid "Count"
+msgstr "Какво да се отчита"
+
+msgid "every page view"
+msgstr "всяко зареждане на страница"
+
+msgid "unique visitors"
+msgstr "уникални посетители"
 
 msgid "Link"
 msgstr "Връзка"
@@ -74,3 +134,99 @@ msgstr "броячът да води към публичната си стран
 
 msgid "Off by default. Visitors who click the counter then see your statistics."
 msgstr "По подразбиране е изключено. Посетителите, които щракнат върху брояча, ще виждат вашата статистика."
+
+msgid "Placement"
+msgstr "Разположение"
+
+msgid "Where to show it"
+msgstr "Къде да се показва"
+
+msgid "below your theme's footer (recommended)"
+msgstr "под долния колонтитул на темата (препоръчително)"
+
+msgid "inside your theme's footer, at its end"
+msgstr "в долния колонтитул на темата, в края му"
+
+msgid "at the very end of the page"
+msgstr "в самия край на страницата"
+
+msgid "below the content of posts and pages"
+msgstr "под съдържанието на публикациите и страниците"
+
+msgid "fixed in the bottom right corner"
+msgstr "фиксиран в долния десен ъгъл"
+
+msgid "fixed in the bottom left corner"
+msgstr "фиксиран в долния ляв ъгъл"
+
+msgid "nowhere automatically - I place it myself"
+msgstr "никъде автоматично – поставям го ръчно"
+
+msgid "To place it yourself, use the block \"Stats4U counter\" or the shortcode [stats4u] - for example in a footer widget."
+msgstr "За да го поставите сами, използвайте блока „Брояч Stats4U“ или краткия код [stats4u] – например в джаджа в долния колонтитул."
+
+msgid "Alignment"
+msgstr "Подравняване"
+
+msgid "left"
+msgstr "отляво"
+
+msgid "center"
+msgstr "в центъра"
+
+msgid "right"
+msgstr "отдясно"
+
+msgid "On which pages"
+msgstr "На кои страници"
+
+msgid "on all pages"
+msgstr "на всички страници"
+
+msgid "only on the front page"
+msgstr "само на началната страница"
+
+msgid "only on single posts and pages"
+msgstr "само в отделните публикации и страници"
+
+msgid "Consent"
+msgstr "Съгласие"
+
+msgid "Load the counter"
+msgstr "Зареждане на брояча"
+
+msgid "right away - I use no consent tool"
+msgstr "веднага – не използвам инструмент за съгласие"
+
+msgid "Found on this site"
+msgstr "Открити на този сайт"
+
+msgid "after consent in %s"
+msgstr "след съгласие в %s"
+
+msgid "Consent tools"
+msgstr "Инструменти за съгласие"
+
+msgid "after consent in another tool - enter its attributes"
+msgstr "след съгласие в друг инструмент – въведете неговите атрибути"
+
+msgid "With a consent tool, visitors who decline are not counted - your numbers will be lower."
+msgstr "С инструмент за съгласие посетителите, които откажат, не се отчитат – числата ви ще бъдат по-ниски."
+
+msgid "Category or service"
+msgstr "Категория или услуга"
+
+msgid "Leave empty for the usual one of your tool. If your tool works with named services, enter the name you gave Stats4U there."
+msgstr "Оставете празно за обичайната категория на вашия инструмент. Ако инструментът ви работи с именувани услуги, въведете името, което сте дали там на Stats4U."
+
+msgid "Attributes"
+msgstr "Атрибути"
+
+msgid "What your consent tool wants on a script it should only run after consent. Allowed: type, class and data-* attributes."
+msgstr "Какво изисква вашият инструмент за съгласие от скрипт, който трябва да се изпълнява само след съгласие. Разрешени са атрибутите type, class и data-*."
+
+msgid "A paragraph for your privacy policy is at %s."
+msgstr "Абзац за вашата политика за поверителност ще намерите на %s."
+
+msgid "Puts a Stats4U visitor counter on your site. Paste the code from stats4u.net, choose where it appears and, if you use a consent banner, let it decide when the counter loads."
+msgstr "Поставя брояч на посещенията Stats4U на вашия сайт. Поставете кода от stats4u.net, изберете къде да се показва и ако използвате банер за съгласие, оставете го да решава кога да се зарежда броячът."

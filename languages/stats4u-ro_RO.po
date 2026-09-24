@@ -2,69 +2,129 @@
 # Liegt beim Plugin, damit die Uebersetzung auch ohne wordpress.org mitkommt.
 msgid ""
 msgstr ""
-"Project-Id-Version: Stats4U 1.3.0\n"
+"Project-Id-Version: Stats4U 1.4.0\n"
 "Report-Msgid-Bugs-To: https://www.stats4u.net/\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ro_RO\n"
 
-msgid "A paragraph for your privacy policy is at %s."
-msgstr "Un paragraf pentru politica dumneavoastră de confidențialitate găsiți la %s."
+msgid "This is a globe or map widget. The plugin shows image counters - pick an image design on stats4u.net."
+msgstr "Aceasta este o piesă cu glob sau hartă. Modulul afișează contoare sub formă de imagine – alegeți un design de imagine pe stats4u.net."
 
-msgid "Counter number"
-msgstr "Numărul contorului"
+msgid "This is a link to a statistics page with a custom name. Paste the counter code instead - or just the counter number."
+msgstr "Acesta este un link către o pagină de statistici cu nume personalizat. Lipiți în schimb codul contorului – sau doar numărul contorului."
 
-msgid "Dark mode"
-msgstr "Mod întunecat"
-
-msgid "Design"
-msgstr "Design"
-
-msgid "Otherwise put the shortcode [stats4u] wherever you like."
-msgstr "Altfel, puneți shortcode-ul [stats4u] oriunde doriți."
-
-msgid "Palette"
-msgstr "Paletă"
-
-msgid "Preview"
-msgstr "Previzualizare"
-
-msgid "Puts a Stats4U counter on your site - as the shortcode [stats4u] or automatically in the footer. One image, no script, no cookie."
-msgstr "Adaugă un contor Stats4U pe site – ca shortcode [stats4u] sau automat în subsol. O singură imagine, fără script, fără cookie."
-
-msgid "Shape"
-msgstr "Formă"
-
-msgid "Shape and palette only apply to design 950. Pick them in the creator at %s and copy the names out of the address - there are far too many to list here, and a list here would go stale."
-msgstr "Forma și paleta se aplică doar designului 950. Alegeți-le în generatorul de pe %s și copiați denumirile din adresă – sunt mult prea multe ca să fie enumerate aici, iar o listă aici s-ar învechi."
-
-msgid "Stats4U Visitor Counter"
-msgstr "Stats4U Contor de vizitatori"
-
-msgid "The number from the gallery. 950 is the adjustable counter."
-msgstr "Numărul din galerie. 950 este contorul configurabil."
+msgid "No Stats4U counter found in what you pasted. Paste the code from stats4u.net - or just the counter number."
+msgstr "Nu am găsit niciun contor Stats4U în ce ați lipit. Lipiți codul de pe stats4u.net – sau doar numărul contorului."
 
 msgid "Visitor counter"
 msgstr "Contor de vizitatori"
 
-msgid "Where to show it"
-msgstr "Unde se afișează"
+msgid "Stats4U counter"
+msgstr "Contor Stats4U"
 
-msgid "You need a counter number first. Get one at %s - no sign-up."
-msgstr "Mai întâi aveți nevoie de un număr de contor. Îl obțineți pe %s – fără înregistrare."
+msgid "Your visitor counter from stats4u.net."
+msgstr "Contorul dumneavoastră de vizitatori de pe stats4u.net."
 
-msgid "always dark"
-msgstr "mereu întunecat"
+msgid "Set up your counter first under Settings > Stats4U."
+msgstr "Configurați mai întâi contorul în Setări > Stats4U."
 
-msgid "always light"
-msgstr "mereu luminos"
+msgid "Stats4U"
+msgstr "Stats4U"
+
+msgid "Settings"
+msgstr "Setări"
+
+msgid "Your consent tool decides per service: add a service named \"%s\" there, in its statistics category - or enter the name you already use."
+msgstr "Instrumentul dumneavoastră de consimțământ decide pentru fiecare serviciu în parte: adăugați acolo un serviciu numit „%s”, în categoria de statistici – sau introduceți numele pe care îl folosiți deja."
+
+msgid "Enter the ID your consent tool uses for statistics - its settings show it. Until then the counter does not load."
+msgstr "Introduceți ID-ul pe care instrumentul dumneavoastră de consimțământ îl folosește pentru statistici – îl găsiți în setările lui. Până atunci, contorul nu se încarcă."
+
+msgid "Uses the category \"%s\" of your consent tool. Change it only if yours is called differently."
+msgstr "Se folosește categoria „%s” a instrumentului dumneavoastră de consimțământ. Schimbați-o doar dacă la dumneavoastră se numește altfel."
+
+msgid "Stats4U Visitor Counter"
+msgstr "Stats4U Contor de vizitatori"
+
+msgid "%s needs the ID it uses for statistics (see \"Category or service\" below). Until you enter it, the counter does not load."
+msgstr "%s are nevoie de ID-ul pe care îl folosește pentru statistici (vedeți „Categorie sau serviciu” mai jos). Până nu îl introduceți, contorul nu se încarcă."
+
+msgid "Received from stats4u.net: counter %1$s, design %2$s. Click \"Save Changes\" to use it."
+msgstr "Primit de pe stats4u.net: contorul %1$s, designul %2$s. Dați clic pe „Salvează modificările” pentru a-l folosi."
+
+msgid "Paste the code you got on stats4u.net below - or create a free counter there first. No sign-up."
+msgstr "Lipiți mai jos codul primit pe stats4u.net – sau creați mai întâi acolo un contor gratuit. Fără înregistrare."
+
+msgid "Your counter"
+msgstr "Contorul dumneavoastră"
+
+msgid "Counter"
+msgstr "Contor"
+
+msgid "Counter %1$s, design %2$s"
+msgstr "Contor %1$s, design %2$s"
+
+msgid "Preview - not counted."
+msgstr "Previzualizare – nu se contorizează."
+
+msgid "Code from stats4u.net"
+msgstr "Cod de pe stats4u.net"
+
+msgid "Paste your code"
+msgstr "Lipiți codul"
+
+msgid "Use a different counter or code"
+msgstr "Folosiți alt contor sau alt cod"
+
+msgid "Paste the HTML, BBCode or image address from stats4u.net - or just the counter number. Design, colors, size and everything else you set there come along."
+msgstr "Lipiți codul HTML, BBCode sau adresa imaginii de pe stats4u.net – sau doar numărul contorului. Designul, culorile, dimensiunea și tot ce ați setat acolo sunt preluate odată cu el."
+
+msgid "Create a free counter on stats4u.net"
+msgstr "Creați un contor gratuit pe stats4u.net"
+
+msgid "At the end, a button brings the code back here."
+msgstr "La final, un buton aduce codul înapoi aici."
+
+msgid "Appearance"
+msgstr "Aspect"
+
+msgid "Size"
+msgstr "Dimensiune"
+
+msgid "Sharp at any size for the modern designs. The classic pixel designs keep their original size."
+msgstr "Designurile moderne rămân clare la orice dimensiune. Designurile clasice în pixeli își păstrează dimensiunea originală."
+
+msgid "Language of the counter"
+msgstr "Limba contorului"
+
+msgid "as set on stats4u.net"
+msgstr "cum este setat pe stats4u.net"
+
+msgid "the language of each page"
+msgstr "limba fiecărei pagini"
+
+msgid "Dark mode"
+msgstr "Mod întunecat"
 
 msgid "follow the device"
 msgstr "după dispozitiv"
 
-msgid "show automatically in the footer"
-msgstr "afișează automat în subsol"
+msgid "always light"
+msgstr "mereu luminos"
+
+msgid "always dark"
+msgstr "mereu întunecat"
+
+msgid "Count"
+msgstr "Ce se numără"
+
+msgid "every page view"
+msgstr "fiecare afișare de pagină"
+
+msgid "unique visitors"
+msgstr "vizitatori unici"
 
 msgid "Link"
 msgstr "Link"
@@ -74,3 +134,99 @@ msgstr "leagă contorul de pagina sa publică de statistici de pe stats4u.net"
 
 msgid "Off by default. Visitors who click the counter then see your statistics."
 msgstr "Dezactivat implicit. Vizitatorii care dau clic pe contor vă văd apoi statisticile."
+
+msgid "Placement"
+msgstr "Poziționare"
+
+msgid "Where to show it"
+msgstr "Unde se afișează"
+
+msgid "below your theme's footer (recommended)"
+msgstr "sub subsolul temei (recomandat)"
+
+msgid "inside your theme's footer, at its end"
+msgstr "în subsolul temei, la final"
+
+msgid "at the very end of the page"
+msgstr "chiar la sfârșitul paginii"
+
+msgid "below the content of posts and pages"
+msgstr "sub conținutul articolelor și paginilor"
+
+msgid "fixed in the bottom right corner"
+msgstr "fix în colțul din dreapta jos"
+
+msgid "fixed in the bottom left corner"
+msgstr "fix în colțul din stânga jos"
+
+msgid "nowhere automatically - I place it myself"
+msgstr "nicăieri automat – îl plasez eu"
+
+msgid "To place it yourself, use the block \"Stats4U counter\" or the shortcode [stats4u] - for example in a footer widget."
+msgstr "Pentru plasare manuală, folosiți blocul „Contor Stats4U” sau codul scurt [stats4u] – de exemplu, într-o piesă din subsol."
+
+msgid "Alignment"
+msgstr "Aliniere"
+
+msgid "left"
+msgstr "stânga"
+
+msgid "center"
+msgstr "centru"
+
+msgid "right"
+msgstr "dreapta"
+
+msgid "On which pages"
+msgstr "Pe ce pagini"
+
+msgid "on all pages"
+msgstr "pe toate paginile"
+
+msgid "only on the front page"
+msgstr "doar pe prima pagină"
+
+msgid "only on single posts and pages"
+msgstr "doar în articolele și paginile individuale"
+
+msgid "Consent"
+msgstr "Consimțământ"
+
+msgid "Load the counter"
+msgstr "Încarcă contorul"
+
+msgid "right away - I use no consent tool"
+msgstr "imediat – nu folosesc niciun instrument de consimțământ"
+
+msgid "Found on this site"
+msgstr "Găsite pe acest site"
+
+msgid "after consent in %s"
+msgstr "după consimțământul din %s"
+
+msgid "Consent tools"
+msgstr "Instrumente de consimțământ"
+
+msgid "after consent in another tool - enter its attributes"
+msgstr "după consimțământul dintr-un alt instrument – introduceți atributele lui"
+
+msgid "With a consent tool, visitors who decline are not counted - your numbers will be lower."
+msgstr "Cu un instrument de consimțământ, vizitatorii care refuză nu sunt numărați – cifrele dumneavoastră vor fi mai mici."
+
+msgid "Category or service"
+msgstr "Categorie sau serviciu"
+
+msgid "Leave empty for the usual one of your tool. If your tool works with named services, enter the name you gave Stats4U there."
+msgstr "Lăsați gol pentru categoria obișnuită a instrumentului dumneavoastră. Dacă instrumentul lucrează cu servicii denumite, introduceți numele pe care l-ați dat acolo pentru Stats4U."
+
+msgid "Attributes"
+msgstr "Atribute"
+
+msgid "What your consent tool wants on a script it should only run after consent. Allowed: type, class and data-* attributes."
+msgstr "Ce cere instrumentul dumneavoastră de consimțământ pe un script care trebuie să ruleze doar după consimțământ. Permise: atributele type, class și data-*."
+
+msgid "A paragraph for your privacy policy is at %s."
+msgstr "Un paragraf pentru politica dumneavoastră de confidențialitate găsiți la %s."
+
+msgid "Puts a Stats4U visitor counter on your site. Paste the code from stats4u.net, choose where it appears and, if you use a consent banner, let it decide when the counter loads."
+msgstr "Adaugă pe site-ul dumneavoastră un contor de vizitatori Stats4U. Lipiți codul de pe stats4u.net, alegeți unde apare și, dacă folosiți un banner de consimțământ, lăsați-l să decidă când se încarcă contorul."

@@ -2,69 +2,129 @@
 # Liegt beim Plugin, damit die Uebersetzung auch ohne wordpress.org mitkommt.
 msgid ""
 msgstr ""
-"Project-Id-Version: Stats4U 1.3.0\n"
+"Project-Id-Version: Stats4U 1.4.0\n"
 "Report-Msgid-Bugs-To: https://www.stats4u.net/\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: tr_TR\n"
 
-msgid "A paragraph for your privacy policy is at %s."
-msgstr "Gizlilik politikanız için bir paragrafı %s adresinde bulabilirsiniz."
+msgid "This is a globe or map widget. The plugin shows image counters - pick an image design on stats4u.net."
+msgstr "Bu bir küre ya da harita bileşeni. Eklenti görsel sayaçlar gösterir – stats4u.net üzerinde bir görsel tasarımı seçin."
 
-msgid "Counter number"
-msgstr "Sayaç numarası"
+msgid "This is a link to a statistics page with a custom name. Paste the counter code instead - or just the counter number."
+msgstr "Bu, özel adlı bir istatistik sayfasının bağlantısı. Bunun yerine sayaç kodunu yapıştırın – ya da yalnızca sayaç numarasını."
 
-msgid "Dark mode"
-msgstr "Koyu mod"
-
-msgid "Design"
-msgstr "Tasarım"
-
-msgid "Otherwise put the shortcode [stats4u] wherever you like."
-msgstr "Ya da [stats4u] kısa kodunu istediğiniz yere yerleştirin."
-
-msgid "Palette"
-msgstr "Renk paleti"
-
-msgid "Preview"
-msgstr "Önizleme"
-
-msgid "Puts a Stats4U counter on your site - as the shortcode [stats4u] or automatically in the footer. One image, no script, no cookie."
-msgstr "Sitenize bir Stats4U sayacı ekler – [stats4u] kısa koduyla ya da otomatik olarak alt bilgide. Tek bir görsel; betik yok, çerez yok."
-
-msgid "Shape"
-msgstr "Şekil"
-
-msgid "Shape and palette only apply to design 950. Pick them in the creator at %s and copy the names out of the address - there are far too many to list here, and a list here would go stale."
-msgstr "Şekil ve renk paleti yalnızca 950 numaralı tasarım için geçerlidir. Bunları %s üzerindeki sihirbazda seçin ve adlarını adresten kopyalayın – burada listelenemeyecek kadar çoklar ve buradaki bir liste zamanla eskirdi."
-
-msgid "Stats4U Visitor Counter"
-msgstr "Stats4U Ziyaretçi Sayacı"
-
-msgid "The number from the gallery. 950 is the adjustable counter."
-msgstr "Galerideki numara. 950 ayarlanabilir sayaçtır."
+msgid "No Stats4U counter found in what you pasted. Paste the code from stats4u.net - or just the counter number."
+msgstr "Yapıştırdığınız metinde Stats4U sayacı bulunamadı. Kodu stats4u.net’ten yapıştırın – ya da yalnızca sayaç numarasını."
 
 msgid "Visitor counter"
 msgstr "Ziyaretçi sayacı"
 
-msgid "Where to show it"
-msgstr "Nerede gösterilsin"
+msgid "Stats4U counter"
+msgstr "Stats4U sayacı"
 
-msgid "You need a counter number first. Get one at %s - no sign-up."
-msgstr "Önce bir sayaç numarasına ihtiyacınız var. %s adresinden alabilirsiniz – kayıt gerekmez."
+msgid "Your visitor counter from stats4u.net."
+msgstr "Ziyaretçi sayacınız – stats4u.net’ten."
 
-msgid "always dark"
-msgstr "her zaman koyu"
+msgid "Set up your counter first under Settings > Stats4U."
+msgstr "Önce sayacınızı Ayarlar > Stats4U altında kurun."
 
-msgid "always light"
-msgstr "her zaman açık"
+msgid "Stats4U"
+msgstr "Stats4U"
+
+msgid "Settings"
+msgstr "Ayarlar"
+
+msgid "Your consent tool decides per service: add a service named \"%s\" there, in its statistics category - or enter the name you already use."
+msgstr "Onay aracınız her hizmet için ayrı karar verir: orada istatistik kategorisinde “%s” adlı bir hizmet ekleyin – ya da zaten kullandığınız adı girin."
+
+msgid "Enter the ID your consent tool uses for statistics - its settings show it. Until then the counter does not load."
+msgstr "Onay aracınızın istatistik için kullandığı ID’yi girin – aracın ayarlarında görünür. O zamana kadar sayaç yüklenmez."
+
+msgid "Uses the category \"%s\" of your consent tool. Change it only if yours is called differently."
+msgstr "Onay aracınızın “%s” kategorisi kullanılır. Yalnızca sizinkinin adı farklıysa değiştirin."
+
+msgid "Stats4U Visitor Counter"
+msgstr "Stats4U Ziyaretçi Sayacı"
+
+msgid "%s needs the ID it uses for statistics (see \"Category or service\" below). Until you enter it, the counter does not load."
+msgstr "%s, istatistik için kullandığı ID’ye ihtiyaç duyar (aşağıdaki “Kategori veya hizmet” alanına bakın). Siz girene kadar sayaç yüklenmez."
+
+msgid "Received from stats4u.net: counter %1$s, design %2$s. Click \"Save Changes\" to use it."
+msgstr "stats4u.net’ten alındı: sayaç %1$s, tasarım %2$s. Kullanmak için “Değişiklikleri kaydet” düğmesine tıklayın."
+
+msgid "Paste the code you got on stats4u.net below - or create a free counter there first. No sign-up."
+msgstr "stats4u.net’te aldığınız kodu aşağıya yapıştırın – ya da önce orada ücretsiz bir sayaç oluşturun. Kayıt gerekmez."
+
+msgid "Your counter"
+msgstr "Sayacınız"
+
+msgid "Counter"
+msgstr "Sayaç"
+
+msgid "Counter %1$s, design %2$s"
+msgstr "Sayaç %1$s, tasarım %2$s"
+
+msgid "Preview - not counted."
+msgstr "Önizleme – sayılmaz."
+
+msgid "Code from stats4u.net"
+msgstr "stats4u.net kodu"
+
+msgid "Paste your code"
+msgstr "Kodunuzu yapıştırın"
+
+msgid "Use a different counter or code"
+msgstr "Başka bir sayaç veya kod kullanın"
+
+msgid "Paste the HTML, BBCode or image address from stats4u.net - or just the counter number. Design, colors, size and everything else you set there come along."
+msgstr "stats4u.net’teki HTML, BBCode veya görsel adresini yapıştırın – ya da yalnızca sayaç numarasını. Orada ayarladığınız tasarım, renkler, boyut ve diğer her şey de birlikte gelir."
+
+msgid "Create a free counter on stats4u.net"
+msgstr "stats4u.net’te ücretsiz sayaç oluşturun"
+
+msgid "At the end, a button brings the code back here."
+msgstr "Sonunda bir düğme kodu buraya geri getirir."
+
+msgid "Appearance"
+msgstr "Görünüm"
+
+msgid "Size"
+msgstr "Boyut"
+
+msgid "Sharp at any size for the modern designs. The classic pixel designs keep their original size."
+msgstr "Modern tasarımlar her boyutta keskindir. Klasik piksel tasarımlar özgün boyutlarını korur."
+
+msgid "Language of the counter"
+msgstr "Sayacın dili"
+
+msgid "as set on stats4u.net"
+msgstr "stats4u.net’te ayarlandığı gibi"
+
+msgid "the language of each page"
+msgstr "her sayfanın dili"
+
+msgid "Dark mode"
+msgstr "Koyu mod"
 
 msgid "follow the device"
 msgstr "cihaza uy"
 
-msgid "show automatically in the footer"
-msgstr "alt bilgide otomatik olarak göster"
+msgid "always light"
+msgstr "her zaman açık"
+
+msgid "always dark"
+msgstr "her zaman koyu"
+
+msgid "Count"
+msgstr "Ne sayılsın"
+
+msgid "every page view"
+msgstr "her sayfa görüntüleme"
+
+msgid "unique visitors"
+msgstr "tekil ziyaretçiler"
 
 msgid "Link"
 msgstr "Bağlantı"
@@ -74,3 +134,99 @@ msgstr "sayacı stats4u.net üzerindeki herkese açık istatistik sayfasına ba�
 
 msgid "Off by default. Visitors who click the counter then see your statistics."
 msgstr "Varsayılan olarak kapalı. Sayaca tıklayan ziyaretçiler o zaman istatistiklerinizi görür."
+
+msgid "Placement"
+msgstr "Yerleşim"
+
+msgid "Where to show it"
+msgstr "Nerede gösterilsin"
+
+msgid "below your theme's footer (recommended)"
+msgstr "temanızın alt bilgisinin altında (önerilen)"
+
+msgid "inside your theme's footer, at its end"
+msgstr "temanızın alt bilgisinin içinde, en sonda"
+
+msgid "at the very end of the page"
+msgstr "sayfanın en sonunda"
+
+msgid "below the content of posts and pages"
+msgstr "yazıların ve sayfaların içeriğinin altında"
+
+msgid "fixed in the bottom right corner"
+msgstr "sağ alt köşede sabit"
+
+msgid "fixed in the bottom left corner"
+msgstr "sol alt köşede sabit"
+
+msgid "nowhere automatically - I place it myself"
+msgstr "hiçbir yerde otomatik değil – kendim yerleştiririm"
+
+msgid "To place it yourself, use the block \"Stats4U counter\" or the shortcode [stats4u] - for example in a footer widget."
+msgstr "Kendiniz yerleştirmek için “Stats4U sayacı” bloğunu ya da [stats4u] kısa kodunu kullanın – örneğin bir alt bilgi bileşeninde."
+
+msgid "Alignment"
+msgstr "Hizalama"
+
+msgid "left"
+msgstr "sola"
+
+msgid "center"
+msgstr "ortaya"
+
+msgid "right"
+msgstr "sağa"
+
+msgid "On which pages"
+msgstr "Hangi sayfalarda"
+
+msgid "on all pages"
+msgstr "tüm sayfalarda"
+
+msgid "only on the front page"
+msgstr "yalnızca ana sayfada"
+
+msgid "only on single posts and pages"
+msgstr "yalnızca tekil yazı ve sayfalarda"
+
+msgid "Consent"
+msgstr "Onay"
+
+msgid "Load the counter"
+msgstr "Sayacı yükle"
+
+msgid "right away - I use no consent tool"
+msgstr "hemen – onay aracı kullanmıyorum"
+
+msgid "Found on this site"
+msgstr "Bu sitede bulunanlar"
+
+msgid "after consent in %s"
+msgstr "%s aracında onay verildikten sonra"
+
+msgid "Consent tools"
+msgstr "Onay araçları"
+
+msgid "after consent in another tool - enter its attributes"
+msgstr "başka bir araçta onay verildikten sonra – özniteliklerini girin"
+
+msgid "With a consent tool, visitors who decline are not counted - your numbers will be lower."
+msgstr "Onay aracı kullanıldığında reddeden ziyaretçiler sayılmaz – rakamlarınız daha düşük olur."
+
+msgid "Category or service"
+msgstr "Kategori veya hizmet"
+
+msgid "Leave empty for the usual one of your tool. If your tool works with named services, enter the name you gave Stats4U there."
+msgstr "Aracınızın olağan kategorisi için boş bırakın. Aracınız adlandırılmış hizmetlerle çalışıyorsa orada Stats4U’ya verdiğiniz adı girin."
+
+msgid "Attributes"
+msgstr "Öznitelikler"
+
+msgid "What your consent tool wants on a script it should only run after consent. Allowed: type, class and data-* attributes."
+msgstr "Onay aracınızın, yalnızca onaydan sonra çalışması gereken bir betikte görmek istediği öznitelikler. İzin verilenler: type, class ve data-* öznitelikleri."
+
+msgid "A paragraph for your privacy policy is at %s."
+msgstr "Gizlilik politikanız için bir paragrafı %s adresinde bulabilirsiniz."
+
+msgid "Puts a Stats4U visitor counter on your site. Paste the code from stats4u.net, choose where it appears and, if you use a consent banner, let it decide when the counter loads."
+msgstr "Sitenize bir Stats4U ziyaretçi sayacı ekler. Kodu stats4u.net’ten yapıştırın, nerede görüneceğini seçin ve çerez onay banner’ı kullanıyorsanız sayacın ne zaman yükleneceğine onun karar vermesini sağlayın."

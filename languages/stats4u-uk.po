@@ -2,69 +2,129 @@
 # Liegt beim Plugin, damit die Uebersetzung auch ohne wordpress.org mitkommt.
 msgid ""
 msgstr ""
-"Project-Id-Version: Stats4U 1.3.0\n"
+"Project-Id-Version: Stats4U 1.4.0\n"
 "Report-Msgid-Bugs-To: https://www.stats4u.net/\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: uk\n"
 
-msgid "A paragraph for your privacy policy is at %s."
-msgstr "Абзац для вашої політики конфіденційності є на %s."
+msgid "This is a globe or map widget. The plugin shows image counters - pick an image design on stats4u.net."
+msgstr "Це віджет глобуса або карти. Плагін показує лічильники-зображення — виберіть дизайн зображення на stats4u.net."
 
-msgid "Counter number"
-msgstr "Номер лічильника"
+msgid "This is a link to a statistics page with a custom name. Paste the counter code instead - or just the counter number."
+msgstr "Це посилання на сторінку статистики з власною назвою. Вставте натомість код лічильника — або лише номер лічильника."
 
-msgid "Dark mode"
-msgstr "Темний режим"
-
-msgid "Design"
-msgstr "Дизайн"
-
-msgid "Otherwise put the shortcode [stats4u] wherever you like."
-msgstr "Або вставте шорткод [stats4u] у будь-яке місце."
-
-msgid "Palette"
-msgstr "Палітра"
-
-msgid "Preview"
-msgstr "Попередній перегляд"
-
-msgid "Puts a Stats4U counter on your site - as the shortcode [stats4u] or automatically in the footer. One image, no script, no cookie."
-msgstr "Додає лічильник Stats4U на ваш сайт — шорткодом [stats4u] або автоматично в підвалі. Одне зображення, без скриптів, без файлів cookie."
-
-msgid "Shape"
-msgstr "Форма"
-
-msgid "Shape and palette only apply to design 950. Pick them in the creator at %s and copy the names out of the address - there are far too many to list here, and a list here would go stale."
-msgstr "Форма й палітра діють лише для дизайну 950. Виберіть їх у майстрі на %s і скопіюйте назви з адреси — їх надто багато, щоб перелічувати тут, та й такий список швидко застарів би."
-
-msgid "Stats4U Visitor Counter"
-msgstr "Stats4U Лічильник відвідувань"
-
-msgid "The number from the gallery. 950 is the adjustable counter."
-msgstr "Номер із галереї. 950 — лічильник, який можна налаштувати."
+msgid "No Stats4U counter found in what you pasted. Paste the code from stats4u.net - or just the counter number."
+msgstr "У вставленому тексті не знайдено лічильника Stats4U. Вставте код зі stats4u.net — або лише номер лічильника."
 
 msgid "Visitor counter"
 msgstr "Лічильник відвідувань"
 
-msgid "Where to show it"
-msgstr "Де показувати"
+msgid "Stats4U counter"
+msgstr "Лічильник Stats4U"
 
-msgid "You need a counter number first. Get one at %s - no sign-up."
-msgstr "Спершу потрібен номер лічильника. Отримайте його на %s — без реєстрації."
+msgid "Your visitor counter from stats4u.net."
+msgstr "Ваш лічильник відвідувань зі stats4u.net."
 
-msgid "always dark"
-msgstr "завжди темний"
+msgid "Set up your counter first under Settings > Stats4U."
+msgstr "Спершу налаштуйте лічильник у розділі Налаштування > Stats4U."
 
-msgid "always light"
-msgstr "завжди світлий"
+msgid "Stats4U"
+msgstr "Stats4U"
+
+msgid "Settings"
+msgstr "Налаштування"
+
+msgid "Your consent tool decides per service: add a service named \"%s\" there, in its statistics category - or enter the name you already use."
+msgstr "Ваш інструмент згоди вирішує окремо для кожного сервісу: додайте там сервіс із назвою «%s» у категорії статистики — або введіть назву, яку ви вже використовуєте."
+
+msgid "Enter the ID your consent tool uses for statistics - its settings show it. Until then the counter does not load."
+msgstr "Введіть ID, який ваш інструмент згоди використовує для статистики, — його видно в налаштуваннях інструмента. Доти лічильник не завантажується."
+
+msgid "Uses the category \"%s\" of your consent tool. Change it only if yours is called differently."
+msgstr "Використовується категорія «%s» вашого інструмента згоди. Змінюйте її, лише якщо у вас вона називається інакше."
+
+msgid "Stats4U Visitor Counter"
+msgstr "Stats4U Лічильник відвідувань"
+
+msgid "%s needs the ID it uses for statistics (see \"Category or service\" below). Until you enter it, the counter does not load."
+msgstr "%s потребує ID, який він використовує для статистики (див. «Категорія або сервіс» нижче). Доки ви його не введете, лічильник не завантажується."
+
+msgid "Received from stats4u.net: counter %1$s, design %2$s. Click \"Save Changes\" to use it."
+msgstr "Отримано зі stats4u.net: лічильник %1$s, дизайн %2$s. Натисніть «Зберегти зміни», щоб його використовувати."
+
+msgid "Paste the code you got on stats4u.net below - or create a free counter there first. No sign-up."
+msgstr "Вставте нижче код, отриманий на stats4u.net, — або спершу створіть там безкоштовний лічильник. Без реєстрації."
+
+msgid "Your counter"
+msgstr "Ваш лічильник"
+
+msgid "Counter"
+msgstr "Лічильник"
+
+msgid "Counter %1$s, design %2$s"
+msgstr "Лічильник %1$s, дизайн %2$s"
+
+msgid "Preview - not counted."
+msgstr "Попередній перегляд — не враховується."
+
+msgid "Code from stats4u.net"
+msgstr "Код зі stats4u.net"
+
+msgid "Paste your code"
+msgstr "Вставте свій код"
+
+msgid "Use a different counter or code"
+msgstr "Використати інший лічильник або код"
+
+msgid "Paste the HTML, BBCode or image address from stats4u.net - or just the counter number. Design, colors, size and everything else you set there come along."
+msgstr "Вставте HTML, BBCode або адресу зображення зі stats4u.net — або лише номер лічильника. Дизайн, кольори, розмір і все інше, що ви там налаштували, перенесуться разом із ним."
+
+msgid "Create a free counter on stats4u.net"
+msgstr "Створити безкоштовний лічильник на stats4u.net"
+
+msgid "At the end, a button brings the code back here."
+msgstr "Наприкінці кнопка поверне код сюди."
+
+msgid "Appearance"
+msgstr "Вигляд"
+
+msgid "Size"
+msgstr "Розмір"
+
+msgid "Sharp at any size for the modern designs. The classic pixel designs keep their original size."
+msgstr "Сучасні дизайни чіткі за будь-якого розміру. Класичні піксельні дизайни зберігають свій початковий розмір."
+
+msgid "Language of the counter"
+msgstr "Мова лічильника"
+
+msgid "as set on stats4u.net"
+msgstr "як налаштовано на stats4u.net"
+
+msgid "the language of each page"
+msgstr "мова кожної сторінки"
+
+msgid "Dark mode"
+msgstr "Темний режим"
 
 msgid "follow the device"
 msgstr "за налаштуванням пристрою"
 
-msgid "show automatically in the footer"
-msgstr "показувати автоматично в підвалі"
+msgid "always light"
+msgstr "завжди світлий"
+
+msgid "always dark"
+msgstr "завжди темний"
+
+msgid "Count"
+msgstr "Що рахувати"
+
+msgid "every page view"
+msgstr "кожен перегляд сторінки"
+
+msgid "unique visitors"
+msgstr "унікальні відвідувачі"
 
 msgid "Link"
 msgstr "Посилання"
@@ -74,3 +134,99 @@ msgstr "зробити лічильник посиланням на його п�
 
 msgid "Off by default. Visitors who click the counter then see your statistics."
 msgstr "Типово вимкнено. Відвідувачі, які натиснуть на лічильник, побачать вашу статистику."
+
+msgid "Placement"
+msgstr "Розміщення"
+
+msgid "Where to show it"
+msgstr "Де показувати"
+
+msgid "below your theme's footer (recommended)"
+msgstr "під підвалом теми (рекомендовано)"
+
+msgid "inside your theme's footer, at its end"
+msgstr "у підвалі теми, в самому кінці"
+
+msgid "at the very end of the page"
+msgstr "в самому кінці сторінки"
+
+msgid "below the content of posts and pages"
+msgstr "під вмістом записів і сторінок"
+
+msgid "fixed in the bottom right corner"
+msgstr "закріплено в правому нижньому куті"
+
+msgid "fixed in the bottom left corner"
+msgstr "закріплено в лівому нижньому куті"
+
+msgid "nowhere automatically - I place it myself"
+msgstr "ніде автоматично — розміщу вручну"
+
+msgid "To place it yourself, use the block \"Stats4U counter\" or the shortcode [stats4u] - for example in a footer widget."
+msgstr "Щоб розмістити лічильник самостійно, використайте блок «Лічильник Stats4U» або шорткод [stats4u] — наприклад, у віджеті підвалу."
+
+msgid "Alignment"
+msgstr "Вирівнювання"
+
+msgid "left"
+msgstr "ліворуч"
+
+msgid "center"
+msgstr "по центру"
+
+msgid "right"
+msgstr "праворуч"
+
+msgid "On which pages"
+msgstr "На яких сторінках"
+
+msgid "on all pages"
+msgstr "на всіх сторінках"
+
+msgid "only on the front page"
+msgstr "лише на головній сторінці"
+
+msgid "only on single posts and pages"
+msgstr "лише в окремих записах і на сторінках"
+
+msgid "Consent"
+msgstr "Згода"
+
+msgid "Load the counter"
+msgstr "Завантажувати лічильник"
+
+msgid "right away - I use no consent tool"
+msgstr "одразу — я не використовую інструмент згоди"
+
+msgid "Found on this site"
+msgstr "Знайдено на цьому сайті"
+
+msgid "after consent in %s"
+msgstr "після згоди в %s"
+
+msgid "Consent tools"
+msgstr "Інструменти згоди"
+
+msgid "after consent in another tool - enter its attributes"
+msgstr "після згоди в іншому інструменті — введіть його атрибути"
+
+msgid "With a consent tool, visitors who decline are not counted - your numbers will be lower."
+msgstr "З інструментом згоди відвідувачі, які відмовляються, не враховуються — ваші показники будуть нижчими."
+
+msgid "Category or service"
+msgstr "Категорія або сервіс"
+
+msgid "Leave empty for the usual one of your tool. If your tool works with named services, enter the name you gave Stats4U there."
+msgstr "Залиште порожнім, щоб використати звичайну категорію вашого інструмента. Якщо ваш інструмент працює з іменованими сервісами, введіть назву, яку ви дали там Stats4U."
+
+msgid "Attributes"
+msgstr "Атрибути"
+
+msgid "What your consent tool wants on a script it should only run after consent. Allowed: type, class and data-* attributes."
+msgstr "Що ваш інструмент згоди вимагає від скрипту, який має запускатися лише після згоди. Дозволено: атрибути type, class і data-*."
+
+msgid "A paragraph for your privacy policy is at %s."
+msgstr "Абзац для вашої політики конфіденційності є на %s."
+
+msgid "Puts a Stats4U visitor counter on your site. Paste the code from stats4u.net, choose where it appears and, if you use a consent banner, let it decide when the counter loads."
+msgstr "Додає лічильник відвідувань Stats4U на ваш сайт. Вставте код зі stats4u.net, виберіть, де він з’являтиметься, і, якщо ви використовуєте банер згоди, дозвольте йому вирішувати, коли завантажувати лічильник."

@@ -2,69 +2,129 @@
 # Liegt beim Plugin, damit die Uebersetzung auch ohne wordpress.org mitkommt.
 msgid ""
 msgstr ""
-"Project-Id-Version: Stats4U 1.3.0\n"
+"Project-Id-Version: Stats4U 1.4.0\n"
 "Report-Msgid-Bugs-To: https://www.stats4u.net/\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: id_ID\n"
 
-msgid "A paragraph for your privacy policy is at %s."
-msgstr "Paragraf untuk kebijakan privasi Anda tersedia di %s."
+msgid "This is a globe or map widget. The plugin shows image counters - pick an image design on stats4u.net."
+msgstr "Ini adalah widget bola dunia atau peta. Plugin ini menampilkan penghitung berupa gambar – pilih desain gambar di stats4u.net."
 
-msgid "Counter number"
-msgstr "Nomor penghitung"
+msgid "This is a link to a statistics page with a custom name. Paste the counter code instead - or just the counter number."
+msgstr "Ini adalah tautan ke halaman statistik dengan nama khusus. Tempelkan kode penghitung saja – atau cukup nomor penghitungnya."
 
-msgid "Dark mode"
-msgstr "Mode gelap"
-
-msgid "Design"
-msgstr "Desain"
-
-msgid "Otherwise put the shortcode [stats4u] wherever you like."
-msgstr "Atau pasang shortcode [stats4u] di mana saja Anda mau."
-
-msgid "Palette"
-msgstr "Palet"
-
-msgid "Preview"
-msgstr "Pratinjau"
-
-msgid "Puts a Stats4U counter on your site - as the shortcode [stats4u] or automatically in the footer. One image, no script, no cookie."
-msgstr "Memasang penghitung Stats4U di situs Anda – sebagai shortcode [stats4u] atau otomatis di footer. Satu gambar, tanpa skrip, tanpa cookie."
-
-msgid "Shape"
-msgstr "Bentuk"
-
-msgid "Shape and palette only apply to design 950. Pick them in the creator at %s and copy the names out of the address - there are far too many to list here, and a list here would go stale."
-msgstr "Bentuk dan palet hanya berlaku untuk desain 950. Pilih keduanya di asisten pada %s lalu salin namanya dari alamat – jumlahnya terlalu banyak untuk dicantumkan di sini, dan daftar di sini akan cepat usang."
-
-msgid "Stats4U Visitor Counter"
-msgstr "Stats4U Penghitung Pengunjung"
-
-msgid "The number from the gallery. 950 is the adjustable counter."
-msgstr "Nomor dari galeri. 950 adalah penghitung yang dapat diatur."
+msgid "No Stats4U counter found in what you pasted. Paste the code from stats4u.net - or just the counter number."
+msgstr "Tidak ditemukan penghitung Stats4U dalam teks yang Anda tempelkan. Tempelkan kode dari stats4u.net – atau cukup nomor penghitungnya."
 
 msgid "Visitor counter"
 msgstr "Penghitung pengunjung"
 
-msgid "Where to show it"
-msgstr "Tempat penayangan"
+msgid "Stats4U counter"
+msgstr "Penghitung Stats4U"
 
-msgid "You need a counter number first. Get one at %s - no sign-up."
-msgstr "Anda perlu nomor penghitung terlebih dahulu. Dapatkan di %s – tanpa pendaftaran."
+msgid "Your visitor counter from stats4u.net."
+msgstr "Penghitung pengunjung Anda dari stats4u.net."
 
-msgid "always dark"
-msgstr "selalu gelap"
+msgid "Set up your counter first under Settings > Stats4U."
+msgstr "Atur penghitung Anda terlebih dahulu di Pengaturan > Stats4U."
 
-msgid "always light"
-msgstr "selalu terang"
+msgid "Stats4U"
+msgstr "Stats4U"
+
+msgid "Settings"
+msgstr "Pengaturan"
+
+msgid "Your consent tool decides per service: add a service named \"%s\" there, in its statistics category - or enter the name you already use."
+msgstr "Alat persetujuan cookie Anda memutuskan per layanan: tambahkan layanan bernama “%s” di sana, dalam kategori statistiknya – atau masukkan nama yang sudah Anda gunakan."
+
+msgid "Enter the ID your consent tool uses for statistics - its settings show it. Until then the counter does not load."
+msgstr "Masukkan ID yang digunakan alat persetujuan cookie Anda untuk statistik – ID ini tercantum di pengaturannya. Sebelum itu, penghitung tidak dimuat."
+
+msgid "Uses the category \"%s\" of your consent tool. Change it only if yours is called differently."
+msgstr "Menggunakan kategori “%s” dari alat persetujuan cookie Anda. Ubah hanya jika nama kategorinya berbeda."
+
+msgid "Stats4U Visitor Counter"
+msgstr "Stats4U Penghitung Pengunjung"
+
+msgid "%s needs the ID it uses for statistics (see \"Category or service\" below). Until you enter it, the counter does not load."
+msgstr "%s memerlukan ID yang digunakannya untuk statistik (lihat “Kategori atau layanan” di bawah). Selama ID belum dimasukkan, penghitung tidak dimuat."
+
+msgid "Received from stats4u.net: counter %1$s, design %2$s. Click \"Save Changes\" to use it."
+msgstr "Diterima dari stats4u.net: penghitung %1$s, desain %2$s. Klik “Simpan Perubahan” untuk menggunakannya."
+
+msgid "Paste the code you got on stats4u.net below - or create a free counter there first. No sign-up."
+msgstr "Tempelkan kode yang Anda dapatkan di stats4u.net di bawah ini – atau buat penghitung gratis di sana terlebih dahulu. Tanpa pendaftaran."
+
+msgid "Your counter"
+msgstr "Penghitung Anda"
+
+msgid "Counter"
+msgstr "Penghitung"
+
+msgid "Counter %1$s, design %2$s"
+msgstr "Penghitung %1$s, desain %2$s"
+
+msgid "Preview - not counted."
+msgstr "Pratinjau – tidak dihitung."
+
+msgid "Code from stats4u.net"
+msgstr "Kode dari stats4u.net"
+
+msgid "Paste your code"
+msgstr "Tempelkan kode Anda"
+
+msgid "Use a different counter or code"
+msgstr "Gunakan penghitung atau kode lain"
+
+msgid "Paste the HTML, BBCode or image address from stats4u.net - or just the counter number. Design, colors, size and everything else you set there come along."
+msgstr "Tempelkan HTML, BBCode, atau alamat gambar dari stats4u.net – atau cukup nomor penghitungnya. Desain, warna, ukuran, dan semua yang Anda atur di sana ikut terbawa."
+
+msgid "Create a free counter on stats4u.net"
+msgstr "Buat penghitung gratis di stats4u.net"
+
+msgid "At the end, a button brings the code back here."
+msgstr "Di akhir, sebuah tombol akan membawa kode kembali ke sini."
+
+msgid "Appearance"
+msgstr "Tampilan"
+
+msgid "Size"
+msgstr "Ukuran"
+
+msgid "Sharp at any size for the modern designs. The classic pixel designs keep their original size."
+msgstr "Tetap tajam di ukuran berapa pun untuk desain modern. Desain piksel klasik tetap dalam ukuran aslinya."
+
+msgid "Language of the counter"
+msgstr "Bahasa penghitung"
+
+msgid "as set on stats4u.net"
+msgstr "sesuai pengaturan di stats4u.net"
+
+msgid "the language of each page"
+msgstr "bahasa setiap halaman"
+
+msgid "Dark mode"
+msgstr "Mode gelap"
 
 msgid "follow the device"
 msgstr "ikuti perangkat"
 
-msgid "show automatically in the footer"
-msgstr "tampilkan otomatis di footer"
+msgid "always light"
+msgstr "selalu terang"
+
+msgid "always dark"
+msgstr "selalu gelap"
+
+msgid "Count"
+msgstr "Yang dihitung"
+
+msgid "every page view"
+msgstr "setiap tampilan halaman"
+
+msgid "unique visitors"
+msgstr "pengunjung unik"
 
 msgid "Link"
 msgstr "Tautan"
@@ -74,3 +134,99 @@ msgstr "tautkan penghitung ke halaman statistik publiknya di stats4u.net"
 
 msgid "Off by default. Visitors who click the counter then see your statistics."
 msgstr "Nonaktif secara bawaan. Pengunjung yang mengeklik penghitung lalu akan melihat statistik Anda."
+
+msgid "Placement"
+msgstr "Penempatan"
+
+msgid "Where to show it"
+msgstr "Tempat penayangan"
+
+msgid "below your theme's footer (recommended)"
+msgstr "di bawah footer tema Anda (disarankan)"
+
+msgid "inside your theme's footer, at its end"
+msgstr "di dalam footer tema Anda, di bagian akhirnya"
+
+msgid "at the very end of the page"
+msgstr "di bagian paling akhir halaman"
+
+msgid "below the content of posts and pages"
+msgstr "di bawah konten pos dan halaman"
+
+msgid "fixed in the bottom right corner"
+msgstr "tetap di pojok kanan bawah"
+
+msgid "fixed in the bottom left corner"
+msgstr "tetap di pojok kiri bawah"
+
+msgid "nowhere automatically - I place it myself"
+msgstr "tidak di mana pun secara otomatis – saya menempatkannya sendiri"
+
+msgid "To place it yourself, use the block \"Stats4U counter\" or the shortcode [stats4u] - for example in a footer widget."
+msgstr "Untuk menempatkannya sendiri, gunakan blok “Penghitung Stats4U” atau shortcode [stats4u] – misalnya di widget footer."
+
+msgid "Alignment"
+msgstr "Perataan"
+
+msgid "left"
+msgstr "kiri"
+
+msgid "center"
+msgstr "tengah"
+
+msgid "right"
+msgstr "kanan"
+
+msgid "On which pages"
+msgstr "Di halaman mana"
+
+msgid "on all pages"
+msgstr "di semua halaman"
+
+msgid "only on the front page"
+msgstr "hanya di halaman depan"
+
+msgid "only on single posts and pages"
+msgstr "hanya di pos dan halaman tunggal"
+
+msgid "Consent"
+msgstr "Persetujuan"
+
+msgid "Load the counter"
+msgstr "Muat penghitung"
+
+msgid "right away - I use no consent tool"
+msgstr "langsung – saya tidak memakai alat persetujuan cookie"
+
+msgid "Found on this site"
+msgstr "Ditemukan di situs ini"
+
+msgid "after consent in %s"
+msgstr "setelah persetujuan di %s"
+
+msgid "Consent tools"
+msgstr "Alat persetujuan cookie"
+
+msgid "after consent in another tool - enter its attributes"
+msgstr "setelah persetujuan di alat lain – masukkan atributnya"
+
+msgid "With a consent tool, visitors who decline are not counted - your numbers will be lower."
+msgstr "Dengan alat persetujuan cookie, pengunjung yang menolak tidak dihitung – angka Anda akan lebih rendah."
+
+msgid "Category or service"
+msgstr "Kategori atau layanan"
+
+msgid "Leave empty for the usual one of your tool. If your tool works with named services, enter the name you gave Stats4U there."
+msgstr "Biarkan kosong untuk kategori standar alat Anda. Jika alat Anda bekerja dengan layanan bernama, masukkan nama yang Anda berikan untuk Stats4U di sana."
+
+msgid "Attributes"
+msgstr "Atribut"
+
+msgid "What your consent tool wants on a script it should only run after consent. Allowed: type, class and data-* attributes."
+msgstr "Apa yang diminta alat persetujuan cookie Anda pada skrip yang baru boleh berjalan setelah persetujuan. Diizinkan: atribut type, class, dan data-*."
+
+msgid "A paragraph for your privacy policy is at %s."
+msgstr "Paragraf untuk kebijakan privasi Anda tersedia di %s."
+
+msgid "Puts a Stats4U visitor counter on your site. Paste the code from stats4u.net, choose where it appears and, if you use a consent banner, let it decide when the counter loads."
+msgstr "Memasang penghitung pengunjung Stats4U di situs Anda. Tempelkan kode dari stats4u.net, pilih tempat penghitung muncul, dan jika Anda memakai banner persetujuan cookie, biarkan banner itu menentukan kapan penghitung dimuat."

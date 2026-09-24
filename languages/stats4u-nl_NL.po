@@ -2,69 +2,129 @@
 # Liegt beim Plugin, damit die Uebersetzung auch ohne wordpress.org mitkommt.
 msgid ""
 msgstr ""
-"Project-Id-Version: Stats4U 1.3.0\n"
+"Project-Id-Version: Stats4U 1.4.0\n"
 "Report-Msgid-Bugs-To: https://www.stats4u.net/\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: nl_NL\n"
 
-msgid "A paragraph for your privacy policy is at %s."
-msgstr "Een alinea voor je privacyverklaring vind je op %s."
+msgid "This is a globe or map widget. The plugin shows image counters - pick an image design on stats4u.net."
+msgstr "Dit is een wereldbol- of kaartwidget. De plugin toont tellers als afbeelding – kies een afbeeldingsontwerp op stats4u.net."
 
-msgid "Counter number"
-msgstr "Tellernummer"
+msgid "This is a link to a statistics page with a custom name. Paste the counter code instead - or just the counter number."
+msgstr "Dit is een link naar een statistiekpagina met een eigen naam. Plak in plaats daarvan de tellercode – of alleen het tellernummer."
 
-msgid "Dark mode"
-msgstr "Donkere modus"
-
-msgid "Design"
-msgstr "Ontwerp"
-
-msgid "Otherwise put the shortcode [stats4u] wherever you like."
-msgstr "Of plaats de shortcode [stats4u] waar je maar wilt."
-
-msgid "Palette"
-msgstr "Palet"
-
-msgid "Preview"
-msgstr "Voorbeeld"
-
-msgid "Puts a Stats4U counter on your site - as the shortcode [stats4u] or automatically in the footer. One image, no script, no cookie."
-msgstr "Plaatst een Stats4U-teller op je site – als shortcode [stats4u] of automatisch in de footer. Eén afbeelding, geen script, geen cookie."
-
-msgid "Shape"
-msgstr "Vorm"
-
-msgid "Shape and palette only apply to design 950. Pick them in the creator at %s and copy the names out of the address - there are far too many to list here, and a list here would go stale."
-msgstr "Vorm en palet gelden alleen voor ontwerp 950. Kies ze in de creator op %s en neem de namen over uit het adres – het zijn er veel te veel om hier op te sommen, en een lijst hier zou snel verouderen."
-
-msgid "Stats4U Visitor Counter"
-msgstr "Stats4U Bezoekersteller"
-
-msgid "The number from the gallery. 950 is the adjustable counter."
-msgstr "Het nummer uit de galerij. 950 is de instelbare teller."
+msgid "No Stats4U counter found in what you pasted. Paste the code from stats4u.net - or just the counter number."
+msgstr "Geen Stats4U-teller gevonden in wat je hebt geplakt. Plak de code van stats4u.net – of alleen het tellernummer."
 
 msgid "Visitor counter"
 msgstr "Bezoekersteller"
 
-msgid "Where to show it"
-msgstr "Waar tonen"
+msgid "Stats4U counter"
+msgstr "Stats4U-teller"
 
-msgid "You need a counter number first. Get one at %s - no sign-up."
-msgstr "Je hebt eerst een tellernummer nodig. Haal er een op %s – zonder registratie."
+msgid "Your visitor counter from stats4u.net."
+msgstr "Je bezoekersteller van stats4u.net."
 
-msgid "always dark"
-msgstr "altijd donker"
+msgid "Set up your counter first under Settings > Stats4U."
+msgstr "Stel eerst je teller in onder Instellingen > Stats4U."
 
-msgid "always light"
-msgstr "altijd licht"
+msgid "Stats4U"
+msgstr "Stats4U"
+
+msgid "Settings"
+msgstr "Instellingen"
+
+msgid "Your consent tool decides per service: add a service named \"%s\" there, in its statistics category - or enter the name you already use."
+msgstr "Je cookiebanner-tool beslist per dienst: voeg daar een dienst met de naam „%s” toe, in de categorie statistieken – of vul de naam in die je al gebruikt."
+
+msgid "Enter the ID your consent tool uses for statistics - its settings show it. Until then the counter does not load."
+msgstr "Vul de ID in die je cookiebanner-tool voor statistieken gebruikt – je vindt die in de instellingen ervan. Tot dan wordt de teller niet geladen."
+
+msgid "Uses the category \"%s\" of your consent tool. Change it only if yours is called differently."
+msgstr "Gebruikt de categorie „%s” van je cookiebanner-tool. Wijzig dit alleen als die bij jou anders heet."
+
+msgid "Stats4U Visitor Counter"
+msgstr "Stats4U Bezoekersteller"
+
+msgid "%s needs the ID it uses for statistics (see \"Category or service\" below). Until you enter it, the counter does not load."
+msgstr "%s heeft de ID nodig die het voor statistieken gebruikt (zie „Categorie of dienst” hieronder). Zolang je die niet invult, wordt de teller niet geladen."
+
+msgid "Received from stats4u.net: counter %1$s, design %2$s. Click \"Save Changes\" to use it."
+msgstr "Ontvangen van stats4u.net: teller %1$s, ontwerp %2$s. Klik op „Wijzigingen opslaan” om hem te gebruiken."
+
+msgid "Paste the code you got on stats4u.net below - or create a free counter there first. No sign-up."
+msgstr "Plak hieronder de code die je op stats4u.net hebt gekregen – of maak daar eerst een gratis teller aan. Zonder registratie."
+
+msgid "Your counter"
+msgstr "Je teller"
+
+msgid "Counter"
+msgstr "Teller"
+
+msgid "Counter %1$s, design %2$s"
+msgstr "Teller %1$s, ontwerp %2$s"
+
+msgid "Preview - not counted."
+msgstr "Voorbeeld – wordt niet geteld."
+
+msgid "Code from stats4u.net"
+msgstr "Code van stats4u.net"
+
+msgid "Paste your code"
+msgstr "Plak je code"
+
+msgid "Use a different counter or code"
+msgstr "Een andere teller of code gebruiken"
+
+msgid "Paste the HTML, BBCode or image address from stats4u.net - or just the counter number. Design, colors, size and everything else you set there come along."
+msgstr "Plak de HTML, BBCode of het afbeeldingsadres van stats4u.net – of alleen het tellernummer. Ontwerp, kleuren, grootte en alles wat je daar hebt ingesteld, komen mee."
+
+msgid "Create a free counter on stats4u.net"
+msgstr "Maak een gratis teller op stats4u.net"
+
+msgid "At the end, a button brings the code back here."
+msgstr "Aan het eind brengt een knop de code terug naar deze pagina."
+
+msgid "Appearance"
+msgstr "Weergave"
+
+msgid "Size"
+msgstr "Grootte"
+
+msgid "Sharp at any size for the modern designs. The classic pixel designs keep their original size."
+msgstr "Scherp op elke grootte bij de moderne ontwerpen. De klassieke pixelontwerpen behouden hun oorspronkelijke grootte."
+
+msgid "Language of the counter"
+msgstr "Taal van de teller"
+
+msgid "as set on stats4u.net"
+msgstr "zoals ingesteld op stats4u.net"
+
+msgid "the language of each page"
+msgstr "de taal van elke pagina"
+
+msgid "Dark mode"
+msgstr "Donkere modus"
 
 msgid "follow the device"
 msgstr "volgt het apparaat"
 
-msgid "show automatically in the footer"
-msgstr "automatisch tonen in de footer"
+msgid "always light"
+msgstr "altijd licht"
+
+msgid "always dark"
+msgstr "altijd donker"
+
+msgid "Count"
+msgstr "Tellen"
+
+msgid "every page view"
+msgstr "elke paginaweergave"
+
+msgid "unique visitors"
+msgstr "unieke bezoekers"
 
 msgid "Link"
 msgstr "Link"
@@ -74,3 +134,99 @@ msgstr "de teller linken aan zijn openbare statistiekpagina op stats4u.net"
 
 msgid "Off by default. Visitors who click the counter then see your statistics."
 msgstr "Standaard uit. Bezoekers die op de teller klikken, zien dan je statistieken."
+
+msgid "Placement"
+msgstr "Plaatsing"
+
+msgid "Where to show it"
+msgstr "Waar tonen"
+
+msgid "below your theme's footer (recommended)"
+msgstr "onder de footer van je thema (aanbevolen)"
+
+msgid "inside your theme's footer, at its end"
+msgstr "in de footer van je thema, aan het eind"
+
+msgid "at the very end of the page"
+msgstr "helemaal onderaan de pagina"
+
+msgid "below the content of posts and pages"
+msgstr "onder de inhoud van berichten en pagina's"
+
+msgid "fixed in the bottom right corner"
+msgstr "vast in de rechterbenedenhoek"
+
+msgid "fixed in the bottom left corner"
+msgstr "vast in de linkerbenedenhoek"
+
+msgid "nowhere automatically - I place it myself"
+msgstr "nergens automatisch – ik plaats hem zelf"
+
+msgid "To place it yourself, use the block \"Stats4U counter\" or the shortcode [stats4u] - for example in a footer widget."
+msgstr "Om hem zelf te plaatsen gebruik je het blok „Stats4U-teller” of de shortcode [stats4u] – bijvoorbeeld in een footerwidget."
+
+msgid "Alignment"
+msgstr "Uitlijning"
+
+msgid "left"
+msgstr "links"
+
+msgid "center"
+msgstr "gecentreerd"
+
+msgid "right"
+msgstr "rechts"
+
+msgid "On which pages"
+msgstr "Op welke pagina's"
+
+msgid "on all pages"
+msgstr "op alle pagina's"
+
+msgid "only on the front page"
+msgstr "alleen op de voorpagina"
+
+msgid "only on single posts and pages"
+msgstr "alleen op losse berichten en pagina's"
+
+msgid "Consent"
+msgstr "Toestemming"
+
+msgid "Load the counter"
+msgstr "Teller laden"
+
+msgid "right away - I use no consent tool"
+msgstr "meteen – ik gebruik geen cookiebanner-tool"
+
+msgid "Found on this site"
+msgstr "Gevonden op deze site"
+
+msgid "after consent in %s"
+msgstr "na toestemming in %s"
+
+msgid "Consent tools"
+msgstr "Cookiebanner-tools"
+
+msgid "after consent in another tool - enter its attributes"
+msgstr "na toestemming in een andere tool – vul de attributen in"
+
+msgid "With a consent tool, visitors who decline are not counted - your numbers will be lower."
+msgstr "Met een cookiebanner-tool worden bezoekers die weigeren niet geteld – je aantallen vallen dan lager uit."
+
+msgid "Category or service"
+msgstr "Categorie of dienst"
+
+msgid "Leave empty for the usual one of your tool. If your tool works with named services, enter the name you gave Stats4U there."
+msgstr "Leeg laten voor de gebruikelijke van je tool. Werkt je tool met benoemde diensten, vul dan de naam in die je Stats4U daar hebt gegeven."
+
+msgid "Attributes"
+msgstr "Attributen"
+
+msgid "What your consent tool wants on a script it should only run after consent. Allowed: type, class and data-* attributes."
+msgstr "Wat je cookiebanner-tool nodig heeft op een script dat pas na toestemming mag draaien. Toegestaan: type-, class- en data-*-attributen."
+
+msgid "A paragraph for your privacy policy is at %s."
+msgstr "Een alinea voor je privacyverklaring vind je op %s."
+
+msgid "Puts a Stats4U visitor counter on your site. Paste the code from stats4u.net, choose where it appears and, if you use a consent banner, let it decide when the counter loads."
+msgstr "Zet een Stats4U-bezoekersteller op je site. Plak de code van stats4u.net, kies waar hij verschijnt en laat, als je een cookiebanner gebruikt, die bepalen wanneer de teller laadt."

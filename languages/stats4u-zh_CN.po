@@ -2,69 +2,129 @@
 # Liegt beim Plugin, damit die Uebersetzung auch ohne wordpress.org mitkommt.
 msgid ""
 msgstr ""
-"Project-Id-Version: Stats4U 1.3.0\n"
+"Project-Id-Version: Stats4U 1.4.0\n"
 "Report-Msgid-Bugs-To: https://www.stats4u.net/\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: zh_CN\n"
 
-msgid "A paragraph for your privacy policy is at %s."
-msgstr "可放入您隐私政策的一段文字见 %s。"
+msgid "This is a globe or map widget. The plugin shows image counters - pick an image design on stats4u.net."
+msgstr "这是地球仪或地图小工具。本插件显示的是图片计数器——请在 stats4u.net 上选择一种图片样式。"
 
-msgid "Counter number"
-msgstr "计数器编号"
+msgid "This is a link to a statistics page with a custom name. Paste the counter code instead - or just the counter number."
+msgstr "这是指向自定义名称统计页面的链接。请改为粘贴计数器代码——或只填写计数器编号。"
 
-msgid "Dark mode"
-msgstr "深色模式"
-
-msgid "Design"
-msgstr "样式"
-
-msgid "Otherwise put the shortcode [stats4u] wherever you like."
-msgstr "也可以把简码 [stats4u] 放在任意位置。"
-
-msgid "Palette"
-msgstr "配色"
-
-msgid "Preview"
-msgstr "预览"
-
-msgid "Puts a Stats4U counter on your site - as the shortcode [stats4u] or automatically in the footer. One image, no script, no cookie."
-msgstr "在您的网站上显示 Stats4U 计数器——可用简码 [stats4u]，也可自动显示在页脚。只是一张图片，无脚本，无 Cookie。"
-
-msgid "Shape"
-msgstr "形状"
-
-msgid "Shape and palette only apply to design 950. Pick them in the creator at %s and copy the names out of the address - there are far too many to list here, and a list here would go stale."
-msgstr "形状和配色只对样式 950 有效。请在 %s 的创建器中选好，再从地址中抄下名称——可选项太多，无法在此一一列出，列在这里也很快会过时。"
-
-msgid "Stats4U Visitor Counter"
-msgstr "Stats4U 访客计数器"
-
-msgid "The number from the gallery. 950 is the adjustable counter."
-msgstr "样式库中的编号。950 是可调节的计数器。"
+msgid "No Stats4U counter found in what you pasted. Paste the code from stats4u.net - or just the counter number."
+msgstr "在您粘贴的内容中未找到 Stats4U 计数器。请粘贴 stats4u.net 上的代码——或只填写计数器编号。"
 
 msgid "Visitor counter"
 msgstr "访客计数器"
 
-msgid "Where to show it"
-msgstr "显示位置"
+msgid "Stats4U counter"
+msgstr "Stats4U 计数器"
 
-msgid "You need a counter number first. Get one at %s - no sign-up."
-msgstr "您需要先有一个计数器编号。可在 %s 获取，无需注册。"
+msgid "Your visitor counter from stats4u.net."
+msgstr "您在 stats4u.net 上的访客计数器。"
 
-msgid "always dark"
-msgstr "始终深色"
+msgid "Set up your counter first under Settings > Stats4U."
+msgstr "请先在“设置 > Stats4U”中设置您的计数器。"
 
-msgid "always light"
-msgstr "始终浅色"
+msgid "Stats4U"
+msgstr "Stats4U"
+
+msgid "Settings"
+msgstr "设置"
+
+msgid "Your consent tool decides per service: add a service named \"%s\" there, in its statistics category - or enter the name you already use."
+msgstr "您的同意管理工具按服务逐一决定：请在其统计类别中添加名为“%s”的服务——或填写您已在使用的名称。"
+
+msgid "Enter the ID your consent tool uses for statistics - its settings show it. Until then the counter does not load."
+msgstr "请填写您的同意管理工具用于统计的 ID——可在该工具的设置中找到。填写之前，计数器不会加载。"
+
+msgid "Uses the category \"%s\" of your consent tool. Change it only if yours is called differently."
+msgstr "使用您同意管理工具中的“%s”类别。仅当您的工具中名称不同时才需要更改。"
+
+msgid "Stats4U Visitor Counter"
+msgstr "Stats4U 访客计数器"
+
+msgid "%s needs the ID it uses for statistics (see \"Category or service\" below). Until you enter it, the counter does not load."
+msgstr "%s 需要它用于统计的 ID（见下方“类别或服务”）。填写之前，计数器不会加载。"
+
+msgid "Received from stats4u.net: counter %1$s, design %2$s. Click \"Save Changes\" to use it."
+msgstr "已从 stats4u.net 收到：计数器 %1$s，样式 %2$s。点击“保存更改”即可使用。"
+
+msgid "Paste the code you got on stats4u.net below - or create a free counter there first. No sign-up."
+msgstr "请在下方粘贴您在 stats4u.net 上获得的代码——或先去那里创建一个免费计数器。无需注册。"
+
+msgid "Your counter"
+msgstr "您的计数器"
+
+msgid "Counter"
+msgstr "计数器"
+
+msgid "Counter %1$s, design %2$s"
+msgstr "计数器 %1$s，样式 %2$s"
+
+msgid "Preview - not counted."
+msgstr "预览——不计数。"
+
+msgid "Code from stats4u.net"
+msgstr "来自 stats4u.net 的代码"
+
+msgid "Paste your code"
+msgstr "粘贴您的代码"
+
+msgid "Use a different counter or code"
+msgstr "使用其他计数器或代码"
+
+msgid "Paste the HTML, BBCode or image address from stats4u.net - or just the counter number. Design, colors, size and everything else you set there come along."
+msgstr "粘贴 stats4u.net 上的 HTML、BBCode 或图片地址——或只填写计数器编号。您在那里设置的样式、颜色、大小等都会一并带过来。"
+
+msgid "Create a free counter on stats4u.net"
+msgstr "在 stats4u.net 上创建免费计数器"
+
+msgid "At the end, a button brings the code back here."
+msgstr "完成后，点击按钮即可把代码带回这里。"
+
+msgid "Appearance"
+msgstr "外观"
+
+msgid "Size"
+msgstr "大小"
+
+msgid "Sharp at any size for the modern designs. The classic pixel designs keep their original size."
+msgstr "现代样式在任何大小下都保持清晰。经典像素样式保持原始大小。"
+
+msgid "Language of the counter"
+msgstr "计数器语言"
+
+msgid "as set on stats4u.net"
+msgstr "沿用 stats4u.net 上的设置"
+
+msgid "the language of each page"
+msgstr "跟随各页面的语言"
+
+msgid "Dark mode"
+msgstr "深色模式"
 
 msgid "follow the device"
 msgstr "跟随设备"
 
-msgid "show automatically in the footer"
-msgstr "自动显示在页脚"
+msgid "always light"
+msgstr "始终浅色"
+
+msgid "always dark"
+msgstr "始终深色"
+
+msgid "Count"
+msgstr "统计方式"
+
+msgid "every page view"
+msgstr "每次页面浏览"
+
+msgid "unique visitors"
+msgstr "独立访客"
 
 msgid "Link"
 msgstr "链接"
@@ -74,3 +134,99 @@ msgstr "将计数器链接到它在 stats4u.net 上的公开统计页面"
 
 msgid "Off by default. Visitors who click the counter then see your statistics."
 msgstr "默认关闭。开启后，访客点击计数器即可看到您的统计。"
+
+msgid "Placement"
+msgstr "放置位置"
+
+msgid "Where to show it"
+msgstr "显示位置"
+
+msgid "below your theme's footer (recommended)"
+msgstr "在主题页脚下方（推荐）"
+
+msgid "inside your theme's footer, at its end"
+msgstr "在主题页脚内部的末尾"
+
+msgid "at the very end of the page"
+msgstr "在页面的最末尾"
+
+msgid "below the content of posts and pages"
+msgstr "在文章和页面的内容下方"
+
+msgid "fixed in the bottom right corner"
+msgstr "固定在右下角"
+
+msgid "fixed in the bottom left corner"
+msgstr "固定在左下角"
+
+msgid "nowhere automatically - I place it myself"
+msgstr "不自动放置——由我自己放置"
+
+msgid "To place it yourself, use the block \"Stats4U counter\" or the shortcode [stats4u] - for example in a footer widget."
+msgstr "如需自行放置，请使用“Stats4U 计数器”区块或简码 [stats4u]——例如放在页脚小工具中。"
+
+msgid "Alignment"
+msgstr "对齐方式"
+
+msgid "left"
+msgstr "左对齐"
+
+msgid "center"
+msgstr "居中"
+
+msgid "right"
+msgstr "右对齐"
+
+msgid "On which pages"
+msgstr "显示在哪些页面"
+
+msgid "on all pages"
+msgstr "所有页面"
+
+msgid "only on the front page"
+msgstr "仅在首页"
+
+msgid "only on single posts and pages"
+msgstr "仅在单篇文章和页面"
+
+msgid "Consent"
+msgstr "用户同意"
+
+msgid "Load the counter"
+msgstr "加载计数器"
+
+msgid "right away - I use no consent tool"
+msgstr "立即加载——我不使用同意管理工具"
+
+msgid "Found on this site"
+msgstr "在本站检测到"
+
+msgid "after consent in %s"
+msgstr "在 %s 中获得同意后"
+
+msgid "Consent tools"
+msgstr "同意管理工具"
+
+msgid "after consent in another tool - enter its attributes"
+msgstr "在其他工具中获得同意后——请填写其属性"
+
+msgid "With a consent tool, visitors who decline are not counted - your numbers will be lower."
+msgstr "使用同意管理工具时，拒绝同意的访客不会被计入——您的数字会偏低。"
+
+msgid "Category or service"
+msgstr "类别或服务"
+
+msgid "Leave empty for the usual one of your tool. If your tool works with named services, enter the name you gave Stats4U there."
+msgstr "留空则使用您工具的常用类别。如果您的工具按具名服务管理，请填写您在其中为 Stats4U 设定的名称。"
+
+msgid "Attributes"
+msgstr "属性"
+
+msgid "What your consent tool wants on a script it should only run after consent. Allowed: type, class and data-* attributes."
+msgstr "您的同意管理工具要求在“仅经同意后才运行的脚本”上添加的内容。允许：type、class 和 data-* 属性。"
+
+msgid "A paragraph for your privacy policy is at %s."
+msgstr "可放入您隐私政策的一段文字见 %s。"
+
+msgid "Puts a Stats4U visitor counter on your site. Paste the code from stats4u.net, choose where it appears and, if you use a consent banner, let it decide when the counter loads."
+msgstr "在您的网站上添加 Stats4U 访客计数器。粘贴 stats4u.net 上的代码，选择显示位置；如果您使用 Cookie 同意横幅，还可以让它决定计数器何时加载。"
