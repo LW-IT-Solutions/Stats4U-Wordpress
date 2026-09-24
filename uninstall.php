@@ -13,8 +13,8 @@ delete_option('stats4u_einstellungen');
 
 // Bei einem Netzwerk steht sie je Blog.
 if (is_multisite()) {
-    foreach (get_sites(array('fields' => 'ids')) as $blog) {
-        switch_to_blog($blog);
+    foreach (get_sites(array('fields' => 'ids')) as $stats4u_blog) {
+        switch_to_blog($stats4u_blog);
         delete_option('stats4u_einstellungen');
         restore_current_blog();
     }

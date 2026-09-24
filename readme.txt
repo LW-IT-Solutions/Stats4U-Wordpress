@@ -1,10 +1,10 @@
-=== Stats4U Visitor Counter ===
+=== Stats4U ===
 Contributors: lwitsolutions
 Tags: counter, hit counter, visitor counter, statistics, privacy
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.2.0
+Stable tag: 1.3.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -30,7 +30,12 @@ A ready-made paragraph for your privacy policy is at
 https://www.stats4u.net/privacy-embed - tailored to your counter number, in
 19 languages.
 
-The plugin interface is available in English, German and Polish.
+The plugin interface is available in 19 languages: English, Arabic, Bulgarian,
+Chinese (Simplified), Czech, Dutch, French, German, Indonesian, Italian,
+Japanese, Korean, Polish, Portuguese (Portugal), Romanian, Russian, Spanish,
+Turkish and Ukrainian - the same languages as stats4u.net. A site in another
+variant of one of these languages (for example de_AT, es_MX or pt_BR) gets
+the nearest one.
 
 == External services ==
 
@@ -113,6 +118,14 @@ should not disappear because you tried a plugin and removed it again.
 
 == Changelog ==
 
+= 1.3.0 =
+* 16 more interface languages, 19 in total - the same as stats4u.net.
+* Sites in a regional variant (de_AT, es_MX, pt_BR, fr_CA ...) get the
+  nearest bundled translation instead of English.
+* Findings of Plugin Check 2.1.0 fixed: output of the settings texts now
+  escaped at the echo, a prefixed variable in uninstall.php, plugin name in
+  readme and header the same.
+
 = 1.2.0 =
 * The link from the counter to its statistics page is now an option, off by
   default. Until 1.1.0 every counter was a link.
@@ -134,6 +147,9 @@ should not disappear because you tried a plugin and removed it again.
 * First release: shortcode, footer, dark mode, settings page.
 
 == Upgrade Notice ==
+
+= 1.3.0 =
+The settings page now speaks 19 languages.
 
 = 1.2.0 =
 The counter is no longer a link unless you switch that on in the settings.

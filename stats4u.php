@@ -3,7 +3,7 @@
  * Plugin Name:       Stats4U
  * Plugin URI:        https://www.stats4u.net/
  * Description:       Puts a Stats4U counter on your site - as the shortcode [stats4u] or automatically in the footer. One image, no script, no cookie.
- * Version:           1.2.0
+ * Version:           1.3.0
  * Requires at least: 5.8
  * Requires PHP:      7.4
  * Author:            LW IT Solutions Company
@@ -159,10 +159,19 @@ function stats4u_erlaubt() {
     );
 }
 
-/** Ein Satz mit einem Verweis darin, fertig escaped. */
+/**
+ * Ein Satz mit einem Verweis darin. $satz kommt schon durch esc_html__(), der
+ * Verweis wird hier mit esc_url()/esc_html() gebaut; ausgegeben wird das
+ * Ganze trotzdem erst durch wp_kses() mit stats4u_erlaubt_link() - so sieht
+ * auch Plugin Check an der echo-Stelle, dass escaped wird.
+ */
 function stats4u_satz_mit_link($satz, $url, $text) {
     $link = sprintf('<a href="%s" target="_blank" rel="noopener">%s</a>', esc_url($url), esc_html($text));
-    return wp_kses(sprintf($satz, $link), array('a' => array('href' => true, 'target' => true, 'rel' => true)));
+    return sprintf($satz, $link);
+}
+
+function stats4u_erlaubt_link() {
+    return array('a' => array('href' => true, 'target' => true, 'rel' => true));
 }
 
 /**
@@ -179,7 +188,21 @@ function stats4u_satz_mit_link($satz, $url, $text) {
  */
 add_action('init', 'stats4u_sprache');
 function stats4u_sprache() {
+    // phpcs:ignore PluginCheck.CodeAnalysis.DiscouragedFunctions.load_plugin_textdomainFound -- bundled translations in /languages, see above; a language pack from translate.wordpress.org still wins
     load_plugin_textdomain('stats4u', false, dirname(plugin_basename(__FILE__)) . '/languages');
+    if (is_textdomain_loaded('stats4u')) { return; }
+
+    // Kein genauer Treffer: dieselbe Sprache aus einem anderen Land nehmen
+    // (de_AT, de_CH -> de_DE, es_MX -> es_ES, pt_BR -> pt_PT, fr_CA -> fr_FR).
+    // Nicht fuer zh: zh_TW und zh_HK schreiben Langzeichen, zh_CN Kurzzeichen.
+    $sprache = (string) strtok(determine_locale(), '_');
+    if ($sprache === '' || $sprache === 'zh') { return; }
+    foreach (glob(__DIR__ . '/languages/stats4u-*.mo') ?: array() as $datei) {
+        if (strtok(substr(basename($datei, '.mo'), 8), '_') === $sprache) {
+            load_textdomain('stats4u', $datei);
+            return;
+        }
+    }
 }
 
 // --- Kurzcode --------------------------------------------------------------
@@ -231,11 +254,11 @@ function stats4u_seite() {
 
         <?php if ($e['id'] === '') : ?>
         <div class="notice notice-info"><p><?php
-            echo stats4u_satz_mit_link(
+            echo wp_kses(stats4u_satz_mit_link(
                 /* translators: %s: link to the Stats4U home page */
                 esc_html__('You need a counter number first. Get one at %s - no sign-up.', 'stats4u'),
                 'https://www.stats4u.net/', 'stats4u.net'
-            ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_kses() in stats4u_satz_mit_link()
+            ), stats4u_erlaubt_link());
         ?></p></div>
         <?php endif; ?>
 
@@ -272,11 +295,11 @@ function stats4u_seite() {
                                type="text" class="regular-text"
                                value="<?php echo esc_attr($e['pal']); ?>">
                         <p class="description"><?php
-                            echo stats4u_satz_mit_link(
+                            echo wp_kses(stats4u_satz_mit_link(
                                 /* translators: %s: link to the counter creator */
                                 esc_html__('Shape and palette only apply to design 950. Pick them in the creator at %s and copy the names out of the address - there are far too many to list here, and a list here would go stale.', 'stats4u'),
                                 'https://www.stats4u.net/', 'stats4u.net'
-                            ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_kses() in stats4u_satz_mit_link()
+                            ), stats4u_erlaubt_link());
                         ?></p></td>
                 </tr>
                 <tr>
@@ -332,11 +355,11 @@ function stats4u_seite() {
         <h2><?php echo esc_html__('Preview', 'stats4u'); ?></h2>
         <p><img src="<?php echo esc_url(stats4u_bildadresse($e, true)); ?>" alt=""></p>
         <p class="description"><?php
-            echo stats4u_satz_mit_link(
+            echo wp_kses(stats4u_satz_mit_link(
                 /* translators: %s: link to the ready-made privacy paragraph */
                 esc_html__('A paragraph for your privacy policy is at %s.', 'stats4u'),
                 'https://www.stats4u.net/privacy-embed?s4uid=' . rawurlencode($e['id']), 'stats4u.net/privacy-embed'
-            ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_kses() in stats4u_satz_mit_link()
+            ), stats4u_erlaubt_link());
         ?></p>
         <?php endif; ?>
     </div>

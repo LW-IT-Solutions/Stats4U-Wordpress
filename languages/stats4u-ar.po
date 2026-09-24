@@ -1,0 +1,76 @@
+# Stats4U - ar
+# Liegt beim Plugin, damit die Uebersetzung auch ohne wordpress.org mitkommt.
+msgid ""
+msgstr ""
+"Project-Id-Version: Stats4U 1.3.0\n"
+"Report-Msgid-Bugs-To: https://www.stats4u.net/\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ar\n"
+
+msgid "A paragraph for your privacy policy is at %s."
+msgstr "تجد فقرة جاهزة لسياسة الخصوصية لديك على %s."
+
+msgid "Counter number"
+msgstr "رقم العداد"
+
+msgid "Dark mode"
+msgstr "الوضع الداكن"
+
+msgid "Design"
+msgstr "التصميم"
+
+msgid "Otherwise put the shortcode [stats4u] wherever you like."
+msgstr "أو ضع الكود المختصر [stats4u] في أي مكان تريده."
+
+msgid "Palette"
+msgstr "لوحة الألوان"
+
+msgid "Preview"
+msgstr "معاينة"
+
+msgid "Puts a Stats4U counter on your site - as the shortcode [stats4u] or automatically in the footer. One image, no script, no cookie."
+msgstr "يضع عداد Stats4U على موقعك، بالكود المختصر [stats4u] أو تلقائيًا في التذييل. صورة واحدة، بلا سكربت وبلا ملفات تعريف ارتباط."
+
+msgid "Shape"
+msgstr "الشكل"
+
+msgid "Shape and palette only apply to design 950. Pick them in the creator at %s and copy the names out of the address - there are far too many to list here, and a list here would go stale."
+msgstr "لا ينطبق الشكل ولوحة الألوان إلا على التصميم 950. اخترهما في أداة الإنشاء على %s وانسخ اسميهما من العنوان، فهي أكثر بكثير من أن تُسرد هنا، وأي قائمة هنا ستتقادم سريعًا."
+
+msgid "Stats4U Visitor Counter"
+msgstr "Stats4U عداد الزوار"
+
+msgid "The number from the gallery. 950 is the adjustable counter."
+msgstr "الرقم من المعرض. التصميم 950 هو العداد القابل للتخصيص."
+
+msgid "Visitor counter"
+msgstr "عداد الزوار"
+
+msgid "Where to show it"
+msgstr "مكان العرض"
+
+msgid "You need a counter number first. Get one at %s - no sign-up."
+msgstr "تحتاج أولًا إلى رقم عداد. احصل عليه من %s دون تسجيل."
+
+msgid "always dark"
+msgstr "داكن دائمًا"
+
+msgid "always light"
+msgstr "فاتح دائمًا"
+
+msgid "follow the device"
+msgstr "يتبع الجهاز"
+
+msgid "show automatically in the footer"
+msgstr "عرض تلقائي في التذييل"
+
+msgid "Link"
+msgstr "الرابط"
+
+msgid "link the counter to its public statistics page on stats4u.net"
+msgstr "ربط العداد بصفحة إحصائياته العامة على stats4u.net"
+
+msgid "Off by default. Visitors who click the counter then see your statistics."
+msgstr "معطّل افتراضيًا. عند تفعيله، يرى الزوار الذين ينقرون على العداد إحصائياتك."

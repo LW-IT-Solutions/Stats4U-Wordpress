@@ -16,7 +16,8 @@ as the shortcode `[stats4u]` or automatically in the footer. Get a counter numbe
 * No script, no cookie, no own database table, no call from your server to stats4u.net.
 * The link from the counter to its public statistics page is **off by default**.
 * The preview on the settings page is marked "display only" and is not counted.
-* Interface in English, German and Polish.
+* Interface in 19 languages – the same as stats4u.net. Regional variants
+  (de_AT, es_MX, pt_BR …) get the nearest one.
 
 Details on the data the image request carries are in [readme.txt](readme.txt),
 section *External services*.

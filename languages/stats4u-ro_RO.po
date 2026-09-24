@@ -1,0 +1,76 @@
+# Stats4U - ro_RO
+# Liegt beim Plugin, damit die Uebersetzung auch ohne wordpress.org mitkommt.
+msgid ""
+msgstr ""
+"Project-Id-Version: Stats4U 1.3.0\n"
+"Report-Msgid-Bugs-To: https://www.stats4u.net/\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ro_RO\n"
+
+msgid "A paragraph for your privacy policy is at %s."
+msgstr "Un paragraf pentru politica dumneavoastră de confidențialitate găsiți la %s."
+
+msgid "Counter number"
+msgstr "Numărul contorului"
+
+msgid "Dark mode"
+msgstr "Mod întunecat"
+
+msgid "Design"
+msgstr "Design"
+
+msgid "Otherwise put the shortcode [stats4u] wherever you like."
+msgstr "Altfel, puneți shortcode-ul [stats4u] oriunde doriți."
+
+msgid "Palette"
+msgstr "Paletă"
+
+msgid "Preview"
+msgstr "Previzualizare"
+
+msgid "Puts a Stats4U counter on your site - as the shortcode [stats4u] or automatically in the footer. One image, no script, no cookie."
+msgstr "Adaugă un contor Stats4U pe site – ca shortcode [stats4u] sau automat în subsol. O singură imagine, fără script, fără cookie."
+
+msgid "Shape"
+msgstr "Formă"
+
+msgid "Shape and palette only apply to design 950. Pick them in the creator at %s and copy the names out of the address - there are far too many to list here, and a list here would go stale."
+msgstr "Forma și paleta se aplică doar designului 950. Alegeți-le în generatorul de pe %s și copiați denumirile din adresă – sunt mult prea multe ca să fie enumerate aici, iar o listă aici s-ar învechi."
+
+msgid "Stats4U Visitor Counter"
+msgstr "Stats4U Contor de vizitatori"
+
+msgid "The number from the gallery. 950 is the adjustable counter."
+msgstr "Numărul din galerie. 950 este contorul configurabil."
+
+msgid "Visitor counter"
+msgstr "Contor de vizitatori"
+
+msgid "Where to show it"
+msgstr "Unde se afișează"
+
+msgid "You need a counter number first. Get one at %s - no sign-up."
+msgstr "Mai întâi aveți nevoie de un număr de contor. Îl obțineți pe %s – fără înregistrare."
+
+msgid "always dark"
+msgstr "mereu întunecat"
+
+msgid "always light"
+msgstr "mereu luminos"
+
+msgid "follow the device"
+msgstr "după dispozitiv"
+
+msgid "show automatically in the footer"
+msgstr "afișează automat în subsol"
+
+msgid "Link"
+msgstr "Link"
+
+msgid "link the counter to its public statistics page on stats4u.net"
+msgstr "leagă contorul de pagina sa publică de statistici de pe stats4u.net"
+
+msgid "Off by default. Visitors who click the counter then see your statistics."
+msgstr "Dezactivat implicit. Vizitatorii care dau clic pe contor vă văd apoi statisticile."

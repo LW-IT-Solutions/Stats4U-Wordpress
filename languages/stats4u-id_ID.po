@@ -1,0 +1,76 @@
+# Stats4U - id_ID
+# Liegt beim Plugin, damit die Uebersetzung auch ohne wordpress.org mitkommt.
+msgid ""
+msgstr ""
+"Project-Id-Version: Stats4U 1.3.0\n"
+"Report-Msgid-Bugs-To: https://www.stats4u.net/\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: id_ID\n"
+
+msgid "A paragraph for your privacy policy is at %s."
+msgstr "Paragraf untuk kebijakan privasi Anda tersedia di %s."
+
+msgid "Counter number"
+msgstr "Nomor penghitung"
+
+msgid "Dark mode"
+msgstr "Mode gelap"
+
+msgid "Design"
+msgstr "Desain"
+
+msgid "Otherwise put the shortcode [stats4u] wherever you like."
+msgstr "Atau pasang shortcode [stats4u] di mana saja Anda mau."
+
+msgid "Palette"
+msgstr "Palet"
+
+msgid "Preview"
+msgstr "Pratinjau"
+
+msgid "Puts a Stats4U counter on your site - as the shortcode [stats4u] or automatically in the footer. One image, no script, no cookie."
+msgstr "Memasang penghitung Stats4U di situs Anda – sebagai shortcode [stats4u] atau otomatis di footer. Satu gambar, tanpa skrip, tanpa cookie."
+
+msgid "Shape"
+msgstr "Bentuk"
+
+msgid "Shape and palette only apply to design 950. Pick them in the creator at %s and copy the names out of the address - there are far too many to list here, and a list here would go stale."
+msgstr "Bentuk dan palet hanya berlaku untuk desain 950. Pilih keduanya di asisten pada %s lalu salin namanya dari alamat – jumlahnya terlalu banyak untuk dicantumkan di sini, dan daftar di sini akan cepat usang."
+
+msgid "Stats4U Visitor Counter"
+msgstr "Stats4U Penghitung Pengunjung"
+
+msgid "The number from the gallery. 950 is the adjustable counter."
+msgstr "Nomor dari galeri. 950 adalah penghitung yang dapat diatur."
+
+msgid "Visitor counter"
+msgstr "Penghitung pengunjung"
+
+msgid "Where to show it"
+msgstr "Tempat penayangan"
+
+msgid "You need a counter number first. Get one at %s - no sign-up."
+msgstr "Anda perlu nomor penghitung terlebih dahulu. Dapatkan di %s – tanpa pendaftaran."
+
+msgid "always dark"
+msgstr "selalu gelap"
+
+msgid "always light"
+msgstr "selalu terang"
+
+msgid "follow the device"
+msgstr "ikuti perangkat"
+
+msgid "show automatically in the footer"
+msgstr "tampilkan otomatis di footer"
+
+msgid "Link"
+msgstr "Tautan"
+
+msgid "link the counter to its public statistics page on stats4u.net"
+msgstr "tautkan penghitung ke halaman statistik publiknya di stats4u.net"
+
+msgid "Off by default. Visitors who click the counter then see your statistics."
+msgstr "Nonaktif secara bawaan. Pengunjung yang mengeklik penghitung lalu akan melihat statistik Anda."

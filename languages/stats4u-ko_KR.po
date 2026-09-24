@@ -1,0 +1,76 @@
+# Stats4U - ko_KR
+# Liegt beim Plugin, damit die Uebersetzung auch ohne wordpress.org mitkommt.
+msgid ""
+msgstr ""
+"Project-Id-Version: Stats4U 1.3.0\n"
+"Report-Msgid-Bugs-To: https://www.stats4u.net/\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ko_KR\n"
+
+msgid "A paragraph for your privacy policy is at %s."
+msgstr "개인정보 처리방침에 넣을 문단은 %s에 있습니다."
+
+msgid "Counter number"
+msgstr "카운터 번호"
+
+msgid "Dark mode"
+msgstr "어두운 모드"
+
+msgid "Design"
+msgstr "디자인"
+
+msgid "Otherwise put the shortcode [stats4u] wherever you like."
+msgstr "또는 숏코드 [stats4u]를 원하는 곳에 넣으세요."
+
+msgid "Palette"
+msgstr "팔레트"
+
+msgid "Preview"
+msgstr "미리보기"
+
+msgid "Puts a Stats4U counter on your site - as the shortcode [stats4u] or automatically in the footer. One image, no script, no cookie."
+msgstr "사이트에 Stats4U 카운터를 넣습니다. 숏코드 [stats4u]로 넣거나 푸터에 자동으로 표시합니다. 이미지 하나뿐이며 스크립트도 쿠키도 없습니다."
+
+msgid "Shape"
+msgstr "모양"
+
+msgid "Shape and palette only apply to design 950. Pick them in the creator at %s and copy the names out of the address - there are far too many to list here, and a list here would go stale."
+msgstr "모양과 팔레트는 디자인 950에만 적용됩니다. %s의 마법사에서 고른 뒤 주소에서 이름을 옮겨 적으세요. 종류가 너무 많아 여기에 모두 나열할 수 없고, 여기에 목록을 두면 금방 낡습니다."
+
+msgid "Stats4U Visitor Counter"
+msgstr "Stats4U 방문자 카운터"
+
+msgid "The number from the gallery. 950 is the adjustable counter."
+msgstr "갤러리에 있는 번호입니다. 950은 직접 설정할 수 있는 카운터입니다."
+
+msgid "Visitor counter"
+msgstr "방문자 카운터"
+
+msgid "Where to show it"
+msgstr "표시 위치"
+
+msgid "You need a counter number first. Get one at %s - no sign-up."
+msgstr "먼저 카운터 번호가 필요합니다. %s에서 가입 없이 받으세요."
+
+msgid "always dark"
+msgstr "항상 어둡게"
+
+msgid "always light"
+msgstr "항상 밝게"
+
+msgid "follow the device"
+msgstr "기기 설정을 따름"
+
+msgid "show automatically in the footer"
+msgstr "푸터에 자동으로 표시"
+
+msgid "Link"
+msgstr "링크"
+
+msgid "link the counter to its public statistics page on stats4u.net"
+msgstr "카운터를 stats4u.net의 공개 통계 페이지에 링크"
+
+msgid "Off by default. Visitors who click the counter then see your statistics."
+msgstr "기본값은 꺼짐입니다. 켜면 카운터를 클릭한 방문자가 내 통계를 볼 수 있습니다."

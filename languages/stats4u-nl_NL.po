@@ -1,0 +1,76 @@
+# Stats4U - nl_NL
+# Liegt beim Plugin, damit die Uebersetzung auch ohne wordpress.org mitkommt.
+msgid ""
+msgstr ""
+"Project-Id-Version: Stats4U 1.3.0\n"
+"Report-Msgid-Bugs-To: https://www.stats4u.net/\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: nl_NL\n"
+
+msgid "A paragraph for your privacy policy is at %s."
+msgstr "Een alinea voor je privacyverklaring vind je op %s."
+
+msgid "Counter number"
+msgstr "Tellernummer"
+
+msgid "Dark mode"
+msgstr "Donkere modus"
+
+msgid "Design"
+msgstr "Ontwerp"
+
+msgid "Otherwise put the shortcode [stats4u] wherever you like."
+msgstr "Of plaats de shortcode [stats4u] waar je maar wilt."
+
+msgid "Palette"
+msgstr "Palet"
+
+msgid "Preview"
+msgstr "Voorbeeld"
+
+msgid "Puts a Stats4U counter on your site - as the shortcode [stats4u] or automatically in the footer. One image, no script, no cookie."
+msgstr "Plaatst een Stats4U-teller op je site – als shortcode [stats4u] of automatisch in de footer. Eén afbeelding, geen script, geen cookie."
+
+msgid "Shape"
+msgstr "Vorm"
+
+msgid "Shape and palette only apply to design 950. Pick them in the creator at %s and copy the names out of the address - there are far too many to list here, and a list here would go stale."
+msgstr "Vorm en palet gelden alleen voor ontwerp 950. Kies ze in de creator op %s en neem de namen over uit het adres – het zijn er veel te veel om hier op te sommen, en een lijst hier zou snel verouderen."
+
+msgid "Stats4U Visitor Counter"
+msgstr "Stats4U Bezoekersteller"
+
+msgid "The number from the gallery. 950 is the adjustable counter."
+msgstr "Het nummer uit de galerij. 950 is de instelbare teller."
+
+msgid "Visitor counter"
+msgstr "Bezoekersteller"
+
+msgid "Where to show it"
+msgstr "Waar tonen"
+
+msgid "You need a counter number first. Get one at %s - no sign-up."
+msgstr "Je hebt eerst een tellernummer nodig. Haal er een op %s – zonder registratie."
+
+msgid "always dark"
+msgstr "altijd donker"
+
+msgid "always light"
+msgstr "altijd licht"
+
+msgid "follow the device"
+msgstr "volgt het apparaat"
+
+msgid "show automatically in the footer"
+msgstr "automatisch tonen in de footer"
+
+msgid "Link"
+msgstr "Link"
+
+msgid "link the counter to its public statistics page on stats4u.net"
+msgstr "de teller linken aan zijn openbare statistiekpagina op stats4u.net"
+
+msgid "Off by default. Visitors who click the counter then see your statistics."
+msgstr "Standaard uit. Bezoekers die op de teller klikken, zien dan je statistieken."

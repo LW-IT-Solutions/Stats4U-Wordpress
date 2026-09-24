@@ -1,0 +1,76 @@
+# Stats4U - uk
+# Liegt beim Plugin, damit die Uebersetzung auch ohne wordpress.org mitkommt.
+msgid ""
+msgstr ""
+"Project-Id-Version: Stats4U 1.3.0\n"
+"Report-Msgid-Bugs-To: https://www.stats4u.net/\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: uk\n"
+
+msgid "A paragraph for your privacy policy is at %s."
+msgstr "Абзац для вашої політики конфіденційності є на %s."
+
+msgid "Counter number"
+msgstr "Номер лічильника"
+
+msgid "Dark mode"
+msgstr "Темний режим"
+
+msgid "Design"
+msgstr "Дизайн"
+
+msgid "Otherwise put the shortcode [stats4u] wherever you like."
+msgstr "Або вставте шорткод [stats4u] у будь-яке місце."
+
+msgid "Palette"
+msgstr "Палітра"
+
+msgid "Preview"
+msgstr "Попередній перегляд"
+
+msgid "Puts a Stats4U counter on your site - as the shortcode [stats4u] or automatically in the footer. One image, no script, no cookie."
+msgstr "Додає лічильник Stats4U на ваш сайт — шорткодом [stats4u] або автоматично в підвалі. Одне зображення, без скриптів, без файлів cookie."
+
+msgid "Shape"
+msgstr "Форма"
+
+msgid "Shape and palette only apply to design 950. Pick them in the creator at %s and copy the names out of the address - there are far too many to list here, and a list here would go stale."
+msgstr "Форма й палітра діють лише для дизайну 950. Виберіть їх у майстрі на %s і скопіюйте назви з адреси — їх надто багато, щоб перелічувати тут, та й такий список швидко застарів би."
+
+msgid "Stats4U Visitor Counter"
+msgstr "Stats4U Лічильник відвідувань"
+
+msgid "The number from the gallery. 950 is the adjustable counter."
+msgstr "Номер із галереї. 950 — лічильник, який можна налаштувати."
+
+msgid "Visitor counter"
+msgstr "Лічильник відвідувань"
+
+msgid "Where to show it"
+msgstr "Де показувати"
+
+msgid "You need a counter number first. Get one at %s - no sign-up."
+msgstr "Спершу потрібен номер лічильника. Отримайте його на %s — без реєстрації."
+
+msgid "always dark"
+msgstr "завжди темний"
+
+msgid "always light"
+msgstr "завжди світлий"
+
+msgid "follow the device"
+msgstr "за налаштуванням пристрою"
+
+msgid "show automatically in the footer"
+msgstr "показувати автоматично в підвалі"
+
+msgid "Link"
+msgstr "Посилання"
+
+msgid "link the counter to its public statistics page on stats4u.net"
+msgstr "зробити лічильник посиланням на його публічну сторінку статистики на stats4u.net"
+
+msgid "Off by default. Visitors who click the counter then see your statistics."
+msgstr "Типово вимкнено. Відвідувачі, які натиснуть на лічильник, побачать вашу статистику."

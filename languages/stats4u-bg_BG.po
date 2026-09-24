@@ -1,0 +1,76 @@
+# Stats4U - bg_BG
+# Liegt beim Plugin, damit die Uebersetzung auch ohne wordpress.org mitkommt.
+msgid ""
+msgstr ""
+"Project-Id-Version: Stats4U 1.3.0\n"
+"Report-Msgid-Bugs-To: https://www.stats4u.net/\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: bg_BG\n"
+
+msgid "A paragraph for your privacy policy is at %s."
+msgstr "Абзац за вашата политика за поверителност ще намерите на %s."
+
+msgid "Counter number"
+msgstr "Номер на брояча"
+
+msgid "Dark mode"
+msgstr "Тъмен режим"
+
+msgid "Design"
+msgstr "Дизайн"
+
+msgid "Otherwise put the shortcode [stats4u] wherever you like."
+msgstr "Или поставете краткия код [stats4u] където пожелаете."
+
+msgid "Palette"
+msgstr "Палитра"
+
+msgid "Preview"
+msgstr "Преглед"
+
+msgid "Puts a Stats4U counter on your site - as the shortcode [stats4u] or automatically in the footer. One image, no script, no cookie."
+msgstr "Поставя брояч на Stats4U на сайта ви – като кратък код [stats4u] или автоматично в долния колонтитул. Едно изображение, без скрипт, без бисквитки."
+
+msgid "Shape"
+msgstr "Форма"
+
+msgid "Shape and palette only apply to design 950. Pick them in the creator at %s and copy the names out of the address - there are far too many to list here, and a list here would go stale."
+msgstr "Формата и палитрата важат само за дизайн 950. Изберете ги в съветника на %s и копирайте имената от адреса – те са твърде много, за да бъдат изброени тук, а и такъв списък бързо би остарял."
+
+msgid "Stats4U Visitor Counter"
+msgstr "Stats4U Брояч на посещенията"
+
+msgid "The number from the gallery. 950 is the adjustable counter."
+msgstr "Номерът от галерията. 950 е броячът, който може да се настройва."
+
+msgid "Visitor counter"
+msgstr "Брояч на посещенията"
+
+msgid "Where to show it"
+msgstr "Къде да се показва"
+
+msgid "You need a counter number first. Get one at %s - no sign-up."
+msgstr "Първо ви трябва номер на брояч. Вземете си на %s – без регистрация."
+
+msgid "always dark"
+msgstr "винаги тъмен"
+
+msgid "always light"
+msgstr "винаги светъл"
+
+msgid "follow the device"
+msgstr "следва устройството"
+
+msgid "show automatically in the footer"
+msgstr "автоматично показване в долния колонтитул"
+
+msgid "Link"
+msgstr "Връзка"
+
+msgid "link the counter to its public statistics page on stats4u.net"
+msgstr "броячът да води към публичната си страница със статистика на stats4u.net"
+
+msgid "Off by default. Visitors who click the counter then see your statistics."
+msgstr "По подразбиране е изключено. Посетителите, които щракнат върху брояча, ще виждат вашата статистика."
