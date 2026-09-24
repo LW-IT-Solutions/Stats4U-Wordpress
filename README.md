@@ -1,11 +1,13 @@
 # Stats4U Visitor Counter for WordPress
 
-A visitor counter as an image. Paste the code from stats4u.net, pick a place,
-and let your consent banner decide when it loads.
+A visitor counter from stats4u.net. Paste the code, pick a place, and let your
+consent banner decide when it loads.
 
-The plugin puts a [Stats4U](https://www.stats4u.net/) counter on your WordPress
-site. Paste the code you got on stats4u.net – HTML, BBCode, Markdown, the script
-version, an image address or just the counter number – under
+The plugin puts the official [Stats4U](https://www.stats4u.net/) script
+(`s4u.js`) on your WordPress site – the same code the creator on stats4u.net
+gives you, with every setting from it – right where the counter should appear.
+Paste the code you got on stats4u.net – HTML, BBCode, Markdown, the script
+code, an image address or just the counter number – under
 *Settings → Stats4U*. No counter yet? The button "Create a free counter on
 stats4u.net" opens the creator, and its last step brings the code back.
 
@@ -22,15 +24,15 @@ stats4u.net" opens the creator, and its last step brings the code back.
   Astra, GeneratePress, Hello Elementor, Kadence, Neve, OceanWP and themes
   whose body is a flex or grid container.
 * **Consent built in:** 27 consent tools and the WP Consent API, or your own
-  attributes. The counter loads only after consent. Tools that can release an
-  image themselves (consented.eu, Cookiebot, Klaro!, Termly, iubenda,
-  Cookie-Script, Cookie Information, Civic) get no script at all.
-* **Without a consent tool:** one `<img>`, no script, no cookie. 797 bytes
-  median over 580 designs, measured at [stats4u.net/weight](https://www.stats4u.net/weight).
+  attributes. The counter loads only after consent: a placeholder waits where
+  the counter goes and is filled with the script once the tool allows it.
+* **Statistics worth reading:** every count carries the page and the referrer;
+  on top come time on page, scroll depth and "online now". The script is
+  12.6 kB over the wire (Brotli) and cached for a week; no cookie.
 * **19 interface languages** – the same as stats4u.net. Regional variants
   (de_AT, es_MX, pt_BR …) get the nearest one.
 
-Details on the data the image request carries are in [readme.txt](readme.txt),
+What the script sends, and when, is listed in [readme.txt](readme.txt),
 section *External services*.
 
 ## Install

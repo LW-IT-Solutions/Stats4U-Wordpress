@@ -3,7 +3,7 @@
  * Plugin Name:       Stats4U
  * Plugin URI:        https://www.stats4u.net/
  * Description:       Puts a Stats4U visitor counter on your site. Paste the code from stats4u.net, choose where it appears and, if you use a consent banner, let it decide when the counter loads.
- * Version:           1.4.0
+ * Version:           1.5.0
  * Requires at least: 5.8
  * Requires PHP:      7.4
  * Author:            LW IT Solutions Company
@@ -15,21 +15,28 @@
  *
  * WAS DIESES PLUGIN TUT UND WAS NICHT
  *
- * Es setzt ein <img> auf die Seite. Kein Cookie, kein eigener Endpunkt, keine
- * eigene Tabelle, kein Aufruf nach Hause vom Server aus. Das ausgelieferte
- * Bild IST die Zaehlung - deshalb zaehlt es auch bei Lesern, die Skripte
- * abschalten.
+ * Es setzt das offizielle Skript von stats4u.net auf die Seite - dasselbe
+ * <script src=".../s4u.js" data-id ...>, das der Assistent dort ausgibt, mit
+ * allen Angaben daraus. s4u.js zeichnet den Zaehler genau dort, wo es steht.
+ * Kein Cookie, kein eigener Endpunkt, keine eigene Tabelle, kein Aufruf nach
+ * Hause vom Server aus.
  *
- * Ein Skript gibt es genau dann, wenn der Betreiber ein Consent-Werkzeug
- * waehlt, das Bilder nicht selbst freischalten kann: dann steht das Bild ohne
- * Adresse im HTML, und ein Einzeiler setzt sie, sobald das Werkzeug ihn nach
- * der Einwilligung ausfuehrt. Werkzeuge, die ein <img> selbst freischalten
- * (consented.eu, Cookiebot ...), bekommen gar kein Skript. Ohne
- * Consent-Werkzeug bleibt es beim reinen Bild.
+ * BIS 1.4.0 WAR ES NUR DAS BILD. Leichter (ein Abruf statt drei), aber die
+ * Statistik bekam damit fast nichts: keine Seitenadresse (der Browser schickt
+ * an eine fremde Herkunft nur den Ursprung), keine Herkunft des Besuchers,
+ * keine Verweildauer und Scrolltiefe, kein "jetzt online", keine Ereignisse.
+ * Das alles traegt s4u.js.
  *
- * Bewusst NICHT die Skriptfassung von stats4u.net: die kann den Zaehler von
- * selbst nachladen, kostet dafuer aber drei Abrufe statt einem. Was das in
- * Byte ausmacht, steht gemessen auf https://www.stats4u.net/weight.
+ * Mit Consent-Werkzeug steht am Platz des Zaehlers ein leerer Platzhalter,
+ * und ein Einzeiler setzt das Skript hinein, sobald das Werkzeug ihn nach der
+ * Einwilligung ausfuehrt.
+ *
+ * Den Verweis auf die Statistikseite setzt s4u.js von sich aus, also der
+ * Dienst und nicht das Plugin - wordpress.org, Richtlinie 10: "Services are
+ * permitted to brand their output as they see fit, provided the code is
+ * handled in the service and not the plugin." Ohne Verweis zeigt s4u.js einen
+ * Zaehler, der auf stats4u.net auf "nicht oeffentlich" steht. (1.2.0 bis
+ * 1.4.0 setzte das Plugin den Verweis selbst - dort ab Werk aus.)
  *
  * WARUM DIE ZEICHENKETTEN ENGLISCH SIND
  *
@@ -42,7 +49,9 @@
 if (!defined('ABSPATH')) { exit; }
 
 const STATS4U_OPTION  = 'stats4u_einstellungen';
-const STATS4U_VERSION = '1.4.0';
+const STATS4U_VERSION = '1.5.0';
+/** Das offizielle Zaehlerskript - dasselbe, das der Assistent auf stats4u.net ausgibt. */
+const STATS4U_SKRIPT  = 'https://www.stats4u.net/s4u.js';
 
 /** Die 19 Sprachen von stats4u.net - dieselben wie die Oberflaeche dort. */
 function stats4u_sprachen() {
@@ -68,9 +77,17 @@ function stats4u_vorgaben() {
         'sprache'       => '',
         'dark'          => 'auto',
         'metrik'        => '',
-        // Den Zaehler mit seiner oeffentlichen Statistikseite verlinken. Ab
-        // Werk AUS (1.2.0): wordpress.org, Richtlinie 10.
+        // 1.2.0 bis 1.4.0: Schalter fuer den Verweis. Seit 1.5.0 setzt ihn
+        // s4u.js selbst; der Wert bleibt nur, damit alte Einstellungen lesbar
+        // bleiben.
         'link'          => 0,
+        // Aus dem Skript-Code des Assistenten (1.5.0): data-private,
+        // data-alias (beide nur fuer das Linkziel) und data-screen (Bildschirm,
+        // Fenster und Pixelverhaeltnis beim Verlassen mitmessen - nur, wenn
+        // der Betreiber es dort angehakt hat).
+        'privat'        => 0,
+        'alias'         => '',
+        'schirm'        => 0,
         'platz'         => 'unter',
         'ausrichtung'   => 'center',
         'wo'            => 'alle',
@@ -181,6 +198,10 @@ function stats4u_code_lesen($roh) {
             $query = $q[1] !== '' ? $q[1] : ($q[2] ?? '');
         }
         if (preg_match('~data-metric\s*=\s*["\']?unique~i', $t)) { $query .= ($query === '' ? '' : '&') . 'm=uniq'; }
+        // Was nur der Skript-Code kennt - wie s4u.js selbst es liest.
+        $aus['privat'] = preg_match('~data-private\s*=\s*["\']?true~i', $t) ? 1 : 0;
+        $aus['alias']  = preg_match('~data-alias\s*=\s*["\']?([a-z0-9_-]{1,40})~i', $t, $a) ? strtolower($a[1]) : '';
+        $aus['schirm'] = preg_match('~data-screen\s*=\s*["\']?(?:1|true|on|yes)\b~i', $t) ? 1 : 0;
     } elseif (preg_match('~/live/([0-9]{1,12})(?![0-9a-z_-])~i', $t, $m)) {
         // Nur die Statistikseite - Nummer ja, Entwurf nein.
         $aus['id'] = $m[1];
@@ -202,6 +223,9 @@ function stats4u_code_lesen($roh) {
     // Der Assistent laesst dark weg, wenn "hell" gewaehlt ist.
     if (!isset($aus['dark']) && $aus['style'] === '950' && $query !== null) { $aus['dark'] = '0'; }
     if (!isset($aus['metrik']) && $query !== null) { $aus['metrik'] = ''; }
+    // Und gr nur, wenn die Groesse nicht 100 ist (js/start.js, grParam()) -
+    // sonst behielte ein neuer Code die Groesse des alten.
+    if (!isset($aus['gr']) && $query !== null) { $aus['gr'] = 100; }
     return $aus;
 }
 
@@ -217,20 +241,27 @@ function stats4u_fehlertext($fehler) {
 
 // --- Consent -----------------------------------------------------------------
 //
-// Vier Wege, je nachdem, was das Werkzeug kann - immer der sicherste, den es
+// Drei Wege, je nachdem, was das Werkzeug kann - immer der sicherste, den es
 // dokumentiert:
 //
-// 'img':    Das Werkzeug schaltet ein <img> selbst frei (eigenes Attribut fuer
-//           die Adresse). Dann gibt es kein einziges Skript vom Plugin.
-// 'skript': Das Werkzeug schaltet nur Skripte frei (type="text/plain" o. ae.
-//           plus sein Attribut). Das Bild steht ohne Adresse da, ein
-//           Einzeiler setzt sie - und den fuehrt das Werkzeug erst nach der
-//           Einwilligung aus.
-// 'extern': Wie 'skript', aber das Werkzeug sperrt nur Skripte mit eigener
-//           Adresse (CookieYes, Osano): dann ist der Einzeiler freigabe.js.
+// 'skript': Das Werkzeug schaltet ein Inline-Skript frei (type="text/plain"
+//           o. ae. plus sein Attribut). Am Platz des Zaehlers steht ein leerer
+//           Platzhalter, ein Einzeiler setzt s4u.js hinein - und den fuehrt
+//           das Werkzeug erst nach der Einwilligung aus.
+// 'extern': Wie 'skript', aber das Werkzeug gibt nur Skripte mit eigener
+//           Adresse frei (CookieYes, Osano, Cookie Information, Civic): dann
+//           ist der Einzeiler freigabe.js. {freigabe} = deren Adresse; wo es
+//           nicht steht, kommt sie in src.
 // 'api':    Das Werkzeug sperrt nichts, sagt aber, ob eingewilligt ist. Ein
 //           kleines Skript fragt nach und horcht auf die Aenderung - und laedt
 //           NUR bei ausdruecklicher Zustimmung. Im Zweifel bleibt es aus.
+//
+// Bis 1.4.0 schalteten acht Werkzeuge ein <img> selbst frei ('img'). Seit
+// 1.5.0 ist der Zaehler s4u.js, also gilt fuer sie ihre Skript-Sperre - fuer
+// Cookie Information und Civic 9 nur mit Adresse (Recherche vom 24.09.2026:
+// ein Inline-Skript mit data-category-consent entfernt Cookie Information
+// ungelaufen; Civic 9 kennt nur data-src). Das s4u.js selbst sperrt keiner der
+// Wege: so kommt es in jedem Fall mit allen Angaben an seinen Platz.
 //
 // {wert} ist Kategorie, Zweck oder Dienst im Werkzeug, {src} die Adresse.
 // Grundlage: Recherche in den Dokumentationen und im ausgelieferten Code der
@@ -244,30 +275,29 @@ function stats4u_fehlertext($fehler) {
 
 function stats4u_cmps() {
     return array(
-        // --- schalten ein <img> selbst frei --------------------------------
-        'consented' => array('name' => 'consented.eu', 'weg' => 'img', 'wert' => 'stats4u', 'art' => 'dienst',
-            'attr' => array('data-consented' => '{wert}', 'data-consented-src' => '{src}')),
-        'cookiebot' => array('name' => 'Cookiebot', 'weg' => 'img', 'wert' => 'statistics', 'art' => 'kategorie',
-            'attr' => array('data-cookieblock-src' => '{src}', 'data-cookieconsent' => '{wert}'),
-            'plugins' => array('cookiebot/cookiebot.php')),
-        'klaro' => array('name' => 'Klaro!', 'weg' => 'img', 'wert' => 'stats4u', 'art' => 'dienst',
-            'attr' => array('data-name' => '{wert}', 'data-src' => '{src}')),
-        'termly' => array('name' => 'Termly', 'weg' => 'img', 'wert' => 'analytics', 'art' => 'kategorie',
-            'attr' => array('data-src' => '{src}', 'data-categories' => '{wert}'),
-            'plugins' => array('uk-cookie-consent/uk-cookie-consent.php')),
-        'iubenda' => array('name' => 'iubenda', 'weg' => 'img', 'wert' => '4', 'art' => 'kategorie',
-            'attr' => array('src' => '', 'class' => '_iub_cs_activate', 'data-iub-purposes' => '{wert}', 'data-suppressedsrc' => '{src}'),
-            'plugins' => array('iubenda-cookie-law-solution/iubenda_cookie_solution.php')),
-        'cookiescript' => array('name' => 'Cookie-Script', 'weg' => 'img', 'wert' => 'performance', 'art' => 'kategorie',
-            'attr' => array('data-src' => '{src}', 'data-cookiescript' => 'accepted', 'data-cookiecategory' => '{wert}'),
-            'plugins' => array('cookie-script-com/index.php')),
-        'cookieinformation' => array('name' => 'Cookie Information', 'weg' => 'img', 'wert' => 'cookie_cat_statistic', 'art' => 'kategorie',
-            'attr' => array('src' => '', 'data-consent-src' => '{src}', 'data-category-consent' => '{wert}'),
-            'plugins' => array('cookie-information-consent-solution/plugin.php')),
-        'civic' => array('name' => 'Civic Cookie Control (9.5+)', 'weg' => 'img', 'wert' => 'analytics', 'art' => 'dienst',
-            'attr' => array('data-src' => '{src}', 'data-cc-category' => '{wert}'),
-            'plugins' => array('civic-cookie-control-8/cookiecontrol-settings.php')),
         // --- schalten ein gesperrtes Inline-Skript frei ---------------------
+        // consented.eu: der dokumentierte Weg fuer Skripte. NICHT das s4u.js
+        // selbst mit data-consented-src sperren - applyConsent() nimmt jedes
+        // script[type="text/plain"][data-consented] in Schritt 1 als
+        // Inline-Skript (src nur aus dem Attribut src) und ersetzt es durch
+        // ein leeres, bevor Schritt 3 data-consented-src liest (cmp.js,
+        // nachgelesen am 24.09.2026).
+        'consented' => array('name' => 'consented.eu', 'weg' => 'skript', 'wert' => 'stats4u', 'art' => 'dienst',
+            'attr' => array('type' => 'text/plain', 'data-consented' => '{wert}')),
+        'cookiebot' => array('name' => 'Cookiebot', 'weg' => 'skript', 'wert' => 'statistics', 'art' => 'kategorie',
+            'attr' => array('type' => 'text/plain', 'data-cookieconsent' => '{wert}'),
+            'plugins' => array('cookiebot/cookiebot.php')),
+        'klaro' => array('name' => 'Klaro!', 'weg' => 'skript', 'wert' => 'stats4u', 'art' => 'dienst',
+            'attr' => array('type' => 'text/plain', 'data-type' => 'text/javascript', 'data-name' => '{wert}')),
+        'termly' => array('name' => 'Termly', 'weg' => 'skript', 'wert' => 'analytics', 'art' => 'kategorie',
+            'attr' => array('type' => 'text/plain', 'data-categories' => '{wert}'),
+            'plugins' => array('uk-cookie-consent/uk-cookie-consent.php')),
+        'iubenda' => array('name' => 'iubenda', 'weg' => 'skript', 'wert' => '4', 'art' => 'kategorie',
+            'attr' => array('type' => 'text/plain', 'class' => '_iub_cs_activate', 'data-iub-purposes' => '{wert}'),
+            'plugins' => array('iubenda-cookie-law-solution/iubenda_cookie_solution.php')),
+        'cookiescript' => array('name' => 'Cookie-Script', 'weg' => 'skript', 'wert' => 'performance', 'art' => 'kategorie',
+            'attr' => array('type' => 'text/plain', 'data-cookiescript' => 'accepted', 'data-cookiecategory' => '{wert}'),
+            'plugins' => array('cookie-script-com/index.php')),
         'complianz' => array('name' => 'Complianz', 'weg' => 'skript', 'wert' => 'statistics', 'art' => 'kategorie',
             'attr' => array('type' => 'text/plain', 'data-category' => '{wert}'),
             'plugins' => array('complianz-gdpr/complianz-gpdr.php', 'complianz-gdpr-premium/complianz-gpdr-premium.php')),
@@ -304,6 +334,12 @@ function stats4u_cmps() {
             'plugins' => array('cookie-law-info/cookie-law-info.php')),
         'osano' => array('name' => 'Osano', 'weg' => 'extern', 'wert' => 'ANALYTICS', 'art' => 'kategorie',
             'attr' => array('data-osano' => '{wert}')),
+        'cookieinformation' => array('name' => 'Cookie Information', 'weg' => 'extern', 'wert' => 'cookie_cat_statistic', 'art' => 'kategorie',
+            'attr' => array('src' => '', 'data-consent-src' => '{freigabe}', 'data-category-consent' => '{wert}'),
+            'plugins' => array('cookie-information-consent-solution/plugin.php')),
+        'civic' => array('name' => 'Civic Cookie Control (9.5+)', 'weg' => 'extern', 'wert' => 'analytics', 'art' => 'dienst',
+            'attr' => array('data-src' => '{freigabe}', 'data-cc-category' => '{wert}'),
+            'plugins' => array('civic-cookie-control-8/cookiecontrol-settings.php')),
         // --- sagen nur, ob eingewilligt ist ------------------------------------
         'wpconsent' => array('name' => 'WP Consent API', 'weg' => 'api', 'wert' => 'statistics', 'art' => 'kategorie',
             'plugins' => array('wp-consent-api/wp-consent-api.php')),
@@ -429,8 +465,9 @@ function stats4u_cl($e) {
 }
 
 /**
- * Die Bildadresse. Die kurze Form mit Endung, damit sie auch dort durchgeht,
- * wo eine Adresse ohne Endung nicht als Bild angenommen wird.
+ * Die Bildadresse - nur noch fuer die Vorschau (Einstellungsseite, Editor).
+ * Die kurze Form mit Endung, damit sie auch dort durchgeht, wo eine Adresse
+ * ohne Endung nicht als Bild angenommen wird. Auf der Seite zeichnet s4u.js.
  */
 function stats4u_bildadresse($e, $nurAnzeigen = false) {
     $url = 'https://www.stats4u.net/c/' . rawurlencode($e['id']) . '-' . rawurlencode($e['style']) . '.png';
@@ -449,80 +486,78 @@ function stats4u_bildadresse($e, $nurAnzeigen = false) {
 }
 
 /**
+ * Die Angaben fuer s4u.js - dieselben Attribute, die der Assistent auf
+ * stats4u.net in seinen Skript-Code schreibt: Nummer, Entwurf, alles
+ * Einstellbare als data-params (Form, Farben, dunkel, Groesse), Zaehlweise,
+ * Sprache, data-private/-alias/-screen. Den Verweis entscheidet s4u.js
+ * (siehe Kopf der Datei).
+ */
+function stats4u_skript_daten($e) {
+    $p = is_array($e['params']) ? $e['params'] : array();
+    if ($e['dark'] !== '0') { $p['dark'] = $e['dark']; }
+    if (stats4u_groesse($e['gr']) !== 100) { $p['gr'] = stats4u_groesse($e['gr']); }
+
+    $d = array('data-id' => (string) $e['id'], 'data-style' => (string) $e['style']);
+    if ($p) { $d['data-params'] = http_build_query($p, '', '&', PHP_QUERY_RFC3986); }
+    if ($e['metrik'] === 'uniq') { $d['data-metric'] = 'unique'; }
+    $cl = stats4u_cl($e);
+    if ($cl !== '') { $d['data-lang'] = $cl; }
+    if (!empty($e['privat'])) { $d['data-private'] = 'true'; }
+    if ((string) $e['alias'] !== '') { $d['data-alias'] = (string) $e['alias']; }
+    if (!empty($e['schirm'])) { $d['data-screen'] = '1'; }
+    return $d;
+}
+
+/**
  * Das fertige Stueck HTML.
  *
- * Kein loading="lazy": ein Zaehler im Fussbereich wuerde damit erst zaehlen,
- * wenn jemand bis nach unten scrollt. Aus demselben Grund die Marken, mit
- * denen sich die verbreiteten Lazy-Load-Plugins ein Bild ausreden lassen
- * (skip-lazy, no-lazyload, data-no-lazy).
+ * Ohne Consent-Werkzeug das offizielle Skript an seinem Platz; mit einem ein
+ * leerer Platzhalter, in den der Einzeiler aus stats4u_aktivierer() das
+ * Skript nach der Einwilligung setzt.
+ * Gebaut mit wp_get_script_tag() (maskiert jedes Attribut) und esc_attr().
+ *
+ * $vorschau: nur das Bild, rl=1 (zaehlt nicht) - fuer Einstellungsseite und
+ * Editor.
  */
 function stats4u_html($vorschau = false) {
     $e = stats4u_einstellungen();
     if ($e['id'] === '') { return ''; }
 
-    $src  = stats4u_bildadresse($e, $vorschau);
-    $cmp  = $vorschau ? null : stats4u_cmp($e);
-    $attr = array();
-    if ($cmp === null) {
-        $attr['src'] = $src;
-    } elseif ($cmp['weg'] === 'img') {
-        foreach ($cmp['attr'] as $k => $v) {
-            $attr[$k] = ($v === '{src}') ? $src : str_replace('{wert}', stats4u_consent_wert($e, $cmp), $v);
-        }
-    } else {
-        $attr['data-stats4u-src'] = $src;
-        stats4u_wartet(true);
+    if ($vorschau) {
+        return '<span class="stats4u-zaehler"><img src="' . esc_url(stats4u_bildadresse($e, true)) . '" alt="" decoding="async"></span>';
     }
-    // Eine Klasse des Werkzeugs (iubenda) bleibt vorn, die Lazy-Load-Marken kommen dazu.
-    $attr['class'] = trim(($attr['class'] ?? '') . ' skip-lazy no-lazyload');
-    $attr += array(
-        'alt'          => __('Visitor counter', 'stats4u'),
-        'data-no-lazy' => '1',
-        'decoding'     => 'async',
-    );
 
-    $bild = '<img';
-    foreach ($attr as $k => $v) {
-        $url  = ($k === 'src' || substr($k, -4) === '-src' || $k === 'data-suppressedsrc');
-        $bild .= ' ' . $k . '="' . ($url ? esc_url($v) : esc_attr($v)) . '"';
+    $daten = stats4u_skript_daten($e);
+    if (stats4u_cmp($e) === null) {
+        return '<span class="stats4u-zaehler">'
+             . trim(wp_get_script_tag(array('src' => STATS4U_SKRIPT, 'async' => true) + $daten)) . '</span>';
     }
-    $bild .= '>';
-
-    if (empty($e['link'])) {
-        return '<span class="stats4u-zaehler">' . $bild . '</span>';
-    }
-    return sprintf(
-        '<a class="stats4u-zaehler" href="%s" rel="noopener">%s</a>',
-        esc_url('https://www.stats4u.net/live/' . $e['id']),
-        $bild
-    );
-}
-
-/**
- * Was stats4u_html() ausgeben darf - fuer wp_kses() bei jeder Ausgabe. Das
- * HTML ist oben schon mit esc_url()/esc_attr() gebaut; die Liste macht das
- * fuer jeden Leser des Codes (und fuer Plugin Check) nachpruefbar.
- */
-function stats4u_erlaubt() {
-    $img = array('src' => true, 'alt' => true, 'class' => true, 'decoding' => true,
-                 'data-no-lazy' => true, 'data-stats4u-src' => true);
-    $cmp = stats4u_cmp(stats4u_einstellungen());
-    if ($cmp && $cmp['weg'] === 'img') {
-        foreach (array_keys($cmp['attr']) as $k) { $img[$k] = true; }
-    }
-    return array(
-        'a'    => array('class' => true, 'href' => true, 'rel' => true),
-        'span' => array('class' => true),
-        'img'  => $img,
-    );
+    stats4u_wartet(true);
+    return '<span class="stats4u-zaehler" data-stats4u="' . esc_attr(wp_json_encode($daten)) . '"></span>';
 }
 
 /** Der Zaehler in seinem Kasten, fuer die automatischen Plaetze. */
 function stats4u_kasten($klasse, $stil) {
     $html = stats4u_html();
     if ($html === '') { return ''; }
-    return '<div class="' . esc_attr($klasse) . '" style="' . esc_attr($stil) . '">'
-         . wp_kses($html, stats4u_erlaubt()) . '</div>';
+    return '<div class="' . esc_attr($klasse) . '" style="' . esc_attr($stil) . '">' . $html . '</div>';
+}
+
+/**
+ * Unsichtbar, bis s4u.js den Zaehler gezeichnet hat.
+ *
+ * Bis dahin (und ohne Einwilligung fuer immer) steht im Kasten nur ein Skript
+ * oder ein leerer Platzhalter - aber sein Rand bliebe als Luecke stehen. Mit
+ * :has() faellt der Kasten weg, bis ein Bild darin ist; ein Browser ohne
+ * :has() verwirft die Regel und zeigt die Luecke.
+ */
+add_action('wp_enqueue_scripts', 'stats4u_stil');
+function stats4u_stil() {
+    $e = stats4u_einstellungen();
+    if ($e['id'] === '') { return; }
+    wp_register_style('stats4u', false, array(), STATS4U_VERSION);
+    wp_enqueue_style('stats4u');
+    wp_add_inline_style('stats4u', ':is(.stats4u-fuss,.stats4u-ecke,.wp-block-stats4u-counter):not(:has(img)){display:none}');
 }
 
 function stats4u_ausrichtung($e) {
@@ -542,11 +577,18 @@ function stats4u_aktivierer() {
     if (!$cmp) { return; }
 
     $wert = stats4u_consent_wert($e, $cmp);
-    // Ohne die Kennung, die das Werkzeug je Seite vergibt, bleibt das Bild
+    // Ohne die Kennung, die das Werkzeug je Seite vergibt, bleibt der Zaehler
     // gesperrt - lieber kein Zaehler als einer ohne Einwilligung.
     if ($wert === '' && $cmp['art'] === 'pflicht') { return; }
 
-    $an = "function an(){var l=document.querySelectorAll('img[data-stats4u-src]');for(var i=0;i<l.length;i++){l[i].src=l[i].getAttribute('data-stats4u-src');l[i].removeAttribute('data-stats4u-src');}}";
+    // an(): in jeden Platzhalter das offizielle s4u.js mit seinen Angaben.
+    // Danach steht es als window.stats4uAn bereit - fuer Seiten, die ohne
+    // Neuaufbau wechseln und dabei neue Platzhalter einsetzen. Erst nach der
+    // Einwilligung: vorher gibt es die Funktion dort nicht.
+    $an = "function an(){window.stats4uAn=an;var l=document.querySelectorAll('span[data-stats4u]');for(var i=0;i<l.length;i++){"
+        . "var p=l[i],d={};try{d=JSON.parse(p.getAttribute('data-stats4u'))||{};}catch(x){}p.removeAttribute('data-stats4u');"
+        . "var s=document.createElement('script');for(var k in d){if(/^data-[a-z]+$/.test(k)){s.setAttribute(k,String(d[k]));}}"
+        . 's.src=' . wp_json_encode(STATS4U_SKRIPT) . ";s.async=true;p.appendChild(s);}}";
     $los = "if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',los);}else{los();}";
 
     if ($cmp['weg'] === 'api') {
@@ -555,11 +597,16 @@ function stats4u_aktivierer() {
         wp_print_inline_script_tag($js, array('id' => 'stats4u-consent'));
         return;
     }
+    $freigabe = plugins_url('freigabe.js', __FILE__) . '?ver=' . STATS4U_VERSION;
     $attr = array();
-    foreach ($cmp['attr'] as $k => $v) { $attr[$k] = str_replace('{wert}', $wert, $v); }
+    foreach ($cmp['attr'] as $k => $v) { $attr[$k] = str_replace(array('{wert}', '{freigabe}'), array($wert, $freigabe), $v); }
     $attr['id'] = 'stats4u-consent';
     if ($cmp['weg'] === 'extern') {
-        $attr['src'] = plugins_url('freigabe.js', __FILE__) . '?ver=' . STATS4U_VERSION;
+        // Cookie Information und Civic wollen die Adresse in ihrem eigenen
+        // Attribut ({freigabe}); die uebrigen in src.
+        $eigenes = false;
+        foreach ($cmp['attr'] as $v) { if (strpos($v, '{freigabe}') !== false) { $eigenes = true; } }
+        if (!$eigenes) { $attr['src'] = $freigabe; }
         wp_print_script_tag($attr);
         return;
     }
@@ -616,7 +663,8 @@ function stats4u_sprache() {
 // --- Kurzcode und Block ---------------------------------------------------------
 add_shortcode('stats4u', 'stats4u_kurzcode');
 function stats4u_kurzcode() {
-    return wp_kses(stats4u_html(), stats4u_erlaubt());
+    // Gebaut mit wp_get_script_tag() und esc_attr() - siehe stats4u_html().
+    return stats4u_html();
 }
 
 /**
@@ -816,14 +864,14 @@ function stats4u_fuss() {
         $spanne = stats4u_fuss_spanne($html, $fuss_ab);
         if ($spanne !== null) {
             $stelle = ($platz === 'im') ? $spanne[1] : $spanne[2];
-            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the theme's own, already rendered HTML, handed back unchanged; $zaehler is built with wp_kses() in stats4u_kasten()
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the theme's own, already rendered HTML, handed back unchanged; $zaehler is built with wp_get_script_tag() and esc_attr() in stats4u_html()
             echo substr($html, 0, $stelle) . $zaehler . substr($html, $stelle);
             return;
         }
         // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the theme's own, already rendered HTML, handed back unchanged
         echo $html;
     }
-    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built with wp_kses() in stats4u_kasten()
+    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built with wp_get_script_tag() and esc_attr() in stats4u_html()
     echo $zaehler;
 }
 
@@ -833,7 +881,7 @@ function stats4u_ecke() {
     $platz = stats4u_platz();
     if ($platz !== 'ecke_r' && $platz !== 'ecke_l') { return; }
     $seite = ($platz === 'ecke_l') ? 'left' : 'right';
-    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built with wp_kses() in stats4u_kasten()
+    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built with wp_get_script_tag() and esc_attr() in stats4u_html()
     echo stats4u_kasten('stats4u-ecke', 'position:fixed;bottom:12px;' . $seite . ':12px;z-index:99990;line-height:0');
 }
 
@@ -878,6 +926,9 @@ function stats4u_saeubern($ein) {
         $aus['id']     = preg_replace('/[^0-9]/', '', (string) $ein['id']);
         $aus['style']  = preg_replace('/[^0-9a-z_]/', '', strtolower((string) ($ein['style'] ?? $v['style']))) ?: $v['style'];
         $aus['params'] = stats4u_params_saeubern($ein['params'] ?? array());
+        $aus['privat'] = empty($ein['privat']) ? 0 : 1;
+        $aus['alias']  = substr(preg_replace('/[^a-z0-9_-]/', '', strtolower((string) ($ein['alias'] ?? ''))), 0, 40);
+        $aus['schirm'] = empty($ein['schirm']) ? 0 : 1;
     }
 
     // Aussehen, Platz, Consent aus dem Formular.
@@ -889,7 +940,6 @@ function stats4u_saeubern($ein) {
     $aus['sprache']     = $wahl('sprache', array_merge(array('', 'site'), stats4u_sprachen()));
     $aus['dark']        = $wahl('dark', array('auto', '1', '0'));
     $aus['metrik']      = $wahl('metrik', array('', 'uniq'));
-    $aus['link']        = empty($ein['link']) ? 0 : 1;
     $aus['platz']       = $wahl('platz', array('unter', 'im', 'ende', 'inhalt', 'ecke_r', 'ecke_l', 'aus'));
     $aus['ausrichtung'] = $wahl('ausrichtung', array('center', 'left', 'right'));
     $aus['wo']          = $wahl('wo', array('alle', 'start', 'einzeln'));
@@ -906,20 +956,35 @@ function stats4u_saeubern($ein) {
         if ($l['fehler'] !== '') {
             add_settings_error(STATS4U_OPTION, 'stats4u_code', stats4u_fehlertext($l['fehler']), 'error');
         } else {
-            $aus['id'] = $l['id'];
-            // Nur eine Nummer eingefuegt: Entwurf und Parameter bleiben.
-            if ($l['style'] !== '') {
-                $aus['style']  = $l['style'];
-                $aus['params'] = $l['params'];
-            }
-            foreach (array('dark', 'gr', 'metrik', 'sprache') as $k) {
-                if (isset($l[$k])) { $aus[$k] = $l[$k]; }
-            }
+            $aus = stats4u_mit_code($aus, $l);
         }
     }
 
     unset($aus['code']);
     return $aus;
+}
+
+/**
+ * Die Einstellungen $e mit einem gelesenen Code $l darin (stats4u_code_lesen()).
+ * Beim Speichern und fuer die Anzeige nach der Rueckkehr vom Assistenten -
+ * dieselbe Regel an einer Stelle.
+ */
+function stats4u_mit_code($e, $l) {
+    $e['id'] = $l['id'];
+    // Nur eine Nummer eingefuegt: Entwurf und Parameter bleiben. Ein ganzer
+    // Code ersetzt alles, was er festlegt - auch data-private, -alias und
+    // -screen: fehlen sie darin, sind sie aus.
+    if ($l['style'] !== '') {
+        $e['style']  = $l['style'];
+        $e['params'] = $l['params'];
+        $e['privat'] = (int) ($l['privat'] ?? 0);
+        $e['alias']  = (string) ($l['alias'] ?? '');
+        $e['schirm'] = (int) ($l['schirm'] ?? 0);
+    }
+    foreach (array('dark', 'gr', 'metrik', 'sprache') as $k) {
+        if (isset($l[$k])) { $e[$k] = $l[$k]; }
+    }
+    return $e;
 }
 
 /** Wo stats4u.net nach dem Assistenten hin zurueckfuehren soll. */
@@ -961,11 +1026,98 @@ function stats4u_cmps_erkannt() {
     return $da;
 }
 
-// Ein paar Zeilen Skript fuer die Einstellungsseite: blendet ein, was zur Wahl
-// passt. Ohne Skript funktioniert die Seite genauso, nur zeigt sie alles.
+/**
+ * Eine Skizze je Platz fuer die Einstellungsseite: Seite, Kopf, Inhalt, Fuss -
+ * und wo der Zaehler landet, in der Farbe des Admin-Themas. Fest im Code, keine
+ * Eingabe darin.
+ */
+function stats4u_platz_bild($platz) {
+    $pille = function ($x, $y, $klasse = 's4u-z') {
+        return '<rect x="' . $x . '" y="' . $y . '" width="22" height="6" rx="3" class="' . $klasse . '"/>';
+    };
+    $zaehler = array(
+        'unter'  => $pille(49, 67),
+        'im'     => $pille(84, 55),
+        'ende'   => '<path d="M8 69.5h104" class="s4u-strich"/>' . $pille(49, 72),
+        'inhalt' => $pille(8, 43),
+        'ecke_r' => $pille(92, 71),
+        'ecke_l' => $pille(6, 71),
+        'aus'    => $pille(49, 43, 's4u-z-frei'),
+    );
+    return '<svg class="s4u-platz-bild" viewBox="0 0 120 80" aria-hidden="true" focusable="false">'
+         . '<rect x="1" y="1" width="118" height="78" rx="5" class="s4u-seite"/>'
+         . '<rect x="8" y="7" width="104" height="7" rx="2" class="s4u-grau"/>'
+         . '<rect x="8" y="20" width="72" height="4" rx="2" class="s4u-grau"/>'
+         . '<rect x="8" y="28" width="96" height="4" rx="2" class="s4u-grau"/>'
+         . '<rect x="8" y="36" width="60" height="4" rx="2" class="s4u-grau"/>'
+         . '<rect x="8" y="52" width="104" height="12" rx="2" class="s4u-fussleiste"/>'
+         . ($zaehler[$platz] ?? '') . '</svg>';
+}
+
+// Stil und ein paar Zeilen Skript fuer die Einstellungsseite: Karten statt der
+// langen Formulartabelle, Umschalter, Bildkarten fuer den Platz; das Skript
+// blendet ein, was zur Wahl passt, und zieht die Vorschau nach. Ohne Skript
+// funktioniert die Seite genauso, nur zeigt sie alles und die Vorschau bleibt.
 add_action('admin_enqueue_scripts', 'stats4u_admin_skript');
 function stats4u_admin_skript($seite) {
     if ($seite !== 'settings_page_stats4u') { return; }
+    wp_register_style('stats4u-admin', false, array(), STATS4U_VERSION);
+    wp_enqueue_style('stats4u-admin');
+    // Farben aus der Palette des Admin-Bereichs; die Akzentfarbe folgt dem
+    // Farbschema des Nutzers (--wp-admin-theme-color, seit WordPress 5.7).
+    wp_add_inline_style('stats4u-admin', implode('', array(
+        '.s4u-admin{max-width:1000px}',
+        '.s4u-kopf{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:6px 0 14px}',
+        '.s4u-kopf h1{margin:0;padding:9px 0 4px}',
+        '.s4u-version{font-size:12px;line-height:1;padding:4px 8px;border-radius:999px;background:#f0f0f1;color:#50575e}',
+        '.s4u-karte{background:#fff;border:1px solid #c3c4c7;border-radius:8px;box-shadow:0 1px 2px rgba(0,0,0,.04);margin:0 0 20px}',
+        '.s4u-karte>h2{margin:0;padding:14px 20px;font-size:14px;line-height:1.4;border-bottom:1px solid #f0f0f1}',
+        '.s4u-karte.s4u-neu{border-color:#00a32a;box-shadow:0 0 0 1px #00a32a}',
+        '.s4u-zaehler{display:flex;flex-wrap:wrap;align-items:center;gap:20px 28px;padding:20px}',
+        '.s4u-buehne{flex:0 0 auto;display:flex;align-items:center;justify-content:center;min-width:240px;min-height:120px;',
+        'padding:24px;box-sizing:border-box;border-radius:8px;background:#f6f7f7;border:1px solid #f0f0f1;transition:background .2s}',
+        '.s4u-buehne.s4u-dunkel{background:#1d2327;border-color:#1d2327}',
+        '.s4u-buehne img{display:block;max-width:100%;height:auto}',
+        '.s4u-zaehler-info{flex:1 1 260px;min-width:0}',
+        '.s4u-nr{margin:0 0 2px;font-size:15px;font-weight:600;color:#1d2327}',
+        '.s4u-aktionen{margin:14px 0 4px}',
+        '.s4u-code{margin:0;padding:12px 20px 16px;border-top:1px solid #f0f0f1}',
+        '.s4u-code summary{cursor:pointer;font-weight:600;padding:4px 0;color:#2271b1}',
+        '.s4u-code textarea{margin-top:8px}',
+        '.s4u-felder{padding:0 20px}',
+        '.s4u-feld{display:grid;grid-template-columns:minmax(140px,210px) minmax(0,1fr);gap:6px 24px;align-items:start;padding:16px 0;border-top:1px solid #f0f0f1}',
+        '.s4u-feld:first-child{border-top:0}',
+        '.s4u-feld[hidden]{display:none}',
+        '.s4u-lab{font-weight:600;color:#1d2327;padding-top:6px}',
+        '.s4u-feld .description{margin-top:6px}',
+        // Eine Auswahl ist so breit wie ihre laengste Zeile ("after consent in
+        // another tool - enter its attributes") und ragte auf dem Handy aus der Karte.
+        '.s4u-admin select{max-width:100%}',
+        // Als Rasterzelle wuerde der Umschalter die ganze Spalte fuellen.
+        '.s4u-segment{justify-self:start;display:inline-flex;flex-wrap:wrap;max-width:100%;border:1px solid #8c8f94;border-radius:6px;overflow:hidden;background:#fff}',
+        '.s4u-segment label{position:relative;margin:0}',
+        '.s4u-segment label+label{border-left:1px solid #8c8f94}',
+        '.s4u-segment input{position:absolute;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}',
+        '.s4u-segment span{display:block;padding:6px 14px;line-height:1.6;cursor:pointer;color:#1d2327}',
+        '.s4u-segment label:hover span{background:#f6f7f7}',
+        '.s4u-segment input:checked+span{background:var(--wp-admin-theme-color,#2271b1);color:#fff}',
+        '.s4u-segment input:focus-visible+span{outline:2px solid var(--wp-admin-theme-color,#2271b1);outline-offset:-2px;box-shadow:inset 0 0 0 3px #fff}',
+        '.s4u-plaetze{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin:0 0 8px}',
+        '.s4u-platz{display:flex;flex-direction:column;gap:8px;padding:10px;border:1px solid #dcdcde;border-radius:8px;cursor:pointer;background:#fff}',
+        '.s4u-platz:hover{border-color:#8c8f94}',
+        '.s4u-platz:has(input:checked){border-color:var(--wp-admin-theme-color,#2271b1);box-shadow:0 0 0 1px var(--wp-admin-theme-color,#2271b1)}',
+        '.s4u-platz-bild{display:block;width:100%;height:auto}',
+        '.s4u-platz-zeile{display:flex;align-items:flex-start;gap:6px;font-size:13px;line-height:1.4}',
+        '.s4u-platz-zeile input{margin:1px 0 0}',
+        '.s4u-platz-bild .s4u-seite{fill:#f6f7f7;stroke:#c3c4c7}',
+        '.s4u-platz-bild .s4u-grau{fill:#dcdcde}',
+        '.s4u-platz-bild .s4u-fussleiste{fill:#c3c4c7}',
+        '.s4u-platz-bild .s4u-z{fill:var(--wp-admin-theme-color,#2271b1)}',
+        '.s4u-platz-bild .s4u-z-frei{fill:none;stroke:var(--wp-admin-theme-color,#2271b1);stroke-dasharray:3 2}',
+        '.s4u-platz-bild .s4u-strich{fill:none;stroke:#a7aaad;stroke-dasharray:2 2}',
+        '@media (max-width:782px){.s4u-feld{grid-template-columns:minmax(0,1fr)}.s4u-lab{padding-top:0}',
+        '.s4u-buehne{min-width:0;width:100%}}',
+    )));
     wp_register_script('stats4u-admin', false, array(), STATS4U_VERSION, true);
     wp_enqueue_script('stats4u-admin');
     $daten = array();
@@ -979,6 +1131,23 @@ function stats4u_admin_skript($seite) {
         . "var p=d.querySelectorAll('input[name$=\"[platz]\"]'),az=d.getElementById('s4u_ausrichtung_zeile');"
         . "function platz(){var x=d.querySelector('input[name$=\"[platz]\"]:checked');if(az&&x){az.hidden=/^(ecke_r|ecke_l|aus)$/.test(x.value);}}"
         . "for(var i=0;i<p.length;i++){p[i].addEventListener('change',platz);}platz();})();");
+    // Die Vorschau zieht Groesse, Sprache, hell/dunkel und Zaehlweise nach -
+    // dieselbe Reihenfolge wie stats4u_bildadresse(), immer mit rl=1 (zaehlt
+    // nicht). Die Bausteine stehen an der Vorschau selbst (data-*), damit
+    // auch der Rueckweg vom Assistenten sie richtig hat.
+    wp_add_inline_script('stats4u-admin',
+        "(function(){var d=document,b=d.getElementById('s4u_vorschau'),bu=d.getElementById('s4u_buehne');if(!b){return;}"
+        . "function wert(s){var x=d.querySelector(s);return x?x.value:'';}"
+        . "function neu(){var p={},q=[],k;try{p=JSON.parse(b.getAttribute('data-params'))||{};}catch(x){}"
+        . "for(k in p){if(Object.prototype.hasOwnProperty.call(p,k)){q.push(encodeURIComponent(k)+'='+encodeURIComponent(p[k]));}}"
+        . "var dk=wert('input[name$=\"[dark]\"]:checked')||'0';if(dk!=='0'){q.push('dark='+encodeURIComponent(dk));}"
+        . "var g=parseInt(wert('#s4u_gr'),10);if(g&&g!==100){q.push('gr='+g);}"
+        . "if(wert('input[name$=\"[metrik]\"]:checked')==='uniq'){q.push('m=uniq');}"
+        . "var s=wert('#s4u_sprache');if(s==='site'){s=b.getAttribute('data-seite')||'';}if(s){q.push('cl='+encodeURIComponent(s));}"
+        . "q.push('rl=1');var u=b.getAttribute('data-basis')+'?'+q.join('&');if(b.getAttribute('src')!==u){b.setAttribute('src',u);}"
+        . "if(bu){bu.classList.toggle('s4u-dunkel',dk==='1');}}"
+        . "var f=d.querySelectorAll('#s4u_gr,#s4u_sprache,input[name$=\"[dark]\"],input[name$=\"[metrik]\"]');"
+        . "for(var i=0;i<f.length;i++){f[i].addEventListener('change',neu);}})();");
 }
 
 function stats4u_seite() {
@@ -994,6 +1163,12 @@ function stats4u_seite() {
     // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only prefill of a form field; nothing is saved without the nonce-protected form below
     $zurueck = isset($_GET['stats4u_code']) ? sanitize_textarea_field(wp_unslash($_GET['stats4u_code'])) : '';
     $erkannt = ($zurueck !== '') ? stats4u_code_lesen($zurueck) : null;
+    // Zurueck vom Assistenten: gleich so zeigen, wie es nach dem Speichern
+    // aussieht - Vorschau und Auswahlfelder aus dem neuen Code. Bis 1.4.0
+    // stand hier die ALTE Vorschau, und der neue Entwurf schien verloren
+    // (gemeldet am 24.09.2026). Gespeichert wird weiter erst mit dem Knopf.
+    $neu = ($erkannt && $erkannt['fehler'] === '');
+    if ($neu) { $e = stats4u_mit_code($e, $erkannt); }
 
     $groessen = array(50, 75, 100, 125, 150, 200, 300);
     if (!in_array((int) $e['gr'], $groessen, true)) { $groessen[] = (int) $e['gr']; sort($groessen); }
@@ -1012,9 +1187,13 @@ function stats4u_seite() {
         $e['consent'] = $erkannte_cmps[0];
     }
     $cmp_jetzt = stats4u_cmp($e);
+    $sprache_seite = strtolower(substr(get_locale(), 0, 2));
     ?>
-    <div class="wrap">
-        <h1><?php echo esc_html__('Stats4U Visitor Counter', 'stats4u'); ?></h1>
+    <div class="wrap s4u-admin">
+        <div class="s4u-kopf">
+            <h1><?php echo esc_html__('Stats4U Visitor Counter', 'stats4u'); ?></h1>
+            <span class="s4u-version"><?php echo esc_html(STATS4U_VERSION); ?></span>
+        </div>
 
         <?php if ($cmp_jetzt && $cmp_jetzt['art'] === 'pflicht' && stats4u_consent_wert($e, $cmp_jetzt) === '') : ?>
         <div class="notice notice-warning"><p><?php
@@ -1045,201 +1224,221 @@ function stats4u_seite() {
         <form action="options.php" method="post">
             <?php settings_fields('stats4u_gruppe'); ?>
 
-            <h2><?php echo esc_html__('Your counter', 'stats4u'); ?></h2>
-            <table class="form-table" role="presentation">
-                <?php if ($e['id'] !== '') : ?>
-                <tr>
-                    <th scope="row"><?php echo esc_html__('Counter', 'stats4u'); ?></th>
-                    <td>
-                        <p><strong><?php
+            <?php
+            // --- Der Zaehler: Vorschau auf einer Buehne, Nummer, Knopf zum
+            // Assistenten, darunter das Feld fuer den Code. Die Vorschau zieht
+            // Groesse, Sprache und hell/dunkel beim Umstellen nach (Skript in
+            // stats4u_admin_skript); die Bausteine stehen an der Vorschau.
+            ?>
+            <section class="s4u-karte<?php echo $neu ? ' s4u-neu' : ''; ?>">
+                <h2><?php echo esc_html__('Your counter', 'stats4u'); ?></h2>
+                <div class="s4u-zaehler">
+                    <?php if ($e['id'] !== '') : ?>
+                    <div class="s4u-buehne<?php echo $e['dark'] === '1' ? ' s4u-dunkel' : ''; ?>" id="s4u_buehne">
+                        <img id="s4u_vorschau" src="<?php echo esc_url(stats4u_bildadresse($e, true)); ?>" alt=""
+                             data-basis="<?php echo esc_url('https://www.stats4u.net/c/' . rawurlencode($e['id']) . '-' . rawurlencode($e['style']) . '.png'); ?>"
+                             data-params="<?php echo esc_attr(wp_json_encode((object) (is_array($e['params']) ? $e['params'] : array()))); ?>"
+                             data-seite="<?php echo esc_attr(in_array($sprache_seite, stats4u_sprachen(), true) ? $sprache_seite : ''); ?>">
+                    </div>
+                    <?php endif; ?>
+                    <div class="s4u-zaehler-info">
+                        <?php if ($e['id'] !== '') : ?>
+                        <p class="s4u-nr"><?php
                             echo esc_html(sprintf(
                                 /* translators: 1: counter number, 2: design number */
                                 __('Counter %1$s, design %2$s', 'stats4u'), $e['id'], $e['style']
                             ));
-                        ?></strong></p>
-                        <p><img src="<?php echo esc_url(stats4u_bildadresse($e, true)); ?>" alt=""></p>
+                        ?></p>
                         <p class="description"><?php echo esc_html__('Preview - not counted.', 'stats4u'); ?></p>
-                    </td>
-                </tr>
-                <?php endif; ?>
-                <tr>
-                    <th scope="row"><label for="s4u_code"><?php echo esc_html__('Code from stats4u.net', 'stats4u'); ?></label></th>
-                    <td>
-                        <?php $offen = ($e['id'] === '' || $zurueck !== ''); ?>
-                        <details <?php echo $offen ? 'open' : ''; ?>>
-                            <summary><?php echo $e['id'] === ''
-                                ? esc_html__('Paste your code', 'stats4u')
-                                : esc_html__('Use a different counter or code', 'stats4u'); ?></summary>
-                            <p><textarea name="<?php echo esc_attr($n); ?>[code]" id="s4u_code" rows="4" class="large-text code"
-                                placeholder="&lt;img src=&quot;https://www.stats4u.net/c/12345-950.png&quot; ...&gt;"><?php
-                                echo esc_textarea($zurueck); ?></textarea></p>
-                            <p class="description"><?php
-                                echo esc_html__('Paste the HTML, BBCode or image address from stats4u.net - or just the counter number. Design, colors, size and everything else you set there come along.', 'stats4u');
-                            ?></p>
-                        </details>
-                        <p><a class="button" href="<?php echo esc_url(stats4u_erstellen_url()); ?>"><?php
+                        <?php endif; ?>
+                        <?php if ($neu) : ?>
+                        <p class="s4u-aktionen"><?php submit_button(null, 'primary', 'submit', false, array('id' => 'stats4u-sofort')); ?></p>
+                        <?php endif; ?>
+                        <p class="s4u-aktionen"><a class="button<?php echo $e['id'] === '' ? ' button-primary' : ''; ?>" href="<?php echo esc_url(stats4u_erstellen_url()); ?>"><?php
                             echo esc_html__('Create a free counter on stats4u.net', 'stats4u'); ?></a></p>
                         <p class="description"><?php
                             echo esc_html__('At the end, a button brings the code back here.', 'stats4u');
                         ?></p>
-                    </td>
-                </tr>
-            </table>
-
-            <h2><?php echo esc_html__('Appearance', 'stats4u'); ?></h2>
-            <table class="form-table" role="presentation">
-                <tr>
-                    <th scope="row"><label for="s4u_gr"><?php echo esc_html__('Size', 'stats4u'); ?></label></th>
-                    <td><select name="<?php echo esc_attr($n); ?>[gr]" id="s4u_gr">
-                        <?php foreach ($groessen as $g) : ?>
-                        <option value="<?php echo esc_attr($g); ?>" <?php selected((int) $e['gr'], $g); ?>><?php echo esc_html($g . ' %'); ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                    <p class="description"><?php echo esc_html__('Sharp at any size for the modern designs. The classic pixel designs keep their original size.', 'stats4u'); ?></p></td>
-                </tr>
-                <tr>
-                    <th scope="row"><label for="s4u_sprache"><?php echo esc_html__('Language of the counter', 'stats4u'); ?></label></th>
-                    <td><select name="<?php echo esc_attr($n); ?>[sprache]" id="s4u_sprache">
-                        <option value="" <?php selected($e['sprache'], ''); ?>><?php echo esc_html__('as set on stats4u.net', 'stats4u'); ?></option>
-                        <option value="site" <?php selected($e['sprache'], 'site'); ?>><?php echo esc_html__('the language of each page', 'stats4u'); ?></option>
-                        <?php foreach ($sprachnamen as $code => $name) : ?>
-                        <option value="<?php echo esc_attr($code); ?>" <?php selected($e['sprache'], $code); ?>><?php echo esc_html($name); ?></option>
-                        <?php endforeach; ?>
-                    </select></td>
-                </tr>
-                <tr>
-                    <th scope="row"><?php echo esc_html__('Dark mode', 'stats4u'); ?></th>
-                    <td><?php
-                        $modi = array(
-                            'auto' => __('follow the device', 'stats4u'),
-                            '0'    => __('always light', 'stats4u'),
-                            '1'    => __('always dark', 'stats4u'),
-                        );
-                        foreach ($modi as $wert => $beschriftung) : ?>
-                        <label style="margin-right:1em"><input type="radio" name="<?php echo esc_attr($n); ?>[dark]"
-                               value="<?php echo esc_attr($wert); ?>" <?php checked($e['dark'], $wert); ?>>
-                            <?php echo esc_html($beschriftung); ?></label>
-                        <?php endforeach; ?></td>
-                </tr>
-                <tr>
-                    <th scope="row"><?php echo esc_html__('Count', 'stats4u'); ?></th>
-                    <td>
-                        <label style="margin-right:1em"><input type="radio" name="<?php echo esc_attr($n); ?>[metrik]" value="" <?php checked($e['metrik'], ''); ?>>
-                            <?php echo esc_html__('every page view', 'stats4u'); ?></label>
-                        <label><input type="radio" name="<?php echo esc_attr($n); ?>[metrik]" value="uniq" <?php checked($e['metrik'], 'uniq'); ?>>
-                            <?php echo esc_html__('unique visitors', 'stats4u'); ?></label>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row"><?php echo esc_html__('Link', 'stats4u'); ?></th>
-                    <td>
-                        <label><input type="checkbox" name="<?php echo esc_attr($n); ?>[link]" value="1" <?php checked($e['link'], 1); ?>>
-                            <?php echo esc_html__('link the counter to its public statistics page on stats4u.net', 'stats4u'); ?></label>
-                        <p class="description"><?php echo esc_html__('Off by default. Visitors who click the counter then see your statistics.', 'stats4u'); ?></p>
-                    </td>
-                </tr>
-            </table>
-
-            <h2><?php echo esc_html__('Placement', 'stats4u'); ?></h2>
-            <table class="form-table" role="presentation">
-                <tr>
-                    <th scope="row"><?php echo esc_html__('Where to show it', 'stats4u'); ?></th>
-                    <td><fieldset><?php
-                        $plaetze = array(
-                            'unter'  => __('below your theme\'s footer (recommended)', 'stats4u'),
-                            'im'     => __('inside your theme\'s footer, at its end', 'stats4u'),
-                            'ende'   => __('at the very end of the page', 'stats4u'),
-                            'inhalt' => __('below the content of posts and pages', 'stats4u'),
-                            'ecke_r' => __('fixed in the bottom right corner', 'stats4u'),
-                            'ecke_l' => __('fixed in the bottom left corner', 'stats4u'),
-                            'aus'    => __('nowhere automatically - I place it myself', 'stats4u'),
-                        );
-                        foreach ($plaetze as $wert => $beschriftung) : ?>
-                        <label style="display:block;margin:.3em 0"><input type="radio" name="<?php echo esc_attr($n); ?>[platz]"
-                               value="<?php echo esc_attr($wert); ?>" <?php checked($e['platz'], $wert); ?>>
-                            <?php echo esc_html($beschriftung); ?></label>
-                        <?php endforeach; ?></fieldset>
-                        <p class="description"><?php
-                            echo esc_html__('To place it yourself, use the block "Stats4U counter" or the shortcode [stats4u] - for example in a footer widget.', 'stats4u');
-                        ?></p></td>
-                </tr>
-                <tr id="s4u_ausrichtung_zeile" <?php echo in_array($e['platz'], array('ecke_r', 'ecke_l', 'aus'), true) ? 'hidden' : ''; ?>>
-                    <th scope="row"><?php echo esc_html__('Alignment', 'stats4u'); ?></th>
-                    <td><?php
-                        $seiten = array('left' => __('left', 'stats4u'), 'center' => __('center', 'stats4u'), 'right' => __('right', 'stats4u'));
-                        foreach ($seiten as $wert => $beschriftung) : ?>
-                        <label style="margin-right:1em"><input type="radio" name="<?php echo esc_attr($n); ?>[ausrichtung]"
-                               value="<?php echo esc_attr($wert); ?>" <?php checked($e['ausrichtung'], $wert); ?>>
-                            <?php echo esc_html($beschriftung); ?></label>
-                        <?php endforeach; ?></td>
-                </tr>
-                <tr>
-                    <th scope="row"><?php echo esc_html__('On which pages', 'stats4u'); ?></th>
-                    <td><?php
-                        $wo = array('alle' => __('on all pages', 'stats4u'), 'start' => __('only on the front page', 'stats4u'),
-                                    'einzeln' => __('only on single posts and pages', 'stats4u'));
-                        foreach ($wo as $wert => $beschriftung) : ?>
-                        <label style="margin-right:1em"><input type="radio" name="<?php echo esc_attr($n); ?>[wo]"
-                               value="<?php echo esc_attr($wert); ?>" <?php checked($e['wo'], $wert); ?>>
-                            <?php echo esc_html($beschriftung); ?></label>
-                        <?php endforeach; ?></td>
-                </tr>
-            </table>
-
-            <h2><?php echo esc_html__('Consent', 'stats4u'); ?></h2>
-            <table class="form-table" role="presentation">
-                <tr>
-                    <th scope="row"><label for="s4u_consent"><?php echo esc_html__('Load the counter', 'stats4u'); ?></label></th>
-                    <td><select name="<?php echo esc_attr($n); ?>[consent]" id="s4u_consent">
-                        <option value="" <?php selected($e['consent'], ''); ?>><?php echo esc_html__('right away - I use no consent tool', 'stats4u'); ?></option>
-                        <?php if ($erkannte_cmps) : ?>
-                        <optgroup label="<?php echo esc_attr__('Found on this site', 'stats4u'); ?>">
-                            <?php foreach ($erkannte_cmps as $k) : ?>
-                            <option value="<?php echo esc_attr($k); ?>" <?php selected($e['consent'], $k); ?>><?php
-                                echo esc_html(sprintf(
-                                    /* translators: %s: name of a consent tool */
-                                    __('after consent in %s', 'stats4u'),
-                                    $alle_cmps[$k]['name']
-                                )); ?></option>
-                            <?php endforeach; ?>
-                        </optgroup>
-                        <?php endif; ?>
-                        <optgroup label="<?php echo esc_attr__('Consent tools', 'stats4u'); ?>">
-                            <?php foreach ($alle_cmps as $k => $c) : if (in_array($k, $erkannte_cmps, true)) { continue; } ?>
-                            <option value="<?php echo esc_attr($k); ?>" <?php selected($e['consent'], $k); ?>><?php
-                                echo esc_html(sprintf(
-                                    /* translators: %s: name of a consent tool */
-                                    __('after consent in %s', 'stats4u'),
-                                    $c['name']
-                                )); ?></option>
-                            <?php endforeach; ?>
-                            <option value="eigen" <?php selected($e['consent'], 'eigen'); ?>><?php echo esc_html__('after consent in another tool - enter its attributes', 'stats4u'); ?></option>
-                        </optgroup>
-                    </select>
+                    </div>
+                </div>
+                <?php $offen = ($e['id'] === '' || $zurueck !== ''); ?>
+                <details class="s4u-code"<?php echo $offen ? ' open' : ''; ?>>
+                    <summary><?php echo $e['id'] === ''
+                        ? esc_html__('Paste your code', 'stats4u')
+                        : esc_html__('Use a different counter or code', 'stats4u'); ?></summary>
+                    <label class="screen-reader-text" for="s4u_code"><?php echo esc_html__('Code from stats4u.net', 'stats4u'); ?></label>
+                    <textarea name="<?php echo esc_attr($n); ?>[code]" id="s4u_code" rows="4" class="large-text code"
+                        placeholder="&lt;script src=&quot;https://www.stats4u.net/s4u.js&quot; data-id=&quot;12345&quot; ...&gt;"><?php
+                        echo esc_textarea($zurueck); ?></textarea>
                     <p class="description"><?php
-                        echo esc_html__('With a consent tool, visitors who decline are not counted - your numbers will be lower.', 'stats4u');
-                    ?></p></td>
-                </tr>
-                <tr id="s4u_wert_zeile" <?php echo ($e['consent'] === '' || $e['consent'] === 'eigen') ? 'hidden' : ''; ?>>
-                    <th scope="row"><label for="s4u_consent_wert"><?php echo esc_html__('Category or service', 'stats4u'); ?></label></th>
-                    <td><input name="<?php echo esc_attr($n); ?>[consent_wert]" id="s4u_consent_wert" type="text" class="regular-text"
-                               value="<?php echo esc_attr($e['consent_wert']); ?>"
-                               placeholder="<?php echo esc_attr($cmp_jetzt ? $cmp_jetzt['wert'] : ''); ?>">
-                        <p class="description" id="s4u_wert_hinweis"><?php
-                            echo esc_html($cmp_jetzt && $e['consent'] !== 'eigen'
-                                ? stats4u_cmp_hinweis($cmp_jetzt)
-                                : __('Leave empty for the usual one of your tool. If your tool works with named services, enter the name you gave Stats4U there.', 'stats4u'));
-                        ?></p></td>
-                </tr>
-                <tr id="s4u_eigen_zeile" <?php echo $e['consent'] !== 'eigen' ? 'hidden' : ''; ?>>
-                    <th scope="row"><label for="s4u_consent_eigen"><?php echo esc_html__('Attributes', 'stats4u'); ?></label></th>
-                    <td><input name="<?php echo esc_attr($n); ?>[consent_eigen]" id="s4u_consent_eigen" type="text" class="large-text code"
-                               value="<?php echo esc_attr($e['consent_eigen']); ?>" placeholder='type="text/plain" data-category="statistics"'>
-                        <p class="description"><?php
-                            echo esc_html__('What your consent tool wants on a script it should only run after consent. Allowed: type, class and data-* attributes.', 'stats4u');
-                        ?></p></td>
-                </tr>
-            </table>
+                        echo esc_html__('Paste the HTML, BBCode or image address from stats4u.net - or just the counter number. Design, colors, size and everything else you set there come along.', 'stats4u');
+                    ?></p>
+                </details>
+            </section>
+
+            <section class="s4u-karte">
+                <h2><?php echo esc_html__('Appearance', 'stats4u'); ?></h2>
+                <div class="s4u-felder">
+                    <div class="s4u-feld">
+                        <label class="s4u-lab" for="s4u_gr"><?php echo esc_html__('Size', 'stats4u'); ?></label>
+                        <div>
+                            <select name="<?php echo esc_attr($n); ?>[gr]" id="s4u_gr">
+                                <?php foreach ($groessen as $g) : ?>
+                                <option value="<?php echo esc_attr($g); ?>" <?php selected((int) $e['gr'], $g); ?>><?php echo esc_html($g . ' %'); ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                            <p class="description"><?php echo esc_html__('Sharp at any size for the modern designs. The classic pixel designs keep their original size.', 'stats4u'); ?></p>
+                        </div>
+                    </div>
+                    <div class="s4u-feld">
+                        <label class="s4u-lab" for="s4u_sprache"><?php echo esc_html__('Language of the counter', 'stats4u'); ?></label>
+                        <div>
+                            <select name="<?php echo esc_attr($n); ?>[sprache]" id="s4u_sprache">
+                                <option value="" <?php selected($e['sprache'], ''); ?>><?php echo esc_html__('as set on stats4u.net', 'stats4u'); ?></option>
+                                <option value="site" <?php selected($e['sprache'], 'site'); ?>><?php echo esc_html__('the language of each page', 'stats4u'); ?></option>
+                                <?php foreach ($sprachnamen as $code => $name) : ?>
+                                <option value="<?php echo esc_attr($code); ?>" <?php selected($e['sprache'], $code); ?>><?php echo esc_html($name); ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="s4u-feld">
+                        <span class="s4u-lab" id="s4u_dark_lab"><?php echo esc_html__('Dark mode', 'stats4u'); ?></span>
+                        <div class="s4u-segment" role="radiogroup" aria-labelledby="s4u_dark_lab"><?php
+                            $modi = array(
+                                'auto' => __('follow the device', 'stats4u'),
+                                '0'    => __('always light', 'stats4u'),
+                                '1'    => __('always dark', 'stats4u'),
+                            );
+                            foreach ($modi as $wert => $beschriftung) : ?>
+                            <label><input type="radio" name="<?php echo esc_attr($n); ?>[dark]" value="<?php echo esc_attr($wert); ?>" <?php checked($e['dark'], $wert); ?>><span><?php echo esc_html($beschriftung); ?></span></label>
+                            <?php endforeach; ?></div>
+                    </div>
+                    <div class="s4u-feld">
+                        <span class="s4u-lab" id="s4u_metrik_lab"><?php echo esc_html__('Count', 'stats4u'); ?></span>
+                        <div class="s4u-segment" role="radiogroup" aria-labelledby="s4u_metrik_lab">
+                            <label><input type="radio" name="<?php echo esc_attr($n); ?>[metrik]" value="" <?php checked($e['metrik'], ''); ?>><span><?php echo esc_html__('every page view', 'stats4u'); ?></span></label>
+                            <label><input type="radio" name="<?php echo esc_attr($n); ?>[metrik]" value="uniq" <?php checked($e['metrik'], 'uniq'); ?>><span><?php echo esc_html__('unique visitors', 'stats4u'); ?></span></label>
+                        </div>
+                    </div>
+                    <?php
+                    // Kein Schalter "Link" mehr (bis 1.4.0: ab Werk aus). Den Verweis
+                    // auf die Statistikseite setzt s4u.js, also der Dienst - wie auf
+                    // jeder Seite mit dem Code von stats4u.net. Ohne Verweis zeigt er
+                    // einen Zaehler, der dort auf "nicht oeffentlich" steht.
+                    ?>
+                </div>
+            </section>
+
+            <section class="s4u-karte">
+                <h2><?php echo esc_html__('Placement', 'stats4u'); ?></h2>
+                <div class="s4u-felder">
+                    <div class="s4u-feld s4u-feld-breit">
+                        <span class="s4u-lab" id="s4u_platz_lab"><?php echo esc_html__('Where to show it', 'stats4u'); ?></span>
+                        <div>
+                            <div class="s4u-plaetze" role="radiogroup" aria-labelledby="s4u_platz_lab"><?php
+                                $plaetze = array(
+                                    'unter'  => __('below your theme\'s footer (recommended)', 'stats4u'),
+                                    'im'     => __('inside your theme\'s footer, at its end', 'stats4u'),
+                                    'ende'   => __('at the very end of the page', 'stats4u'),
+                                    'inhalt' => __('below the content of posts and pages', 'stats4u'),
+                                    'ecke_r' => __('fixed in the bottom right corner', 'stats4u'),
+                                    'ecke_l' => __('fixed in the bottom left corner', 'stats4u'),
+                                    'aus'    => __('nowhere automatically - I place it myself', 'stats4u'),
+                                );
+                                foreach ($plaetze as $wert => $beschriftung) : ?>
+                                <label class="s4u-platz">
+                                    <?php echo stats4u_platz_bild($wert); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- fixed SVG markup from stats4u_platz_bild(), no input in it ?>
+                                    <span class="s4u-platz-zeile"><input type="radio" name="<?php echo esc_attr($n); ?>[platz]" value="<?php echo esc_attr($wert); ?>" <?php checked($e['platz'], $wert); ?>><span><?php echo esc_html($beschriftung); ?></span></span>
+                                </label>
+                                <?php endforeach; ?></div>
+                            <p class="description"><?php
+                                echo esc_html__('To place it yourself, use the block "Stats4U counter" or the shortcode [stats4u] - for example in a footer widget.', 'stats4u');
+                            ?></p>
+                        </div>
+                    </div>
+                    <div class="s4u-feld" id="s4u_ausrichtung_zeile" <?php echo in_array($e['platz'], array('ecke_r', 'ecke_l', 'aus'), true) ? 'hidden' : ''; ?>>
+                        <span class="s4u-lab" id="s4u_ausrichtung_lab"><?php echo esc_html__('Alignment', 'stats4u'); ?></span>
+                        <div class="s4u-segment" role="radiogroup" aria-labelledby="s4u_ausrichtung_lab"><?php
+                            $seiten = array('left' => __('left', 'stats4u'), 'center' => __('center', 'stats4u'), 'right' => __('right', 'stats4u'));
+                            foreach ($seiten as $wert => $beschriftung) : ?>
+                            <label><input type="radio" name="<?php echo esc_attr($n); ?>[ausrichtung]" value="<?php echo esc_attr($wert); ?>" <?php checked($e['ausrichtung'], $wert); ?>><span><?php echo esc_html($beschriftung); ?></span></label>
+                            <?php endforeach; ?></div>
+                    </div>
+                    <div class="s4u-feld">
+                        <span class="s4u-lab" id="s4u_wo_lab"><?php echo esc_html__('On which pages', 'stats4u'); ?></span>
+                        <div class="s4u-segment" role="radiogroup" aria-labelledby="s4u_wo_lab"><?php
+                            $wo = array('alle' => __('on all pages', 'stats4u'), 'start' => __('only on the front page', 'stats4u'),
+                                        'einzeln' => __('only on single posts and pages', 'stats4u'));
+                            foreach ($wo as $wert => $beschriftung) : ?>
+                            <label><input type="radio" name="<?php echo esc_attr($n); ?>[wo]" value="<?php echo esc_attr($wert); ?>" <?php checked($e['wo'], $wert); ?>><span><?php echo esc_html($beschriftung); ?></span></label>
+                            <?php endforeach; ?></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="s4u-karte">
+                <h2><?php echo esc_html__('Consent', 'stats4u'); ?></h2>
+                <div class="s4u-felder">
+                    <div class="s4u-feld">
+                        <label class="s4u-lab" for="s4u_consent"><?php echo esc_html__('Load the counter', 'stats4u'); ?></label>
+                        <div>
+                            <select name="<?php echo esc_attr($n); ?>[consent]" id="s4u_consent">
+                                <option value="" <?php selected($e['consent'], ''); ?>><?php echo esc_html__('right away - I use no consent tool', 'stats4u'); ?></option>
+                                <?php if ($erkannte_cmps) : ?>
+                                <optgroup label="<?php echo esc_attr__('Found on this site', 'stats4u'); ?>">
+                                    <?php foreach ($erkannte_cmps as $k) : ?>
+                                    <option value="<?php echo esc_attr($k); ?>" <?php selected($e['consent'], $k); ?>><?php
+                                        echo esc_html(sprintf(
+                                            /* translators: %s: name of a consent tool */
+                                            __('after consent in %s', 'stats4u'),
+                                            $alle_cmps[$k]['name']
+                                        )); ?></option>
+                                    <?php endforeach; ?>
+                                </optgroup>
+                                <?php endif; ?>
+                                <optgroup label="<?php echo esc_attr__('Consent tools', 'stats4u'); ?>">
+                                    <?php foreach ($alle_cmps as $k => $c) : if (in_array($k, $erkannte_cmps, true)) { continue; } ?>
+                                    <option value="<?php echo esc_attr($k); ?>" <?php selected($e['consent'], $k); ?>><?php
+                                        echo esc_html(sprintf(
+                                            /* translators: %s: name of a consent tool */
+                                            __('after consent in %s', 'stats4u'),
+                                            $c['name']
+                                        )); ?></option>
+                                    <?php endforeach; ?>
+                                    <option value="eigen" <?php selected($e['consent'], 'eigen'); ?>><?php echo esc_html__('after consent in another tool - enter its attributes', 'stats4u'); ?></option>
+                                </optgroup>
+                            </select>
+                            <p class="description"><?php
+                                echo esc_html__('With a consent tool, visitors who decline are not counted - your numbers will be lower.', 'stats4u');
+                            ?></p>
+                        </div>
+                    </div>
+                    <div class="s4u-feld" id="s4u_wert_zeile" <?php echo ($e['consent'] === '' || $e['consent'] === 'eigen') ? 'hidden' : ''; ?>>
+                        <label class="s4u-lab" for="s4u_consent_wert"><?php echo esc_html__('Category or service', 'stats4u'); ?></label>
+                        <div>
+                            <input name="<?php echo esc_attr($n); ?>[consent_wert]" id="s4u_consent_wert" type="text" class="regular-text"
+                                   value="<?php echo esc_attr($e['consent_wert']); ?>"
+                                   placeholder="<?php echo esc_attr($cmp_jetzt ? $cmp_jetzt['wert'] : ''); ?>">
+                            <p class="description" id="s4u_wert_hinweis"><?php
+                                echo esc_html($cmp_jetzt && $e['consent'] !== 'eigen'
+                                    ? stats4u_cmp_hinweis($cmp_jetzt)
+                                    : __('Leave empty for the usual one of your tool. If your tool works with named services, enter the name you gave Stats4U there.', 'stats4u'));
+                            ?></p>
+                        </div>
+                    </div>
+                    <div class="s4u-feld" id="s4u_eigen_zeile" <?php echo $e['consent'] !== 'eigen' ? 'hidden' : ''; ?>>
+                        <label class="s4u-lab" for="s4u_consent_eigen"><?php echo esc_html__('Attributes', 'stats4u'); ?></label>
+                        <div>
+                            <input name="<?php echo esc_attr($n); ?>[consent_eigen]" id="s4u_consent_eigen" type="text" class="large-text code"
+                                   value="<?php echo esc_attr($e['consent_eigen']); ?>" placeholder='type="text/plain" data-category="statistics"'>
+                            <p class="description"><?php
+                                echo esc_html__('What your consent tool wants on a script it should only run after consent. Allowed: type, class and data-* attributes.', 'stats4u');
+                            ?></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
             <?php submit_button(); ?>
         </form>

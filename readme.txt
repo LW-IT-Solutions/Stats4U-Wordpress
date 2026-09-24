@@ -4,18 +4,20 @@ Tags: counter, visitor counter, hit counter, statistics, consent
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.4.0
+Stable tag: 1.5.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-A visitor counter as an image. Paste the code from stats4u.net, pick a place, and let your consent banner decide when it loads.
+A visitor counter from stats4u.net. Paste the code, pick a place, and let your consent banner decide when it loads.
 
 == Description ==
 
-The plugin puts a Stats4U visitor counter on your site as a single `<img>`.
+The plugin puts the official Stats4U script (s4u.js) on your site - the same
+code the creator on stats4u.net gives you, with every setting from it - right
+where you want the counter to appear.
 
 * **Paste what you copied.** Paste the code you got on stats4u.net - HTML,
-  BBCode, Markdown, the script version or just the image address - or only the
+  BBCode, Markdown, the script code or just the image address - or only the
   counter number. Design, colors, size and every other setting you chose there
   come along. No counter yet? One button takes you to the free creator on
   stats4u.net, and a button at its end brings the code back.
@@ -32,11 +34,13 @@ The plugin puts a Stats4U visitor counter on your site as a single `<img>`.
   mode), Didomi, GDPR Cookie Compliance (Moove), iubenda, Klaro!, OneTrust /
   CookiePro, Osano, Real Cookie Banner, Termly, Usercentrics and the WP
   Consent API - or any tool that blocks scripts, with your own attributes.
-  Without a consent tool it is a plain image: no script at all.
-* **One request.** 797 bytes median over 580 designs, over the wire with gzip
-  (measured on 2026-09-06). Check it yourself at https://www.stats4u.net/weight.
-* **No cookie.** No Set-Cookie header in any response. The image that is
-  served IS the counting.
+* **Statistics worth reading.** Every count carries the page and where the
+  visitor came from; on top come time on page, scroll depth and who is online
+  right now. You read it all on stats4u.net.
+* **Light.** The script is 12.6 kB over the wire (Brotli, measured on
+  2026-09-24) and cached for a week; each page view adds the counter image
+  (about half a kilobyte) and one tiny settings request.
+* **No cookie.** The script sets none and stores nothing on the device.
 * **No account.** Your counter number is all you need.
 * **Size, language, dark mode, what to count.** Sharp at any size for the
   modern designs; the words in the counter in the language of your choice or
@@ -56,31 +60,55 @@ the nearest one.
 
 == External services ==
 
-This plugin connects to Stats4U (https://www.stats4u.net/), the visitor
-counter service it is made for. Without it, the plugin does nothing.
+This plugin loads the script of Stats4U (https://www.stats4u.net/), the
+visitor counter service it is made for. Without it, the plugin does nothing.
 
 What is sent and when:
 
 * On every page view of your site that shows the counter, the visitor's
-  browser loads the counter image from
-  `https://www.stats4u.net/c/<counter number>-<design>.png`. As with any image
-  from another server, this request carries the visitor's IP address, the
-  browser's user agent and the Referer header as the browser's referrer policy
-  allows (usually the address of your site), plus the counter number and the
-  design settings in the image address. Stats4U counts the visit from this
-  request. No cookie is set and nothing is read from the visitor's device.
-  If you chose a consent tool, this happens only after the visitor agreed.
+  browser loads `https://www.stats4u.net/s4u.js` (cached for up to seven
+  days). The script then:
+    * loads the counter image from `https://www.stats4u.net/index.php`
+      (`action=pic`) with the counter number, the design settings, the address
+      of the page, the address the visitor came from (referrer), the language
+      of the page and a random number against caching. Stats4U counts the
+      visit from this request.
+    * asks once per page for the counter's own settings (`action=cfg`: does it
+      refresh itself, count clicks, have a public statistics page) - with the
+      counter number only.
+    * when the visitor leaves the page or switches away from it, sends how
+      many seconds the page was visible, how far down it was scrolled (in
+      percent), the page address and - for a page that was loaded normally -
+      its load time (`action=puls`). Stats4U sorts these into ranges and adds
+      them up per day.
+    * while the page is visible, sends the counter number once a minute, at
+      most 120 times (`action=ping`), for the "online now" figure. This counts
+      nothing.
+    * sends an event (`action=event`) when a visitor clicks an element you
+      marked with `data-s4u-event` - or, only if you switched this on for your
+      counter on stats4u.net, any link. The event name is the link's target,
+      shortened to its host or path.
+    * only if the code you pasted contains `data-screen="1"` (a choice in the
+      creator on stats4u.net): the screen size, the window size and the pixel
+      ratio, sent together with the time on page.
+  Like any request to another server, these carry the visitor's IP address
+  and the browser's user agent. No cookie is set and nothing is stored on the
+  visitor's device. If you chose a consent tool, none of this happens before
+  the visitor agreed.
 * On the plugin's settings page and in the block editor, your own browser
-  loads the same image as a preview, marked "display only" (rl=1) so that it
-  is not counted.
+  loads a preview image of the counter, marked "display only" (rl=1) so that
+  it is not counted.
 * If you click "Create a free counter on stats4u.net", your browser opens
   stats4u.net with the address of this settings page as a parameter
   (`wpback`), so that a button at the end of the creator can bring the code
   back. That address is only used for that button.
 * Your WordPress server itself never contacts stats4u.net.
 
-If you tick "link the counter to its public statistics page" (off by
-default), the image is wrapped in a link to `https://www.stats4u.net/live/<counter number>`.
+The Stats4U script links the counter to its statistics page,
+`https://www.stats4u.net/live/<counter number>` - as on every site that uses
+the code from stats4u.net. This link comes from the service, not from the
+plugin. A counter that is set to "not public" on stats4u.net is shown without
+it.
 
 The service is provided by LW IT Solutions Company Lukas Wójcik, Łódź, Poland:
 
@@ -110,13 +138,23 @@ theme has no recognisable footer, the counter goes to the end of the page.
 You can also choose "inside the footer", "below the content of posts and
 pages", a fixed corner, or place it yourself with the block or the shortcode.
 
+= Why the script and not just the counter image? =
+
+Up to version 1.4.0 the plugin used the image alone. It was lighter, but
+your statistics got almost nothing from it: a browser sends only your site's
+domain along with an image from another server, not the page, and nothing
+about where the visitor came from or how long they stayed. The script sends
+the page and the referrer with every count and adds time on page, scroll
+depth and the "online now" figure.
+
 = Do I need a cookie banner? =
 
-The image sets no cookie and reads nothing from the device. Which duties apply
-to your site is a question for your jurisdiction; what actually happens is
-described at https://www.stats4u.net/privacy-embed. If your site uses a
-consent tool anyway, choose it under *Consent* and the counter waits for the
-visitor's consent.
+The script sets no cookie and stores nothing on the device; what it sends is
+listed under *External services*. Which duties apply to your site is a
+question for your jurisdiction; a description for your privacy policy is at
+https://www.stats4u.net/privacy-embed. If your site uses a consent tool
+anyway, choose it under *Consent* and the counter waits for the visitor's
+consent.
 
 = My consent tool is not in the list. =
 
@@ -135,12 +173,25 @@ Until the service exists, those tools never release the counter.
 = Will I lose visitors in my numbers? =
 
 With a consent tool, visitors who decline are not counted - so yes, the
-numbers will be lower than without one. Without a consent tool nothing
-changes.
+numbers will be lower than without one. The same happens with optimisation
+plugins that hold back JavaScript until the first click or scroll: visitors
+who do neither are not counted. Exclude `stats4u.net/s4u.js` there.
+
+= My theme changes pages without a full reload. =
+
+Then the counter counts the first page only, unless the theme lets the
+Stats4U script run again for each new page - the way the navigation of
+stats4u.net itself does: before swapping the page, fire the event
+`s4u:seiteweg` on `document` (it closes the time on the old page), and
+afterwards insert the counter's script tag again. With a consent tool,
+`window.stats4uAn()` fills new placeholders after the swap; it exists only
+once the visitor agreed.
 
 = How do I change the design? =
 
-Create or change it on stats4u.net and paste the new code. The plugin keeps
+Create or change it on stats4u.net and paste the new code - or use "Create a
+free counter on stats4u.net": when you come back, the settings page shows the
+new design at once, and *Save Changes* puts it on your site. The plugin keeps
 your placement and consent settings; only the counter changes. Pasting just a
 number keeps the design and changes only the counter.
 
@@ -151,14 +202,15 @@ page and in the block editor, marked so that it is not counted.
 
 = What happens if stats4u.net is unreachable? =
 
-Then one image is missing from your page, and nothing else. An `<img>` does
-not block page rendering.
+Then the counter is missing from your page, and nothing else. The script loads
+asynchronously and does not hold up your page.
 
-= Why is the counter not a link? =
+= Why is the counter a link? =
 
-Because a plugin should not put links on your site that you did not ask for.
-Tick "link the counter to its public statistics page" in the settings if you
-want visitors to be able to click through to your statistics.
+The Stats4U script links every counter to its statistics page, so visitors
+can click through to your numbers - the same on every site that uses the code
+from stats4u.net. If your statistics should stay private, set the counter to
+"not public" on stats4u.net: the script then shows it without a link.
 
 = Does deleting the plugin delete my counter? =
 
@@ -174,6 +226,23 @@ should not disappear because you tried a plugin and removed it again.
 
 == Changelog ==
 
+= 1.5.0 =
+* The counter is now the official Stats4U script (s4u.js) with every setting
+  from the creator, instead of the counter image alone. Your statistics get
+  the page and the referrer of every visit, time on page, scroll depth and the
+  "online now" figure. The counter still appears exactly where you place it.
+* Coming back from the creator on stats4u.net shows the new design at once,
+  with *Save Changes* right below it. Before, the settings page still showed
+  the old design until you saved.
+* Consent: a placeholder waits where the counter goes and is filled with the
+  script after consent - with every tool. Cookie Information and Civic now use
+  their blocking of script files.
+* The link to the statistics page now comes from the Stats4U script itself,
+  as everywhere the code from stats4u.net is used; the plugin's own switch is
+  gone. A counter set to "not public" on stats4u.net has no link.
+* `data-private`, `data-alias` and `data-screen` from a pasted script code are
+  kept.
+
 = 1.4.0 =
 * Paste the code from stats4u.net instead of typing a number: HTML, BBCode,
   Markdown, the script version, an image address or just the number. Every
@@ -181,18 +250,12 @@ should not disappear because you tried a plugin and removed it again.
 * "Create a free counter on stats4u.net" - the creator's last step brings the
   code back to the settings page.
 * Consent: 27 consent tools and the WP Consent API, or your own attributes.
-  The counter loads only after consent; tools that can release an image
-  themselves get no script at all.
 * Placement: below or inside the theme's footer, end of the page, below the
   content, fixed corner, or nowhere automatically; alignment; all pages,
   front page only or single posts and pages only.
 * New block "Stats4U counter".
 * Size, language of the counter and what to count (page views or unique
   visitors) can be set.
-* The footer is now found as its outermost element (GeneratePress wraps its
-  `<footer>` in a `<div class="site-footer">`), and marked for lazy-load
-  plugins to leave alone - a lazily loaded counter would only count visitors
-  who scroll down.
 
 = 1.3.1 =
 * The automatic counter now sits right below your theme's footer instead of
@@ -220,8 +283,8 @@ should not disappear because you tried a plugin and removed it again.
 
 == Upgrade Notice ==
 
+= 1.5.0 =
+The counter now uses the official Stats4U script: your statistics get the page, the referrer and the time on page of every visit. Your settings are kept.
+
 = 1.4.0 =
 Paste the code from stats4u.net, choose where the counter goes and let your consent tool decide when it loads. Your settings are kept.
-
-= 1.3.1 =
-The automatic counter now works with themes that lay out the page body as a flex or grid container.
