@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:       Stats4U
- * Plugin URI:        https://www.stats4u.net/
+ * Plugin URI:        https://github.com/LW-IT-Solutions/Stats4U-Wordpress
  * Description:       Puts a Stats4U visitor counter on your site. Paste the code from stats4u.net, choose where it appears and, if you use a consent banner, let it decide when the counter loads.
  * Version:           1.5.0
  * Requires at least: 5.8
