@@ -279,3 +279,78 @@ msgstr "يرسل متصفحك الرسالة إلى stats4u.net مع إصدار 
 
 msgid "Privacy policy"
 msgstr "سياسة الخصوصية"
+
+msgid "Free hit counters and visitor stats for websites"
+msgstr "عدادات زوار مجانية للمواقع"
+
+msgid "Simple, lightweight and secure analytics."
+msgstr "إحصائيات بسيطة وخفيفة وآمنة."
+
+msgid "Restart wizard"
+msgstr "إعادة تشغيل المعالج"
+
+msgid "Custom configuration"
+msgstr "إعداد مخصص"
+
+msgid "Done"
+msgstr "تم"
+
+msgid "Settings sections"
+msgstr "أقسام الإعدادات"
+
+#. translators: 1: counter number, 2: design number
+#, php-format
+msgid "Received from stats4u.net: counter %1$s, design %2$s. Continue with \"Next\"."
+msgstr "تم الاستلام من stats4u.net: العداد %1$s، التصميم %2$s. تابع بالنقر على «التالي»."
+
+msgid "Request a new counter number"
+msgstr "طلب رقم عداد جديد"
+
+msgid "Back"
+msgstr "رجوع"
+
+msgid "Next"
+msgstr "التالي"
+
+msgid "Save and finish"
+msgstr "حفظ وإنهاء"
+
+msgid "Save to put the counter on your site. You can change everything later - or run this wizard again."
+msgstr "احفظ لوضع العداد على موقعك. يمكنك تغيير كل شيء لاحقًا – أو تشغيل هذا المعالج مرة أخرى."
+
+msgid "How do you want to set up your counter?"
+msgstr "كيف تريد إعداد عدادك؟"
+
+msgid "Recommended"
+msgstr "موصى به"
+
+msgid "Wizard"
+msgstr "المعالج"
+
+msgid "Step by step, with a live preview - about two minutes."
+msgstr "خطوة بخطوة، مع معاينة مباشرة – نحو دقيقتين."
+
+msgid "Start the wizard"
+msgstr "ابدأ المعالج"
+
+msgid "All settings on one page, sorted in a menu."
+msgstr "كل الإعدادات في صفحة واحدة، مرتبة في قائمة."
+
+msgid "Open the settings"
+msgstr "افتح الإعدادات"
+
+#. translators: 1: number of the current step, 2: number of steps
+#, php-format
+msgid "Step %1$d of %2$d"
+msgstr "الخطوة %1$d من %2$d"
+
+msgid "Choose or create a counter first."
+msgstr "اختر عدادًا أو أنشئه أولًا."
+
+#. translators: %s: the new counter number
+#, php-format
+msgid "New counter number %s - it is used as soon as you save."
+msgstr "رقم عداد جديد %s – يُستخدم بمجرد الحفظ."
+
+msgid "Too many new numbers from here - please try again in an hour."
+msgstr "أرقام جديدة كثيرة جدًا من هنا – يُرجى المحاولة بعد ساعة."

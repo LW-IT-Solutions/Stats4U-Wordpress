@@ -279,3 +279,78 @@ msgstr "Browserul dumneavoastră trimite mesajul către stats4u.net, împreună 
 
 msgid "Privacy policy"
 msgstr "Politica de confidențialitate"
+
+msgid "Free hit counters and visitor stats for websites"
+msgstr "Contoare de vizitatori gratuite pentru site-uri"
+
+msgid "Simple, lightweight and secure analytics."
+msgstr "Statistici simple, ușoare și sigure."
+
+msgid "Restart wizard"
+msgstr "Reporniți asistentul"
+
+msgid "Custom configuration"
+msgstr "Configurare personalizată"
+
+msgid "Done"
+msgstr "Gata"
+
+msgid "Settings sections"
+msgstr "Secțiunile setărilor"
+
+#. translators: 1: counter number, 2: design number
+#, php-format
+msgid "Received from stats4u.net: counter %1$s, design %2$s. Continue with \"Next\"."
+msgstr "Primit de pe stats4u.net: contorul %1$s, designul %2$s. Continuați cu „Înainte”."
+
+msgid "Request a new counter number"
+msgstr "Solicitați un număr nou de contor"
+
+msgid "Back"
+msgstr "Înapoi"
+
+msgid "Next"
+msgstr "Înainte"
+
+msgid "Save and finish"
+msgstr "Salvați și finalizați"
+
+msgid "Save to put the counter on your site. You can change everything later - or run this wizard again."
+msgstr "Salvați pentru a pune contorul pe site-ul dumneavoastră. Puteți schimba totul mai târziu – sau puteți relua acest asistent."
+
+msgid "How do you want to set up your counter?"
+msgstr "Cum doriți să configurați contorul?"
+
+msgid "Recommended"
+msgstr "Recomandat"
+
+msgid "Wizard"
+msgstr "Asistent"
+
+msgid "Step by step, with a live preview - about two minutes."
+msgstr "Pas cu pas, cu previzualizare în timp real – cam două minute."
+
+msgid "Start the wizard"
+msgstr "Porniți asistentul"
+
+msgid "All settings on one page, sorted in a menu."
+msgstr "Toate setările pe o singură pagină, ordonate într-un meniu."
+
+msgid "Open the settings"
+msgstr "Deschideți setările"
+
+#. translators: 1: number of the current step, 2: number of steps
+#, php-format
+msgid "Step %1$d of %2$d"
+msgstr "Pasul %1$d din %2$d"
+
+msgid "Choose or create a counter first."
+msgstr "Mai întâi alegeți sau creați un contor."
+
+#. translators: %s: the new counter number
+#, php-format
+msgid "New counter number %s - it is used as soon as you save."
+msgstr "Număr nou de contor %s – se folosește imediat ce salvați."
+
+msgid "Too many new numbers from here - please try again in an hour."
+msgstr "Prea multe numere noi de aici – încercați din nou peste o oră."

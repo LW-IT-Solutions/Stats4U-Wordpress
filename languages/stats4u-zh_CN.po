@@ -279,3 +279,78 @@ msgstr "您的浏览器会将留言连同插件版本和本页面的语言一起
 
 msgid "Privacy policy"
 msgstr "隐私政策"
+
+msgid "Free hit counters and visitor stats for websites"
+msgstr "免费网站计数器"
+
+msgid "Simple, lightweight and secure analytics."
+msgstr "简单、轻量且安全的分析工具。"
+
+msgid "Restart wizard"
+msgstr "重新启动向导"
+
+msgid "Custom configuration"
+msgstr "自定义配置"
+
+msgid "Done"
+msgstr "完成"
+
+msgid "Settings sections"
+msgstr "设置分区"
+
+#. translators: 1: counter number, 2: design number
+#, php-format
+msgid "Received from stats4u.net: counter %1$s, design %2$s. Continue with \"Next\"."
+msgstr "已从 stats4u.net 收到：计数器 %1$s，样式 %2$s。点击“下一步”继续。"
+
+msgid "Request a new counter number"
+msgstr "获取新的计数器编号"
+
+msgid "Back"
+msgstr "上一步"
+
+msgid "Next"
+msgstr "下一步"
+
+msgid "Save and finish"
+msgstr "保存并完成"
+
+msgid "Save to put the counter on your site. You can change everything later - or run this wizard again."
+msgstr "保存后，计数器就会出现在您的网站上。之后可以随时更改所有设置，也可以重新运行此向导。"
+
+msgid "How do you want to set up your counter?"
+msgstr "您想如何设置计数器？"
+
+msgid "Recommended"
+msgstr "推荐"
+
+msgid "Wizard"
+msgstr "向导"
+
+msgid "Step by step, with a live preview - about two minutes."
+msgstr "分步操作，并可实时预览——大约两分钟。"
+
+msgid "Start the wizard"
+msgstr "启动向导"
+
+msgid "All settings on one page, sorted in a menu."
+msgstr "所有设置集中在一个页面上，按菜单分类。"
+
+msgid "Open the settings"
+msgstr "打开设置"
+
+#. translators: 1: number of the current step, 2: number of steps
+#, php-format
+msgid "Step %1$d of %2$d"
+msgstr "第 %1$d 步，共 %2$d 步"
+
+msgid "Choose or create a counter first."
+msgstr "请先选择或创建一个计数器。"
+
+#. translators: %s: the new counter number
+#, php-format
+msgid "New counter number %s - it is used as soon as you save."
+msgstr "新的计数器编号 %s——保存后立即生效。"
+
+msgid "Too many new numbers from here - please try again in an hour."
+msgstr "从这里申请的新编号太多了——请一小时后再试。"

@@ -279,3 +279,78 @@ msgstr "Tarayıcınız mesajı eklenti sürümü ve bu sayfanın diliyle birlikt
 
 msgid "Privacy policy"
 msgstr "Gizlilik politikası"
+
+msgid "Free hit counters and visitor stats for websites"
+msgstr "Web siteleri için ücretsiz hit sayaçları ve ziyaretçi istatistikleri"
+
+msgid "Simple, lightweight and secure analytics."
+msgstr "Basit, hafif ve güvenli ziyaretçi istatistikleri."
+
+msgid "Restart wizard"
+msgstr "Sihirbazı yeniden başlat"
+
+msgid "Custom configuration"
+msgstr "Özel yapılandırma"
+
+msgid "Done"
+msgstr "Bitti"
+
+msgid "Settings sections"
+msgstr "Ayar bölümleri"
+
+#. translators: 1: counter number, 2: design number
+#, php-format
+msgid "Received from stats4u.net: counter %1$s, design %2$s. Continue with \"Next\"."
+msgstr "stats4u.net’ten alındı: sayaç %1$s, tasarım %2$s. “İleri” ile devam edin."
+
+msgid "Request a new counter number"
+msgstr "Yeni sayaç numarası iste"
+
+msgid "Back"
+msgstr "Geri"
+
+msgid "Next"
+msgstr "İleri"
+
+msgid "Save and finish"
+msgstr "Kaydet ve bitir"
+
+msgid "Save to put the counter on your site. You can change everything later - or run this wizard again."
+msgstr "Sayacı sitenize yerleştirmek için kaydedin. Her şeyi daha sonra değiştirebilir ya da bu sihirbazı yeniden çalıştırabilirsiniz."
+
+msgid "How do you want to set up your counter?"
+msgstr "Sayacınızı nasıl kurmak istersiniz?"
+
+msgid "Recommended"
+msgstr "Önerilen"
+
+msgid "Wizard"
+msgstr "Sihirbaz"
+
+msgid "Step by step, with a live preview - about two minutes."
+msgstr "Adım adım, canlı önizlemeyle – yaklaşık iki dakika."
+
+msgid "Start the wizard"
+msgstr "Sihirbazı başlat"
+
+msgid "All settings on one page, sorted in a menu."
+msgstr "Tüm ayarlar tek sayfada, bir menüde düzenlenmiş."
+
+msgid "Open the settings"
+msgstr "Ayarları aç"
+
+#. translators: 1: number of the current step, 2: number of steps
+#, php-format
+msgid "Step %1$d of %2$d"
+msgstr "Adım %1$d / %2$d"
+
+msgid "Choose or create a counter first."
+msgstr "Önce bir sayaç seçin ya da oluşturun."
+
+#. translators: %s: the new counter number
+#, php-format
+msgid "New counter number %s - it is used as soon as you save."
+msgstr "Yeni sayaç numarası %s – kaydettiğiniz anda kullanılır."
+
+msgid "Too many new numbers from here - please try again in an hour."
+msgstr "Buradan çok fazla yeni numara istendi – lütfen bir saat sonra tekrar deneyin."

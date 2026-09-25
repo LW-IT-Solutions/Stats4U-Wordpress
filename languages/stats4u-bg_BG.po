@@ -279,3 +279,78 @@ msgstr "Браузърът ви изпраща съобщението до stats
 
 msgid "Privacy policy"
 msgstr "Политика за поверителност"
+
+msgid "Free hit counters and visitor stats for websites"
+msgstr "Безплатни броячи на посещенията за сайт"
+
+msgid "Simple, lightweight and secure analytics."
+msgstr "Проста, лека и сигурна статистика."
+
+msgid "Restart wizard"
+msgstr "Стартирай съветника отново"
+
+msgid "Custom configuration"
+msgstr "Персонализирани настройки"
+
+msgid "Done"
+msgstr "Готово"
+
+msgid "Settings sections"
+msgstr "Раздели на настройките"
+
+#. translators: 1: counter number, 2: design number
+#, php-format
+msgid "Received from stats4u.net: counter %1$s, design %2$s. Continue with \"Next\"."
+msgstr "Получено от stats4u.net: брояч %1$s, дизайн %2$s. Продължете с „Напред“."
+
+msgid "Request a new counter number"
+msgstr "Поискай нов номер на брояч"
+
+msgid "Back"
+msgstr "Назад"
+
+msgid "Next"
+msgstr "Напред"
+
+msgid "Save and finish"
+msgstr "Запази и завърши"
+
+msgid "Save to put the counter on your site. You can change everything later - or run this wizard again."
+msgstr "Запазете, за да се появи броячът на сайта ви. По-късно можете да промените всичко – или да стартирате съветника отново."
+
+msgid "How do you want to set up your counter?"
+msgstr "Как искате да настроите брояча си?"
+
+msgid "Recommended"
+msgstr "Препоръчително"
+
+msgid "Wizard"
+msgstr "Съветник"
+
+msgid "Step by step, with a live preview - about two minutes."
+msgstr "Стъпка по стъпка, с преглед на живо – около две минути."
+
+msgid "Start the wizard"
+msgstr "Стартирай съветника"
+
+msgid "All settings on one page, sorted in a menu."
+msgstr "Всички настройки на една страница, подредени в меню."
+
+msgid "Open the settings"
+msgstr "Отвори настройките"
+
+#. translators: 1: number of the current step, 2: number of steps
+#, php-format
+msgid "Step %1$d of %2$d"
+msgstr "Стъпка %1$d от %2$d"
+
+msgid "Choose or create a counter first."
+msgstr "Първо изберете или създайте брояч."
+
+#. translators: %s: the new counter number
+#, php-format
+msgid "New counter number %s - it is used as soon as you save."
+msgstr "Нов номер на брояч %s – използва се веднага щом запазите."
+
+msgid "Too many new numbers from here - please try again in an hour."
+msgstr "Твърде много нови номера оттук – опитайте отново след час."

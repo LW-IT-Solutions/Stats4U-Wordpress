@@ -279,3 +279,78 @@ msgstr "Ваш браузер надішле повідомлення на stats
 
 msgid "Privacy policy"
 msgstr "Політика конфіденційності"
+
+msgid "Free hit counters and visitor stats for websites"
+msgstr "Безкоштовні лічильники відвідувань для сайту"
+
+msgid "Simple, lightweight and secure analytics."
+msgstr "Проста, легка й безпечна аналітика."
+
+msgid "Restart wizard"
+msgstr "Запустити майстер знову"
+
+msgid "Custom configuration"
+msgstr "Ручне налаштування"
+
+msgid "Done"
+msgstr "Готово"
+
+msgid "Settings sections"
+msgstr "Розділи налаштувань"
+
+#. translators: 1: counter number, 2: design number
+#, php-format
+msgid "Received from stats4u.net: counter %1$s, design %2$s. Continue with \"Next\"."
+msgstr "Отримано зі stats4u.net: лічильник %1$s, дизайн %2$s. Продовжте кнопкою «Далі»."
+
+msgid "Request a new counter number"
+msgstr "Отримати новий номер лічильника"
+
+msgid "Back"
+msgstr "Назад"
+
+msgid "Next"
+msgstr "Далі"
+
+msgid "Save and finish"
+msgstr "Зберегти й завершити"
+
+msgid "Save to put the counter on your site. You can change everything later - or run this wizard again."
+msgstr "Збережіть, щоб лічильник з’явився на сайті. Усе можна змінити пізніше – або пройти цей майстер ще раз."
+
+msgid "How do you want to set up your counter?"
+msgstr "Як ви хочете налаштувати лічильник?"
+
+msgid "Recommended"
+msgstr "Рекомендовано"
+
+msgid "Wizard"
+msgstr "Майстер налаштування"
+
+msgid "Step by step, with a live preview - about two minutes."
+msgstr "Крок за кроком, із живим переглядом – близько двох хвилин."
+
+msgid "Start the wizard"
+msgstr "Запустити майстер"
+
+msgid "All settings on one page, sorted in a menu."
+msgstr "Усі налаштування на одній сторінці, упорядковані в меню."
+
+msgid "Open the settings"
+msgstr "Відкрити налаштування"
+
+#. translators: 1: number of the current step, 2: number of steps
+#, php-format
+msgid "Step %1$d of %2$d"
+msgstr "Крок %1$d з %2$d"
+
+msgid "Choose or create a counter first."
+msgstr "Спочатку виберіть або створіть лічильник."
+
+#. translators: %s: the new counter number
+#, php-format
+msgid "New counter number %s - it is used as soon as you save."
+msgstr "Новий номер лічильника %s – він діятиме, щойно ви збережете."
+
+msgid "Too many new numbers from here - please try again in an hour."
+msgstr "Забагато нових номерів звідси – спробуйте ще раз за годину."

@@ -279,3 +279,78 @@ msgstr "Váš prohlížeč odešle zprávu na stats4u.net spolu s verzí pluginu
 
 msgid "Privacy policy"
 msgstr "Zásady ochrany osobních údajů"
+
+msgid "Free hit counters and visitor stats for websites"
+msgstr "Počítadla přístupů zdarma a statistiky návštěvnosti webu"
+
+msgid "Simple, lightweight and secure analytics."
+msgstr "Jednoduchá, lehká a bezpečná analytika."
+
+msgid "Restart wizard"
+msgstr "Spustit průvodce znovu"
+
+msgid "Custom configuration"
+msgstr "Vlastní nastavení"
+
+msgid "Done"
+msgstr "Hotovo"
+
+msgid "Settings sections"
+msgstr "Části nastavení"
+
+#. translators: 1: counter number, 2: design number
+#, php-format
+msgid "Received from stats4u.net: counter %1$s, design %2$s. Continue with \"Next\"."
+msgstr "Přijato ze stats4u.net: počítadlo %1$s, design %2$s. Pokračujte tlačítkem „Další“."
+
+msgid "Request a new counter number"
+msgstr "Vyžádat nové číslo počítadla"
+
+msgid "Back"
+msgstr "Zpět"
+
+msgid "Next"
+msgstr "Další"
+
+msgid "Save and finish"
+msgstr "Uložit a dokončit"
+
+msgid "Save to put the counter on your site. You can change everything later - or run this wizard again."
+msgstr "Uložením umístíte počítadlo na svůj web. Vše můžete později změnit – nebo tohoto průvodce spustit znovu."
+
+msgid "How do you want to set up your counter?"
+msgstr "Jak chcete počítadlo nastavit?"
+
+msgid "Recommended"
+msgstr "Doporučeno"
+
+msgid "Wizard"
+msgstr "Průvodce"
+
+msgid "Step by step, with a live preview - about two minutes."
+msgstr "Krok za krokem, s živým náhledem – zhruba dvě minuty."
+
+msgid "Start the wizard"
+msgstr "Spustit průvodce"
+
+msgid "All settings on one page, sorted in a menu."
+msgstr "Všechna nastavení na jedné stránce, seřazená v nabídce."
+
+msgid "Open the settings"
+msgstr "Otevřít nastavení"
+
+#. translators: 1: number of the current step, 2: number of steps
+#, php-format
+msgid "Step %1$d of %2$d"
+msgstr "Krok %1$d z %2$d"
+
+msgid "Choose or create a counter first."
+msgstr "Nejdříve vyberte nebo vytvořte počítadlo."
+
+#. translators: %s: the new counter number
+#, php-format
+msgid "New counter number %s - it is used as soon as you save."
+msgstr "Nové číslo počítadla %s – použije se, jakmile uložíte."
+
+msgid "Too many new numbers from here - please try again in an hour."
+msgstr "Odsud bylo vyžádáno příliš mnoho nových čísel – zkuste to prosím znovu za hodinu."

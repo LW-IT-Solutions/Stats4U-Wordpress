@@ -279,3 +279,78 @@ msgstr "Votre navigateur envoie le message à stats4u.net, avec la version de l�
 
 msgid "Privacy policy"
 msgstr "Politique de confidentialité"
+
+msgid "Free hit counters and visitor stats for websites"
+msgstr "Compteurs de visites gratuits pour site web"
+
+msgid "Simple, lightweight and secure analytics."
+msgstr "Analytique simple, légère et sécurisée."
+
+msgid "Restart wizard"
+msgstr "Relancer l’assistant"
+
+msgid "Custom configuration"
+msgstr "Configuration personnalisée"
+
+msgid "Done"
+msgstr "Terminé"
+
+msgid "Settings sections"
+msgstr "Sections des réglages"
+
+#. translators: 1: counter number, 2: design number
+#, php-format
+msgid "Received from stats4u.net: counter %1$s, design %2$s. Continue with \"Next\"."
+msgstr "Reçu de stats4u.net : compteur %1$s, design %2$s. Continuez avec « Suivant »."
+
+msgid "Request a new counter number"
+msgstr "Demander un nouveau numéro de compteur"
+
+msgid "Back"
+msgstr "Retour"
+
+msgid "Next"
+msgstr "Suivant"
+
+msgid "Save and finish"
+msgstr "Enregistrer et terminer"
+
+msgid "Save to put the counter on your site. You can change everything later - or run this wizard again."
+msgstr "Enregistrez pour placer le compteur sur votre site. Vous pourrez tout modifier plus tard – ou relancer cet assistant."
+
+msgid "How do you want to set up your counter?"
+msgstr "Comment voulez-vous configurer votre compteur ?"
+
+msgid "Recommended"
+msgstr "Recommandé"
+
+msgid "Wizard"
+msgstr "Assistant"
+
+msgid "Step by step, with a live preview - about two minutes."
+msgstr "Étape par étape, avec un aperçu en direct – environ deux minutes."
+
+msgid "Start the wizard"
+msgstr "Lancer l’assistant"
+
+msgid "All settings on one page, sorted in a menu."
+msgstr "Tous les réglages sur une seule page, classés dans un menu."
+
+msgid "Open the settings"
+msgstr "Ouvrir les réglages"
+
+#. translators: 1: number of the current step, 2: number of steps
+#, php-format
+msgid "Step %1$d of %2$d"
+msgstr "Étape %1$d sur %2$d"
+
+msgid "Choose or create a counter first."
+msgstr "Choisissez ou créez d’abord un compteur."
+
+#. translators: %s: the new counter number
+#, php-format
+msgid "New counter number %s - it is used as soon as you save."
+msgstr "Nouveau numéro de compteur %s – il s’applique dès que vous enregistrez."
+
+msgid "Too many new numbers from here - please try again in an hour."
+msgstr "Trop de nouveaux numéros demandés d’ici – réessayez dans une heure."

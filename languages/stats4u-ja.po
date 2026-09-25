@@ -279,3 +279,78 @@ msgstr "メッセージは、プラグインのバージョンとこのページ
 
 msgid "Privacy policy"
 msgstr "プライバシーポリシー"
+
+msgid "Free hit counters and visitor stats for websites"
+msgstr "無料アクセスカウンター"
+
+msgid "Simple, lightweight and secure analytics."
+msgstr "シンプルで軽量、安全なアクセス解析。"
+
+msgid "Restart wizard"
+msgstr "ウィザードをやり直す"
+
+msgid "Custom configuration"
+msgstr "カスタム設定"
+
+msgid "Done"
+msgstr "完了"
+
+msgid "Settings sections"
+msgstr "設定のセクション"
+
+#. translators: 1: counter number, 2: design number
+#, php-format
+msgid "Received from stats4u.net: counter %1$s, design %2$s. Continue with \"Next\"."
+msgstr "stats4u.net から受け取りました：カウンター %1$s、デザイン %2$s。「次へ」で先に進んでください。"
+
+msgid "Request a new counter number"
+msgstr "新しいカウンター番号を取得"
+
+msgid "Back"
+msgstr "戻る"
+
+msgid "Next"
+msgstr "次へ"
+
+msgid "Save and finish"
+msgstr "保存して完了"
+
+msgid "Save to put the counter on your site. You can change everything later - or run this wizard again."
+msgstr "保存すると、カウンターがサイトに表示されます。すべて後から変更でき、このウィザードをもう一度実行することもできます。"
+
+msgid "How do you want to set up your counter?"
+msgstr "カウンターをどのように設定しますか？"
+
+msgid "Recommended"
+msgstr "おすすめ"
+
+msgid "Wizard"
+msgstr "ウィザード"
+
+msgid "Step by step, with a live preview - about two minutes."
+msgstr "プレビューを見ながら一歩ずつ。約2分です。"
+
+msgid "Start the wizard"
+msgstr "ウィザードを開始"
+
+msgid "All settings on one page, sorted in a menu."
+msgstr "すべての設定を1ページに、メニューで整理して表示します。"
+
+msgid "Open the settings"
+msgstr "設定を開く"
+
+#. translators: 1: number of the current step, 2: number of steps
+#, php-format
+msgid "Step %1$d of %2$d"
+msgstr "ステップ %1$d / %2$d"
+
+msgid "Choose or create a counter first."
+msgstr "まずカウンターを選ぶか作成してください。"
+
+#. translators: %s: the new counter number
+#, php-format
+msgid "New counter number %s - it is used as soon as you save."
+msgstr "新しいカウンター番号 %s ― 保存するとすぐに使われます。"
+
+msgid "Too many new numbers from here - please try again in an hour."
+msgstr "ここからの新しい番号のリクエストが多すぎます。1時間後にもう一度お試しください。"

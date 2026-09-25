@@ -279,3 +279,78 @@ msgstr "브라우저가 메시지를 플러그인 버전 및 이 페이지의 �
 
 msgid "Privacy policy"
 msgstr "개인정보 처리방침"
+
+msgid "Free hit counters and visitor stats for websites"
+msgstr "무료 홈페이지 방문자 카운터"
+
+msgid "Simple, lightweight and secure analytics."
+msgstr "가볍고 안전한, 간단한 통계."
+
+msgid "Restart wizard"
+msgstr "마법사 다시 시작"
+
+msgid "Custom configuration"
+msgstr "사용자 지정 설정"
+
+msgid "Done"
+msgstr "완료"
+
+msgid "Settings sections"
+msgstr "설정 섹션"
+
+#. translators: 1: counter number, 2: design number
+#, php-format
+msgid "Received from stats4u.net: counter %1$s, design %2$s. Continue with \"Next\"."
+msgstr "stats4u.net에서 받았습니다: 카운터 %1$s, 디자인 %2$s. “다음”을 눌러 계속하세요."
+
+msgid "Request a new counter number"
+msgstr "새 카운터 번호 받기"
+
+msgid "Back"
+msgstr "이전"
+
+msgid "Next"
+msgstr "다음"
+
+msgid "Save and finish"
+msgstr "저장하고 완료"
+
+msgid "Save to put the counter on your site. You can change everything later - or run this wizard again."
+msgstr "저장하면 카운터가 사이트에 표시됩니다. 나중에 모두 바꿀 수 있고, 이 마법사를 다시 실행할 수도 있습니다."
+
+msgid "How do you want to set up your counter?"
+msgstr "카운터를 어떻게 설정하시겠어요?"
+
+msgid "Recommended"
+msgstr "추천"
+
+msgid "Wizard"
+msgstr "마법사"
+
+msgid "Step by step, with a live preview - about two minutes."
+msgstr "실시간 미리보기와 함께 단계별로 – 약 2분이면 됩니다."
+
+msgid "Start the wizard"
+msgstr "마법사 시작"
+
+msgid "All settings on one page, sorted in a menu."
+msgstr "모든 설정을 한 페이지에서 메뉴별로 정리해 보여 줍니다."
+
+msgid "Open the settings"
+msgstr "설정 열기"
+
+#. translators: 1: number of the current step, 2: number of steps
+#, php-format
+msgid "Step %1$d of %2$d"
+msgstr "%2$d단계 중 %1$d단계"
+
+msgid "Choose or create a counter first."
+msgstr "먼저 카운터를 선택하거나 만드세요."
+
+#. translators: %s: the new counter number
+#, php-format
+msgid "New counter number %s - it is used as soon as you save."
+msgstr "새 카운터 번호 %s – 저장하면 바로 사용됩니다."
+
+msgid "Too many new numbers from here - please try again in an hour."
+msgstr "이곳에서 새 번호를 너무 많이 요청했습니다. 1시간 후에 다시 시도해 주세요."

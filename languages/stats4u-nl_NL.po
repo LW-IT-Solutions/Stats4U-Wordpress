@@ -279,3 +279,78 @@ msgstr "Je browser stuurt het bericht naar stats4u.net, samen met de pluginversi
 
 msgid "Privacy policy"
 msgstr "Privacybeleid"
+
+msgid "Free hit counters and visitor stats for websites"
+msgstr "Gratis bezoekerstellers voor websites"
+
+msgid "Simple, lightweight and secure analytics."
+msgstr "Eenvoudige, lichte en veilige statistiek."
+
+msgid "Restart wizard"
+msgstr "Wizard opnieuw starten"
+
+msgid "Custom configuration"
+msgstr "Eigen configuratie"
+
+msgid "Done"
+msgstr "Klaar"
+
+msgid "Settings sections"
+msgstr "Onderdelen van de instellingen"
+
+#. translators: 1: counter number, 2: design number
+#, php-format
+msgid "Received from stats4u.net: counter %1$s, design %2$s. Continue with \"Next\"."
+msgstr "Ontvangen van stats4u.net: teller %1$s, ontwerp %2$s. Ga verder met „Volgende”."
+
+msgid "Request a new counter number"
+msgstr "Nieuw tellernummer aanvragen"
+
+msgid "Back"
+msgstr "Terug"
+
+msgid "Next"
+msgstr "Volgende"
+
+msgid "Save and finish"
+msgstr "Opslaan en afronden"
+
+msgid "Save to put the counter on your site. You can change everything later - or run this wizard again."
+msgstr "Sla op om de teller op je site te zetten. Je kunt later alles wijzigen – of deze wizard opnieuw doorlopen."
+
+msgid "How do you want to set up your counter?"
+msgstr "Hoe wil je je teller instellen?"
+
+msgid "Recommended"
+msgstr "Aanbevolen"
+
+msgid "Wizard"
+msgstr "Wizard"
+
+msgid "Step by step, with a live preview - about two minutes."
+msgstr "Stap voor stap, met een live voorbeeld – ongeveer twee minuten."
+
+msgid "Start the wizard"
+msgstr "Wizard starten"
+
+msgid "All settings on one page, sorted in a menu."
+msgstr "Alle instellingen op één pagina, geordend in een menu."
+
+msgid "Open the settings"
+msgstr "Instellingen openen"
+
+#. translators: 1: number of the current step, 2: number of steps
+#, php-format
+msgid "Step %1$d of %2$d"
+msgstr "Stap %1$d van %2$d"
+
+msgid "Choose or create a counter first."
+msgstr "Kies of maak eerst een teller."
+
+#. translators: %s: the new counter number
+#, php-format
+msgid "New counter number %s - it is used as soon as you save."
+msgstr "Nieuw tellernummer %s – het geldt zodra je opslaat."
+
+msgid "Too many new numbers from here - please try again in an hour."
+msgstr "Te veel nieuwe nummers vanaf hier – probeer het over een uur opnieuw."

@@ -279,3 +279,78 @@ msgstr "Il tuo browser invia il messaggio a stats4u.net, insieme alla versione d
 
 msgid "Privacy policy"
 msgstr "Informativa sulla privacy"
+
+msgid "Free hit counters and visitor stats for websites"
+msgstr "Contatori visite gratis per siti web"
+
+msgid "Simple, lightweight and secure analytics."
+msgstr "Analisi semplice, leggera e sicura."
+
+msgid "Restart wizard"
+msgstr "Riavvia la procedura guidata"
+
+msgid "Custom configuration"
+msgstr "Configurazione personalizzata"
+
+msgid "Done"
+msgstr "Fatto"
+
+msgid "Settings sections"
+msgstr "Sezioni delle impostazioni"
+
+#. translators: 1: counter number, 2: design number
+#, php-format
+msgid "Received from stats4u.net: counter %1$s, design %2$s. Continue with \"Next\"."
+msgstr "Ricevuto da stats4u.net: contatore %1$s, design %2$s. Continua con «Avanti»."
+
+msgid "Request a new counter number"
+msgstr "Richiedi un nuovo numero di contatore"
+
+msgid "Back"
+msgstr "Indietro"
+
+msgid "Next"
+msgstr "Avanti"
+
+msgid "Save and finish"
+msgstr "Salva e termina"
+
+msgid "Save to put the counter on your site. You can change everything later - or run this wizard again."
+msgstr "Salva per mettere il contatore sul tuo sito. Potrai cambiare tutto in seguito, oppure rifare questa procedura guidata."
+
+msgid "How do you want to set up your counter?"
+msgstr "Come vuoi configurare il tuo contatore?"
+
+msgid "Recommended"
+msgstr "Consigliato"
+
+msgid "Wizard"
+msgstr "Procedura guidata"
+
+msgid "Step by step, with a live preview - about two minutes."
+msgstr "Passo dopo passo, con anteprima dal vivo: circa due minuti."
+
+msgid "Start the wizard"
+msgstr "Avvia la procedura guidata"
+
+msgid "All settings on one page, sorted in a menu."
+msgstr "Tutte le impostazioni in una pagina, ordinate in un menu."
+
+msgid "Open the settings"
+msgstr "Apri le impostazioni"
+
+#. translators: 1: number of the current step, 2: number of steps
+#, php-format
+msgid "Step %1$d of %2$d"
+msgstr "Passo %1$d di %2$d"
+
+msgid "Choose or create a counter first."
+msgstr "Prima scegli o crea un contatore."
+
+#. translators: %s: the new counter number
+#, php-format
+msgid "New counter number %s - it is used as soon as you save."
+msgstr "Nuovo numero di contatore %s: verrà usato appena salvi."
+
+msgid "Too many new numbers from here - please try again in an hour."
+msgstr "Troppi nuovi numeri da qui: riprova tra un’ora."

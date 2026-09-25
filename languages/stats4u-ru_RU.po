@@ -279,3 +279,78 @@ msgstr "Ваш браузер отправит сообщение на stats4u.n
 
 msgid "Privacy policy"
 msgstr "Политика конфиденциальности"
+
+msgid "Free hit counters and visitor stats for websites"
+msgstr "Бесплатные счётчики посещений для сайта"
+
+msgid "Simple, lightweight and secure analytics."
+msgstr "Простая, легкая и безопасная аналитика."
+
+msgid "Restart wizard"
+msgstr "Запустить мастер заново"
+
+msgid "Custom configuration"
+msgstr "Ручная настройка"
+
+msgid "Done"
+msgstr "Готово"
+
+msgid "Settings sections"
+msgstr "Разделы настроек"
+
+#. translators: 1: counter number, 2: design number
+#, php-format
+msgid "Received from stats4u.net: counter %1$s, design %2$s. Continue with \"Next\"."
+msgstr "Получено с stats4u.net: счётчик %1$s, дизайн %2$s. Продолжите кнопкой «Далее»."
+
+msgid "Request a new counter number"
+msgstr "Получить новый номер счётчика"
+
+msgid "Back"
+msgstr "Назад"
+
+msgid "Next"
+msgstr "Далее"
+
+msgid "Save and finish"
+msgstr "Сохранить и завершить"
+
+msgid "Save to put the counter on your site. You can change everything later - or run this wizard again."
+msgstr "Сохраните, чтобы счётчик появился на сайте. Всё можно изменить позже – или пройти этот мастер ещё раз."
+
+msgid "How do you want to set up your counter?"
+msgstr "Как вы хотите настроить счётчик?"
+
+msgid "Recommended"
+msgstr "Рекомендуется"
+
+msgid "Wizard"
+msgstr "Мастер настройки"
+
+msgid "Step by step, with a live preview - about two minutes."
+msgstr "Шаг за шагом, с живым предпросмотром – около двух минут."
+
+msgid "Start the wizard"
+msgstr "Запустить мастер"
+
+msgid "All settings on one page, sorted in a menu."
+msgstr "Все настройки на одной странице, разложенные по меню."
+
+msgid "Open the settings"
+msgstr "Открыть настройки"
+
+#. translators: 1: number of the current step, 2: number of steps
+#, php-format
+msgid "Step %1$d of %2$d"
+msgstr "Шаг %1$d из %2$d"
+
+msgid "Choose or create a counter first."
+msgstr "Сначала выберите или создайте счётчик."
+
+#. translators: %s: the new counter number
+#, php-format
+msgid "New counter number %s - it is used as soon as you save."
+msgstr "Новый номер счётчика %s – он начнёт действовать, как только вы сохраните."
+
+msgid "Too many new numbers from here - please try again in an hour."
+msgstr "Слишком много новых номеров отсюда – попробуйте снова через час."

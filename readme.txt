@@ -102,6 +102,10 @@ What is sent and when:
   stats4u.net with the address of this settings page as a parameter
   (`wpback`), so that a button at the end of the creator can bring the code
   back. That address is only used for that button.
+* If you click "Request a new counter number", your browser asks
+  `https://www.stats4u.net/index.php` (`action=wpneu`) for a free counter
+  number, sending only the language of your admin area. Nothing is created
+  there until the counter is first seen on your site.
 * If you send feedback from the settings page, your browser sends your
   message to `https://www.stats4u.net/index.php` (`action=wpfeedback`),
   together with the plugin version and the language of your admin area - plus
@@ -126,11 +130,13 @@ The service is provided by LW IT Solutions Company Lukas Wójcik, Łódź, Polan
 == Installation ==
 
 1. Install and activate the plugin.
-2. Under *Settings -> Stats4U*, paste the code you got on stats4u.net - or
-   click "Create a free counter on stats4u.net" and follow the creator; its
-   last step brings the code back.
-3. Click *Save Changes*. The counter appears below your theme's footer.
-   Change the place, the look and the consent tool on the same page.
+2. Open *Settings -> Stats4U* and choose the wizard - or the custom
+   configuration, if you prefer all settings at once.
+3. Paste the code you got on stats4u.net, click "Create a free counter on
+   stats4u.net" (its last step brings the code back), or request a new
+   counter number right there.
+4. Save. The counter appears below your theme's footer; change the place, the
+   look and the consent tool any time.
 
 == Frequently Asked Questions ==
 
@@ -230,15 +236,16 @@ instead of your numbers.
 
 = Does deleting the plugin delete my counter? =
 
-No. Deleting the plugin removes its single option from your database and
-nothing else. The counter belongs to you and keeps its history - your numbers
+No. Deleting the plugin removes its option and the remembered view of its
+settings page from your database, and nothing else. The counter belongs to you and keeps its history - your numbers
 should not disappear because you tried a plugin and removed it again.
 
 == Screenshots ==
 
-1. Your counter: paste the code from stats4u.net - or create one there and come back with a click.
-2. Appearance, placement and consent on the same page.
-3. The counter right below the footer of a theme.
+1. The start: a wizard that walks you through it, or all settings at once.
+2. The wizard: counter, appearance, placement and consent, one step at a time.
+3. Custom configuration: every setting, sorted in a menu.
+4. The counter right below the footer of a theme.
 
 == Changelog ==
 
@@ -263,6 +270,11 @@ should not disappear because you tried a plugin and removed it again.
   change, and under *Placement* the line for a theme template.
 * A feedback form at the end of the settings page: tell us what is missing or
   not working.
+* A new start: choose between a wizard that walks you through counter,
+  appearance, placement and consent step by step, and a custom configuration
+  with all settings sorted in a menu. The wizard can be restarted at any time.
+* "Request a new counter number" gets a free number from stats4u.net in one
+  click - in the design you have set.
 
 = 1.4.0 =
 * Paste the code from stats4u.net instead of typing a number: HTML, BBCode,
