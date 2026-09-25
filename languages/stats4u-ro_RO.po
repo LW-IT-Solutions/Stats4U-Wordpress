@@ -230,3 +230,11 @@ msgstr "Un paragraf pentru politica dumneavoastră de confidențialitate găsiț
 
 msgid "Puts a Stats4U visitor counter on your site. Paste the code from stats4u.net, choose where it appears and, if you use a consent banner, let it decide when the counter loads."
 msgstr "Adaugă pe site-ul dumneavoastră un contor de vizitatori Stats4U. Lipiți codul de pe stats4u.net, alegeți unde apare și, dacă folosiți un banner de consimțământ, lăsați-l să decidă când se încarcă contorul."
+
+msgid "Your code"
+msgstr "Codul dumneavoastră"
+
+#. translators: %s: a line of PHP code
+#, php-format
+msgid "In a theme template (PHP): %s"
+msgstr "Într-un fișier al temei (PHP): %s"

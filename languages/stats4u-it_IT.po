@@ -230,3 +230,11 @@ msgstr "Un paragrafo per la tua informativa sulla privacy si trova su %s."
 
 msgid "Puts a Stats4U visitor counter on your site. Paste the code from stats4u.net, choose where it appears and, if you use a consent banner, let it decide when the counter loads."
 msgstr "Aggiunge al tuo sito un contatore visite Stats4U. Incolla il codice da stats4u.net, scegli dove compare e, se usi un banner per il consenso, lascia decidere a lui quando caricare il contatore."
+
+msgid "Your code"
+msgstr "Il tuo codice"
+
+#. translators: %s: a line of PHP code
+#, php-format
+msgid "In a theme template (PHP): %s"
+msgstr "In un file del tema (PHP): %s"

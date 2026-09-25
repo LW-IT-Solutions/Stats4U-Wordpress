@@ -230,3 +230,11 @@ msgstr "Paragraf untuk kebijakan privasi Anda tersedia di %s."
 
 msgid "Puts a Stats4U visitor counter on your site. Paste the code from stats4u.net, choose where it appears and, if you use a consent banner, let it decide when the counter loads."
 msgstr "Memasang penghitung pengunjung Stats4U di situs Anda. Tempelkan kode dari stats4u.net, pilih tempat penghitung muncul, dan jika Anda memakai banner persetujuan cookie, biarkan banner itu menentukan kapan penghitung dimuat."
+
+msgid "Your code"
+msgstr "Kode Anda"
+
+#. translators: %s: a line of PHP code
+#, php-format
+msgid "In a theme template (PHP): %s"
+msgstr "Di file tema (PHP): %s"

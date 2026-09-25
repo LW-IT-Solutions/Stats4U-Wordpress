@@ -203,6 +203,11 @@ function stats4u_code_lesen($roh) {
         $aus['privat'] = preg_match('~data-private\s*=\s*["\']?true~i', $t) ? 1 : 0;
         $aus['alias']  = preg_match('~data-alias\s*=\s*["\']?([a-z0-9_-]{1,40})~i', $t, $a) ? strtolower($a[1]) : '';
         $aus['schirm'] = preg_match('~data-screen\s*=\s*["\']?(?:1|true|on|yes)\b~i', $t) ? 1 : 0;
+        // Feste Sprache der Beschriftung - im Skript-Code data-lang, in der
+        // Bildadresse cl= (unten). Steht im Feld der Einstellungsseite.
+        if (preg_match('~data-lang\s*=\s*["\']?([a-z]{2})(?![a-z])~i', $t, $l) && in_array(strtolower($l[1]), stats4u_sprachen(), true)) {
+            $aus['sprache'] = strtolower($l[1]);
+        }
     } elseif (preg_match('~/live/([0-9]{1,12})(?![0-9a-z_-])~i', $t, $m)) {
         // Nur die Statistikseite - Nummer ja, Entwurf nein.
         $aus['id'] = $m[1];
@@ -507,6 +512,37 @@ function stats4u_skript_daten($e) {
     if ((string) $e['alias'] !== '') { $d['data-alias'] = (string) $e['alias']; }
     if (!empty($e['schirm'])) { $d['data-screen'] = '1'; }
     return $d;
+}
+
+/**
+ * Der ganze Code des Zaehlers, so wie ihn der Assistent auf stats4u.net
+ * ausgibt - fuer das Feld auf der Einstellungsseite. Ungekuerzt: bis 1.5.0
+ * stand dort nur ein Beispiel mit "...", und das sah aus wie der eigene,
+ * abgeschnittene Code.
+ *
+ * data-lang nur bei fester Sprache. "Wie die Seite" setzt das Plugin je Seite
+ * selbst ein (stats4u_skript_daten); stuende hier die Sprache der
+ * Einstellungsseite, machte ein geaenderter und gespeicherter Code daraus eine
+ * feste - auf einer mehrsprachigen Seite spraeche der Zaehler dann ueberall
+ * dieselbe Sprache.
+ */
+function stats4u_code_text($e) {
+    if ((string) $e['id'] === '') { return ''; }
+    $d = stats4u_skript_daten(array_merge($e, array('sprache' => $e['sprache'] === 'site' ? '' : $e['sprache'])));
+    $teile = array('src="' . STATS4U_SKRIPT . '"');
+    foreach ($d as $k => $v) { $teile[] = $k . '="' . $v . '"'; }
+    return '<script ' . implode(' ', $teile) . ' async></script>';
+}
+
+/**
+ * Hat jemand den Code im Feld geaendert? Das Feld zeigt den gespeicherten
+ * Code; kaeme er unveraendert zurueck und wuerde gelesen, setzte er die
+ * Auswahlfelder unter "Aussehen" beim Speichern wieder auf seinen Stand.
+ * Leerraum zaehlt nicht - das Feld bricht lange Zeilen nur um.
+ */
+function stats4u_code_geaendert($code, $vorher) {
+    $norm = function ($s) { return trim(preg_replace('/\s+/', ' ', (string) $s)); };
+    return $norm($code) !== '' && $norm($code) !== $norm($vorher);
 }
 
 /**
@@ -951,8 +987,10 @@ function stats4u_saeubern($ein) {
 
     // Der eingefuegte Code zuletzt: was er festlegt, gewinnt gegen die
     // Auswahlfelder - er ist das, was der Nutzer gerade bewusst geaendert hat.
+    // Nur wenn er sich geaendert hat: das Feld zeigt den gespeicherten Code
+    // (stats4u_code_text), code_vorher ist derselbe Code aus dem Formular.
     $code = isset($ein['code']) ? trim((string) $ein['code']) : '';
-    if ($code !== '') {
+    if (stats4u_code_geaendert($code, $ein['code_vorher'] ?? '')) {
         $l = stats4u_code_lesen($code);
         if ($l['fehler'] !== '') {
             add_settings_error(STATS4U_OPTION, 'stats4u_code', stats4u_fehlertext($l['fehler']), 'error');
@@ -961,7 +999,7 @@ function stats4u_saeubern($ein) {
         }
     }
 
-    unset($aus['code']);
+    unset($aus['code'], $aus['code_vorher']);
     return $aus;
 }
 
@@ -1085,6 +1123,8 @@ function stats4u_admin_skript($seite) {
         '.s4u-code{margin:0;padding:12px 20px 16px;border-top:1px solid #f0f0f1}',
         '.s4u-code summary{cursor:pointer;font-weight:600;padding:4px 0;color:#2271b1}',
         '.s4u-code textarea{margin-top:8px}',
+        // Ein Klick markiert den ganzen Aufruf fuer die Theme-Datei.
+        '.s4u-snippet{-webkit-user-select:all;user-select:all;cursor:text}',
         '.s4u-felder{padding:0 20px}',
         '.s4u-feld{display:grid;grid-template-columns:minmax(140px,210px) minmax(0,1fr);gap:6px 24px;align-items:start;padding:16px 0;border-top:1px solid #f0f0f1}',
         '.s4u-feld:first-child{border-top:0}',
@@ -1169,6 +1209,9 @@ function stats4u_seite() {
     // stand hier die ALTE Vorschau, und der neue Entwurf schien verloren
     // (gemeldet am 24.09.2026). Gespeichert wird weiter erst mit dem Knopf.
     $neu = ($erkannt && $erkannt['fehler'] === '');
+    // Der gespeicherte Code - daran erkennt stats4u_saeubern(), ob das Feld
+    // geaendert wurde (stats4u_code_geaendert).
+    $code_vorher = stats4u_code_text($e);
     if ($neu) { $e = stats4u_mit_code($e, $erkannt); }
 
     $groessen = array(50, 75, 100, 125, 150, 200, 300);
@@ -1262,15 +1305,22 @@ function stats4u_seite() {
                         ?></p>
                     </div>
                 </div>
-                <?php $offen = ($e['id'] === '' || $zurueck !== ''); ?>
-                <details class="s4u-code"<?php echo $offen ? ' open' : ''; ?>>
+                <?php
+                // Im Feld steht der ganze Code des Zaehlers, nach der Rueckkehr vom
+                // Assistenten schon der neue - nur ein Code, den der Assistent nicht
+                // lesen konnte, bleibt so stehen, wie er kam. Wer ihn aendert oder
+                // ersetzt, wechselt Zaehler oder Entwurf.
+                $code_feld = ($zurueck !== '' && !$neu) ? $zurueck : stats4u_code_text($e);
+                ?>
+                <details class="s4u-code" open>
                     <summary><?php echo $e['id'] === ''
                         ? esc_html__('Paste your code', 'stats4u')
-                        : esc_html__('Use a different counter or code', 'stats4u'); ?></summary>
+                        : esc_html__('Your code', 'stats4u'); ?></summary>
                     <label class="screen-reader-text" for="s4u_code"><?php echo esc_html__('Code from stats4u.net', 'stats4u'); ?></label>
-                    <textarea name="<?php echo esc_attr($n); ?>[code]" id="s4u_code" rows="4" class="large-text code"
-                        placeholder="&lt;script src=&quot;https://www.stats4u.net/s4u.js&quot; data-id=&quot;12345&quot; ...&gt;"><?php
-                        echo esc_textarea($zurueck); ?></textarea>
+                    <textarea name="<?php echo esc_attr($n); ?>[code]" id="s4u_code" rows="4" class="large-text code" spellcheck="false"
+                        placeholder="&lt;script src=&quot;https://www.stats4u.net/s4u.js&quot; data-id=&quot;12345&quot; data-style=&quot;950&quot; async&gt;&lt;/script&gt;"><?php
+                        echo esc_textarea($code_feld); ?></textarea>
+                    <input type="hidden" name="<?php echo esc_attr($n); ?>[code_vorher]" value="<?php echo esc_attr($code_vorher); ?>">
                     <p class="description"><?php
                         echo esc_html__('Paste the HTML, BBCode or image address from stats4u.net - or just the counter number. Design, colors, size and everything else you set there come along.', 'stats4u');
                     ?></p>
@@ -1355,6 +1405,16 @@ function stats4u_seite() {
                                 <?php endforeach; ?></div>
                             <p class="description"><?php
                                 echo esc_html__('To place it yourself, use the block "Stats4U counter" or the shortcode [stats4u] - for example in a footer widget.', 'stats4u');
+                            ?></p>
+                            <p class="description"><?php
+                                // Fuer Entwickler, damit niemand suchen muss: ein Kurzcode, der als
+                                // Text in einer PHP-Datei steht, wird nicht ausgewertet. Ein Klick
+                                // markiert den ganzen Aufruf (.s4u-snippet).
+                                echo wp_kses(sprintf(
+                                    /* translators: %s: a line of PHP code */
+                                    esc_html__('In a theme template (PHP): %s', 'stats4u'),
+                                    '<code class="s4u-snippet">' . esc_html("<?php echo do_shortcode( '[stats4u]' ); ?>") . '</code>'
+                                ), array('code' => array('class' => true)));
                             ?></p>
                         </div>
                     </div>

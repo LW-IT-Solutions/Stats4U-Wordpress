@@ -230,3 +230,11 @@ msgstr "Абзац за вашата политика за поверителн�
 
 msgid "Puts a Stats4U visitor counter on your site. Paste the code from stats4u.net, choose where it appears and, if you use a consent banner, let it decide when the counter loads."
 msgstr "Поставя брояч на посещенията Stats4U на вашия сайт. Поставете кода от stats4u.net, изберете къде да се показва и ако използвате банер за съгласие, оставете го да решава кога да се зарежда броячът."
+
+msgid "Your code"
+msgstr "Вашият код"
+
+#. translators: %s: a line of PHP code
+#, php-format
+msgid "In a theme template (PHP): %s"
+msgstr "В шаблон на темата (PHP): %s"

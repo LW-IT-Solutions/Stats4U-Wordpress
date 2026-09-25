@@ -230,3 +230,11 @@ msgstr "Odstavec pro vaše zásady ochrany osobních údajů najdete na %s."
 
 msgid "Puts a Stats4U visitor counter on your site. Paste the code from stats4u.net, choose where it appears and, if you use a consent banner, let it decide when the counter loads."
 msgstr "Umístí na váš web počítadlo přístupů Stats4U. Vložte kód ze stats4u.net, zvolte, kde se má zobrazit, a pokud používáte cookie lištu, nechte ji rozhodnout, kdy se počítadlo načte."
+
+msgid "Your code"
+msgstr "Váš kód"
+
+#. translators: %s: a line of PHP code
+#, php-format
+msgid "In a theme template (PHP): %s"
+msgstr "V souboru šablony (PHP): %s"

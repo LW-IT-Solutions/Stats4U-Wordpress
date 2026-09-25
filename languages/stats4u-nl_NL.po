@@ -230,3 +230,11 @@ msgstr "Een alinea voor je privacyverklaring vind je op %s."
 
 msgid "Puts a Stats4U visitor counter on your site. Paste the code from stats4u.net, choose where it appears and, if you use a consent banner, let it decide when the counter loads."
 msgstr "Zet een Stats4U-bezoekersteller op je site. Plak de code van stats4u.net, kies waar hij verschijnt en laat, als je een cookiebanner gebruikt, die bepalen wanneer de teller laadt."
+
+msgid "Your code"
+msgstr "Je code"
+
+#. translators: %s: a line of PHP code
+#, php-format
+msgid "In a theme template (PHP): %s"
+msgstr "In een themabestand (PHP): %s"

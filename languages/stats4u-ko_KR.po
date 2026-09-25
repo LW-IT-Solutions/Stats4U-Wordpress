@@ -230,3 +230,11 @@ msgstr "개인정보 처리방침에 넣을 문단은 %s에 있습니다."
 
 msgid "Puts a Stats4U visitor counter on your site. Paste the code from stats4u.net, choose where it appears and, if you use a consent banner, let it decide when the counter loads."
 msgstr "사이트에 Stats4U 방문자 카운터를 추가합니다. stats4u.net의 코드를 붙여넣고 표시 위치를 선택하세요. 동의 배너를 사용한다면 카운터를 로드할 시점을 배너가 결정하게 할 수 있습니다."
+
+msgid "Your code"
+msgstr "내 코드"
+
+#. translators: %s: a line of PHP code
+#, php-format
+msgid "In a theme template (PHP): %s"
+msgstr "테마 템플릿 파일(PHP): %s"

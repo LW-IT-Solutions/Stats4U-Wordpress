@@ -230,3 +230,11 @@ msgstr "تجد فقرة جاهزة لسياسة الخصوصية لديك على
 
 msgid "Puts a Stats4U visitor counter on your site. Paste the code from stats4u.net, choose where it appears and, if you use a consent banner, let it decide when the counter loads."
 msgstr "يضيف عداد زوار Stats4U إلى موقعك. الصق الكود من stats4u.net واختر مكان ظهوره، وإن كنت تستخدم لافتة موافقة على ملفات تعريف الارتباط فدعها تقرر متى يُحمَّل العداد."
+
+msgid "Your code"
+msgstr "الكود الخاص بك"
+
+#. translators: %s: a line of PHP code
+#, php-format
+msgid "In a theme template (PHP): %s"
+msgstr "في ملف القالب (PHP): %s"

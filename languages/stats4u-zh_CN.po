@@ -230,3 +230,11 @@ msgstr "可放入您隐私政策的一段文字见 %s。"
 
 msgid "Puts a Stats4U visitor counter on your site. Paste the code from stats4u.net, choose where it appears and, if you use a consent banner, let it decide when the counter loads."
 msgstr "在您的网站上添加 Stats4U 访客计数器。粘贴 stats4u.net 上的代码，选择显示位置；如果您使用 Cookie 同意横幅，还可以让它决定计数器何时加载。"
+
+msgid "Your code"
+msgstr "您的代码"
+
+#. translators: %s: a line of PHP code
+#, php-format
+msgid "In a theme template (PHP): %s"
+msgstr "在主题模板文件（PHP）中：%s"

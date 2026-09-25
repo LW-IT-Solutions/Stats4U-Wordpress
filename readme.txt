@@ -138,6 +138,14 @@ theme has no recognisable footer, the counter goes to the end of the page.
 You can also choose "inside the footer", "below the content of posts and
 pages", a fixed corner, or place it yourself with the block or the shortcode.
 
+= How do I put the counter into a theme template? =
+
+Write `<?php echo do_shortcode( '[stats4u]' ); ?>` where it should appear -
+in footer.php, for example. A shortcode typed into a PHP file as plain text is
+not processed. Set *Where to show it* to "nowhere automatically", otherwise the
+counter appears twice. The settings page shows the same line under
+*Placement*.
+
 = Why the script and not just the counter image? =
 
 Up to version 1.4.0 the plugin used the image alone. It was lighter, but
@@ -244,6 +252,8 @@ should not disappear because you tried a plugin and removed it again.
   home page.
 * `data-private`, `data-alias` and `data-screen` from a pasted script code are
   kept.
+* The settings page shows the full code of your counter, ready to copy or to
+  change, and under *Placement* the line for a theme template.
 
 = 1.4.0 =
 * Paste the code from stats4u.net instead of typing a number: HTML, BBCode,

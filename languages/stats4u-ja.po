@@ -230,3 +230,11 @@ msgstr "プライバシーポリシーに載せる文例は %s にあります�
 
 msgid "Puts a Stats4U visitor counter on your site. Paste the code from stats4u.net, choose where it appears and, if you use a consent banner, let it decide when the counter loads."
 msgstr "サイトに Stats4U アクセスカウンターを設置します。stats4u.net のコードを貼り付けて表示場所を選べます。同意バナーを使っている場合は、カウンターを読み込むタイミングをバナーに任せられます。"
+
+msgid "Your code"
+msgstr "お使いのコード"
+
+#. translators: %s: a line of PHP code
+#, php-format
+msgid "In a theme template (PHP): %s"
+msgstr "テーマのテンプレートファイル（PHP）：%s"
