@@ -11,10 +11,14 @@ code, an image address or just the counter number – under
 *Settings → Stats4U*. No counter yet? The button "Create a free counter on
 stats4u.net" opens the creator, and its last step brings the code back.
 
-![Settings page](.wordpress-org/screenshot-1.png)
+![Start: the wizard or the custom configuration](.wordpress-org/screenshot-1.png)
 
 ## What it does
 
+* **Set up in about two minutes:** a wizard walks you through counter,
+  appearance, placement and consent, one step at a time – or open the custom
+  configuration with every setting sorted in a menu. A new counter number is
+  one click away, and the wizard can be restarted at any time.
 * **Everything from the creator comes along:** design, colors, size, dark mode,
   sparkline, what to count – no fields to copy by hand.
 * **Placed right, with any theme:** below or inside the theme's footer, at the
@@ -28,7 +32,7 @@ stats4u.net" opens the creator, and its last step brings the code back.
   the counter goes and is filled with the script once the tool allows it.
 * **Statistics worth reading:** every count carries the page and the referrer;
   on top come time on page, scroll depth and "online now". The script is
-  12.6 kB over the wire (Brotli) and cached for a week; no cookie.
+  12.6 kB over the wire (Brotli) and cached for an hour; no cookie.
 * **19 interface languages** – the same as stats4u.net. Regional variants
   (de_AT, es_MX, pt_BR …) get the nearest one.
 
