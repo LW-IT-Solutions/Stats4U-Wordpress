@@ -34,9 +34,10 @@
  * Den Verweis auf die Statistikseite setzt s4u.js von sich aus, also der
  * Dienst und nicht das Plugin - wordpress.org, Richtlinie 10: "Services are
  * permitted to brand their output as they see fit, provided the code is
- * handled in the service and not the plugin." Ohne Verweis zeigt s4u.js einen
- * Zaehler, der auf stats4u.net auf "nicht oeffentlich" steht. (1.2.0 bis
- * 1.4.0 setzte das Plugin den Verweis selbst - dort ab Werk aus.)
+ * handled in the service and not the plugin." Steht der Zaehler auf
+ * stats4u.net auf "nicht oeffentlich", verweist s4u.js auf die Startseite
+ * statt auf die Statistik. (1.2.0 bis 1.4.0 setzte das Plugin den Verweis
+ * selbst - dort ab Werk aus.)
  *
  * WARUM DIE ZEICHENKETTEN ENGLISCH SIND
  *
@@ -1324,8 +1325,8 @@ function stats4u_seite() {
                     <?php
                     // Kein Schalter "Link" mehr (bis 1.4.0: ab Werk aus). Den Verweis
                     // auf die Statistikseite setzt s4u.js, also der Dienst - wie auf
-                    // jeder Seite mit dem Code von stats4u.net. Ohne Verweis zeigt er
-                    // einen Zaehler, der dort auf "nicht oeffentlich" steht.
+                    // jeder Seite mit dem Code von stats4u.net. Steht der Zaehler dort
+                    // auf "nicht oeffentlich", verweist er auf die Startseite.
                     ?>
                 </div>
             </section>

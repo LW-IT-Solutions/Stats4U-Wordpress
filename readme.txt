@@ -107,8 +107,8 @@ What is sent and when:
 The Stats4U script links the counter to its statistics page,
 `https://www.stats4u.net/live/<counter number>` - as on every site that uses
 the code from stats4u.net. This link comes from the service, not from the
-plugin. A counter that is set to "not public" on stats4u.net is shown without
-it.
+plugin. A counter that is set to "not public" on stats4u.net links to the
+Stats4U home page, `https://www.stats4u.net`, instead.
 
 The service is provided by LW IT Solutions Company Lukas Wójcik, Łódź, Poland:
 
@@ -210,7 +210,8 @@ asynchronously and does not hold up your page.
 The Stats4U script links every counter to its statistics page, so visitors
 can click through to your numbers - the same on every site that uses the code
 from stats4u.net. If your statistics should stay private, set the counter to
-"not public" on stats4u.net: the script then shows it without a link.
+"not public" on stats4u.net: the link then goes to the Stats4U home page
+instead of your numbers.
 
 = Does deleting the plugin delete my counter? =
 
@@ -239,7 +240,8 @@ should not disappear because you tried a plugin and removed it again.
   their blocking of script files.
 * The link to the statistics page now comes from the Stats4U script itself,
   as everywhere the code from stats4u.net is used; the plugin's own switch is
-  gone. A counter set to "not public" on stats4u.net has no link.
+  gone. A counter set to "not public" on stats4u.net links to the Stats4U
+  home page.
 * `data-private`, `data-alias` and `data-screen` from a pasted script code are
   kept.
 
