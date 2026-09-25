@@ -53,6 +53,8 @@ const STATS4U_OPTION  = 'stats4u_einstellungen';
 const STATS4U_VERSION = '1.5.0';
 /** Das offizielle Zaehlerskript - dasselbe, das der Assistent auf stats4u.net ausgibt. */
 const STATS4U_SKRIPT  = 'https://www.stats4u.net/s4u.js';
+/** Wohin das Feedback-Formular schickt - aus dem Browser, nie vom Server. */
+const STATS4U_RUECKMELDUNG = 'https://www.stats4u.net/index.php?action=wpfeedback';
 
 /** Die 19 Sprachen von stats4u.net - dieselben wie die Oberflaeche dort. */
 function stats4u_sprachen() {
@@ -1156,7 +1158,15 @@ function stats4u_admin_skript($seite) {
         '.s4u-platz-bild .s4u-z{fill:var(--wp-admin-theme-color,#2271b1)}',
         '.s4u-platz-bild .s4u-z-frei{fill:none;stroke:var(--wp-admin-theme-color,#2271b1);stroke-dasharray:3 2}',
         '.s4u-platz-bild .s4u-strich{fill:none;stroke:#a7aaad;stroke-dasharray:2 2}',
-        '@media (max-width:782px){.s4u-feld{grid-template-columns:minmax(0,1fr)}.s4u-lab{padding-top:0}',
+        '.s4u-fb-einleitung{margin:0;padding:14px 20px 0}',
+        '.s4u-fb-haken{display:flex;gap:8px;align-items:flex-start;padding-top:4px}',
+        '.s4u-fb-haken input{margin-top:3px}',
+        '.s4u-fb-senden{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;padding:4px 20px 0}',
+        '#s4u_fb_status{font-weight:600}',
+        '#s4u_fb_status.s4u-ok{color:#008a20}',
+        '#s4u_fb_status.s4u-fehler{color:#d63638}',
+        '.s4u-fb-hinweis{margin:0;padding:10px 20px 18px}',
+        '@media (max-width:782px){.s4u-feld{grid-template-columns:minmax(0,1fr)}.s4u-lab{padding-top:0}.s4u-lab:empty{display:none}',
         '.s4u-buehne{min-width:0;width:100%}}',
     )));
     wp_register_script('stats4u-admin', false, array(), STATS4U_VERSION, true);
@@ -1189,6 +1199,36 @@ function stats4u_admin_skript($seite) {
         . "if(bu){bu.classList.toggle('s4u-dunkel',dk==='1');}}"
         . "var f=d.querySelectorAll('#s4u_gr,#s4u_sprache,input[name$=\"[dark]\"],input[name$=\"[metrik]\"]');"
         . "for(var i=0;i<f.length;i++){f[i].addEventListener('change',neu);}})();");
+
+    // Feedback: der Browser schickt an stats4u.net (STATS4U_RUECKMELDUNG) - als
+    // einfaches Formular (URLSearchParams), also ohne Vorabfrage und ohne
+    // Anmeldedaten. Die Saetze zu den Antwortcodes stehen hier, uebersetzt.
+    $e   = stats4u_einstellungen();
+    $spr = strtolower(substr(get_user_locale(), 0, 2));
+    wp_add_inline_script('stats4u-admin', 'window.stats4uFb=' . wp_json_encode(array(
+        'ziel'    => STATS4U_RUECKMELDUNG,
+        'version' => STATS4U_VERSION,
+        'lang'    => in_array($spr, stats4u_sprachen(), true) ? $spr : 'en',
+        'seite'   => home_url('/'),
+        'zaehler' => (string) $e['id'],
+        'danke'   => __('Thank you - your message has arrived.', 'stats4u'),
+        'kurz'    => __('Please write a little more - at least a few words.', 'stats4u'),
+        'mail'    => __('This email address does not look right.', 'stats4u'),
+        'zu_oft'  => __('Too many messages from here - please try again in an hour.', 'stats4u'),
+        'netz'    => __('stats4u.net could not be reached. Please try again later.', 'stats4u'),
+    )) . ';'
+        . '(function(){var d=document,f=d.getElementById("s4u_fb_form"),T=window.stats4uFb;if(!f||!window.fetch||!window.URLSearchParams){return;}'
+        . 'var t=d.getElementById("s4u_fb_text"),m=d.getElementById("s4u_fb_mail"),h=d.getElementById("s4u_fb_seite"),k=d.getElementById("s4u_fb_knopf"),st=d.getElementById("s4u_fb_status");'
+        . 'function zeig(x,ok){st.textContent=x;st.className=ok?"s4u-ok":"s4u-fehler";}'
+        . 'f.addEventListener("submit",function(ev){ev.preventDefault();var x=t.value.trim(),y=m.value.trim();'
+        . 'if(x.length<10){zeig(T.kurz,false);t.focus();return;}'
+        . 'if(y!==""&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(y)){zeig(T.mail,false);m.focus();return;}'
+        . 'var q=new URLSearchParams();q.append("message",x);q.append("email",y);q.append("version",T.version);q.append("lang",T.lang);'
+        . 'if(h&&h.checked){q.append("siteurl",T.seite);if(T.zaehler){q.append("counterid",T.zaehler);}}'
+        . 'k.disabled=true;st.textContent="";st.className="";'
+        . 'fetch(T.ziel,{method:"POST",body:q,credentials:"omit"}).then(function(r){return r.json();}).then(function(a){k.disabled=false;'
+        . 'if(a&&a.ok){zeig(T.danke,true);t.value="";return;}zeig((a&&T[a.code])||T.netz,false);})'
+        . '.catch(function(){k.disabled=false;zeig(T.netz,false);});});})();');
 }
 
 function stats4u_seite() {
@@ -1513,6 +1553,47 @@ function stats4u_seite() {
             ), stats4u_erlaubt_link());
         ?></p>
         <?php endif; ?>
+
+        <?php
+        // --- Rueckmeldung an stats4u.net. Ein eigenes Formular ausserhalb des
+        // Einstellungsformulars (Formulare lassen sich nicht schachteln); es
+        // schickt der Browser per fetch (stats4u_admin_skript), nie der Server
+        // der Seite - so steht es in der readme. Seitenadresse und Zaehler nur
+        // mit Haken: ab Werk geht nichts mit, was niemand angeklickt hat.
+        ?>
+        <section class="s4u-karte" id="s4u_feedback">
+            <h2><?php echo esc_html__('Feedback', 'stats4u'); ?></h2>
+            <form id="s4u_fb_form" novalidate>
+                <p class="s4u-fb-einleitung"><?php echo esc_html__('Missing something, found a bug, or have an idea? Write to us - every message is read.', 'stats4u'); ?></p>
+                <div class="s4u-felder">
+                    <div class="s4u-feld">
+                        <label class="s4u-lab" for="s4u_fb_text"><?php echo esc_html__('Your message', 'stats4u'); ?></label>
+                        <textarea id="s4u_fb_text" rows="5" class="large-text" maxlength="5000"></textarea>
+                    </div>
+                    <div class="s4u-feld">
+                        <label class="s4u-lab" for="s4u_fb_mail"><?php echo esc_html__('Email for an answer (optional)', 'stats4u'); ?></label>
+                        <input type="email" id="s4u_fb_mail" class="regular-text" maxlength="190" autocomplete="email">
+                    </div>
+                    <div class="s4u-feld">
+                        <span class="s4u-lab" aria-hidden="true"></span>
+                        <label class="s4u-fb-haken"><input type="checkbox" id="s4u_fb_seite"> <span><?php
+                            echo esc_html__('Also send my site address and counter number', 'stats4u'); ?>
+                            <span class="description">(<?php echo esc_html(home_url('/') . ($e['id'] !== '' ? ', ' . $e['id'] : '')); ?>)</span></span></label>
+                    </div>
+                </div>
+                <div class="s4u-fb-senden">
+                    <button type="submit" class="button button-primary" id="s4u_fb_knopf"><?php echo esc_html__('Send feedback', 'stats4u'); ?></button>
+                    <span id="s4u_fb_status" role="status" aria-live="polite"></span>
+                </div>
+                <p class="description s4u-fb-hinweis"><?php
+                    echo wp_kses(sprintf(
+                        /* translators: %s: link "Privacy policy" to stats4u.net */
+                        esc_html__('Your browser sends the message to stats4u.net, together with the plugin version and the language of this page. %s', 'stats4u'),
+                        '<a href="https://www.stats4u.net/privacy" target="_blank" rel="noopener">' . esc_html__('Privacy policy', 'stats4u') . '</a>'
+                    ), stats4u_erlaubt_link());
+                ?></p>
+            </form>
+        </section>
     </div>
     <?php
 }

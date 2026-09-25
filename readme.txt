@@ -66,8 +66,8 @@ visitor counter service it is made for. Without it, the plugin does nothing.
 What is sent and when:
 
 * On every page view of your site that shows the counter, the visitor's
-  browser loads `https://www.stats4u.net/s4u.js` (cached for up to seven
-  days). The script then:
+  browser loads `https://www.stats4u.net/s4u.js` (cached for up to an hour).
+  The script then:
     * loads the counter image from `https://www.stats4u.net/index.php`
       (`action=pic`) with the counter number, the design settings, the address
       of the page, the address the visitor came from (referrer), the language
@@ -102,6 +102,13 @@ What is sent and when:
   stats4u.net with the address of this settings page as a parameter
   (`wpback`), so that a button at the end of the creator can bring the code
   back. That address is only used for that button.
+* If you send feedback from the settings page, your browser sends your
+  message to `https://www.stats4u.net/index.php` (`action=wpfeedback`),
+  together with the plugin version and the language of your admin area - plus
+  your email address if you enter one, and your site address and counter
+  number only if you tick the box for them. The message is stored so that it
+  can be answered, and the operator is notified through Telegram. Nothing is
+  sent before you click "Send feedback".
 * Your WordPress server itself never contacts stats4u.net.
 
 The Stats4U script links the counter to its statistics page,
@@ -254,6 +261,8 @@ should not disappear because you tried a plugin and removed it again.
   kept.
 * The settings page shows the full code of your counter, ready to copy or to
   change, and under *Placement* the line for a theme template.
+* A feedback form at the end of the settings page: tell us what is missing or
+  not working.
 
 = 1.4.0 =
 * Paste the code from stats4u.net instead of typing a number: HTML, BBCode,

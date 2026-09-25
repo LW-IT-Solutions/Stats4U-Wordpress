@@ -238,3 +238,44 @@ msgstr "Ваш код"
 #, php-format
 msgid "In a theme template (PHP): %s"
 msgstr "У шаблоні теми (PHP): %s"
+
+msgid "Feedback"
+msgstr "Відгук"
+
+msgid "Missing something, found a bug, or have an idea? Write to us - every message is read."
+msgstr "Чогось бракує, знайшли помилку чи маєте ідею? Напишіть нам – ми читаємо кожне повідомлення."
+
+msgid "Your message"
+msgstr "Ваше повідомлення"
+
+msgid "Email for an answer (optional)"
+msgstr "E-mail для відповіді (необов’язково)"
+
+msgid "Also send my site address and counter number"
+msgstr "Також надіслати адресу мого сайту й номер лічильника"
+
+msgid "Send feedback"
+msgstr "Надіслати відгук"
+
+msgid "Thank you - your message has arrived."
+msgstr "Дякуємо – ваше повідомлення надійшло."
+
+msgid "Please write a little more - at least a few words."
+msgstr "Будь ласка, напишіть трохи більше – хоча б кілька слів."
+
+msgid "This email address does not look right."
+msgstr "Ця адреса електронної пошти виглядає неправильною."
+
+msgid "Too many messages from here - please try again in an hour."
+msgstr "Забагато повідомлень звідси – спробуйте ще раз за годину."
+
+msgid "stats4u.net could not be reached. Please try again later."
+msgstr "Не вдалося зв’язатися зі stats4u.net. Спробуйте пізніше."
+
+#. translators: %s: link "Privacy policy" to stats4u.net
+#, php-format
+msgid "Your browser sends the message to stats4u.net, together with the plugin version and the language of this page. %s"
+msgstr "Ваш браузер надішле повідомлення на stats4u.net разом із версією плагіна та мовою цієї сторінки. %s"
+
+msgid "Privacy policy"
+msgstr "Політика конфіденційності"

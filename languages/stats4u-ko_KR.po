@@ -238,3 +238,44 @@ msgstr "내 코드"
 #, php-format
 msgid "In a theme template (PHP): %s"
 msgstr "테마 템플릿 파일(PHP): %s"
+
+msgid "Feedback"
+msgstr "피드백"
+
+msgid "Missing something, found a bug, or have an idea? Write to us - every message is read."
+msgstr "부족한 점이나 버그를 발견하셨거나 아이디어가 있으신가요? 알려 주세요. 모든 메시지를 읽습니다."
+
+msgid "Your message"
+msgstr "메시지"
+
+msgid "Email for an answer (optional)"
+msgstr "답변받을 이메일(선택)"
+
+msgid "Also send my site address and counter number"
+msgstr "사이트 주소와 카운터 번호도 함께 보내기"
+
+msgid "Send feedback"
+msgstr "피드백 보내기"
+
+msgid "Thank you - your message has arrived."
+msgstr "감사합니다. 메시지가 도착했습니다."
+
+msgid "Please write a little more - at least a few words."
+msgstr "조금 더 써 주세요. 몇 단어 이상이 필요합니다."
+
+msgid "This email address does not look right."
+msgstr "이메일 주소가 올바르지 않은 것 같습니다."
+
+msgid "Too many messages from here - please try again in an hour."
+msgstr "이곳에서 보낸 메시지가 너무 많습니다. 1시간 후에 다시 시도해 주세요."
+
+msgid "stats4u.net could not be reached. Please try again later."
+msgstr "stats4u.net에 연결할 수 없습니다. 잠시 후 다시 시도해 주세요."
+
+#. translators: %s: link "Privacy policy" to stats4u.net
+#, php-format
+msgid "Your browser sends the message to stats4u.net, together with the plugin version and the language of this page. %s"
+msgstr "브라우저가 메시지를 플러그인 버전 및 이 페이지의 언어와 함께 stats4u.net으로 보냅니다. %s"
+
+msgid "Privacy policy"
+msgstr "개인정보 처리방침"

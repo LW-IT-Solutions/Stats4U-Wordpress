@@ -238,3 +238,44 @@ msgstr "Kodunuz"
 #, php-format
 msgid "In a theme template (PHP): %s"
 msgstr "Tema şablon dosyasında (PHP): %s"
+
+msgid "Feedback"
+msgstr "Geri bildirim"
+
+msgid "Missing something, found a bug, or have an idea? Write to us - every message is read."
+msgstr "Eksik bir şey mi var, bir hata mı buldunuz, yoksa bir fikriniz mi var? Bize yazın – her mesajı okuyoruz."
+
+msgid "Your message"
+msgstr "Mesajınız"
+
+msgid "Email for an answer (optional)"
+msgstr "Yanıt için e-posta (isteğe bağlı)"
+
+msgid "Also send my site address and counter number"
+msgstr "Site adresimi ve sayaç numaramı da gönder"
+
+msgid "Send feedback"
+msgstr "Geri bildirim gönder"
+
+msgid "Thank you - your message has arrived."
+msgstr "Teşekkürler – mesajınız ulaştı."
+
+msgid "Please write a little more - at least a few words."
+msgstr "Lütfen biraz daha yazın – en azından birkaç kelime."
+
+msgid "This email address does not look right."
+msgstr "Bu e-posta adresi doğru görünmüyor."
+
+msgid "Too many messages from here - please try again in an hour."
+msgstr "Buradan çok fazla mesaj gönderildi – lütfen bir saat sonra tekrar deneyin."
+
+msgid "stats4u.net could not be reached. Please try again later."
+msgstr "stats4u.net’e ulaşılamadı. Lütfen daha sonra tekrar deneyin."
+
+#. translators: %s: link "Privacy policy" to stats4u.net
+#, php-format
+msgid "Your browser sends the message to stats4u.net, together with the plugin version and the language of this page. %s"
+msgstr "Tarayıcınız mesajı eklenti sürümü ve bu sayfanın diliyle birlikte stats4u.net’e gönderir. %s"
+
+msgid "Privacy policy"
+msgstr "Gizlilik politikası"

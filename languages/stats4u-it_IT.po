@@ -238,3 +238,44 @@ msgstr "Il tuo codice"
 #, php-format
 msgid "In a theme template (PHP): %s"
 msgstr "In un file del tema (PHP): %s"
+
+msgid "Feedback"
+msgstr "Feedback"
+
+msgid "Missing something, found a bug, or have an idea? Write to us - every message is read."
+msgstr "Ti manca qualcosa, hai trovato un errore o hai un’idea? Scrivici: leggiamo ogni messaggio."
+
+msgid "Your message"
+msgstr "Il tuo messaggio"
+
+msgid "Email for an answer (optional)"
+msgstr "Email per la risposta (facoltativa)"
+
+msgid "Also send my site address and counter number"
+msgstr "Invia anche l’indirizzo del mio sito e il numero del contatore"
+
+msgid "Send feedback"
+msgstr "Invia feedback"
+
+msgid "Thank you - your message has arrived."
+msgstr "Grazie, il tuo messaggio è arrivato."
+
+msgid "Please write a little more - at least a few words."
+msgstr "Scrivi ancora qualcosa, per favore: almeno qualche parola."
+
+msgid "This email address does not look right."
+msgstr "Questo indirizzo email non sembra corretto."
+
+msgid "Too many messages from here - please try again in an hour."
+msgstr "Troppi messaggi da qui: riprova tra un’ora."
+
+msgid "stats4u.net could not be reached. Please try again later."
+msgstr "Impossibile raggiungere stats4u.net. Riprova più tardi."
+
+#. translators: %s: link "Privacy policy" to stats4u.net
+#, php-format
+msgid "Your browser sends the message to stats4u.net, together with the plugin version and the language of this page. %s"
+msgstr "Il tuo browser invia il messaggio a stats4u.net, insieme alla versione del plugin e alla lingua di questa pagina. %s"
+
+msgid "Privacy policy"
+msgstr "Informativa sulla privacy"

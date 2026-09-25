@@ -238,3 +238,44 @@ msgstr "Codul dumneavoastră"
 #, php-format
 msgid "In a theme template (PHP): %s"
 msgstr "Într-un fișier al temei (PHP): %s"
+
+msgid "Feedback"
+msgstr "Feedback"
+
+msgid "Missing something, found a bug, or have an idea? Write to us - every message is read."
+msgstr "Vă lipsește ceva, ați găsit o eroare sau aveți o idee? Scrieți-ne – citim fiecare mesaj."
+
+msgid "Your message"
+msgstr "Mesajul dumneavoastră"
+
+msgid "Email for an answer (optional)"
+msgstr "E-mail pentru răspuns (opțional)"
+
+msgid "Also send my site address and counter number"
+msgstr "Trimite și adresa site-ului meu și numărul contorului"
+
+msgid "Send feedback"
+msgstr "Trimite feedback"
+
+msgid "Thank you - your message has arrived."
+msgstr "Mulțumim – mesajul dumneavoastră a ajuns."
+
+msgid "Please write a little more - at least a few words."
+msgstr "Vă rugăm să scrieți puțin mai mult – măcar câteva cuvinte."
+
+msgid "This email address does not look right."
+msgstr "Această adresă de e-mail nu pare corectă."
+
+msgid "Too many messages from here - please try again in an hour."
+msgstr "Prea multe mesaje de aici – încercați din nou peste o oră."
+
+msgid "stats4u.net could not be reached. Please try again later."
+msgstr "stats4u.net nu a putut fi accesat. Încercați din nou mai târziu."
+
+#. translators: %s: link "Privacy policy" to stats4u.net
+#, php-format
+msgid "Your browser sends the message to stats4u.net, together with the plugin version and the language of this page. %s"
+msgstr "Browserul dumneavoastră trimite mesajul către stats4u.net, împreună cu versiunea pluginului și limba acestei pagini. %s"
+
+msgid "Privacy policy"
+msgstr "Politica de confidențialitate"

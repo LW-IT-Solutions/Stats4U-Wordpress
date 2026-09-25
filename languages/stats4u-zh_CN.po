@@ -238,3 +238,44 @@ msgstr "您的代码"
 #, php-format
 msgid "In a theme template (PHP): %s"
 msgstr "在主题模板文件（PHP）中：%s"
+
+msgid "Feedback"
+msgstr "反馈"
+
+msgid "Missing something, found a bug, or have an idea? Write to us - every message is read."
+msgstr "缺少什么功能、发现了错误，或者有什么想法？请告诉我们——每条留言我们都会阅读。"
+
+msgid "Your message"
+msgstr "您的留言"
+
+msgid "Email for an answer (optional)"
+msgstr "用于回复的电子邮箱（可选）"
+
+msgid "Also send my site address and counter number"
+msgstr "同时发送我的网站地址和计数器编号"
+
+msgid "Send feedback"
+msgstr "发送反馈"
+
+msgid "Thank you - your message has arrived."
+msgstr "谢谢——我们已收到您的留言。"
+
+msgid "Please write a little more - at least a few words."
+msgstr "请再多写一点——至少写几个词。"
+
+msgid "This email address does not look right."
+msgstr "这个电子邮箱地址似乎不正确。"
+
+msgid "Too many messages from here - please try again in an hour."
+msgstr "从这里发送的消息太多了——请一小时后再试。"
+
+msgid "stats4u.net could not be reached. Please try again later."
+msgstr "无法连接 stats4u.net。请稍后再试。"
+
+#. translators: %s: link "Privacy policy" to stats4u.net
+#, php-format
+msgid "Your browser sends the message to stats4u.net, together with the plugin version and the language of this page. %s"
+msgstr "您的浏览器会将留言连同插件版本和本页面的语言一起发送到 stats4u.net。%s"
+
+msgid "Privacy policy"
+msgstr "隐私政策"
