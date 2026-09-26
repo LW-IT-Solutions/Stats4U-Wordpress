@@ -33,8 +33,10 @@ stats4u.net" opens the creator, and its last step brings the code back.
 * **Statistics worth reading:** every count carries the page and the referrer;
   on top come time on page, scroll depth and "online now". The script is
   12.6 kB over the wire (Brotli) and cached for an hour; no cookie.
-* **19 interface languages** – the same as stats4u.net. Regional variants
-  (de_AT, es_MX, pt_BR …) get the nearest one.
+* **Translations from translate.wordpress.org:** the settings page is written
+  in English and fully translatable; WordPress installs the language packs by
+  itself. Ready-made translations for 18 languages – the same as stats4u.net –
+  are in `translations/`, ready to be imported there once the plugin is listed.
 
 What the script sends, and when, is listed in [readme.txt](readme.txt),
 section *External services*.
@@ -51,8 +53,9 @@ Requires WordPress 5.8+ and PHP 7.4+. Tested up to WordPress 7.1.
 
 | Path | What |
 |---|---|
-| `stats4u.php`, `uninstall.php`, `editor.js`, `freigabe.js`, `languages/` | the plugin |
+| `stats4u.php`, `uninstall.php`, `editor.js`, `freigabe.js` | the plugin |
 | `readme.txt` | the wordpress.org readme (canonical description, changelog) |
+| `translations/` | `.po`/`.mo` for 18 languages – the source for translate.wordpress.org, not part of the plugin zip |
 | `.wordpress-org/` | banner, icon and screenshots for the wordpress.org page (SVN `assets/`), not part of the plugin zip |
 
 ## License

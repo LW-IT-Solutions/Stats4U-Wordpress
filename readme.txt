@@ -4,7 +4,7 @@ Tags: counter, visitor counter, hit counter, statistics, consent
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.5.0
+Stable tag: 1.6.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -38,7 +38,7 @@ where you want the counter to appear.
   visitor came from; on top come time on page, scroll depth and who is online
   right now. You read it all on stats4u.net.
 * **Light.** The script is 12.6 kB over the wire (Brotli, measured on
-  2026-09-24) and cached for a week; each page view adds the counter image
+  2026-09-26) and cached for an hour; each page view adds the counter image
   (about half a kilobyte) and one tiny settings request.
 * **No cookie.** The script sets none and stores nothing on the device.
 * **No account.** Your counter number is all you need.
@@ -51,12 +51,10 @@ A ready-made paragraph for your privacy policy is at
 https://www.stats4u.net/privacy-embed - tailored to your counter number, in
 19 languages.
 
-The plugin interface is available in 19 languages: English, Arabic, Bulgarian,
-Chinese (Simplified), Czech, Dutch, French, German, Indonesian, Italian,
-Japanese, Korean, Polish, Portuguese (Portugal), Romanian, Russian, Spanish,
-Turkish and Ukrainian - the same languages as stats4u.net. A site in another
-variant of one of these languages (for example de_AT, es_MX or pt_BR) gets
-the nearest one.
+The words in the counter come in 19 languages - the same as on stats4u.net.
+The settings page is written in English and ready for translation on
+translate.wordpress.org; WordPress installs the translation for your language
+by itself once it is there.
 
 == External services ==
 
@@ -249,6 +247,16 @@ should not disappear because you tried a plugin and removed it again.
 
 == Changelog ==
 
+= 1.6.0 =
+* Every value is escaped right where it is printed. The counter below or
+  inside your theme's footer is now put in place by an output buffer
+  callback; the plugin no longer prints the page itself.
+* Error messages about a pasted code are escaped.
+* The settings page remembers "wizard" or "custom configuration" only when
+  you choose it on the page itself.
+* Translations now come from translate.wordpress.org instead of files bundled
+  with the plugin.
+
 = 1.5.0 =
 * The counter is now the official Stats4U script (s4u.js) with every setting
   from the creator, instead of the counter image alone. Your statistics get
@@ -315,6 +323,9 @@ should not disappear because you tried a plugin and removed it again.
 * First release: shortcode, footer, dark mode, settings page.
 
 == Upgrade Notice ==
+
+= 1.6.0 =
+Output escaping hardened. The settings page is translated through translate.wordpress.org now; until your language is complete there, it is in English. Your settings are kept.
 
 = 1.5.0 =
 The counter now uses the official Stats4U script: your statistics get the page, the referrer and the time on page of every visit. Your settings are kept.

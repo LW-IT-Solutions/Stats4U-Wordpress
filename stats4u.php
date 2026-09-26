@@ -3,7 +3,7 @@
  * Plugin Name:       Stats4U
  * Plugin URI:        https://github.com/LW-IT-Solutions/Stats4U-Wordpress
  * Description:       Puts a Stats4U visitor counter on your site. Paste the code from stats4u.net, choose where it appears and, if you use a consent banner, let it decide when the counter loads.
- * Version:           1.5.0
+ * Version:           1.6.0
  * Requires at least: 5.8
  * Requires PHP:      7.4
  * Author:            LW IT Solutions Company
@@ -11,7 +11,6 @@
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       stats4u
- * Domain Path:       /languages
  *
  * WAS DIESES PLUGIN TUT UND WAS NICHT
  *
@@ -43,14 +42,26 @@
  *
  * Bis 1.0.0 standen sie auf Deutsch, und WordPress zeigte sie deshalb auf
  * JEDEM Blog auf Deutsch. WordPress uebersetzt nur weg VON der Quellsprache,
- * und die ist per Uebereinkunft Englisch. Die 18 Uebersetzungen liegen in
- * languages/.
+ * und die ist per Uebereinkunft Englisch.
+ *
+ * Uebersetzt wird seit 1.6.0 auf translate.wordpress.org: WordPress holt die
+ * Sprachpakete nach wp-content/languages/plugins/ und laedt sie von selbst,
+ * ohne eigenen Aufruf im Plugin. 1.1.0 bis 1.5.0 brachten 18 Uebersetzungen
+ * mit - das wollte die Pruefung von wordpress.org nicht (26.09.2026). Sie
+ * liegen seitdem ausserhalb des Pakets, als Vorlage fuer den Import dort.
+ * (Den Namen der Ladefunktion nennt hier kein Kommentar mehr: wer nach ihm
+ * sucht, soll im Plugin nichts finden.)
+ *
+ * AUSGABE: jeder Wert wird beim Ausgeben maskiert (esc_html, esc_attr,
+ * esc_url, wp_kses, wp_print_script_tag). Fremdes HTML gibt das Plugin nie
+ * selbst aus - den Zaehler hinter den Seitenfuss setzt der Rueckruf eines
+ * Ausgabepuffers (stats4u_puffer_zurueck).
  */
 
 if (!defined('ABSPATH')) { exit; }
 
 const STATS4U_OPTION  = 'stats4u_einstellungen';
-const STATS4U_VERSION = '1.5.0';
+const STATS4U_VERSION = '1.6.0';
 /** Das offizielle Zaehlerskript - dasselbe, das der Assistent auf stats4u.net ausgibt. */
 const STATS4U_SKRIPT  = 'https://www.stats4u.net/s4u.js';
 /** Wohin das Feedback-Formular schickt - aus dem Browser, nie vom Server. */
@@ -550,38 +561,66 @@ function stats4u_code_geaendert($code, $vorher) {
 }
 
 /**
- * Das fertige Stueck HTML.
+ * Was am Platz des Zaehlers steht.
  *
- * Ohne Consent-Werkzeug das offizielle Skript an seinem Platz; mit einem ein
- * leerer Platzhalter, in den der Einzeiler aus stats4u_aktivierer() das
- * Skript nach der Einwilligung setzt.
- * Gebaut mit wp_get_script_tag() (maskiert jedes Attribut) und esc_attr().
- *
- * $vorschau: nur das Bild, rl=1 (zaehlt nicht) - fuer Einstellungsseite und
- * Editor.
+ * Ohne Consent-Werkzeug das offizielle Skript ('skript' => seine Attribute);
+ * mit einem ein leerer Platzhalter ('platzhalter' => die Angaben), in den der
+ * Einzeiler aus stats4u_aktivierer() das Skript nach der Einwilligung setzt.
+ * Die eine Entscheidung fuer beide Wege: stats4u_html() gibt HTML zurueck,
+ * stats4u_kasten_ausgeben() gibt es aus.
  */
-function stats4u_html($vorschau = false) {
-    $e = stats4u_einstellungen();
-    if ($e['id'] === '') { return ''; }
-
-    if ($vorschau) {
-        return '<span class="stats4u-zaehler"><img src="' . esc_url(stats4u_bildadresse($e, true)) . '" alt="" decoding="async"></span>';
-    }
-
+function stats4u_zaehler_teile($e) {
     $daten = stats4u_skript_daten($e);
     if (stats4u_cmp($e) === null) {
-        return '<span class="stats4u-zaehler">'
-             . trim(wp_get_script_tag(array('src' => STATS4U_SKRIPT, 'async' => true) + $daten)) . '</span>';
+        return array('skript' => array('src' => STATS4U_SKRIPT, 'async' => true) + $daten);
     }
     stats4u_wartet(true);
-    return '<span class="stats4u-zaehler" data-stats4u="' . esc_attr(wp_json_encode($daten)) . '"></span>';
+    return array('platzhalter' => $daten);
 }
 
-/** Der Zaehler in seinem Kasten, fuer die automatischen Plaetze. */
+/**
+ * Das fertige Stueck HTML als Zeichenkette - fuer Kurzcode, Block, the_content
+ * und den Puffer des Seitenfusses, die HTML zurueckgeben statt auszugeben.
+ * Gebaut mit wp_get_script_tag() (maskiert jedes Attribut) und esc_attr().
+ *
+ * Die Vorschau (nur das Bild, rl=1) baut seit 1.5.0 die Einstellungsseite
+ * selbst; der Zweig dafuer hier wurde nie mehr aufgerufen und ist weg.
+ */
+function stats4u_html() {
+    $e = stats4u_einstellungen();
+    if ($e['id'] === '') { return ''; }
+    $t = stats4u_zaehler_teile($e);
+    if (isset($t['skript'])) {
+        return '<span class="stats4u-zaehler">' . trim(wp_get_script_tag($t['skript'])) . '</span>';
+    }
+    return '<span class="stats4u-zaehler" data-stats4u="' . esc_attr(wp_json_encode($t['platzhalter'])) . '"></span>';
+}
+
+/** Der Zaehler in seinem Kasten, als Zeichenkette (siehe stats4u_html()). */
 function stats4u_kasten($klasse, $stil) {
     $html = stats4u_html();
     if ($html === '') { return ''; }
     return '<div class="' . esc_attr($klasse) . '" style="' . esc_attr($stil) . '">' . $html . '</div>';
+}
+
+/**
+ * Derselbe Kasten, direkt ausgegeben - fuer die Plaetze, die in wp_footer
+ * schreiben. Jeder Wert wird erst hier, beim Ausgeben, maskiert:
+ * wp_print_script_tag() maskiert die Attribute des Skripts selbst.
+ */
+function stats4u_kasten_ausgeben($klasse, $stil) {
+    $e = stats4u_einstellungen();
+    if ($e['id'] === '') { return; }
+    $t = stats4u_zaehler_teile($e);
+    echo '<div class="' . esc_attr($klasse) . '" style="' . esc_attr($stil) . '">';
+    if (isset($t['skript'])) {
+        echo '<span class="stats4u-zaehler">';
+        wp_print_script_tag($t['skript']);
+        echo '</span>';
+    } else {
+        echo '<span class="stats4u-zaehler" data-stats4u="' . esc_attr(wp_json_encode($t['platzhalter'])) . '"></span>';
+    }
+    echo '</div>';
 }
 
 /**
@@ -626,15 +665,17 @@ function stats4u_aktivierer() {
     // Danach steht es als window.stats4uAn bereit - fuer Seiten, die ohne
     // Neuaufbau wechseln und dabei neue Platzhalter einsetzen. Erst nach der
     // Einwilligung: vorher gibt es die Funktion dort nicht.
+    // Werte kommen als JSON mit JSON_HEX_TAG/-AMP ins Skript: in ihnen kann
+    // kein <, > oder & stehen - also auch kein </script> und kein <!--.
     $an = "function an(){window.stats4uAn=an;var l=document.querySelectorAll('span[data-stats4u]');for(var i=0;i<l.length;i++){"
         . "var p=l[i],d={};try{d=JSON.parse(p.getAttribute('data-stats4u'))||{};}catch(x){}p.removeAttribute('data-stats4u');"
         . "var s=document.createElement('script');for(var k in d){if(/^data-[a-z]+$/.test(k)){s.setAttribute(k,String(d[k]));}}"
-        . 's.src=' . wp_json_encode(STATS4U_SKRIPT) . ";s.async=true;p.appendChild(s);}}";
+        . 's.src=' . wp_json_encode(STATS4U_SKRIPT, JSON_HEX_TAG | JSON_HEX_AMP) . ";s.async=true;p.appendChild(s);}}";
     $los = "if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',los);}else{los();}";
 
     if ($cmp['weg'] === 'api') {
         $js = '(function(k){' . $an . 'function los(){' . stats4u_api_js($e['consent']) . '}' . $los . '})('
-            . wp_json_encode($wert) . ');';
+            . wp_json_encode($wert, JSON_HEX_TAG | JSON_HEX_AMP) . ');';
         wp_print_inline_script_tag($js, array('id' => 'stats4u-consent'));
         return;
     }
@@ -674,32 +715,28 @@ function stats4u_erlaubt_link() {
 }
 
 /**
- * Die mitgelieferte Uebersetzung laden.
- *
- * NACHGEMESSEN, NICHT ANGENOMMEN: WordPress 7.0 findet von selbst nur, was in
- * wp-content/languages/plugins/ liegt. Ohne diese Zeile blieb die Oberflaeche
- * auf einem deutschen und einem polnischen Blog englisch, obwohl die
- * .mo-Dateien danebenlagen. Auf 'init': seit WordPress 6.7 meldet ein zu
- * frueher Aufruf eine Warnung.
+ * Was die kleinen Bilder der Einstellungsseite enthalten duerfen - fuer
+ * wp_kses() beim Ausgeben (stats4u_platz_bild, stats4u_menue_bild).
+ * Attributnamen klein: wp_kses vergleicht UND schreibt sie so ("viewbox").
+ * Im HTML-Dokument macht der Parser daraus im SVG wieder viewBox - gemessen
+ * am 26.09.2026 in Edge: viewBox.baseVal 0 0 120 80, dieselbe Groesse wie mit
+ * "viewBox" geschrieben.
  */
-add_action('init', 'stats4u_sprache');
-function stats4u_sprache() {
-    // phpcs:ignore PluginCheck.CodeAnalysis.DiscouragedFunctions.load_plugin_textdomainFound -- bundled translations in /languages, see above; a language pack from translate.wordpress.org still wins
-    load_plugin_textdomain('stats4u', false, dirname(plugin_basename(__FILE__)) . '/languages');
-    if (is_textdomain_loaded('stats4u')) { return; }
-
-    // Kein genauer Treffer: dieselbe Sprache aus einem anderen Land nehmen
-    // (de_AT, de_CH -> de_DE, es_MX -> es_ES, pt_BR -> pt_PT, fr_CA -> fr_FR).
-    // Nicht fuer zh: zh_TW und zh_HK schreiben Langzeichen, zh_CN Kurzzeichen.
-    $sprache = (string) strtok(determine_locale(), '_');
-    if ($sprache === '' || $sprache === 'zh') { return; }
-    foreach (glob(__DIR__ . '/languages/stats4u-*.mo') ?: array() as $datei) {
-        if (strtok(substr(basename($datei, '.mo'), 8), '_') === $sprache) {
-            load_textdomain('stats4u', $datei);
-            return;
-        }
-    }
+function stats4u_svg_erlaubt() {
+    $form = array('class' => true, 'x' => true, 'y' => true, 'width' => true, 'height' => true,
+                  'rx' => true, 'cx' => true, 'cy' => true, 'r' => true, 'd' => true);
+    return array(
+        'svg'    => array('class' => true, 'viewbox' => true, 'aria-hidden' => true, 'focusable' => true),
+        'rect'   => $form,
+        'circle' => $form,
+        'path'   => $form,
+    );
 }
+
+// Keine eigene Uebersetzung mehr laden (bis 1.5.0 stats4u_sprache mit den
+// mitgelieferten Dateien): WordPress laedt die Sprachpakete von
+// translate.wordpress.org seit 4.6 von selbst, sobald die Textdomain
+// "stats4u" zum ersten Mal gebraucht wird.
 
 // --- Kurzcode und Block ---------------------------------------------------------
 add_shortcode('stats4u', 'stats4u_kurzcode');
@@ -725,7 +762,7 @@ function stats4u_block() {
         'beschreibung' => __('Your visitor counter from stats4u.net.', 'stats4u'),
         'vorschau'     => $e['id'] !== '' ? stats4u_bildadresse($e, true) : '',
         'leer'         => __('Set up your counter first under Settings > Stats4U.', 'stats4u'),
-    )) . ';', 'before');
+    ), JSON_HEX_TAG | JSON_HEX_AMP) . ';', 'before');
     register_block_type('stats4u/counter', array(
         'api_version'     => 2,
         'editor_script'   => 'stats4u-editor',
@@ -804,8 +841,35 @@ function stats4u_puffer_fuss() {
 function stats4u_puffer_start() {
     global $stats4u_puffer;
     if (!empty($stats4u_puffer) || did_action('wp_footer') || !in_array(stats4u_platz(), array('unter', 'im'), true)) { return; }
-    ob_start();
-    $stats4u_puffer = array('stufe' => ob_get_level(), 'fuss' => null);
+    // Mit Rueckruf: stats4u_puffer_zurueck() gibt PHP die Seite zurueck, das
+    // Plugin selbst gibt sie nicht aus (bis 1.5.0: ob_get_clean() und echo).
+    ob_start('stats4u_puffer_zurueck');
+    $stats4u_puffer = array('stufe' => ob_get_level(), 'fuss' => null, 'zaehler' => '', 'platz' => '');
+}
+
+/**
+ * Der Rueckruf des Puffers. PHP reicht ihm die gepufferte Seite und schickt
+ * weiter, was er zurueckgibt - so kommt der Zaehler hinter (oder in) den
+ * Seitenfuss, ohne dass das Plugin fremdes HTML ausgibt.
+ *
+ * Scharf nur, wenn stats4u_fuss() den Puffer am Ende von wp_footer schliesst
+ * und den Zaehler hinterlegt hat. Leert ihn jemand anders (ein anderes Plugin,
+ * das Ende der Anfrage, ob_flush zwischendurch), kommt die Seite unveraendert
+ * zurueck. Ausgeben darf ein solcher Rueckruf nichts - deshalb baut
+ * stats4u_fuss() den Zaehler vorher.
+ */
+function stats4u_puffer_zurueck($html) {
+    global $stats4u_puffer;
+    if (empty($stats4u_puffer['zaehler'])) { return $html; }
+    $zaehler = $stats4u_puffer['zaehler'];
+    $stats4u_puffer['zaehler'] = '';
+    $spanne = stats4u_fuss_spanne($html, $stats4u_puffer['fuss']);
+    if ($spanne === null) {
+        // Kein Seitenfuss zu erkennen: ans Ende, wie 'ende'.
+        return $html . $zaehler;
+    }
+    $stelle = ($stats4u_puffer['platz'] === 'im') ? $spanne[1] : $spanne[2];
+    return substr($html, 0, $stelle) . $zaehler . substr($html, $stelle);
 }
 
 /**
@@ -894,26 +958,20 @@ function stats4u_fuss() {
 
     // clear: hinter gefloateten Fussbereichen; grid-column: in einem Raster
     // ueber die volle Breite statt in die naechste freie Zelle.
-    $zaehler = stats4u_kasten('stats4u-fuss', 'clear:both;grid-column:1/-1;text-align:'
-             . stats4u_ausrichtung(stats4u_einstellungen()) . ';margin:1em 0');
+    $stil = 'clear:both;grid-column:1/-1;text-align:' . stats4u_ausrichtung(stats4u_einstellungen()) . ';margin:1em 0';
 
     if (!empty($stats4u_puffer) && $stats4u_puffer['stufe'] > 0
         && ob_get_level() === $stats4u_puffer['stufe']) {
-        $fuss_ab = $stats4u_puffer['fuss'];
-        $stats4u_puffer = array('stufe' => -1, 'fuss' => null);
-        $html = (string) ob_get_clean();
-        $spanne = stats4u_fuss_spanne($html, $fuss_ab);
-        if ($spanne !== null) {
-            $stelle = ($platz === 'im') ? $spanne[1] : $spanne[2];
-            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the theme's own, already rendered HTML, handed back unchanged; $zaehler is built with wp_get_script_tag() and esc_attr() in stats4u_html()
-            echo substr($html, 0, $stelle) . $zaehler . substr($html, $stelle);
-            return;
-        }
-        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the theme's own, already rendered HTML, handed back unchanged
-        echo $html;
+        // Der eigene Puffer liegt obenauf: Zaehler hinterlegen, Puffer
+        // schliessen - einsetzen tut ihn stats4u_puffer_zurueck().
+        $stats4u_puffer['zaehler'] = stats4u_kasten('stats4u-fuss', $stil);
+        $stats4u_puffer['platz']   = $platz;
+        $stats4u_puffer['stufe']   = -1;
+        ob_end_flush();
+        return;
     }
-    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built with wp_get_script_tag() and esc_attr() in stats4u_html()
-    echo $zaehler;
+    // 'ende', oder ein fremder Puffer liegt ueber dem eigenen: hier, am Ende.
+    stats4u_kasten_ausgeben('stats4u-fuss', $stil);
 }
 
 // Fest in einer Ecke: ueber allem, unabhaengig vom Theme.
@@ -922,14 +980,15 @@ function stats4u_ecke() {
     $platz = stats4u_platz();
     if ($platz !== 'ecke_r' && $platz !== 'ecke_l') { return; }
     $seite = ($platz === 'ecke_l') ? 'left' : 'right';
-    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built with wp_get_script_tag() and esc_attr() in stats4u_html()
-    echo stats4u_kasten('stats4u-ecke', 'position:fixed;bottom:12px;' . $seite . ':12px;z-index:99990;line-height:0');
+    stats4u_kasten_ausgeben('stats4u-ecke', 'position:fixed;bottom:12px;' . $seite . ':12px;z-index:99990;line-height:0');
 }
 
 // --- Einstellungsseite -------------------------------------------------------------
 add_action('admin_menu', 'stats4u_menue');
 function stats4u_menue() {
-    add_options_page(__('Stats4U', 'stats4u'), __('Stats4U', 'stats4u'), 'manage_options', 'stats4u', 'stats4u_seite');
+    // Den Menuetitel gibt WordPress ungefiltert aus (dort darf HTML stehen,
+    // etwa eine Zahl in einer Blase) - deshalb maskiert.
+    add_options_page(esc_html__('Stats4U', 'stats4u'), esc_html__('Stats4U', 'stats4u'), 'manage_options', 'stats4u', 'stats4u_seite');
 }
 
 add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'stats4u_aktionslinks');
@@ -997,7 +1056,9 @@ function stats4u_saeubern($ein) {
     if (stats4u_code_geaendert($code, $ein['code_vorher'] ?? '')) {
         $l = stats4u_code_lesen($code);
         if ($l['fehler'] !== '') {
-            add_settings_error(STATS4U_OPTION, 'stats4u_code', stats4u_fehlertext($l['fehler']), 'error');
+            // settings_errors() gibt die Meldung ungefiltert aus
+            // (wp-admin/includes/template.php) - maskiert wird deshalb hier.
+            add_settings_error(STATS4U_OPTION, 'stats4u_code', esc_html(stats4u_fehlertext($l['fehler'])), 'error');
         } else {
             $aus = stats4u_mit_code($aus, $l);
         }
@@ -1252,7 +1313,9 @@ function stats4u_admin_skript($seite) {
     wp_enqueue_script('stats4u-admin');
     $daten = array();
     foreach (stats4u_cmps() as $k => $c) { $daten[$k] = array('wert' => $c['wert'], 'hinweis' => stats4u_cmp_hinweis($c)); }
-    wp_add_inline_script('stats4u-admin', 'window.stats4uCmp=' . wp_json_encode($daten) . ';'
+    // Alle Angaben fuer die Skripte als JSON mit JSON_HEX_TAG/-AMP (siehe
+    // stats4u_aktivierer): kein <, > oder & in den Werten.
+    wp_add_inline_script('stats4u-admin', 'window.stats4uCmp=' . wp_json_encode($daten, JSON_HEX_TAG | JSON_HEX_AMP) . ';'
         . "(function(){var d=document,c=d.getElementById('s4u_consent');if(!c){return;}"
         . "var w=d.getElementById('s4u_consent_wert'),h=d.getElementById('s4u_wert_hinweis'),wz=d.getElementById('s4u_wert_zeile'),ez=d.getElementById('s4u_eigen_zeile');"
         . "function neu(){var k=c.value,x=window.stats4uCmp[k];if(w){w.placeholder=x?x.wert:'';}if(h&&x){h.textContent=x.hinweis;}"
@@ -1296,7 +1359,7 @@ function stats4u_admin_skript($seite) {
         'mail'    => __('This email address does not look right.', 'stats4u'),
         'zu_oft'  => __('Too many messages from here - please try again in an hour.', 'stats4u'),
         'netz'    => __('stats4u.net could not be reached. Please try again later.', 'stats4u'),
-    )) . ';'
+    ), JSON_HEX_TAG | JSON_HEX_AMP) . ';'
         . '(function(){var d=document,f=d.getElementById("s4u_fb_form"),T=window.stats4uFb;if(!f||!window.fetch||!window.URLSearchParams){return;}'
         . 'var t=d.getElementById("s4u_fb_text"),m=d.getElementById("s4u_fb_mail"),h=d.getElementById("s4u_fb_seite"),k=d.getElementById("s4u_fb_knopf"),st=d.getElementById("s4u_fb_status");'
         . 'function zeig(x,ok){st.textContent=x;st.className=ok?"s4u-ok":"s4u-fehler";}'
@@ -1320,7 +1383,7 @@ function stats4u_admin_skript($seite) {
         'erst'    => __('Choose or create a counter first.', 'stats4u'),
         /* translators: 1: counter number, 2: design number */
         'zaehler' => __('Counter %1$s, design %2$s', 'stats4u'),
-    )) . ';'
+    ), JSON_HEX_TAG | JSON_HEX_AMP) . ';'
         // Das Code-Feld waechst mit dem Code - ungekuerzt sichtbar, auch auf dem Handy.
         . '(function(){var c=document.getElementById("s4u_code");if(!c){return;}'
         . 'function hoch(){if(!c.offsetParent){return;}c.style.height="auto";c.style.height=(c.scrollHeight+2)+"px";}'
@@ -1370,7 +1433,7 @@ function stats4u_admin_skript($seite) {
         'ok'      => __('New counter number %s - it is used as soon as you save.', 'stats4u'),
         'zu_oft'  => __('Too many new numbers from here - please try again in an hour.', 'stats4u'),
         'netz'    => __('stats4u.net could not be reached. Please try again later.', 'stats4u'),
-    )) . ';'
+    ), JSON_HEX_TAG | JSON_HEX_AMP) . ';'
         . '(function(){var d=document,k=d.getElementById("s4u_neu_nr"),N=window.stats4uNeu;if(!k||!window.fetch||!window.URLSearchParams){if(k){k.hidden=true;}return;}'
         . 'var st=d.getElementById("s4u_neu_status"),c=d.getElementById("s4u_code");'
         . 'k.addEventListener("click",function(){var q=new URLSearchParams();q.append("lang",N.lang);k.disabled=true;st.textContent="";st.className="s4u-status";'
@@ -1426,16 +1489,15 @@ function stats4u_seite() {
     $cmp_jetzt = stats4u_cmp($e);
     $sprache_seite = strtolower(substr(get_locale(), 0, 2));
     $ansicht = stats4u_ansicht();
-    $basis_url = admin_url('options-general.php?page=stats4u');
     ?>
     <div class="wrap s4u-admin s4u-ansicht-<?php echo esc_attr($ansicht); ?>">
         <div class="s4u-kopf">
             <h1><?php echo esc_html__('Stats4U Visitor Counter', 'stats4u'); ?></h1>
             <span class="s4u-version"><?php echo esc_html(STATS4U_VERSION); ?></span>
             <?php if ($ansicht === 'eigen') : ?>
-            <a class="button s4u-kopf-knopf" href="<?php echo esc_url(add_query_arg('ansicht', 'assistent', $basis_url)); ?>"><?php echo esc_html__('Restart wizard', 'stats4u'); ?></a>
+            <a class="button s4u-kopf-knopf" href="<?php echo esc_url(stats4u_ansicht_url('assistent')); ?>"><?php echo esc_html__('Restart wizard', 'stats4u'); ?></a>
             <?php elseif ($ansicht === 'assistent') : ?>
-            <a class="button s4u-kopf-knopf" href="<?php echo esc_url(add_query_arg('ansicht', 'eigen', $basis_url)); ?>"><?php echo esc_html__('Custom configuration', 'stats4u'); ?></a>
+            <a class="button s4u-kopf-knopf" href="<?php echo esc_url(stats4u_ansicht_url('eigen')); ?>"><?php echo esc_html__('Custom configuration', 'stats4u'); ?></a>
             <?php endif; ?>
         </div>
         <?php
@@ -1454,7 +1516,10 @@ function stats4u_seite() {
         ?>
         <hr class="wp-header-end">
 
-        <?php if ($ansicht === 'start') { stats4u_teil_start($basis_url); echo '</div>'; return; } ?>
+        <?php if ($ansicht === 'start') : ?>
+        <?php stats4u_teil_start(); ?>
+    </div>
+        <?php return; endif; ?>
 
         <?php if ($cmp_jetzt && $cmp_jetzt['art'] === 'pflicht' && stats4u_consent_wert($e, $cmp_jetzt) === '') : ?>
         <div class="notice notice-warning"><p><?php
@@ -1497,7 +1562,7 @@ function stats4u_seite() {
             <ol class="s4u-schritte" id="s4u_schritte">
                 <?php foreach (array(1 => __('Counter', 'stats4u'), 2 => __('Appearance', 'stats4u'), 3 => __('Placement', 'stats4u'),
                                      4 => __('Consent', 'stats4u'), 5 => __('Done', 'stats4u')) as $nr => $name) : ?>
-                <li data-schritt="<?php echo (int) $nr; ?>"><span class="s4u-schritt-nr"><?php echo (int) $nr; ?></span><span class="s4u-schritt-name"><?php echo esc_html($name); ?></span></li>
+                <li data-schritt="<?php echo esc_attr($nr); ?>"><span class="s4u-schritt-nr"><?php echo esc_html($nr); ?></span><span class="s4u-schritt-name"><?php echo esc_html($name); ?></span></li>
                 <?php endforeach; ?>
             </ol>
             <?php else : ?>
@@ -1506,26 +1571,27 @@ function stats4u_seite() {
                                      'platz' => __('Placement', 'stats4u'), 'consent' => __('Consent', 'stats4u'),
                                      'feedback' => __('Feedback', 'stats4u')) as $teil => $name) : ?>
                 <a href="#s4u-teil-<?php echo esc_attr($teil); ?>" data-teil="<?php echo esc_attr($teil); ?>"><?php
-                    echo stats4u_menue_bild($teil); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- fixed SVG markup from stats4u_menue_bild(), no input in it
+                    echo wp_kses(stats4u_menue_bild($teil), stats4u_svg_erlaubt());
                     ?><span><?php echo esc_html($name); ?></span></a>
                 <?php endforeach; ?>
             </nav>
             <?php endif; ?>
             <div class="s4u-inhalt">
         <form action="options.php" method="post" id="s4u_form">
+            <?php if ($ansicht === 'assistent') : ?>
             <?php
-            if ($ansicht === 'assistent') {
-                // Wie settings_fields(), aber mit eigenem Rueckweg: nach dem
-                // letzten Schritt geht es in die Einstellungen, nicht wieder an
-                // den Anfang des Assistenten.
-                echo '<input type="hidden" name="option_page" value="stats4u_gruppe">';
-                echo '<input type="hidden" name="action" value="update">';
-                wp_nonce_field('stats4u_gruppe-options', '_wpnonce', false);
-                echo '<input type="hidden" name="_wp_http_referer" value="' . esc_url(add_query_arg('ansicht', 'eigen', $basis_url)) . '">';
-            } else {
-                settings_fields('stats4u_gruppe');
-            }
+            // Wie settings_fields(), aber mit eigenem Rueckweg: nach dem
+            // letzten Schritt geht es in die Einstellungen, nicht wieder an
+            // den Anfang des Assistenten - mit der Nonce der Ansicht, damit
+            // sie sich "Einstellungen" merkt (stats4u_ansicht).
             ?>
+            <input type="hidden" name="option_page" value="stats4u_gruppe">
+            <input type="hidden" name="action" value="update">
+            <?php wp_nonce_field('stats4u_gruppe-options', '_wpnonce', false); ?>
+            <input type="hidden" name="_wp_http_referer" value="<?php echo esc_url(stats4u_ansicht_url('eigen')); ?>">
+            <?php else : ?>
+            <?php settings_fields('stats4u_gruppe'); ?>
+            <?php endif; ?>
 
             <?php
             // --- Der Zaehler: Vorschau auf einer Buehne, Nummer, Knopf zum
@@ -1533,11 +1599,11 @@ function stats4u_seite() {
             // Groesse, Sprache und hell/dunkel beim Umstellen nach (Skript in
             // stats4u_admin_skript); die Bausteine stehen an der Vorschau.
             ?>
-            <section class="s4u-karte s4u-teil<?php echo $neu ? ' s4u-neu' : ''; ?>" id="s4u-teil-zaehler" data-schritt="1">
+            <section class="<?php echo esc_attr('s4u-karte s4u-teil' . ($neu ? ' s4u-neu' : '')); ?>" id="s4u-teil-zaehler" data-schritt="1">
                 <h2><?php echo esc_html__('Your counter', 'stats4u'); ?></h2>
                 <div class="s4u-zaehler">
                     <?php if ($e['id'] !== '') : ?>
-                    <div class="s4u-buehne<?php echo $e['dark'] === '1' ? ' s4u-dunkel' : ''; ?>" id="s4u_buehne">
+                    <div class="<?php echo esc_attr('s4u-buehne' . ($e['dark'] === '1' ? ' s4u-dunkel' : '')); ?>" id="s4u_buehne">
                         <img id="s4u_vorschau" src="<?php echo esc_url(stats4u_bildadresse($e, true)); ?>" alt=""
                              data-basis="<?php echo esc_url('https://www.stats4u.net/c/' . rawurlencode($e['id']) . '-' . rawurlencode($e['style']) . '.png'); ?>"
                              data-params="<?php echo esc_attr(wp_json_encode((object) (is_array($e['params']) ? $e['params'] : array()))); ?>"
@@ -1557,7 +1623,7 @@ function stats4u_seite() {
                         <?php if ($neu && $ansicht !== 'assistent') : ?>
                         <p class="s4u-aktionen"><?php submit_button(null, 'primary', 'submit', false, array('id' => 'stats4u-sofort')); ?></p>
                         <?php endif; ?>
-                        <p class="s4u-aktionen"><a class="button<?php echo $e['id'] === '' ? ' button-primary' : ''; ?>" href="<?php echo esc_url(stats4u_erstellen_url()); ?>"><?php
+                        <p class="s4u-aktionen"><a class="<?php echo esc_attr('button' . ($e['id'] === '' ? ' button-primary' : '')); ?>" href="<?php echo esc_url(stats4u_erstellen_url()); ?>"><?php
                             echo esc_html__('Create a free counter on stats4u.net', 'stats4u'); ?></a>
                             <?php // Eine freie Nummer direkt von stats4u.net (action=wpneu), im Entwurf, der gerade eingestellt ist. ?>
                             <button type="button" class="button" id="s4u_neu_nr"><?php echo esc_html__('Request a new counter number', 'stats4u'); ?></button></p>
@@ -1576,9 +1642,7 @@ function stats4u_seite() {
                 $code_feld = ($zurueck !== '' && !$neu) ? $zurueck : stats4u_code_text($e);
                 ?>
                 <details class="s4u-code" open>
-                    <summary><?php echo $e['id'] === ''
-                        ? esc_html__('Paste your code', 'stats4u')
-                        : esc_html__('Your code', 'stats4u'); ?></summary>
+                    <summary><?php echo esc_html($e['id'] === '' ? __('Paste your code', 'stats4u') : __('Your code', 'stats4u')); ?></summary>
                     <label class="screen-reader-text" for="s4u_code"><?php echo esc_html__('Code from stats4u.net', 'stats4u'); ?></label>
                     <textarea name="<?php echo esc_attr($n); ?>[code]" id="s4u_code" rows="4" class="large-text code" spellcheck="false"
                         placeholder="&lt;script src=&quot;https://www.stats4u.net/s4u.js&quot; data-id=&quot;12345&quot; data-style=&quot;950&quot; async&gt;&lt;/script&gt;"><?php
@@ -1662,7 +1726,7 @@ function stats4u_seite() {
                                 );
                                 foreach ($plaetze as $wert => $beschriftung) : ?>
                                 <label class="s4u-platz">
-                                    <?php echo stats4u_platz_bild($wert); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- fixed SVG markup from stats4u_platz_bild(), no input in it ?>
+                                    <?php echo wp_kses(stats4u_platz_bild($wert), stats4u_svg_erlaubt()); ?>
                                     <span class="s4u-platz-zeile"><input type="radio" name="<?php echo esc_attr($n); ?>[platz]" value="<?php echo esc_attr($wert); ?>" <?php checked($e['platz'], $wert); ?>><span><?php echo esc_html($beschriftung); ?></span></span>
                                 </label>
                                 <?php endforeach; ?></div>
@@ -1681,7 +1745,7 @@ function stats4u_seite() {
                             ?></p>
                         </div>
                     </div>
-                    <div class="s4u-feld" id="s4u_ausrichtung_zeile" <?php echo in_array($e['platz'], array('ecke_r', 'ecke_l', 'aus'), true) ? 'hidden' : ''; ?>>
+                    <div class="s4u-feld" id="s4u_ausrichtung_zeile"<?php if (in_array($e['platz'], array('ecke_r', 'ecke_l', 'aus'), true)) : ?> hidden<?php endif; ?>>
                         <span class="s4u-lab" id="s4u_ausrichtung_lab"><?php echo esc_html__('Alignment', 'stats4u'); ?></span>
                         <div class="s4u-segment" role="radiogroup" aria-labelledby="s4u_ausrichtung_lab"><?php
                             $seiten = array('left' => __('left', 'stats4u'), 'center' => __('center', 'stats4u'), 'right' => __('right', 'stats4u'));
@@ -1738,7 +1802,7 @@ function stats4u_seite() {
                             ?></p>
                         </div>
                     </div>
-                    <div class="s4u-feld" id="s4u_wert_zeile" <?php echo ($e['consent'] === '' || $e['consent'] === 'eigen') ? 'hidden' : ''; ?>>
+                    <div class="s4u-feld" id="s4u_wert_zeile"<?php if ($e['consent'] === '' || $e['consent'] === 'eigen') : ?> hidden<?php endif; ?>>
                         <label class="s4u-lab" for="s4u_consent_wert"><?php echo esc_html__('Category or service', 'stats4u'); ?></label>
                         <div>
                             <input name="<?php echo esc_attr($n); ?>[consent_wert]" id="s4u_consent_wert" type="text" class="regular-text"
@@ -1751,7 +1815,7 @@ function stats4u_seite() {
                             ?></p>
                         </div>
                     </div>
-                    <div class="s4u-feld" id="s4u_eigen_zeile" <?php echo $e['consent'] !== 'eigen' ? 'hidden' : ''; ?>>
+                    <div class="s4u-feld" id="s4u_eigen_zeile"<?php if ($e['consent'] !== 'eigen') : ?> hidden<?php endif; ?>>
                         <label class="s4u-lab" for="s4u_consent_eigen"><?php echo esc_html__('Attributes', 'stats4u'); ?></label>
                         <div>
                             <input name="<?php echo esc_attr($n); ?>[consent_eigen]" id="s4u_consent_eigen" type="text" class="large-text code"
@@ -1857,33 +1921,45 @@ function stats4u_seite() {
  * Assistenten auf stats4u.net (der nur ?page=stats4u kennt) in der Ansicht
  * weitergeht, aus der jemand losgegangen ist. Die Auswahl erscheint, solange
  * dieser Nutzer noch nichts gewaehlt hat.
+ *
+ * Gemerkt wird nur mit gueltiger Nonce - die Links der Seite tragen sie
+ * (stats4u_ansicht_url). Ein fremder Link darf eine Ansicht zeigen, aber
+ * nicht umstellen, was sich dieser Nutzer gemerkt hat. Bis 1.5.0 schrieb
+ * jeder Aufruf mit ?ansicht= in die Nutzerdaten.
  */
 function stats4u_ansicht() {
-    $uid = get_current_user_id();
-    // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only choice of the view; nothing is saved from it except this user's own view preference
+    $uid  = get_current_user_id();
+    $echt = isset($_GET['stats4u_nonce'])
+         && wp_verify_nonce(sanitize_key(wp_unslash($_GET['stats4u_nonce'])), 'stats4u_ansicht');
     $wunsch = isset($_GET['ansicht']) ? sanitize_key(wp_unslash($_GET['ansicht'])) : '';
     if (in_array($wunsch, array('start', 'assistent', 'eigen'), true)) {
-        if ($wunsch !== 'start') { update_user_meta($uid, 'stats4u_ansicht', $wunsch); }
+        if ($echt && $wunsch !== 'start') { update_user_meta($uid, 'stats4u_ansicht', $wunsch); }
         return $wunsch;
     }
     $gemerkt = (string) get_user_meta($uid, 'stats4u_ansicht', true);
     return in_array($gemerkt, array('assistent', 'eigen'), true) ? $gemerkt : 'start';
 }
 
+/** Die Adresse einer Ansicht der Einstellungsseite, mit der Nonce zum Merken. */
+function stats4u_ansicht_url($ansicht) {
+    return add_query_arg(array('ansicht' => $ansicht, 'stats4u_nonce' => wp_create_nonce('stats4u_ansicht')),
+                         admin_url('options-general.php?page=stats4u'));
+}
+
 /** Die Auswahl beim ersten Aufruf: Assistent oder Einstellungen. */
-function stats4u_teil_start($basis_url) {
+function stats4u_teil_start() {
     ?>
     <div class="s4u-start">
         <h2><?php echo esc_html__('How do you want to set up your counter?', 'stats4u'); ?></h2>
         <div class="s4u-wahl">
-            <a class="s4u-wahl-karte s4u-empfohlen" href="<?php echo esc_url(add_query_arg('ansicht', 'assistent', $basis_url)); ?>">
+            <a class="s4u-wahl-karte s4u-empfohlen" href="<?php echo esc_url(stats4u_ansicht_url('assistent')); ?>">
                 <span class="s4u-marke"><?php echo esc_html__('Recommended', 'stats4u'); ?></span>
                 <svg class="s4u-wahl-bild" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><circle cx="10" cy="24" r="6"/><circle cx="24" cy="24" r="6"/><circle cx="38" cy="24" r="6" class="s4u-leer"/><path d="M16 24h2M30 24h2"/></svg>
                 <strong><?php echo esc_html__('Wizard', 'stats4u'); ?></strong>
                 <span class="s4u-wahl-text"><?php echo esc_html__('Step by step, with a live preview - about two minutes.', 'stats4u'); ?></span>
                 <span class="button button-primary"><?php echo esc_html__('Start the wizard', 'stats4u'); ?></span>
             </a>
-            <a class="s4u-wahl-karte" href="<?php echo esc_url(add_query_arg('ansicht', 'eigen', $basis_url)); ?>">
+            <a class="s4u-wahl-karte" href="<?php echo esc_url(stats4u_ansicht_url('eigen')); ?>">
                 <svg class="s4u-wahl-bild" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M8 14h32M8 24h32M8 34h32"/><circle cx="18" cy="14" r="4"/><circle cx="32" cy="24" r="4"/><circle cx="14" cy="34" r="4"/></svg>
                 <strong><?php echo esc_html__('Custom configuration', 'stats4u'); ?></strong>
                 <span class="s4u-wahl-text"><?php echo esc_html__('All settings on one page, sorted in a menu.', 'stats4u'); ?></span>
