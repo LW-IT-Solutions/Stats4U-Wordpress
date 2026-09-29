@@ -35,16 +35,20 @@ stats4u.net" opens the creator, and its last step brings the code back.
   12.6 kB over the wire (Brotli) and cached for an hour; no cookie.
 * **Translations from translate.wordpress.org:** the settings page is written
   in English and fully translatable; WordPress installs the language packs by
-  itself. Ready-made translations for 18 languages – the same as stats4u.net –
-  are in `translations/`, ready to be imported there once the plugin is listed.
+  itself. Translations for 18 languages – the same as stats4u.net – are in
+  `translations/` and were imported on
+  [translate.wordpress.org](https://translate.wordpress.org/projects/wp-plugins/stats4u/),
+  where they wait for review by the language teams.
 
 What the script sends, and when, is listed in [readme.txt](readme.txt),
 section *External services*.
 
 ## Install
 
-* **From wordpress.org** (once listed): *Plugins → Add New*, search for "Stats4U".
-* **By hand:** download `stats4u.zip` from the latest release, then
+* **From wordpress.org:** *Plugins → Add New*, search for "Stats4U" – or see
+  [wordpress.org/plugins/stats4u](https://wordpress.org/plugins/stats4u/).
+* **By hand:** download the zip from
+  [wordpress.org](https://wordpress.org/plugins/stats4u/), then
   *Plugins → Add New → Upload Plugin*.
 
 Requires WordPress 5.8+ and PHP 7.4+. Tested up to WordPress 7.1.
