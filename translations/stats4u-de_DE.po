@@ -133,7 +133,7 @@ msgid "link the counter to its public statistics page on stats4u.net"
 msgstr "den Zähler mit seiner öffentlichen Statistikseite auf stats4u.net verlinken"
 
 msgid "Off by default. Visitors who click the counter then see your statistics."
-msgstr "Ab Werk aus. Wer dann auf den Zähler klickt, sieht Ihre Statistik."
+msgstr "Standardmäßig deaktiviert. Wer dann auf den Zähler klickt, sieht Ihre Statistik."
 
 msgid "Placement"
 msgstr "Platzierung"
@@ -229,7 +229,7 @@ msgid "A paragraph for your privacy policy is at %s."
 msgstr "Ein Absatz für Ihre Datenschutzerklärung steht unter %s."
 
 msgid "Puts a Stats4U visitor counter on your site. Paste the code from stats4u.net, choose where it appears and, if you use a consent banner, let it decide when the counter loads."
-msgstr "Setzt einen Stats4U-Besucherzähler auf Ihre Website. Fügen Sie den Code von stats4u.net ein, wählen Sie, wo er erscheint, und lassen Sie Ihr Cookie-Banner – falls Sie eines nutzen – entscheiden, wann der Zähler lädt."
+msgstr "Setzt einen Stats4U-Besucherzähler auf Ihre Website. Fügen Sie den Code von stats4u.net ein, wählen Sie, wo er erscheint, und lassen Sie Ihr Consent-Banner – falls Sie eines nutzen – entscheiden, wann der Zähler lädt."
 
 msgid "Your code"
 msgstr "Ihr Code"
@@ -267,7 +267,7 @@ msgid "This email address does not look right."
 msgstr "Diese E-Mail-Adresse sieht nicht richtig aus."
 
 msgid "Too many messages from here - please try again in an hour."
-msgstr "Zu viele Nachrichten von hier – bitte versuchen Sie es in einer Stunde noch einmal."
+msgstr "Zu viele Nachrichten von dieser Adresse – bitte versuchen Sie es in einer Stunde noch einmal."
 
 msgid "stats4u.net could not be reached. Please try again later."
 msgstr "stats4u.net war nicht erreichbar. Bitte versuchen Sie es später noch einmal."
@@ -281,10 +281,10 @@ msgid "Privacy policy"
 msgstr "Datenschutzerklärung"
 
 msgid "Free hit counters and visitor stats for websites"
-msgstr "Kostenlose Besucherzähler für die Homepage"
+msgstr "Kostenlose Besucherzähler und Besucherstatistiken für Webseiten"
 
 msgid "Simple, lightweight and secure analytics."
-msgstr "Einfache, leichte und sichere Analytik."
+msgstr "Einfache, schlanke und sichere Webanalyse."
 
 msgid "Restart wizard"
 msgstr "Assistenten neu starten"
@@ -353,4 +353,4 @@ msgid "New counter number %s - it is used as soon as you save."
 msgstr "Neue Zählernummer %s – sie gilt, sobald Sie speichern."
 
 msgid "Too many new numbers from here - please try again in an hour."
-msgstr "Zu viele neue Nummern von hier – bitte versuchen Sie es in einer Stunde noch einmal."
+msgstr "Zu viele neue Nummern von dieser Adresse – bitte versuchen Sie es in einer Stunde noch einmal."
