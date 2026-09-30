@@ -7,7 +7,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de_DE\n"
+"Language: de_DE_formal\n"
 
 msgid "This is a globe or map widget. The plugin shows image counters - pick an image design on stats4u.net."
 msgstr "Das ist ein Globus- oder Karten-Widget. Das Plugin zeigt Bildzähler – wählen Sie auf stats4u.net ein Bild-Design."
