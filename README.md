@@ -35,10 +35,11 @@ stats4u.net" opens the creator, and its last step brings the code back.
   12.6 kB over the wire (Brotli) and cached for an hour; no cookie.
 * **Translations from translate.wordpress.org:** the settings page is written
   in English and fully translatable; WordPress installs the language packs by
-  itself. Translations for 18 languages – the same as stats4u.net – are in
+  itself. Translations for 18 languages – the same as stats4u.net, German in
+  both the informal (`de_DE`) and the formal form (`de_DE_formal`) – are in
   `translations/` and were imported on
-  [translate.wordpress.org](https://translate.wordpress.org/projects/wp-plugins/stats4u/),
-  where they wait for review by the language teams.
+  [translate.wordpress.org](https://translate.wordpress.org/projects/wp-plugins/stats4u/).
+  Polish is approved; the others wait for review by the language teams.
 
 What the script sends, and when, is listed in [readme.txt](readme.txt),
 section *External services*.
@@ -59,7 +60,7 @@ Requires WordPress 5.8+ and PHP 7.4+. Tested up to WordPress 7.1.
 |---|---|
 | `stats4u.php`, `uninstall.php`, `editor.js`, `freigabe.js` | the plugin |
 | `readme.txt` | the wordpress.org readme (canonical description, changelog) |
-| `translations/` | `.po`/`.mo` for 18 languages – the source for translate.wordpress.org, not part of the plugin zip |
+| `translations/` | `.po`/`.mo` for 18 languages (German informal and formal) – the source for translate.wordpress.org, not part of the plugin zip |
 | `.wordpress-org/` | banner, icon and screenshots for the wordpress.org page (SVN `assets/`), not part of the plugin zip |
 
 ## License
