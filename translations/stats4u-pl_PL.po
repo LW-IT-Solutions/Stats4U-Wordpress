@@ -16,7 +16,7 @@ msgid "This is a link to a statistics page with a custom name. Paste the counter
 msgstr "To link do strony statystyk z własną nazwą. Wklej zamiast tego kod licznika – albo sam numer licznika."
 
 msgid "No Stats4U counter found in what you pasted. Paste the code from stats4u.net - or just the counter number."
-msgstr "W wklejonym tekście nie znaleziono licznika Stats4U. Wklej kod ze stats4u.net – albo sam numer licznika."
+msgstr "We wklejonym tekście nie znaleziono licznika Stats4U. Wklej kod ze stats4u.net – albo sam numer licznika."
 
 msgid "Visitor counter"
 msgstr "Licznik odwiedzin"
@@ -130,7 +130,7 @@ msgid "Link"
 msgstr "Link"
 
 msgid "link the counter to its public statistics page on stats4u.net"
-msgstr "linkuj licznik do jego publicznej strony statystyk na stats4u.net"
+msgstr "połącz licznik z jego publiczną stroną statystyk na stats4u.net"
 
 msgid "Off by default. Visitors who click the counter then see your statistics."
 msgstr "Domyślnie wyłączone. Po włączeniu kliknięcie licznika pokazuje odwiedzającym Twoje statystyki."
@@ -199,7 +199,7 @@ msgid "right away - I use no consent tool"
 msgstr "od razu – nie używam narzędzia do zgód"
 
 msgid "Found on this site"
-msgstr "Znalezione na tej witrynie"
+msgstr "Znaleziono w tej witrynie"
 
 msgid "after consent in %s"
 msgstr "po zgodzie w %s"
@@ -267,7 +267,7 @@ msgid "This email address does not look right."
 msgstr "Ten adres e-mail wygląda na niepoprawny."
 
 msgid "Too many messages from here - please try again in an hour."
-msgstr "Zbyt wiele wiadomości stąd – spróbuj ponownie za godzinę."
+msgstr "Zbyt wiele wiadomości z tego adresu – spróbuj ponownie za godzinę."
 
 msgid "stats4u.net could not be reached. Please try again later."
 msgstr "Nie udało się połączyć ze stats4u.net. Spróbuj ponownie później."
@@ -281,7 +281,7 @@ msgid "Privacy policy"
 msgstr "Polityka prywatności"
 
 msgid "Free hit counters and visitor stats for websites"
-msgstr "Darmowe liczniki odwiedzin na stronę WWW"
+msgstr "Darmowe liczniki odwiedzin i statystyki dla stron WWW"
 
 msgid "Simple, lightweight and secure analytics."
 msgstr "Prosta, lekka i bezpieczna analityka."
@@ -353,4 +353,4 @@ msgid "New counter number %s - it is used as soon as you save."
 msgstr "Nowy numer licznika %s – zacznie działać po zapisaniu."
 
 msgid "Too many new numbers from here - please try again in an hour."
-msgstr "Zbyt wiele nowych numerów stąd – spróbuj ponownie za godzinę."
+msgstr "Zbyt wiele nowych numerów z tego adresu – spróbuj ponownie za godzinę."
