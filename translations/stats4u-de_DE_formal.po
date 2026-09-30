@@ -1,4 +1,4 @@
-# Stats4U - de_DE (du)
+# Stats4U - de_DE_formal
 # Liegt beim Plugin, damit die Uebersetzung auch ohne wordpress.org mitkommt.
 msgid ""
 msgstr ""
@@ -10,13 +10,13 @@ msgstr ""
 "Language: de_DE\n"
 
 msgid "This is a globe or map widget. The plugin shows image counters - pick an image design on stats4u.net."
-msgstr "Das ist ein Globus- oder Karten-Widget. Das Plugin zeigt Bildzähler – wähle auf stats4u.net ein Bild-Design."
+msgstr "Das ist ein Globus- oder Karten-Widget. Das Plugin zeigt Bildzähler – wählen Sie auf stats4u.net ein Bild-Design."
 
 msgid "This is a link to a statistics page with a custom name. Paste the counter code instead - or just the counter number."
-msgstr "Das ist ein Link zu einer Statistikseite mit eigenem Namen. Füge stattdessen den Zählercode ein – oder nur die Zählernummer."
+msgstr "Das ist ein Link zu einer Statistikseite mit eigenem Namen. Fügen Sie stattdessen den Zählercode ein – oder nur die Zählernummer."
 
 msgid "No Stats4U counter found in what you pasted. Paste the code from stats4u.net - or just the counter number."
-msgstr "Im eingefügten Text wurde kein Stats4U-Zähler gefunden. Füge den Code von stats4u.net ein – oder nur die Zählernummer."
+msgstr "Im eingefügten Text wurde kein Stats4U-Zähler gefunden. Fügen Sie den Code von stats4u.net ein – oder nur die Zählernummer."
 
 msgid "Visitor counter"
 msgstr "Besucherzähler"
@@ -25,10 +25,10 @@ msgid "Stats4U counter"
 msgstr "Stats4U-Zähler"
 
 msgid "Your visitor counter from stats4u.net."
-msgstr "Dein Besucherzähler von stats4u.net."
+msgstr "Ihr Besucherzähler von stats4u.net."
 
 msgid "Set up your counter first under Settings > Stats4U."
-msgstr "Richte deinen Zähler zuerst unter Einstellungen > Stats4U ein."
+msgstr "Richten Sie Ihren Zähler zuerst unter Einstellungen > Stats4U ein."
 
 msgid "Stats4U"
 msgstr "Stats4U"
@@ -37,13 +37,13 @@ msgid "Settings"
 msgstr "Einstellungen"
 
 msgid "Your consent tool decides per service: add a service named \"%s\" there, in its statistics category - or enter the name you already use."
-msgstr "Dein Consent-Tool entscheidet je Dienst: Lege dort einen Dienst namens „%s“ in der Kategorie für Statistik an – oder trage den Namen ein, den du schon verwendest."
+msgstr "Ihr Consent-Tool entscheidet je Dienst: Legen Sie dort einen Dienst namens „%s“ in der Kategorie für Statistik an – oder tragen Sie den Namen ein, den Sie schon verwenden."
 
 msgid "Enter the ID your consent tool uses for statistics - its settings show it. Until then the counter does not load."
-msgstr "Trage die ID ein, die dein Consent-Tool für Statistik verwendet – sie steht in dessen Einstellungen. Bis dahin lädt der Zähler nicht."
+msgstr "Tragen Sie die ID ein, die Ihr Consent-Tool für Statistik verwendet – sie steht in dessen Einstellungen. Bis dahin lädt der Zähler nicht."
 
 msgid "Uses the category \"%s\" of your consent tool. Change it only if yours is called differently."
-msgstr "Verwendet die Kategorie „%s“ deines Consent-Tools. Ändere sie nur, wenn sie bei dir anders heißt."
+msgstr "Verwendet die Kategorie „%s“ Ihres Consent-Tools. Ändern Sie sie nur, wenn sie bei Ihnen anders heißt."
 
 msgid "Stats4U Visitor Counter"
 msgstr "Stats4U Besucherzähler"
@@ -52,13 +52,13 @@ msgid "%s needs the ID it uses for statistics (see \"Category or service\" below
 msgstr "%s braucht die ID, die es für Statistik verwendet (siehe „Kategorie oder Dienst“ unten). Solange sie fehlt, lädt der Zähler nicht."
 
 msgid "Received from stats4u.net: counter %1$s, design %2$s. Click \"Save Changes\" to use it."
-msgstr "Von stats4u.net übernommen: Zähler %1$s, Design %2$s. Klicke auf „Änderungen speichern“, um ihn zu verwenden."
+msgstr "Von stats4u.net übernommen: Zähler %1$s, Design %2$s. Klicken Sie auf „Änderungen speichern“, um ihn zu verwenden."
 
 msgid "Paste the code you got on stats4u.net below - or create a free counter there first. No sign-up."
-msgstr "Füge unten den Code ein, den du auf stats4u.net erhalten hast – oder erstelle dort zuerst einen kostenlosen Zähler. Ohne Anmeldung."
+msgstr "Fügen Sie unten den Code ein, den Sie auf stats4u.net erhalten haben – oder erstellen Sie dort zuerst einen kostenlosen Zähler. Ohne Anmeldung."
 
 msgid "Your counter"
-msgstr "Dein Zähler"
+msgstr "Ihr Zähler"
 
 msgid "Counter"
 msgstr "Zähler"
@@ -79,7 +79,7 @@ msgid "Use a different counter or code"
 msgstr "Anderen Zähler oder Code verwenden"
 
 msgid "Paste the HTML, BBCode or image address from stats4u.net - or just the counter number. Design, colors, size and everything else you set there come along."
-msgstr "Füge HTML, BBCode oder die Bildadresse von stats4u.net ein – oder nur die Zählernummer. Design, Farben, Größe und alles andere, was du dort eingestellt hast, werden übernommen."
+msgstr "Fügen Sie HTML, BBCode oder die Bildadresse von stats4u.net ein – oder nur die Zählernummer. Design, Farben, Größe und alles andere, was Sie dort eingestellt haben, werden übernommen."
 
 msgid "Create a free counter on stats4u.net"
 msgstr "Kostenlosen Zähler auf stats4u.net erstellen"
@@ -133,7 +133,7 @@ msgid "link the counter to its public statistics page on stats4u.net"
 msgstr "den Zähler mit seiner öffentlichen Statistikseite auf stats4u.net verlinken"
 
 msgid "Off by default. Visitors who click the counter then see your statistics."
-msgstr "Standardmäßig deaktiviert. Wer dann auf den Zähler klickt, sieht deine Statistik."
+msgstr "Standardmäßig deaktiviert. Wer dann auf den Zähler klickt, sieht Ihre Statistik."
 
 msgid "Placement"
 msgstr "Platzierung"
@@ -142,10 +142,10 @@ msgid "Where to show it"
 msgstr "Wo anzeigen"
 
 msgid "below your theme's footer (recommended)"
-msgstr "unter dem Fußbereich deines Themes (empfohlen)"
+msgstr "unter dem Fußbereich Ihres Themes (empfohlen)"
 
 msgid "inside your theme's footer, at its end"
-msgstr "im Fußbereich deines Themes, an dessen Ende"
+msgstr "im Fußbereich Ihres Themes, an dessen Ende"
 
 msgid "at the very end of the page"
 msgstr "ganz am Ende der Seite"
@@ -163,7 +163,7 @@ msgid "nowhere automatically - I place it myself"
 msgstr "nirgends automatisch – ich platziere ihn selbst"
 
 msgid "To place it yourself, use the block \"Stats4U counter\" or the shortcode [stats4u] - for example in a footer widget."
-msgstr "Zum Selbst-Platzieren nutze den Block „Stats4U-Zähler“ oder den Shortcode [stats4u] – zum Beispiel in einem Widget im Fußbereich."
+msgstr "Zum Selbst-Platzieren nutzen Sie den Block „Stats4U-Zähler“ oder den Shortcode [stats4u] – zum Beispiel in einem Widget im Fußbereich."
 
 msgid "Alignment"
 msgstr "Ausrichtung"
@@ -211,28 +211,28 @@ msgid "after consent in another tool - enter its attributes"
 msgstr "nach Einwilligung in einem anderen Tool – Attribute eintragen"
 
 msgid "With a consent tool, visitors who decline are not counted - your numbers will be lower."
-msgstr "Mit einem Consent-Tool werden Besucher, die ablehnen, nicht gezählt – deine Zahlen fallen niedriger aus."
+msgstr "Mit einem Consent-Tool werden Besucher, die ablehnen, nicht gezählt – Ihre Zahlen fallen niedriger aus."
 
 msgid "Category or service"
 msgstr "Kategorie oder Dienst"
 
 msgid "Leave empty for the usual one of your tool. If your tool works with named services, enter the name you gave Stats4U there."
-msgstr "Leer lassen für die übliche Kategorie deines Tools. Arbeitet dein Tool mit benannten Diensten, trage den Namen ein, den du Stats4U dort gegeben hast."
+msgstr "Leer lassen für die übliche Kategorie Ihres Tools. Arbeitet Ihr Tool mit benannten Diensten, tragen Sie den Namen ein, den Sie Stats4U dort gegeben haben."
 
 msgid "Attributes"
 msgstr "Attribute"
 
 msgid "What your consent tool wants on a script it should only run after consent. Allowed: type, class and data-* attributes."
-msgstr "Was dein Consent-Tool an einem Skript erwartet, das erst nach Einwilligung laufen soll. Erlaubt: type, class und data-*-Attribute."
+msgstr "Was Ihr Consent-Tool an einem Skript erwartet, das erst nach Einwilligung laufen soll. Erlaubt: type, class und data-*-Attribute."
 
 msgid "A paragraph for your privacy policy is at %s."
-msgstr "Ein Absatz für deine Datenschutzerklärung steht unter %s."
+msgstr "Ein Absatz für Ihre Datenschutzerklärung steht unter %s."
 
 msgid "Puts a Stats4U visitor counter on your site. Paste the code from stats4u.net, choose where it appears and, if you use a consent banner, let it decide when the counter loads."
-msgstr "Setzt einen Stats4U-Besucherzähler auf deine Website. Füge den Code von stats4u.net ein, wähle, wo er erscheint, und lass dein Consent-Banner – falls du eines nutzt – entscheiden, wann der Zähler lädt."
+msgstr "Setzt einen Stats4U-Besucherzähler auf Ihre Website. Fügen Sie den Code von stats4u.net ein, wählen Sie, wo er erscheint, und lassen Sie Ihr Consent-Banner – falls Sie eines nutzen – entscheiden, wann der Zähler lädt."
 
 msgid "Your code"
-msgstr "Dein Code"
+msgstr "Ihr Code"
 
 #. translators: %s: a line of PHP code
 #, php-format
@@ -243,10 +243,10 @@ msgid "Feedback"
 msgstr "Feedback"
 
 msgid "Missing something, found a bug, or have an idea? Write to us - every message is read."
-msgstr "Fehlt dir etwas, hast du einen Fehler gefunden oder eine Idee? Schreib uns – wir lesen jede Nachricht."
+msgstr "Fehlt Ihnen etwas, haben Sie einen Fehler gefunden oder eine Idee? Schreiben Sie uns – wir lesen jede Nachricht."
 
 msgid "Your message"
-msgstr "Deine Nachricht"
+msgstr "Ihre Nachricht"
 
 msgid "Email for an answer (optional)"
 msgstr "E-Mail für eine Antwort (freiwillig)"
@@ -258,24 +258,24 @@ msgid "Send feedback"
 msgstr "Feedback senden"
 
 msgid "Thank you - your message has arrived."
-msgstr "Danke – deine Nachricht ist angekommen."
+msgstr "Danke – Ihre Nachricht ist angekommen."
 
 msgid "Please write a little more - at least a few words."
-msgstr "Bitte schreib etwas mehr – wenigstens ein paar Wörter."
+msgstr "Bitte schreiben Sie etwas mehr – wenigstens ein paar Wörter."
 
 msgid "This email address does not look right."
 msgstr "Diese E-Mail-Adresse sieht nicht richtig aus."
 
 msgid "Too many messages from here - please try again in an hour."
-msgstr "Zu viele Nachrichten von dieser Adresse – bitte versuche es in einer Stunde noch einmal."
+msgstr "Zu viele Nachrichten von dieser Adresse – bitte versuchen Sie es in einer Stunde noch einmal."
 
 msgid "stats4u.net could not be reached. Please try again later."
-msgstr "stats4u.net war nicht erreichbar. Bitte versuche es später noch einmal."
+msgstr "stats4u.net war nicht erreichbar. Bitte versuchen Sie es später noch einmal."
 
 #. translators: %s: link "Privacy policy" to stats4u.net
 #, php-format
 msgid "Your browser sends the message to stats4u.net, together with the plugin version and the language of this page. %s"
-msgstr "Dein Browser schickt die Nachricht an stats4u.net, zusammen mit der Plugin-Version und der Sprache dieser Seite. %s"
+msgstr "Ihr Browser schickt die Nachricht an stats4u.net, zusammen mit der Plugin-Version und der Sprache dieser Seite. %s"
 
 msgid "Privacy policy"
 msgstr "Datenschutzerklärung"
@@ -316,10 +316,10 @@ msgid "Save and finish"
 msgstr "Speichern und fertig"
 
 msgid "Save to put the counter on your site. You can change everything later - or run this wizard again."
-msgstr "Speichere, damit der Zähler auf deiner Website erscheint. Du kannst später alles ändern – oder diesen Assistenten noch einmal durchlaufen."
+msgstr "Speichern Sie, damit der Zähler auf Ihrer Website erscheint. Sie können später alles ändern – oder diesen Assistenten noch einmal durchlaufen."
 
 msgid "How do you want to set up your counter?"
-msgstr "Wie möchtest du deinen Zähler einrichten?"
+msgstr "Wie möchten Sie Ihren Zähler einrichten?"
 
 msgid "Recommended"
 msgstr "Empfohlen"
@@ -345,12 +345,12 @@ msgid "Step %1$d of %2$d"
 msgstr "Schritt %1$d von %2$d"
 
 msgid "Choose or create a counter first."
-msgstr "Wähle oder erstelle zuerst einen Zähler."
+msgstr "Wählen oder erstellen Sie zuerst einen Zähler."
 
 #. translators: %s: the new counter number
 #, php-format
 msgid "New counter number %s - it is used as soon as you save."
-msgstr "Neue Zählernummer %s – sie gilt, sobald du speicherst."
+msgstr "Neue Zählernummer %s – sie gilt, sobald Sie speichern."
 
 msgid "Too many new numbers from here - please try again in an hour."
-msgstr "Zu viele neue Nummern von dieser Adresse – bitte versuche es in einer Stunde noch einmal."
+msgstr "Zu viele neue Nummern von dieser Adresse – bitte versuchen Sie es in einer Stunde noch einmal."
