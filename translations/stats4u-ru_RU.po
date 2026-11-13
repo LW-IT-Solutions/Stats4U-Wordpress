@@ -354,3 +354,51 @@ msgstr "Новый номер счётчика %s – он начнёт дейс
 
 msgid "Too many new numbers from here - please try again in an hour."
 msgstr "Слишком много новых номеров отсюда – попробуйте снова через час."
+
+#: shop.php
+msgid "Stats4U shop"
+msgstr "Магазин Stats4U"
+
+#: shop.php
+msgid "Enable shop reporting in your Stats4U owner link, create a shop secret and enter it here. Only confirmed payments and refunds are sent, with currency and an anonymous order reference. No customer details are sent."
+msgstr "Включите отправку отчётов магазина по своей ссылке владельца Stats4U, создайте секретный ключ магазина и введите его здесь. Передаются только подтверждённые платежи и возвраты вместе с валютой и анонимным идентификатором заказа. Сведения о клиентах не передаются."
+
+#: shop.php
+msgid "Check the counter number and shop secret."
+msgstr "Проверьте номер счётчика и секретный ключ магазина."
+
+#: shop.php
+msgid "WooCommerce is required for shop reporting."
+msgstr "Для отправки отчётов магазина требуется WooCommerce."
+
+#: shop.php
+msgid "A shop report failed. Stats4U retries automatically; check your settings and the server connection."
+msgstr "Не удалось отправить отчёт магазина. Stats4U автоматически повторяет попытки; проверьте настройки и соединение с сервером."
+
+#: shop.php
+msgid "Enable shop reporting"
+msgstr "Включить отправку отчётов магазина"
+
+#: shop.php
+msgid "Counter number"
+msgstr "Номер счётчика"
+
+#: shop.php
+msgid "Shop secret"
+msgstr "Секретный ключ магазина"
+
+#: shop.php
+msgid "Leave the secret blank to keep the existing one."
+msgstr "Оставьте поле секретного ключа пустым, чтобы сохранить существующий ключ."
+
+#: shop.php
+msgid "Integration guide"
+msgstr "Руководство по интеграции"
+
+#: shop.php
+msgid "Stats4U: shop reporting needs attention."
+msgstr "Stats4U: отправка отчётов магазина требует внимания."
+
+#: shop.php
+msgid "Retry failed reports"
+msgstr "Повторить отправку неотправленных отчётов"

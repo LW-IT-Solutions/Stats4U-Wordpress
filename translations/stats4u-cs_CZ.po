@@ -354,3 +354,51 @@ msgstr "Nové číslo počítadla %s – použije se, jakmile uložíte."
 
 msgid "Too many new numbers from here - please try again in an hour."
 msgstr "Odsud bylo vyžádáno příliš mnoho nových čísel – zkuste to prosím znovu za hodinu."
+
+#: shop.php
+msgid "Stats4U shop"
+msgstr "Obchod Stats4U"
+
+#: shop.php
+msgid "Enable shop reporting in your Stats4U owner link, create a shop secret and enter it here. Only confirmed payments and refunds are sent, with currency and an anonymous order reference. No customer details are sent."
+msgstr "Zapněte odesílání přehledů obchodu přes svůj odkaz vlastníka Stats4U, vytvořte tajný klíč obchodu a zadejte ho sem. Odesílají se pouze potvrzené platby a vrácení peněz, spolu s měnou a anonymní referencí objednávky. Údaje o zákaznících se neodesílají."
+
+#: shop.php
+msgid "Check the counter number and shop secret."
+msgstr "Zkontrolujte číslo počítadla a tajný klíč obchodu."
+
+#: shop.php
+msgid "WooCommerce is required for shop reporting."
+msgstr "K odesílání přehledů obchodu je potřeba WooCommerce."
+
+#: shop.php
+msgid "A shop report failed. Stats4U retries automatically; check your settings and the server connection."
+msgstr "Odeslání přehledu obchodu se nezdařilo. Stats4U to automaticky zkouší znovu; zkontrolujte nastavení a připojení k serveru."
+
+#: shop.php
+msgid "Enable shop reporting"
+msgstr "Zapnout odesílání přehledů obchodu"
+
+#: shop.php
+msgid "Counter number"
+msgstr "Číslo počítadla"
+
+#: shop.php
+msgid "Shop secret"
+msgstr "Tajný klíč obchodu"
+
+#: shop.php
+msgid "Leave the secret blank to keep the existing one."
+msgstr "Pole tajného klíče nechte prázdné, pokud chcete zachovat stávající klíč."
+
+#: shop.php
+msgid "Integration guide"
+msgstr "Průvodce integrací"
+
+#: shop.php
+msgid "Stats4U: shop reporting needs attention."
+msgstr "Stats4U: odesílání přehledů obchodu vyžaduje pozornost."
+
+#: shop.php
+msgid "Retry failed reports"
+msgstr "Znovu odeslat neúspěšné přehledy"

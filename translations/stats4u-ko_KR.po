@@ -354,3 +354,51 @@ msgstr "새 카운터 번호 %s – 저장하면 바로 사용됩니다."
 
 msgid "Too many new numbers from here - please try again in an hour."
 msgstr "이곳에서 새 번호를 너무 많이 요청했습니다. 1시간 후에 다시 시도해 주세요."
+
+#: shop.php
+msgid "Stats4U shop"
+msgstr "Stats4U 쇼핑몰"
+
+#: shop.php
+msgid "Enable shop reporting in your Stats4U owner link, create a shop secret and enter it here. Only confirmed payments and refunds are sent, with currency and an anonymous order reference. No customer details are sent."
+msgstr "Stats4U 소유자 링크에서 쇼핑몰 보고를 활성화하고, 쇼핑몰 비밀 키를 생성하여 여기에 입력하세요. 확인된 결제와 환불만 통화 및 익명 주문 참조 번호와 함께 전송됩니다. 고객 세부 정보는 전송하지 않습니다."
+
+#: shop.php
+msgid "Check the counter number and shop secret."
+msgstr "카운터 번호와 쇼핑몰 비밀 키를 확인하세요."
+
+#: shop.php
+msgid "WooCommerce is required for shop reporting."
+msgstr "쇼핑몰 보고에는 WooCommerce가 필요합니다."
+
+#: shop.php
+msgid "A shop report failed. Stats4U retries automatically; check your settings and the server connection."
+msgstr "쇼핑몰 보고서 전송에 실패했습니다. Stats4U가 자동으로 재시도합니다. 설정과 서버 연결을 확인하세요."
+
+#: shop.php
+msgid "Enable shop reporting"
+msgstr "쇼핑몰 보고 활성화"
+
+#: shop.php
+msgid "Counter number"
+msgstr "카운터 번호"
+
+#: shop.php
+msgid "Shop secret"
+msgstr "쇼핑몰 비밀 키"
+
+#: shop.php
+msgid "Leave the secret blank to keep the existing one."
+msgstr "기존 비밀 키를 유지하려면 비밀 키 입력란을 비워 두세요."
+
+#: shop.php
+msgid "Integration guide"
+msgstr "연동 안내"
+
+#: shop.php
+msgid "Stats4U: shop reporting needs attention."
+msgstr "Stats4U: 쇼핑몰 보고에 조치가 필요합니다."
+
+#: shop.php
+msgid "Retry failed reports"
+msgstr "실패한 보고서 전송 재시도"

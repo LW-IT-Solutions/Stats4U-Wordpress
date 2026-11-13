@@ -354,3 +354,51 @@ msgstr "新的计数器编号 %s——保存后立即生效。"
 
 msgid "Too many new numbers from here - please try again in an hour."
 msgstr "从这里申请的新编号太多了——请一小时后再试。"
+
+#: shop.php
+msgid "Stats4U shop"
+msgstr "Stats4U 商店"
+
+#: shop.php
+msgid "Enable shop reporting in your Stats4U owner link, create a shop secret and enter it here. Only confirmed payments and refunds are sent, with currency and an anonymous order reference. No customer details are sent."
+msgstr "通过您的 Stats4U 所有者链接启用商店报告，创建商店密钥并在此输入。仅发送已确认的付款和退款，以及货币和匿名订单参考编号。不会发送客户详情。"
+
+#: shop.php
+msgid "Check the counter number and shop secret."
+msgstr "请检查计数器编号和商店密钥。"
+
+#: shop.php
+msgid "WooCommerce is required for shop reporting."
+msgstr "商店报告功能需要 WooCommerce。"
+
+#: shop.php
+msgid "A shop report failed. Stats4U retries automatically; check your settings and the server connection."
+msgstr "一份商店报告发送失败。Stats4U 会自动重试；请检查您的设置和服务器连接。"
+
+#: shop.php
+msgid "Enable shop reporting"
+msgstr "启用商店报告"
+
+#: shop.php
+msgid "Counter number"
+msgstr "计数器编号"
+
+#: shop.php
+msgid "Shop secret"
+msgstr "商店密钥"
+
+#: shop.php
+msgid "Leave the secret blank to keep the existing one."
+msgstr "将密钥留空以保留现有密钥。"
+
+#: shop.php
+msgid "Integration guide"
+msgstr "集成指南"
+
+#: shop.php
+msgid "Stats4U: shop reporting needs attention."
+msgstr "Stats4U：商店报告需要处理。"
+
+#: shop.php
+msgid "Retry failed reports"
+msgstr "重试失败的报告"

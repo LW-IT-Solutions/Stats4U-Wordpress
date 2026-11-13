@@ -354,3 +354,51 @@ msgstr "Yeni sayaç numarası %s – kaydettiğiniz anda kullanılır."
 
 msgid "Too many new numbers from here - please try again in an hour."
 msgstr "Buradan çok fazla yeni numara istendi – lütfen bir saat sonra tekrar deneyin."
+
+#: shop.php
+msgid "Stats4U shop"
+msgstr "Stats4U mağazası"
+
+#: shop.php
+msgid "Enable shop reporting in your Stats4U owner link, create a shop secret and enter it here. Only confirmed payments and refunds are sent, with currency and an anonymous order reference. No customer details are sent."
+msgstr "Stats4U sahip bağlantınız üzerinden mağaza raporlamasını etkinleştirin, bir mağaza gizli anahtarı oluşturun ve buraya girin. Yalnızca doğrulanmış ödemeler ve iadeler, para birimi ve anonim bir sipariş referansıyla birlikte gönderilir. Müşteri ayrıntıları gönderilmez."
+
+#: shop.php
+msgid "Check the counter number and shop secret."
+msgstr "Sayaç numarasını ve mağaza gizli anahtarını kontrol edin."
+
+#: shop.php
+msgid "WooCommerce is required for shop reporting."
+msgstr "Mağaza raporlaması için WooCommerce gereklidir."
+
+#: shop.php
+msgid "A shop report failed. Stats4U retries automatically; check your settings and the server connection."
+msgstr "Bir mağaza raporu gönderilemedi. Stats4U otomatik olarak yeniden dener; ayarlarınızı ve sunucu bağlantısını kontrol edin."
+
+#: shop.php
+msgid "Enable shop reporting"
+msgstr "Mağaza raporlamasını etkinleştir"
+
+#: shop.php
+msgid "Counter number"
+msgstr "Sayaç numarası"
+
+#: shop.php
+msgid "Shop secret"
+msgstr "Mağaza gizli anahtarı"
+
+#: shop.php
+msgid "Leave the secret blank to keep the existing one."
+msgstr "Mevcut gizli anahtarı korumak için gizli anahtar alanını boş bırakın."
+
+#: shop.php
+msgid "Integration guide"
+msgstr "Entegrasyon kılavuzu"
+
+#: shop.php
+msgid "Stats4U: shop reporting needs attention."
+msgstr "Stats4U: mağaza raporlamasıyla ilgilenmeniz gerekiyor."
+
+#: shop.php
+msgid "Retry failed reports"
+msgstr "Başarısız raporları yeniden gönder"

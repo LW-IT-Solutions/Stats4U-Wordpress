@@ -354,3 +354,51 @@ msgstr "Număr nou de contor %s – se folosește imediat ce salvați."
 
 msgid "Too many new numbers from here - please try again in an hour."
 msgstr "Prea multe numere noi de aici – încercați din nou peste o oră."
+
+#: shop.php
+msgid "Stats4U shop"
+msgstr "Magazin Stats4U"
+
+#: shop.php
+msgid "Enable shop reporting in your Stats4U owner link, create a shop secret and enter it here. Only confirmed payments and refunds are sent, with currency and an anonymous order reference. No customer details are sent."
+msgstr "Activează raportarea magazinului prin linkul tău de proprietar Stats4U, creează o cheie secretă pentru magazin și introdu-o aici. Sunt trimise doar plățile și rambursările confirmate, împreună cu moneda și o referință anonimă a comenzii. Nu sunt trimise detalii despre clienți."
+
+#: shop.php
+msgid "Check the counter number and shop secret."
+msgstr "Verifică numărul contorului și cheia secretă a magazinului."
+
+#: shop.php
+msgid "WooCommerce is required for shop reporting."
+msgstr "WooCommerce este necesar pentru raportarea magazinului."
+
+#: shop.php
+msgid "A shop report failed. Stats4U retries automatically; check your settings and the server connection."
+msgstr "Trimiterea unui raport al magazinului a eșuat. Stats4U reîncearcă automat; verifică setările și conexiunea la server."
+
+#: shop.php
+msgid "Enable shop reporting"
+msgstr "Activează raportarea magazinului"
+
+#: shop.php
+msgid "Counter number"
+msgstr "Numărul contorului"
+
+#: shop.php
+msgid "Shop secret"
+msgstr "Cheia secretă a magazinului"
+
+#: shop.php
+msgid "Leave the secret blank to keep the existing one."
+msgstr "Lasă câmpul cheii secrete necompletat pentru a o păstra pe cea existentă."
+
+#: shop.php
+msgid "Integration guide"
+msgstr "Ghid de integrare"
+
+#: shop.php
+msgid "Stats4U: shop reporting needs attention."
+msgstr "Stats4U: raportarea magazinului necesită atenție."
+
+#: shop.php
+msgid "Retry failed reports"
+msgstr "Reîncearcă trimiterea rapoartelor eșuate"

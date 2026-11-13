@@ -354,3 +354,51 @@ msgstr "Nuovo numero di contatore %s: verrà usato appena salvi."
 
 msgid "Too many new numbers from here - please try again in an hour."
 msgstr "Troppi nuovi numeri da qui: riprova tra un’ora."
+
+#: shop.php
+msgid "Stats4U shop"
+msgstr "Negozio Stats4U"
+
+#: shop.php
+msgid "Enable shop reporting in your Stats4U owner link, create a shop secret and enter it here. Only confirmed payments and refunds are sent, with currency and an anonymous order reference. No customer details are sent."
+msgstr "Attiva i rapporti del negozio tramite il tuo link del proprietario Stats4U, crea un segreto del negozio e inseriscilo qui. Vengono inviati solo pagamenti e rimborsi confermati, con la valuta e un riferimento d’ordine anonimo. Non vengono inviati dati dei clienti."
+
+#: shop.php
+msgid "Check the counter number and shop secret."
+msgstr "Controlla il numero del contatore e il segreto del negozio."
+
+#: shop.php
+msgid "WooCommerce is required for shop reporting."
+msgstr "Per i rapporti del negozio è necessario WooCommerce."
+
+#: shop.php
+msgid "A shop report failed. Stats4U retries automatically; check your settings and the server connection."
+msgstr "L’invio di un rapporto del negozio non è riuscito. Stats4U riprova automaticamente; controlla le impostazioni e il collegamento al server."
+
+#: shop.php
+msgid "Enable shop reporting"
+msgstr "Attiva i rapporti del negozio"
+
+#: shop.php
+msgid "Counter number"
+msgstr "Numero del contatore"
+
+#: shop.php
+msgid "Shop secret"
+msgstr "Segreto del negozio"
+
+#: shop.php
+msgid "Leave the secret blank to keep the existing one."
+msgstr "Lascia vuoto il campo del segreto per mantenere quello esistente."
+
+#: shop.php
+msgid "Integration guide"
+msgstr "Guida all’integrazione"
+
+#: shop.php
+msgid "Stats4U: shop reporting needs attention."
+msgstr "Stats4U: i rapporti del negozio richiedono attenzione."
+
+#: shop.php
+msgid "Retry failed reports"
+msgstr "Riprova a inviare i rapporti non riusciti"

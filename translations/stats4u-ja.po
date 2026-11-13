@@ -354,3 +354,51 @@ msgstr "新しいカウンター番号 %s ― 保存するとすぐに使われ�
 
 msgid "Too many new numbers from here - please try again in an hour."
 msgstr "ここからの新しい番号のリクエストが多すぎます。1時間後にもう一度お試しください。"
+
+#: shop.php
+msgid "Stats4U shop"
+msgstr "Stats4U ショップ"
+
+#: shop.php
+msgid "Enable shop reporting in your Stats4U owner link, create a shop secret and enter it here. Only confirmed payments and refunds are sent, with currency and an anonymous order reference. No customer details are sent."
+msgstr "Stats4U の所有者リンクからショップのレポート送信を有効にし、ショップのシークレットを作成してここに入力してください。確認済みの支払いと返金のみが、通貨および匿名の注文参照番号とともに送信されます。顧客の詳細情報は送信されません。"
+
+#: shop.php
+msgid "Check the counter number and shop secret."
+msgstr "カウンター番号とショップのシークレットを確認してください。"
+
+#: shop.php
+msgid "WooCommerce is required for shop reporting."
+msgstr "ショップのレポート送信には WooCommerce が必要です。"
+
+#: shop.php
+msgid "A shop report failed. Stats4U retries automatically; check your settings and the server connection."
+msgstr "ショップのレポート送信に失敗しました。Stats4U が自動で再試行します。設定とサーバー接続を確認してください。"
+
+#: shop.php
+msgid "Enable shop reporting"
+msgstr "ショップのレポート送信を有効にする"
+
+#: shop.php
+msgid "Counter number"
+msgstr "カウンター番号"
+
+#: shop.php
+msgid "Shop secret"
+msgstr "ショップのシークレット"
+
+#: shop.php
+msgid "Leave the secret blank to keep the existing one."
+msgstr "既存のシークレットを維持するには、シークレット欄を空欄にしてください。"
+
+#: shop.php
+msgid "Integration guide"
+msgstr "連携ガイド"
+
+#: shop.php
+msgid "Stats4U: shop reporting needs attention."
+msgstr "Stats4U：ショップのレポート送信に対応が必要です。"
+
+#: shop.php
+msgid "Retry failed reports"
+msgstr "失敗したレポート送信を再試行"

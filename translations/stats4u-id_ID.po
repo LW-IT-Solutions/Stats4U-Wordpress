@@ -354,3 +354,51 @@ msgstr "Nomor penghitung baru %s – dipakai begitu Anda menyimpan."
 
 msgid "Too many new numbers from here - please try again in an hour."
 msgstr "Terlalu banyak nomor baru dari sini – silakan coba lagi dalam satu jam."
+
+#: shop.php
+msgid "Stats4U shop"
+msgstr "Toko Stats4U"
+
+#: shop.php
+msgid "Enable shop reporting in your Stats4U owner link, create a shop secret and enter it here. Only confirmed payments and refunds are sent, with currency and an anonymous order reference. No customer details are sent."
+msgstr "Aktifkan pelaporan toko melalui tautan pemilik Stats4U Anda, buat kunci rahasia toko, lalu masukkan di sini. Hanya pembayaran dan pengembalian dana yang telah dikonfirmasi yang dikirim, beserta mata uang dan referensi pesanan anonim. Detail pelanggan tidak dikirim."
+
+#: shop.php
+msgid "Check the counter number and shop secret."
+msgstr "Periksa nomor penghitung dan kunci rahasia toko."
+
+#: shop.php
+msgid "WooCommerce is required for shop reporting."
+msgstr "WooCommerce diperlukan untuk pelaporan toko."
+
+#: shop.php
+msgid "A shop report failed. Stats4U retries automatically; check your settings and the server connection."
+msgstr "Laporan toko gagal dikirim. Stats4U mencoba ulang secara otomatis; periksa pengaturan Anda dan koneksi server."
+
+#: shop.php
+msgid "Enable shop reporting"
+msgstr "Aktifkan pelaporan toko"
+
+#: shop.php
+msgid "Counter number"
+msgstr "Nomor penghitung"
+
+#: shop.php
+msgid "Shop secret"
+msgstr "Kunci rahasia toko"
+
+#: shop.php
+msgid "Leave the secret blank to keep the existing one."
+msgstr "Biarkan kolom kunci rahasia kosong untuk mempertahankan kunci yang ada."
+
+#: shop.php
+msgid "Integration guide"
+msgstr "Panduan integrasi"
+
+#: shop.php
+msgid "Stats4U: shop reporting needs attention."
+msgstr "Stats4U: pelaporan toko memerlukan perhatian."
+
+#: shop.php
+msgid "Retry failed reports"
+msgstr "Coba ulang laporan yang gagal"

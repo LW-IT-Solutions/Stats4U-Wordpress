@@ -354,3 +354,51 @@ msgstr "Nouveau numéro de compteur %s – il s’applique dès que vous enregis
 
 msgid "Too many new numbers from here - please try again in an hour."
 msgstr "Trop de nouveaux numéros demandés d’ici – réessayez dans une heure."
+
+#: shop.php
+msgid "Stats4U shop"
+msgstr "Boutique Stats4U"
+
+#: shop.php
+msgid "Enable shop reporting in your Stats4U owner link, create a shop secret and enter it here. Only confirmed payments and refunds are sent, with currency and an anonymous order reference. No customer details are sent."
+msgstr "Activez les rapports de la boutique depuis votre lien du propriétaire Stats4U, créez un secret de boutique et saisissez-le ici. Seuls les paiements et les remboursements confirmés sont envoyés, avec la devise et une référence de commande anonyme. Aucune donnée client n’est envoyée."
+
+#: shop.php
+msgid "Check the counter number and shop secret."
+msgstr "Vérifiez le numéro du compteur et le secret de la boutique."
+
+#: shop.php
+msgid "WooCommerce is required for shop reporting."
+msgstr "WooCommerce est nécessaire pour les rapports de la boutique."
+
+#: shop.php
+msgid "A shop report failed. Stats4U retries automatically; check your settings and the server connection."
+msgstr "L’envoi d’un rapport de la boutique a échoué. Stats4U réessaie automatiquement ; vérifiez vos paramètres et la connexion au serveur."
+
+#: shop.php
+msgid "Enable shop reporting"
+msgstr "Activer les rapports de la boutique"
+
+#: shop.php
+msgid "Counter number"
+msgstr "Numéro du compteur"
+
+#: shop.php
+msgid "Shop secret"
+msgstr "Secret de la boutique"
+
+#: shop.php
+msgid "Leave the secret blank to keep the existing one."
+msgstr "Laissez le champ du secret vide pour conserver le secret existant."
+
+#: shop.php
+msgid "Integration guide"
+msgstr "Guide d’intégration"
+
+#: shop.php
+msgid "Stats4U: shop reporting needs attention."
+msgstr "Stats4U : les rapports de la boutique nécessitent votre attention."
+
+#: shop.php
+msgid "Retry failed reports"
+msgstr "Réessayer l’envoi des rapports ayant échoué"

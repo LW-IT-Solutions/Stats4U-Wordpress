@@ -354,3 +354,51 @@ msgstr "رقم عداد جديد %s – يُستخدم بمجرد الحفظ."
 
 msgid "Too many new numbers from here - please try again in an hour."
 msgstr "أرقام جديدة كثيرة جدًا من هنا – يُرجى المحاولة بعد ساعة."
+
+#: shop.php
+msgid "Stats4U shop"
+msgstr "متجر Stats4U"
+
+#: shop.php
+msgid "Enable shop reporting in your Stats4U owner link, create a shop secret and enter it here. Only confirmed payments and refunds are sent, with currency and an anonymous order reference. No customer details are sent."
+msgstr "فعّل إرسال تقارير المتجر عبر رابط مالك Stats4U، وأنشئ مفتاحًا سريًا للمتجر وأدخله هنا. لا تُرسل إلا المدفوعات والمبالغ المستردة المؤكدة، مع العملة ومرجع طلب مجهول الهوية. لا تُرسل تفاصيل العملاء."
+
+#: shop.php
+msgid "Check the counter number and shop secret."
+msgstr "تحقق من رقم العداد والمفتاح السري للمتجر."
+
+#: shop.php
+msgid "WooCommerce is required for shop reporting."
+msgstr "يلزم WooCommerce لإرسال تقارير المتجر."
+
+#: shop.php
+msgid "A shop report failed. Stats4U retries automatically; check your settings and the server connection."
+msgstr "فشل إرسال تقرير متجر. يعيد Stats4U المحاولة تلقائيًا؛ تحقق من إعداداتك واتصال الخادم."
+
+#: shop.php
+msgid "Enable shop reporting"
+msgstr "تفعيل إرسال تقارير المتجر"
+
+#: shop.php
+msgid "Counter number"
+msgstr "رقم العداد"
+
+#: shop.php
+msgid "Shop secret"
+msgstr "المفتاح السري للمتجر"
+
+#: shop.php
+msgid "Leave the secret blank to keep the existing one."
+msgstr "اترك حقل المفتاح السري فارغًا للاحتفاظ بالمفتاح الحالي."
+
+#: shop.php
+msgid "Integration guide"
+msgstr "دليل التكامل"
+
+#: shop.php
+msgid "Stats4U: shop reporting needs attention."
+msgstr "Stats4U: إرسال تقارير المتجر يحتاج إلى معالجة."
+
+#: shop.php
+msgid "Retry failed reports"
+msgstr "إعادة محاولة إرسال التقارير الفاشلة"

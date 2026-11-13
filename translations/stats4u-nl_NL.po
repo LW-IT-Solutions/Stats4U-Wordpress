@@ -354,3 +354,51 @@ msgstr "Nieuw tellernummer %s – het geldt zodra je opslaat."
 
 msgid "Too many new numbers from here - please try again in an hour."
 msgstr "Te veel nieuwe nummers vanaf hier – probeer het over een uur opnieuw."
+
+#: shop.php
+msgid "Stats4U shop"
+msgstr "Stats4U-winkel"
+
+#: shop.php
+msgid "Enable shop reporting in your Stats4U owner link, create a shop secret and enter it here. Only confirmed payments and refunds are sent, with currency and an anonymous order reference. No customer details are sent."
+msgstr "Schakel winkelrapporten in via je Stats4U-eigenaarslink, maak een winkelgeheim aan en vul het hier in. Alleen bevestigde betalingen en terugbetalingen worden verzonden, met valuta en een anonieme bestelreferentie. Er worden geen klantgegevens verzonden."
+
+#: shop.php
+msgid "Check the counter number and shop secret."
+msgstr "Controleer het tellernummer en het winkelgeheim."
+
+#: shop.php
+msgid "WooCommerce is required for shop reporting."
+msgstr "WooCommerce is vereist voor winkelrapporten."
+
+#: shop.php
+msgid "A shop report failed. Stats4U retries automatically; check your settings and the server connection."
+msgstr "Een winkelrapport is mislukt. Stats4U probeert het automatisch opnieuw; controleer je instellingen en de serververbinding."
+
+#: shop.php
+msgid "Enable shop reporting"
+msgstr "Winkelrapporten inschakelen"
+
+#: shop.php
+msgid "Counter number"
+msgstr "Tellernummer"
+
+#: shop.php
+msgid "Shop secret"
+msgstr "Winkelgeheim"
+
+#: shop.php
+msgid "Leave the secret blank to keep the existing one."
+msgstr "Laat het veld voor het geheim leeg om het bestaande geheim te behouden."
+
+#: shop.php
+msgid "Integration guide"
+msgstr "Integratiehandleiding"
+
+#: shop.php
+msgid "Stats4U: shop reporting needs attention."
+msgstr "Stats4U: de winkelrapporten vragen om aandacht."
+
+#: shop.php
+msgid "Retry failed reports"
+msgstr "Mislukte rapporten opnieuw proberen"
