@@ -33,6 +33,10 @@ stats4u.net" opens the creator, and its last step brings the code back.
 * **Statistics worth reading:** every count carries the page and the referrer;
   on top come time on page, scroll depth and "online now". The script is
   12.6 kB over the wire (Brotli) and cached for an hour; no cookie.
+* **Shop revenue (optional, WooCommerce):** off by default. Under
+  *Settings → Stats4U shop*, confirmed payments and refunds can be sent to
+  Stats4U with amount, currency and a keyed order reference, signed with your
+  shop secret – no customer fields, no product details.
 * **Translations from translate.wordpress.org:** the settings page is written
   in English and fully translatable; WordPress installs the language packs by
   itself. Translations for 18 languages – the same as stats4u.net, German in
@@ -58,7 +62,7 @@ Requires WordPress 5.8+ and PHP 7.4+. Tested up to WordPress 7.1.
 
 | Path | What |
 |---|---|
-| `stats4u.php`, `uninstall.php`, `editor.js`, `freigabe.js` | the plugin |
+| `stats4u.php`, `shop.php`, `uninstall.php`, `editor.js`, `freigabe.js` | the plugin |
 | `readme.txt` | the wordpress.org readme (canonical description, changelog) |
 | `translations/` | `.po`/`.mo` for 18 languages (German informal and formal) – the source for translate.wordpress.org, not part of the plugin zip |
 | `.wordpress-org/` | banner, icon and screenshots for the wordpress.org page (SVN `assets/`), not part of the plugin zip |

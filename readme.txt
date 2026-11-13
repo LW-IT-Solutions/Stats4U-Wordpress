@@ -4,7 +4,7 @@ Tags: counter, visitor counter, hit counter, statistics, consent
 Requires at least: 5.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.6.0
+Stable tag: 1.7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -60,6 +60,21 @@ by itself once it is there.
 
 This plugin loads the script of Stats4U (https://www.stats4u.net/), the
 visitor counter service it is made for. Without it, the plugin does nothing.
+
+Optional WooCommerce reporting is off by default. Enable it both in the Stats4U
+owner settings and under Settings > Stats4U shop. Enter the counter number and
+shop secret there. Confirmed payments and refunds send paid/refunded amounts in
+minor currency units, currency and a keyed order reference to
+https://www.stats4u.net/index.php?action=insights_sale over HTTPS, signed with
+your shop secret. No customer fields or product details are sent. Duplicate
+reports are safe. Failed reports retry up to eight times through WP-Cron and
+show an admin notice; after that, check the integration and retry the order hook.
+Reporting requires WP-Cron to run. It does not backfill earlier orders.
+
+Optional contact/download categories and marked form submits are enabled in
+Stats4U owner settings. Contact Form 7 success events use wpcf7mailsent; custom
+forms call s4u.formSuccess only after successful server processing. A submit
+alone never means a successful form. No form values or contact addresses are sent.
 
 What is sent and when:
 
@@ -247,6 +262,13 @@ should not disappear because you tried a plugin and removed it again.
 
 == Changelog ==
 
+= 1.7.0 =
+* Optional WooCommerce reporting (off by default, Settings > Stats4U shop):
+  confirmed payments and refunds are sent to Stats4U with amount, currency
+  and a keyed order reference, signed with your shop secret. No customer
+  fields or product details. Failed reports retry up to eight times.
+* Uninstalling also removes the shop settings and pending retries.
+
 = 1.6.0 =
 * Every value is escaped right where it is printed. The counter below or
   inside your theme's footer is now put in place by an output buffer
@@ -323,6 +345,9 @@ should not disappear because you tried a plugin and removed it again.
 * First release: shortcode, footer, dark mode, settings page.
 
 == Upgrade Notice ==
+
+= 1.7.0 =
+Adds optional WooCommerce payment and refund reporting. It is off until you enable it. Your settings are kept.
 
 = 1.6.0 =
 Output escaping hardened. The settings page is translated through translate.wordpress.org now; until your language is complete there, it is in English. Your settings are kept.

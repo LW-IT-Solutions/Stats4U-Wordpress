@@ -3,7 +3,7 @@
  * Plugin Name:       Stats4U
  * Plugin URI:        https://github.com/LW-IT-Solutions/Stats4U-Wordpress
  * Description:       Puts a Stats4U visitor counter on your site. Paste the code from stats4u.net, choose where it appears and, if you use a consent banner, let it decide when the counter loads.
- * Version:           1.6.0
+ * Version:           1.7.0
  * Requires at least: 5.8
  * Requires PHP:      7.4
  * Author:            LW IT Solutions Company
@@ -17,8 +17,9 @@
  * Es setzt das offizielle Skript von stats4u.net auf die Seite - dasselbe
  * <script src=".../s4u.js" data-id ...>, das der Assistent dort ausgibt, mit
  * allen Angaben daraus. s4u.js zeichnet den Zaehler genau dort, wo es steht.
- * Kein Cookie, kein eigener Endpunkt, keine eigene Tabelle, kein Aufruf nach
- * Hause vom Server aus.
+ * Kein eigener Endpunkt und keine eigene Tabelle. Optional meldet shop.php
+ * bestaetigte WooCommerce-Zahlungen und Erstattungen vom Server an Stats4U;
+ * Bestellmetadaten halten die Referenz und begrenzte Wiederholungen fest.
  *
  * BIS 1.4.0 WAR ES NUR DAS BILD. Leichter (ein Abruf statt drei), aber die
  * Statistik bekam damit fast nichts: keine Seitenadresse (der Browser schickt
@@ -59,9 +60,10 @@
  */
 
 if (!defined('ABSPATH')) { exit; }
+require_once __DIR__.'/shop.php';
 
 const STATS4U_OPTION  = 'stats4u_einstellungen';
-const STATS4U_VERSION = '1.6.0';
+const STATS4U_VERSION = '1.7.0';
 /** Das offizielle Zaehlerskript - dasselbe, das der Assistent auf stats4u.net ausgibt. */
 const STATS4U_SKRIPT  = 'https://www.stats4u.net/s4u.js';
 /** Wohin das Feedback-Formular schickt - aus dem Browser, nie vom Server. */

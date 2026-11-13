@@ -11,6 +11,9 @@
 if (!defined('WP_UNINSTALL_PLUGIN')) { exit; }
 
 delete_option('stats4u_einstellungen');
+delete_option('stats4u_shop');
+delete_option('stats4u_shop_error');
+wp_unschedule_hook('stats4u_shop_retry');
 
 // Die gemerkte Ansicht - Nutzerdaten gibt es im Netzwerk nur einmal.
 delete_metadata('user', 0, 'stats4u_ansicht', '', true);
@@ -20,6 +23,9 @@ if (is_multisite()) {
     foreach (get_sites(array('fields' => 'ids')) as $stats4u_blog) {
         switch_to_blog($stats4u_blog);
         delete_option('stats4u_einstellungen');
+        delete_option('stats4u_shop');
+        delete_option('stats4u_shop_error');
+        wp_unschedule_hook('stats4u_shop_retry');
         restore_current_blog();
     }
 }
