@@ -3,7 +3,7 @@
  * Plugin Name:       Stats4U
  * Plugin URI:        https://github.com/LW-IT-Solutions/Stats4U-Wordpress
  * Description:       Puts a Stats4U visitor counter on your site. Paste the code from stats4u.net, choose where it appears and, if you use a consent banner, let it decide when the counter loads.
- * Version:           1.7.0
+ * Version:           1.7.1
  * Requires at least: 5.8
  * Requires PHP:      7.4
  * Author:            LW IT Solutions Company
@@ -63,7 +63,7 @@ if (!defined('ABSPATH')) { exit; }
 require_once __DIR__.'/shop.php';
 
 const STATS4U_OPTION  = 'stats4u_einstellungen';
-const STATS4U_VERSION = '1.7.0';
+const STATS4U_VERSION = '1.7.1';
 /** Das offizielle Zaehlerskript - dasselbe, das der Assistent auf stats4u.net ausgibt. */
 const STATS4U_SKRIPT  = 'https://www.stats4u.net/s4u.js';
 /** Wohin das Feedback-Formular schickt - aus dem Browser, nie vom Server. */
@@ -766,7 +766,7 @@ function stats4u_block() {
         'leer'         => __('Set up your counter first under Settings > Stats4U.', 'stats4u'),
     ), JSON_HEX_TAG | JSON_HEX_AMP) . ';', 'before');
     register_block_type('stats4u/counter', array(
-        'api_version'     => 2,
+        'api_version'     => 3,
         'editor_script'   => 'stats4u-editor',
         'render_callback' => 'stats4u_block_ausgabe',
         'attributes'      => array('ausrichtung' => array('type' => 'string', 'default' => 'center')),

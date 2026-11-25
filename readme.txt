@@ -2,9 +2,9 @@
 Contributors: lwitsolutions
 Tags: counter, visitor counter, hit counter, statistics, consent
 Requires at least: 5.8
-Tested up to: 7.1
+Tested up to: 7.2
 Requires PHP: 7.4
-Stable tag: 1.7.0
+Stable tag: 1.7.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -262,6 +262,11 @@ should not disappear because you tried a plugin and removed it again.
 
 == Changelog ==
 
+= 1.7.1 =
+* Tested with WordPress 7.2.
+* The Stats4U counter block uses block API version 3, so the post editor
+  keeps running in its iframe (no deprecation notice in the browser console).
+
 = 1.7.0 =
 * Optional WooCommerce reporting (off by default, Settings > Stats4U shop):
   confirmed payments and refunds are sent to Stats4U with amount, currency
@@ -345,6 +350,9 @@ should not disappear because you tried a plugin and removed it again.
 * First release: shortcode, footer, dark mode, settings page.
 
 == Upgrade Notice ==
+
+= 1.7.1 =
+Compatible with WordPress 7.2; the counter block is updated for the iframe editor. Your settings are kept.
 
 = 1.7.0 =
 Adds optional WooCommerce payment and refund reporting. It is off until you enable it. Your settings are kept.

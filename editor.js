@@ -13,7 +13,7 @@
 	var Ausrichtung = blockEditor.AlignmentControl || blockEditor.AlignmentToolbar;
 
 	blocks.registerBlockType('stats4u/counter', {
-		apiVersion: 2,
+		apiVersion: 3,
 		title: daten.titel || 'Stats4U counter',
 		description: daten.beschreibung || '',
 		icon: 'chart-bar',

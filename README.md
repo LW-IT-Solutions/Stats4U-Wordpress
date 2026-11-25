@@ -56,7 +56,7 @@ section *External services*.
   [wordpress.org](https://wordpress.org/plugins/stats4u/), then
   *Plugins → Add New → Upload Plugin*.
 
-Requires WordPress 5.8+ and PHP 7.4+. Tested up to WordPress 7.1.
+Requires WordPress 5.8+ and PHP 7.4+. Tested up to WordPress 7.2.
 
 ## Repository layout
 
