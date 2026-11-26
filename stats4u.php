@@ -3,7 +3,7 @@
  * Plugin Name:       Stats4U
  * Plugin URI:        https://github.com/LW-IT-Solutions/Stats4U-Wordpress
  * Description:       Puts a Stats4U visitor counter on your site. Paste the code from stats4u.net, choose where it appears and, if you use a consent banner, let it decide when the counter loads.
- * Version:           1.7.2
+ * Version:           1.8.0
  * Requires at least: 5.8
  * Requires PHP:      7.4
  * Author:            LW IT Solutions Company
@@ -67,7 +67,7 @@ function stats4u_deaktivieren() {
 }
 
 const STATS4U_OPTION  = 'stats4u_einstellungen';
-const STATS4U_VERSION = '1.7.2';
+const STATS4U_VERSION = '1.8.0';
 /** Das offizielle Zaehlerskript - dasselbe, das der Assistent auf stats4u.net ausgibt. */
 const STATS4U_SKRIPT  = 'https://www.stats4u.net/s4u.js';
 /** Wohin das Feedback-Formular schickt - aus dem Browser, nie vom Server. */
@@ -761,13 +761,19 @@ add_action('init', 'stats4u_block');
 function stats4u_block() {
     if (!function_exists('register_block_type')) { return; }
     wp_register_script('stats4u-editor', plugins_url('editor.js', __FILE__),
-                       array('wp-blocks', 'wp-element', 'wp-block-editor'), STATS4U_VERSION, true);
+                       array('wp-blocks', 'wp-element', 'wp-block-editor', 'wp-components'), STATS4U_VERSION, true);
     $e = stats4u_einstellungen();
     wp_add_inline_script('stats4u-editor', 'window.stats4uEditor=' . wp_json_encode(array(
-        'titel'        => __('Stats4U counter', 'stats4u'),
-        'beschreibung' => __('Your visitor counter from stats4u.net.', 'stats4u'),
-        'vorschau'     => $e['id'] !== '' ? stats4u_bildadresse($e, true) : '',
-        'leer'         => __('Set up your counter first under Settings > Stats4U.', 'stats4u'),
+        'titel'         => __('Stats4U counter', 'stats4u'),
+        'beschreibung'  => __('Your visitor counter from stats4u.net.', 'stats4u'),
+        'vorschau'      => $e['id'] !== '' ? stats4u_bildadresse($e, true) : '',
+        'leer'          => __('Set up your counter first under Settings > Stats4U.', 'stats4u'),
+        'alt'           => __('Preview of the Stats4U counter', 'stats4u'),
+        'nichtGezaehlt' => __('Preview - not counted.', 'stats4u'),
+        'keineVorschau' => __('The preview image could not be loaded from stats4u.net. The counter on your site is not affected.', 'stats4u'),
+        // Der Weg zu den Einstellungen nur fuer, wer sie oeffnen darf.
+        'einstellungen' => current_user_can('manage_options') ? admin_url('options-general.php?page=stats4u') : '',
+        'einrichten'    => __('Set up the counter', 'stats4u'),
     ), JSON_HEX_TAG | JSON_HEX_AMP) . ';', 'before');
     register_block_type('stats4u/counter', array(
         'api_version'     => 3,
@@ -1285,6 +1291,32 @@ function stats4u_admin_skript($seite) {
         '#s4u_fb_status.s4u-ok{color:#008a20}',
         '#s4u_fb_status.s4u-fehler{color:#d63638}',
         '.s4u-fb-hinweis{margin:0;padding:10px 20px 18px}',
+        // 1.8.0: Ueberblick, Kopierknoepfe, Ladeanzeige, Vorschau ohne Bild, Rueckfrage.
+        '.s4u-ueberblick{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 0;padding:0;list-style:none}',
+        '.s4u-ueberblick li{display:inline-flex;align-items:center;gap:4px;margin:0;padding:3px 10px 3px 7px;border-radius:999px;background:#f0f0f1;color:#3c434a;font-size:12px;line-height:1.5}',
+        '.s4u-ueberblick li.s4u-achtung{background:#fcf9e8;color:#7a5600}',
+        '.s4u-ueberblick .dashicons{width:16px;height:16px;font-size:16px}',
+        '.s4u-ueberblick b{font-weight:600}',
+        '.s4u-ohne-vorschau{margin:0;max-width:260px;color:#50575e;text-align:center;font-size:13px}',
+        '.s4u-buehne.s4u-dunkel .s4u-ohne-vorschau{color:#dcdcde}',
+        '.s4u-ohne-vorschau::before{content:"\f128";display:block;margin:0 auto 6px;font:normal 28px/1 dashicons;color:#8c8f94}',
+        '.s4u-kopieren{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:8px 0 0}',
+        '.s4u-kopieren .button .dashicons{width:16px;height:16px;font-size:16px;margin:0 4px 0 -2px;vertical-align:middle;position:relative;top:-1px}',
+        '.s4u-kopiert{border-color:#00a32a!important;color:#00691b!important}',
+        '.s4u-laedt{position:relative;padding-left:30px!important}',
+        '.s4u-laedt::before{content:"";position:absolute;left:9px;top:50%;width:12px;height:12px;margin-top:-8px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:s4u-dreh .8s linear infinite}',
+        '@keyframes s4u-dreh{to{transform:rotate(360deg)}}',
+        '@media (prefers-reduced-motion:reduce){.s4u-laedt::before{animation:none}}',
+        '.s4u-fb-zaehler{margin:6px 0 0;color:#646970;font-size:12px}.s4u-fb-zaehler.s4u-knapp{color:#7a5600;font-weight:600}',
+        '.s4u-menue a .s4u-punkt{margin-left:auto;width:8px;height:8px;border-radius:50%;background:#dba617;box-shadow:0 0 0 2px #fff}',
+        '.s4u-menue a[aria-current] .s4u-punkt{box-shadow:0 0 0 2px var(--wp-admin-theme-color,#2271b1)}',
+        '.s4u-dialog[hidden]{display:none!important}',
+        '.s4u-dialog{position:fixed;inset:0;z-index:100050;display:flex;align-items:center;justify-content:center;padding:16px}',
+        '.s4u-dialog-grund{position:absolute;inset:0;background:rgba(0,0,0,.45)}',
+        '.s4u-dialog-box{position:relative;width:100%;max-width:460px;padding:20px 22px 18px;box-sizing:border-box;border-radius:8px;background:#fff;box-shadow:0 10px 40px rgba(0,0,0,.25)}',
+        '.s4u-dialog-box .dashicons-warning{width:28px;height:28px;font-size:28px;color:#dba617}',
+        '.s4u-dialog-text{margin:8px 0 18px;font-size:14px}',
+        '.s4u-dialog-knoepfe{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px}',
         '@media (max-width:782px){.s4u-feld{grid-template-columns:minmax(0,1fr)}.s4u-lab{padding-top:0}.s4u-lab:empty{display:none}',
         '.s4u-ansicht-eigen .s4u-rahmen{grid-template-columns:minmax(0,1fr);gap:14px}',
         // Auf dem Handy liegt das Menue oben und bricht um - keine Leiste, die seitlich schiebt.
@@ -1325,7 +1357,13 @@ function stats4u_admin_skript($seite) {
         'erst'    => __('Choose or create a counter first.', 'stats4u'),
         /* translators: 1: counter number, 2: design number */
         'zaehler' => __('Counter %1$s, design %2$s', 'stats4u'),
+        'keineVorschau' => __('The preview image could not be loaded from stats4u.net. The counter on your site is not affected.', 'stats4u'),
+        'kopiert' => __('Copied', 'stats4u'),
+        'markiert' => __('Copying failed. The text is selected; press Ctrl+C to copy it.', 'stats4u'),
+        /* translators: 1: number of characters typed, 2: maximum number of characters */
+        'zeichen' => __('%1$s of %2$s characters', 'stats4u'),
     ), JSON_HEX_TAG | JSON_HEX_AMP) . ';', 'before');
+    wp_add_inline_script('stats4u-admin', 'window.stats4uDialog=' . wp_json_encode(array('abbrechen' => __('Cancel', 'stats4u')), JSON_HEX_TAG | JSON_HEX_AMP) . ';', 'before');
 
     // "Neue Zaehlernummer anfordern": eine freie Nummer von stats4u.net
     // (action=wpneu, aus dem Browser, erst auf Klick).
@@ -1338,6 +1376,9 @@ function stats4u_admin_skript($seite) {
         'ok'      => __('New counter number %s - it is used as soon as you save.', 'stats4u'),
         'zu_oft'  => __('Too many new numbers from here - please try again in an hour.', 'stats4u'),
         'netz'    => __('stats4u.net could not be reached. Please try again later.', 'stats4u'),
+        /* translators: %s: the current counter number */
+        'frage'   => __('Request a new counter number? It replaces counter %s in the code below and is used as soon as you save.', 'stats4u'),
+        'knopf'   => __('Request a new counter number', 'stats4u'),
     ), JSON_HEX_TAG | JSON_HEX_AMP) . ';', 'before');
 }
 
@@ -1411,7 +1452,8 @@ function stats4u_seite() {
     </div>
         <?php return; endif; ?>
 
-        <?php if ($cmp_jetzt && $cmp_jetzt['art'] === 'pflicht' && stats4u_consent_wert($e, $cmp_jetzt) === '') : ?>
+        <?php $cmp_fehlt = ($cmp_jetzt && $cmp_jetzt['art'] === 'pflicht' && stats4u_consent_wert($e, $cmp_jetzt) === ''); ?>
+        <?php if ($cmp_fehlt) : ?>
         <div class="notice notice-warning"><p><?php
             echo esc_html(sprintf(
                 /* translators: %s: name of a consent tool */
@@ -1462,7 +1504,9 @@ function stats4u_seite() {
                                      'feedback' => __('Feedback', 'stats4u')) as $teil => $name) : ?>
                 <a href="#s4u-teil-<?php echo esc_attr($teil); ?>" data-teil="<?php echo esc_attr($teil); ?>"><?php
                     echo wp_kses(stats4u_menue_bild($teil), stats4u_svg_erlaubt());
-                    ?><span><?php echo esc_html($name); ?></span></a>
+                    ?><span><?php echo esc_html($name); ?></span><?php
+                    // Ein Punkt am Menuepunkt, solange dort etwas fehlt (wie der Hinweis oben).
+                    if ($teil === 'consent' && $cmp_fehlt) : ?><span class="s4u-punkt" aria-hidden="true"></span><span class="screen-reader-text"><?php echo esc_html__('(needs attention)', 'stats4u'); ?></span><?php endif; ?></a>
                 <?php endforeach; ?>
             </nav>
             <?php endif; ?>
@@ -1494,7 +1538,7 @@ function stats4u_seite() {
                 <div class="s4u-zaehler">
                     <?php if ($e['id'] !== '') : ?>
                     <div class="<?php echo esc_attr('s4u-buehne' . ($e['dark'] === '1' ? ' s4u-dunkel' : '')); ?>" id="s4u_buehne">
-                        <img id="s4u_vorschau" src="<?php echo esc_url(stats4u_bildadresse($e, true)); ?>" alt=""
+                        <img id="s4u_vorschau" src="<?php echo esc_url(stats4u_bildadresse($e, true)); ?>" alt="<?php echo esc_attr__('Preview of the Stats4U counter', 'stats4u'); ?>"
                              data-basis="<?php echo esc_url('https://www.stats4u.net/c/' . rawurlencode($e['id']) . '-' . rawurlencode($e['style']) . '.png'); ?>"
                              data-params="<?php echo esc_attr(wp_json_encode((object) (is_array($e['params']) ? $e['params'] : array()))); ?>"
                              data-seite="<?php echo esc_attr(in_array($sprache_seite, stats4u_sprachen(), true) ? $sprache_seite : ''); ?>">
@@ -1509,6 +1553,34 @@ function stats4u_seite() {
                             ));
                         ?></p>
                         <p class="description"><?php echo esc_html__('Preview - not counted.', 'stats4u'); ?></p>
+                        <?php if ($ansicht === 'eigen') :
+                            // Ueberblick der gespeicherten Wahl - ein Blick statt vier Menuepunkte.
+                            $kurz_platz = array(
+                                'unter' => __('below the footer', 'stats4u'), 'im' => __('in the footer', 'stats4u'),
+                                'ende' => __('end of the page', 'stats4u'), 'inhalt' => __('below the content', 'stats4u'),
+                                'ecke_r' => __('bottom right corner', 'stats4u'), 'ecke_l' => __('bottom left corner', 'stats4u'),
+                                'aus' => __('block or shortcode only', 'stats4u'),
+                            );
+                            if ($e['consent'] === 'eigen') {
+                                $kurz_laden = __('after consent in another tool', 'stats4u');
+                            } elseif ($cmp_jetzt) {
+                                /* translators: %s: name of a consent tool */
+                                $kurz_laden = sprintf(__('after consent in %s', 'stats4u'), $cmp_jetzt['name']);
+                            } else {
+                                $kurz_laden = __('right away', 'stats4u');
+                            }
+                            $ueberblick = array(
+                                array('location', __('Shown:', 'stats4u'), $kurz_platz[$e['platz']] ?? $kurz_platz['unter'], false),
+                                array('shield', __('Loads:', 'stats4u'), $kurz_laden, $cmp_fehlt),
+                                array('chart-bar', __('Counts:', 'stats4u'), $e['metrik'] === 'uniq' ? __('unique visitors', 'stats4u') : __('every page view', 'stats4u'), false),
+                            );
+                            ?>
+                        <ul class="s4u-ueberblick" aria-label="<?php echo esc_attr__('Current settings', 'stats4u'); ?>">
+                            <?php foreach ($ueberblick as $u) : ?>
+                            <li<?php if ($u[3]) : ?> class="s4u-achtung"<?php endif; ?>><span class="dashicons dashicons-<?php echo esc_attr($u[0]); ?>" aria-hidden="true"></span><b><?php echo esc_html($u[1]); ?></b> <?php echo esc_html($u[2]); ?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                        <?php endif; ?>
                         <?php endif; ?>
                         <?php if ($neu && $ansicht !== 'assistent') : ?>
                         <p class="s4u-aktionen"><?php submit_button(null, 'primary', 'submit', false, array('id' => 'stats4u-sofort')); ?></p>
@@ -1623,15 +1695,17 @@ function stats4u_seite() {
                             <p class="description"><?php
                                 echo esc_html__('To place it yourself, use the block "Stats4U counter" or the shortcode [stats4u] - for example in a footer widget.', 'stats4u');
                             ?></p>
-                            <p class="description"><?php
+                            <p class="s4u-kopieren"><code id="s4u_kurzcode" class="s4u-snippet">[stats4u]</code><?php stats4u_kopierknopf('s4u_kurzcode'); ?></p>
+                            <p class="description s4u-kopieren"><?php
                                 // Fuer Entwickler, damit niemand suchen muss: ein Kurzcode, der als
                                 // Text in einer PHP-Datei steht, wird nicht ausgewertet. Ein Klick
-                                // markiert den ganzen Aufruf (.s4u-snippet).
+                                // markiert den ganzen Aufruf (.s4u-snippet), der Knopf kopiert ihn.
                                 echo wp_kses(sprintf(
                                     /* translators: %s: a line of PHP code */
                                     esc_html__('In a theme template (PHP): %s', 'stats4u'),
-                                    '<code class="s4u-snippet">' . esc_html("<?php echo do_shortcode( '[stats4u]' ); ?>") . '</code>'
-                                ), array('code' => array('class' => true)));
+                                    '<code class="s4u-snippet" id="s4u_php">' . esc_html("<?php echo do_shortcode( '[stats4u]' ); ?>") . '</code>'
+                                ), array('code' => array('class' => true, 'id' => true)));
+                                stats4u_kopierknopf('s4u_php');
                             ?></p>
                         </div>
                     </div>
@@ -1732,7 +1806,7 @@ function stats4u_seite() {
             <section class="s4u-karte s4u-teil" id="s4u-teil-fertig" data-schritt="5">
                 <h2><?php echo esc_html__('Done', 'stats4u'); ?></h2>
                 <div class="s4u-zaehler">
-                    <div class="s4u-buehne" id="s4u_buehne_2" hidden><img id="s4u_vorschau_2" alt=""></div>
+                    <div class="s4u-buehne" id="s4u_buehne_2" hidden><img id="s4u_vorschau_2" alt="<?php echo esc_attr__('Preview of the Stats4U counter', 'stats4u'); ?>"></div>
                     <dl class="s4u-zusammen">
                         <dt><?php echo esc_html__('Counter', 'stats4u'); ?></dt><dd id="s4u_z_zaehler"></dd>
                         <dt><?php echo esc_html__('Where to show it', 'stats4u'); ?></dt><dd id="s4u_z_platz"></dd>
@@ -1770,7 +1844,10 @@ function stats4u_seite() {
                 <div class="s4u-felder">
                     <div class="s4u-feld">
                         <label class="s4u-lab" for="s4u_fb_text"><?php echo esc_html__('Your message', 'stats4u'); ?></label>
-                        <textarea id="s4u_fb_text" rows="5" class="large-text" maxlength="5000"></textarea>
+                        <div>
+                            <textarea id="s4u_fb_text" rows="5" class="large-text" maxlength="5000" aria-describedby="s4u_fb_zaehler"></textarea>
+                            <p class="s4u-fb-zaehler" id="s4u_fb_zaehler"></p>
+                        </div>
                     </div>
                     <div class="s4u-feld">
                         <label class="s4u-lab" for="s4u_fb_mail"><?php echo esc_html__('Email for an answer (optional)', 'stats4u'); ?></label>
@@ -1858,6 +1935,13 @@ function stats4u_teil_start() {
         </div>
     </div>
     <?php
+}
+
+/** Ein Knopf, der den Text des Elements $ziel kopiert (admin.js, data-s4u-kopieren). */
+function stats4u_kopierknopf($ziel) {
+    echo '<button type="button" class="button button-small" data-s4u-kopieren="' . esc_attr($ziel) . '">'
+       . '<span class="dashicons dashicons-admin-page" aria-hidden="true"></span><span class="s4u-kopier-text">'
+       . esc_html__('Copy', 'stats4u') . '</span></button>';
 }
 
 /** Ein kleines Zeichen je Menuepunkt - festes SVG, nichts von aussen darin. */

@@ -254,16 +254,18 @@
 		return;
 	}
 	var st = d.getElementById("s4u_neu_status"), c = d.getElementById("s4u_code");
-	k.addEventListener("click", function () {
+	function holen() {
 		var q = new URLSearchParams();
 		q.append("lang", N.lang);
 		k.disabled = true;
+		k.classList.add("s4u-laedt");
 		st.textContent = "";
 		st.className = "s4u-status";
 		fetch(N.ziel, { method: "POST", body: q, credentials: "omit" })
 			.then(function (r) { return r.json(); })
 			.then(function (a) {
 				k.disabled = false;
+				k.classList.remove("s4u-laedt");
 				if (!a || !a.ok || !/^\d{1,12}$/.test(a.id || "")) {
 					st.textContent = (a && N[a.code]) || N.netz;
 					st.className = "s4u-status s4u-fehler";
@@ -286,6 +288,170 @@
 				st.textContent = N.ok.replace("%s", a.id);
 				st.className = "s4u-status s4u-ok";
 			})
-			.catch(function () { k.disabled = false; st.textContent = N.netz; st.className = "s4u-status s4u-fehler"; });
+			.catch(function () { k.disabled = false; k.classList.remove("s4u-laedt"); st.textContent = N.netz; st.className = "s4u-status s4u-fehler"; });
+	}
+	// With a counter number already in place, ask first: the new number
+	// replaces it in the code field. Nothing is sent before the answer.
+	k.addEventListener("click", function () {
+		if (N.alt && window.stats4uFrage) {
+			window.stats4uFrage(N.frage.replace("%s", N.alt), N.knopf, k, holen);
+			return;
+		}
+		holen();
 	});
+})();
+
+// Confirmation dialog of the plugin's own (no browser dialogs): role="dialog",
+// focus stays inside, Esc cancels, the focus returns to the button that opened
+// it. Used by forms with data-s4u-bestaetigen and by window.stats4uFrage().
+(function () {
+	var d = document, D = window.stats4uDialog || {}, box = null, weiter = null, von = null;
+	function zu() {
+		if (!box) { return; }
+		box.hidden = true;
+		weiter = null;
+		if (von && von.focus) { von.focus(); }
+	}
+	function bauen() {
+		box = d.createElement("div");
+		box.className = "s4u-dialog";
+		box.hidden = true;
+		var grund = d.createElement("div");
+		grund.className = "s4u-dialog-grund";
+		var inner = d.createElement("div");
+		inner.className = "s4u-dialog-box";
+		inner.setAttribute("role", "dialog");
+		inner.setAttribute("aria-modal", "true");
+		inner.setAttribute("aria-labelledby", "s4u_dialog_text");
+		var icon = d.createElement("span");
+		icon.className = "dashicons dashicons-warning";
+		icon.setAttribute("aria-hidden", "true");
+		var p = d.createElement("p");
+		p.className = "s4u-dialog-text";
+		p.id = "s4u_dialog_text";
+		var knoepfe = d.createElement("div");
+		knoepfe.className = "s4u-dialog-knoepfe";
+		var nein = d.createElement("button");
+		nein.type = "button";
+		nein.className = "button";
+		nein.textContent = D.abbrechen || "Cancel";
+		var ja = d.createElement("button");
+		ja.type = "button";
+		ja.className = "button button-primary s4u-dialog-ja";
+		knoepfe.appendChild(nein);
+		knoepfe.appendChild(ja);
+		inner.appendChild(icon);
+		inner.appendChild(p);
+		inner.appendChild(knoepfe);
+		box.appendChild(grund);
+		box.appendChild(inner);
+		d.body.appendChild(box);
+		grund.addEventListener("click", zu);
+		nein.addEventListener("click", zu);
+		ja.addEventListener("click", function () {
+			var f = weiter;
+			box.hidden = true;
+			weiter = null;
+			if (von && von.focus) { von.focus(); }
+			if (f) { f(); }
+		});
+		box.addEventListener("keydown", function (ev) {
+			if (ev.key === "Escape") { ev.preventDefault(); zu(); return; }
+			if (ev.key === "Tab") {
+				var b = [nein, ja], i = b.indexOf(d.activeElement);
+				if (ev.shiftKey && i <= 0) { ev.preventDefault(); ja.focus(); }
+				else if (!ev.shiftKey && i === 1) { ev.preventDefault(); nein.focus(); }
+			}
+		});
+	}
+	window.stats4uFrage = function (text, knopf, ausloeser, ok) {
+		if (!box) { bauen(); }
+		von = ausloeser || d.activeElement;
+		weiter = ok;
+		box.querySelector(".s4u-dialog-text").textContent = text;
+		box.querySelector(".s4u-dialog-ja").textContent = knopf || "OK";
+		box.hidden = false;
+		box.querySelector(".s4u-dialog-ja").focus();
+	};
+	d.addEventListener("submit", function (ev) {
+		var f = ev.target;
+		if (!f || !f.hasAttribute || !f.hasAttribute("data-s4u-bestaetigen")) { return; }
+		if (f.getAttribute("data-s4u-ok") === "1") { f.removeAttribute("data-s4u-ok"); return; }
+		ev.preventDefault();
+		window.stats4uFrage(f.getAttribute("data-s4u-bestaetigen"), f.getAttribute("data-s4u-knopf"), ev.submitter || d.activeElement, function () {
+			f.setAttribute("data-s4u-ok", "1");
+			if (f.requestSubmit) { f.requestSubmit(); } else { f.submit(); }
+		});
+	});
+})();
+
+// Preview: if the image cannot be loaded (stats4u.net not reachable from this
+// browser, or a blocker), the stage says so instead of a broken image.
+(function () {
+	var d = document, A = window.stats4uAssi || {};
+	["s4u_vorschau", "s4u_vorschau_2"].forEach(function (id) {
+		var b = d.getElementById(id);
+		if (!b || !A.keineVorschau) { return; }
+		var hinweis = d.createElement("p");
+		hinweis.className = "s4u-ohne-vorschau";
+		hinweis.textContent = A.keineVorschau;
+		hinweis.hidden = true;
+		b.parentNode.appendChild(hinweis);
+		function fehlt() { b.hidden = true; hinweis.hidden = false; }
+		b.addEventListener("error", fehlt);
+		b.addEventListener("load", function () { b.hidden = false; hinweis.hidden = true; });
+		if (b.complete && b.getAttribute("src") && b.naturalWidth === 0) { fehlt(); }
+	});
+})();
+
+// Copy buttons (data-s4u-kopieren = id of the element whose text is copied).
+// Without the clipboard API the text is selected, so that Ctrl+C copies it.
+(function () {
+	var d = document, A = window.stats4uAssi || {};
+	var ansage = d.createElement("div");
+	ansage.className = "screen-reader-text";
+	ansage.setAttribute("aria-live", "polite");
+	d.body.appendChild(ansage);
+	function sag(t) { ansage.textContent = ""; setTimeout(function () { ansage.textContent = t; }, 50); }
+	d.addEventListener("click", function (ev) {
+		var k = ev.target.closest ? ev.target.closest("[data-s4u-kopieren]") : null;
+		if (!k) { return; }
+		var z = d.getElementById(k.getAttribute("data-s4u-kopieren"));
+		if (!z) { return; }
+		var t = k.querySelector(".s4u-kopier-text") || k, vorher = t.getAttribute("data-vorher") || t.textContent;
+		t.setAttribute("data-vorher", vorher);
+		function markieren() {
+			var r = d.createRange();
+			r.selectNodeContents(z);
+			var s = window.getSelection();
+			s.removeAllRanges();
+			s.addRange(r);
+			sag(A.markiert || "");
+		}
+		if (!navigator.clipboard || !window.isSecureContext) { markieren(); return; }
+		navigator.clipboard.writeText(z.textContent).then(function () {
+			k.classList.add("s4u-kopiert");
+			t.textContent = A.kopiert || vorher;
+			sag(A.kopiert || "");
+			setTimeout(function () { k.classList.remove("s4u-kopiert"); t.textContent = vorher; }, 2000);
+		}, markieren);
+	});
+})();
+
+// Feedback: characters left and a sending indicator on the button.
+(function () {
+	var d = document, t = d.getElementById("s4u_fb_text"), z = d.getElementById("s4u_fb_zaehler"), A = window.stats4uAssi || {};
+	if (!t || !z || !A.zeichen) { return; }
+	var max = parseInt(t.getAttribute("maxlength"), 10) || 5000;
+	function neu() {
+		z.textContent = A.zeichen.replace("%1$s", t.value.length).replace("%2$s", max);
+		z.classList.toggle("s4u-knapp", t.value.length > max * 0.9);
+	}
+	t.addEventListener("input", neu);
+	neu();
+	var k = d.getElementById("s4u_fb_knopf");
+	if (k && window.MutationObserver) {
+		new MutationObserver(function () { k.classList.toggle("s4u-laedt", k.disabled); neu(); })
+			.observe(k, { attributes: true, attributeFilter: ["disabled"] });
+	}
 })();

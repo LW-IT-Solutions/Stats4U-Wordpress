@@ -1,0 +1,382 @@
+/* Stats4U shop (Settings > Stats4U shop). Accent colour follows the admin colour scheme. */
+.s4u-shop {
+	--s4u-akzent: var(--wp-admin-theme-color, #2271b1);
+	max-width: 1100px;
+}
+
+.s4u-shop-kopf {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px 12px;
+	margin: 6px 0 12px;
+}
+
+.s4u-shop-kopf h1 {
+	margin: 0;
+	padding: 9px 0 4px;
+}
+
+.s4u-shop .dashicons {
+	width: 18px;
+	height: 18px;
+	font-size: 18px;
+}
+
+/* Pillen */
+.s4u-pille {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	padding: 3px 10px 3px 7px;
+	border-radius: 999px;
+	font-size: 12px;
+	font-weight: 600;
+	line-height: 1.5;
+	background: #f0f0f1;
+	color: #3c434a;
+	vertical-align: middle;
+}
+
+.s4u-pille .dashicons {
+	width: 16px;
+	height: 16px;
+	font-size: 16px;
+}
+
+.s4u-pille-klein {
+	padding: 1px 8px;
+	font-weight: 500;
+}
+
+.s4u-pille-ok { background: #edfaef; color: #00691b; }
+.s4u-pille-warn { background: #fcf9e8; color: #7a5600; }
+.s4u-pille-fehler { background: #fcf0f1; color: #b32d2e; }
+
+/* Kacheln */
+.s4u-kacheln {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+	gap: 12px;
+	margin: 0 0 20px;
+}
+
+.s4u-kachel {
+	position: relative;
+	padding: 12px 14px 12px 52px;
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	border-left-width: 4px;
+	border-radius: 8px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, .04);
+}
+
+.s4u-kachel .dashicons {
+	position: absolute;
+	left: 14px;
+	top: 50%;
+	width: 26px;
+	height: 26px;
+	margin-top: -13px;
+	font-size: 26px;
+	color: #8c8f94;
+}
+
+.s4u-kachel-name {
+	display: block;
+	color: #50575e;
+}
+
+.s4u-kachel strong {
+	display: block;
+	font-size: 20px;
+	line-height: 1.3;
+	color: #1d2327;
+}
+
+.s4u-kachel-ok { border-left-color: #00a32a; }
+.s4u-kachel-ok .dashicons { color: #00a32a; }
+.s4u-kachel-warn { border-left-color: #dba617; }
+.s4u-kachel-warn .dashicons { color: #b08300; }
+.s4u-kachel-fehler { border-left-color: #d63638; }
+.s4u-kachel-fehler .dashicons { color: #d63638; }
+.s4u-kachel-aus { border-left-color: #8c8f94; }
+
+/* Raster und Karten */
+.s4u-shop-raster {
+	display: grid;
+	grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+	gap: 20px;
+	align-items: start;
+}
+
+.s4u-shop .s4u-karte {
+	margin: 0 0 20px;
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	border-radius: 8px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, .04);
+}
+
+.s4u-shop .s4u-karte > h2 {
+	margin: 0;
+	padding: 14px 20px;
+	font-size: 14px;
+	line-height: 1.4;
+	border-bottom: 1px solid #f0f0f1;
+}
+
+.s4u-karte-innen {
+	padding: 4px 20px 14px;
+}
+
+.s4u-karte-innen .form-table th {
+	width: 150px;
+}
+
+.s4u-shop .button .dashicons {
+	width: 16px;
+	height: 16px;
+	font-size: 16px;
+	margin: 0 4px 0 -2px;
+	vertical-align: middle;
+	position: relative;
+	top: -1px;
+}
+
+/* Schalter */
+.s4u-schalter {
+	display: inline-flex !important;
+	align-items: center;
+	gap: 10px;
+	cursor: pointer;
+}
+
+.s4u-schalter input {
+	position: absolute !important;
+	opacity: 0 !important;
+	width: 1px !important;
+	min-width: 0 !important;
+	height: 1px !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	overflow: hidden;
+	clip-path: inset(50%);
+}
+
+.s4u-schalter-bahn {
+	position: relative;
+	display: inline-block;
+	flex: 0 0 auto;
+	width: 40px;
+	height: 22px;
+	border-radius: 999px;
+	background: #8c8f94;
+	transition: background .15s;
+}
+
+.s4u-schalter-bahn::after {
+	content: "";
+	position: absolute;
+	top: 3px;
+	left: 3px;
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	background: #fff;
+	transition: transform .15s;
+}
+
+.s4u-schalter input:checked + .s4u-schalter-bahn {
+	background: var(--s4u-akzent);
+}
+
+.s4u-schalter input:checked + .s4u-schalter-bahn::after {
+	transform: translateX(18px);
+}
+
+.s4u-schalter input:focus-visible + .s4u-schalter-bahn {
+	outline: 2px solid var(--s4u-akzent);
+	outline-offset: 2px;
+}
+
+/* Tabellen */
+.s4u-shop-tabelle {
+	margin: 4px 0 4px;
+}
+
+.s4u-shop-tabelle th:first-child {
+	width: 30%;
+}
+
+/* Was gesendet wird */
+.s4u-fluss-schritte {
+	margin: 10px 0 8px;
+	padding: 0;
+	list-style: none;
+}
+
+.s4u-fluss-schritte > li {
+	position: relative;
+	margin: 0;
+	padding: 0 0 18px 44px;
+}
+
+.s4u-fluss-schritte > li::before {
+	content: "";
+	position: absolute;
+	left: 15px;
+	top: 32px;
+	bottom: 4px;
+	border-left: 2px dashed #c3c4c7;
+}
+
+.s4u-fluss-schritte > li:last-child {
+	padding-bottom: 4px;
+}
+
+.s4u-fluss-schritte > li:last-child::before {
+	display: none;
+}
+
+.s4u-fluss-schritte > li > .dashicons {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 32px;
+	height: 32px;
+	box-sizing: border-box;
+	padding: 7px;
+	border-radius: 50%;
+	background: var(--s4u-akzent);
+	color: #fff;
+	font-size: 18px;
+}
+
+.s4u-fluss-schritte > li > strong,
+.s4u-fluss-schritte > li > span:not(.dashicons) {
+	display: block;
+}
+
+.s4u-fluss-schritte > li > span:not(.dashicons) {
+	color: #50575e;
+}
+
+.s4u-fluss-felder {
+	margin: 8px 0 0;
+	padding: 8px 10px;
+	list-style: none;
+	border-radius: 6px;
+	background: #f6f7f7;
+}
+
+.s4u-fluss-felder li {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	margin: 2px 0;
+}
+
+.s4u-fluss-felder .dashicons {
+	color: #00a32a;
+}
+
+.s4u-fluss-nie {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	margin: 6px 0 0;
+	padding: 8px 10px;
+	border-radius: 6px;
+	background: #fcf0f1;
+	color: #8a2424;
+}
+
+.s4u-fluss-nie .dashicons {
+	flex: 0 0 auto;
+	color: #d63638;
+}
+
+.s4u-shop-link a {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+}
+
+/* Rueckfrage (Dialog) */
+.s4u-dialog[hidden] {
+	display: none;
+}
+
+.s4u-dialog {
+	position: fixed;
+	inset: 0;
+	z-index: 100050;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 16px;
+}
+
+.s4u-dialog-grund {
+	position: absolute;
+	inset: 0;
+	background: rgba(0, 0, 0, .45);
+}
+
+.s4u-dialog-box {
+	position: relative;
+	width: 100%;
+	max-width: 460px;
+	padding: 20px 22px 18px;
+	box-sizing: border-box;
+	border-radius: 8px;
+	background: #fff;
+	box-shadow: 0 10px 40px rgba(0, 0, 0, .25);
+}
+
+.s4u-dialog-box .dashicons-warning {
+	width: 28px;
+	height: 28px;
+	font-size: 28px;
+	color: #dba617;
+}
+
+.s4u-dialog-text {
+	margin: 8px 0 18px;
+	font-size: 14px;
+}
+
+.s4u-dialog-knoepfe {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+	gap: 8px;
+}
+
+@media (max-width: 960px) {
+	.s4u-shop-raster {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}
+
+@media (max-width: 782px) {
+	.s4u-kacheln {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.s4u-karte-innen {
+		padding: 4px 12px 12px;
+	}
+
+	.s4u-shop .button {
+		min-height: 40px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.s4u-schalter-bahn,
+	.s4u-schalter-bahn::after {
+		transition: none;
+	}
+}

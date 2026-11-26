@@ -4,7 +4,7 @@ Tags: counter, visitor counter, hit counter, statistics, consent
 Requires at least: 5.8
 Tested up to: 7.2
 Requires PHP: 7.4
-Stable tag: 1.7.2
+Stable tag: 1.8.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -302,6 +302,22 @@ plugin and removed it again.
 
 == Changelog ==
 
+= 1.8.0 =
+* Shop page rebuilt as cards: a status badge, tiles for reporting, shop secret,
+  failed reports and orders not sent, a switch for reporting and a diagram of
+  exactly what a report contains (and what it never contains).
+* Failed and not-sent orders are listed as tables with links to the orders;
+  clearing the list asks for confirmation in a dialog of the plugin.
+* Settings page: an overview of where the counter is shown, when it loads and
+  what it counts; a dot in the menu when the consent settings need attention.
+* Copy buttons for the shortcode and the PHP template line, a loading
+  indicator for "Request a new counter number" (which asks before replacing an
+  existing number) and a character counter for feedback.
+* If the preview image cannot be loaded, the settings page and the block show
+  a short note instead of a broken image; the block without a counter shows a
+  placeholder with a link to the settings.
+* No change to what is sent, when or where.
+
 = 1.7.2 =
 * Readme and settings texts describe exactly what shop reporting sends, when
   and to which address, and which events come from the Stats4U script rather
@@ -404,6 +420,9 @@ plugin and removed it again.
 * First release: shortcode, footer, dark mode, settings page.
 
 == Upgrade Notice ==
+
+= 1.8.0 =
+Clearer shop page with a diagram of what a report contains, an overview on the settings page and copy buttons. No change to what is sent. Your settings are kept.
 
 = 1.7.2 =
 Exact texts about shop reporting, a shop notice that can be hidden, and order data from 1.7.x is kept. Your settings are kept.
