@@ -3,12 +3,12 @@
  * Plugin Name:       Stats4U
  * Plugin URI:        https://github.com/LW-IT-Solutions/Stats4U-Wordpress
  * Description:       Puts a Stats4U visitor counter on your site. Paste the code from stats4u.net, choose where it appears and, if you use a consent banner, let it decide when the counter loads.
- * Version:           1.7.1
+ * Version:           1.7.2
  * Requires at least: 5.8
  * Requires PHP:      7.4
  * Author:            LW IT Solutions Company
  * Author URI:        https://www.stats4u.net/
- * License:           GPL-2.0-or-later
+ * License:           GPLv2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       stats4u
  *
@@ -46,12 +46,8 @@
  * und die ist per Uebereinkunft Englisch.
  *
  * Uebersetzt wird seit 1.6.0 auf translate.wordpress.org: WordPress holt die
- * Sprachpakete nach wp-content/languages/plugins/ und laedt sie von selbst,
- * ohne eigenen Aufruf im Plugin. 1.1.0 bis 1.5.0 brachten 18 Uebersetzungen
- * mit - das wollte die Pruefung von wordpress.org nicht (26.09.2026). Sie
- * liegen seitdem ausserhalb des Pakets, als Vorlage fuer den Import dort.
- * (Den Namen der Ladefunktion nennt hier kein Kommentar mehr: wer nach ihm
- * sucht, soll im Plugin nichts finden.)
+ * Sprachpakete nach wp-content/languages/plugins/ und laedt sie von selbst.
+ * Das Plugin bringt keine Sprachdateien mit.
  *
  * AUSGABE: jeder Wert wird beim Ausgeben maskiert (esc_html, esc_attr,
  * esc_url, wp_kses, wp_print_script_tag). Fremdes HTML gibt das Plugin nie
@@ -62,8 +58,16 @@
 if (!defined('ABSPATH')) { exit; }
 require_once __DIR__.'/shop.php';
 
+// Beim Deaktivieren keine geplanten Wiederholungen der Shop-Meldungen
+// zuruecklassen; fehlgeschlagene Bestellungen bleiben in der Liste und lassen
+// sich spaeter mit "Retry failed reports" erneut senden.
+register_deactivation_hook(__FILE__, 'stats4u_deaktivieren');
+function stats4u_deaktivieren() {
+    wp_unschedule_hook('stats4u_shop_retry');
+}
+
 const STATS4U_OPTION  = 'stats4u_einstellungen';
-const STATS4U_VERSION = '1.7.1';
+const STATS4U_VERSION = '1.7.2';
 /** Das offizielle Zaehlerskript - dasselbe, das der Assistent auf stats4u.net ausgibt. */
 const STATS4U_SKRIPT  = 'https://www.stats4u.net/s4u.js';
 /** Wohin das Feedback-Formular schickt - aus dem Browser, nie vom Server. */
@@ -681,7 +685,7 @@ function stats4u_aktivierer() {
         wp_print_inline_script_tag($js, array('id' => 'stats4u-consent'));
         return;
     }
-    $freigabe = plugins_url('freigabe.js', __FILE__) . '?ver=' . STATS4U_VERSION;
+    $freigabe = add_query_arg('ver', STATS4U_VERSION, plugins_url('freigabe.js', __FILE__));
     $attr = array();
     foreach ($cmp['attr'] as $k => $v) { $attr[$k] = str_replace(array('{wert}', '{freigabe}'), array($wert, $freigabe), $v); }
     $attr['id'] = 'stats4u-consent';
@@ -1226,29 +1230,7 @@ function stats4u_admin_skript($seite) {
         '.s4u-kopf-knopf{margin-left:auto!important}',
         // .button setzt display:inline-block und schluege sonst [hidden].
         '.s4u-admin [hidden]{display:none!important}',
-        // Die Leiste im Stats4U-Design: dieselbe Tapete wie .hero2 auf
-        // stats4u.net - Farbflaechen in Prozent, Lichtkreise in px (::before).
-        '.s4u-banner{position:relative;overflow:hidden;margin:0 0 20px;padding:24px 20px 22px;border-radius:12px;text-align:center;',
-        'border:1px solid rgba(255,255,255,.16);box-shadow:0 8px 26px rgba(0,0,0,.18);background-color:#050505;background-image:',
-        'linear-gradient(180deg,rgba(0,0,0,.12) 0%,rgba(0,0,0,.58) 100%),',
-        'radial-gradient(72% 132% at 101% 52%,rgba(0,0,0,.94) 0%,rgba(0,0,0,0) 60%),',
-        'radial-gradient(52% 78% at 7% -12%,rgba(0,196,222,.72),rgba(0,196,222,0) 68%),',
-        'radial-gradient(44% 84% at 1% 60%,rgba(255,45,155,.66),rgba(255,45,155,0) 70%),',
-        'radial-gradient(42% 96% at 21% 56%,rgba(255,152,0,.78),rgba(255,152,0,0) 70%),',
-        'radial-gradient(40% 88% at 39% 26%,rgba(196,226,0,.62),rgba(196,226,0,0) 72%),',
-        'radial-gradient(48% 98% at 57% 68%,rgba(0,198,108,.6),rgba(0,198,108,0) 74%)}',
-        '.s4u-banner::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:',
-        'radial-gradient(circle at 20% 54%,rgba(255,255,255,0) 0 44px,rgba(255,255,255,.2) 50px 76px,rgba(255,255,255,0) 84px),',
-        'radial-gradient(circle at 20% 54%,rgba(255,255,255,.22) 0 20px,rgba(255,255,255,.07) 25px,rgba(255,255,255,0) 29px),',
-        'radial-gradient(circle at 8% 24%,rgba(255,255,255,.18) 0 26px,rgba(255,255,255,.06) 31px,rgba(255,255,255,0) 35px),',
-        'radial-gradient(circle at 4% 82%,rgba(255,255,255,.14) 0 22px,rgba(255,255,255,.05) 27px,rgba(255,255,255,0) 31px),',
-        'radial-gradient(circle at 30% 16%,rgba(255,255,255,.16) 0 24px,rgba(255,255,255,.05) 29px,rgba(255,255,255,0) 33px),',
-        'radial-gradient(circle at 45% 44%,rgba(255,255,255,.15) 0 32px,rgba(255,255,255,.05) 38px,rgba(255,255,255,0) 43px),',
-        'radial-gradient(circle at 69% 62%,rgba(255,255,255,.06) 0 52px,rgba(255,255,255,0) 62px)}',
-        '.s4u-banner>*{position:relative}',
-        '.s4u-banner-titel{margin:0 0 22px;font-size:26px;line-height:1.2;font-weight:700;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.75)}',
-        '.s4u-banner-titel::after{content:"";position:absolute;left:50%;bottom:-12px;width:56px;height:4px;margin-left:-28px;border-radius:4px;background:linear-gradient(90deg,#22e3e6,#4be3ac)}',
-        '.s4u-banner-unter{margin:0;font-size:15px;color:rgba(255,255,255,.86);text-shadow:0 1px 10px rgba(0,0,0,.7)}',
+        '.s4u-unterzeile{margin:-6px 0 14px}',
         // Auswahl beim ersten Aufruf
         '.s4u-start>h2{font-size:18px;margin:4px 0 14px}',
         '.s4u-wahl{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;max-width:760px}',
@@ -1307,47 +1289,20 @@ function stats4u_admin_skript($seite) {
         '.s4u-ansicht-eigen .s4u-rahmen{grid-template-columns:minmax(0,1fr);gap:14px}',
         // Auf dem Handy liegt das Menue oben und bricht um - keine Leiste, die seitlich schiebt.
         '.s4u-menue{position:static;flex-direction:row;flex-wrap:wrap}.s4u-menue a{padding:8px 10px}',
-        '.s4u-banner{padding:18px 14px}.s4u-banner-titel{font-size:19px}.s4u-banner-unter{font-size:14px}',
         '.s4u-schritte li:not(.s4u-jetzt) .s4u-schritt-name{display:none}',
         '.s4u-buehne{min-width:0;width:100%}}',
     )));
-    wp_register_script('stats4u-admin', false, array(), STATS4U_VERSION, true);
+    // Das Skript der Seite steht lesbar in admin.js; hier kommen nur seine
+    // Daten dazu, als JSON mit JSON_HEX_TAG/-AMP (siehe stats4u_aktivierer):
+    // kein <, > oder & in den Werten.
+    wp_register_script('stats4u-admin', plugins_url('admin.js', __FILE__), array(), STATS4U_VERSION, true);
     wp_enqueue_script('stats4u-admin');
     $daten = array();
     foreach (stats4u_cmps() as $k => $c) { $daten[$k] = array('wert' => $c['wert'], 'hinweis' => stats4u_cmp_hinweis($c)); }
-    // Alle Angaben fuer die Skripte als JSON mit JSON_HEX_TAG/-AMP (siehe
-    // stats4u_aktivierer): kein <, > oder & in den Werten.
-    wp_add_inline_script('stats4u-admin', 'window.stats4uCmp=' . wp_json_encode($daten, JSON_HEX_TAG | JSON_HEX_AMP) . ';'
-        . "(function(){var d=document,c=d.getElementById('s4u_consent');if(!c){return;}"
-        . "var w=d.getElementById('s4u_consent_wert'),h=d.getElementById('s4u_wert_hinweis'),wz=d.getElementById('s4u_wert_zeile'),ez=d.getElementById('s4u_eigen_zeile');"
-        . "function neu(){var k=c.value,x=window.stats4uCmp[k];if(w){w.placeholder=x?x.wert:'';}if(h&&x){h.textContent=x.hinweis;}"
-        . "if(wz){wz.hidden=!x;}if(ez){ez.hidden=(k!=='eigen');}}"
-        . "c.addEventListener('change',neu);neu();"
-        . "var p=d.querySelectorAll('input[name$=\"[platz]\"]'),az=d.getElementById('s4u_ausrichtung_zeile');"
-        . "function platz(){var x=d.querySelector('input[name$=\"[platz]\"]:checked');if(az&&x){az.hidden=/^(ecke_r|ecke_l|aus)$/.test(x.value);}}"
-        . "for(var i=0;i<p.length;i++){p[i].addEventListener('change',platz);}platz();})();");
-    // Die Vorschau zieht Groesse, Sprache, hell/dunkel und Zaehlweise nach -
-    // dieselbe Reihenfolge wie stats4u_bildadresse(), immer mit rl=1 (zaehlt
-    // nicht). Die Bausteine stehen an der Vorschau selbst (data-*), damit
-    // auch der Rueckweg vom Assistenten sie richtig hat.
-    wp_add_inline_script('stats4u-admin',
-        "(function(){var d=document,b=d.getElementById('s4u_vorschau'),bu=d.getElementById('s4u_buehne');if(!b){return;}"
-        . "function wert(s){var x=d.querySelector(s);return x?x.value:'';}"
-        . "function neu(){var p={},q=[],k;try{p=JSON.parse(b.getAttribute('data-params'))||{};}catch(x){}"
-        . "for(k in p){if(Object.prototype.hasOwnProperty.call(p,k)){q.push(encodeURIComponent(k)+'='+encodeURIComponent(p[k]));}}"
-        . "var dk=wert('input[name$=\"[dark]\"]:checked')||'0';if(dk!=='0'){q.push('dark='+encodeURIComponent(dk));}"
-        . "var g=parseInt(wert('#s4u_gr'),10);if(g&&g!==100){q.push('gr='+g);}"
-        . "if(wert('input[name$=\"[metrik]\"]:checked')==='uniq'){q.push('m=uniq');}"
-        . "var s=wert('#s4u_sprache');if(s==='site'){s=b.getAttribute('data-seite')||'';}if(s){q.push('cl='+encodeURIComponent(s));}"
-        . "q.push('rl=1');var u=b.getAttribute('data-basis')+'?'+q.join('&');if(b.getAttribute('src')!==u){b.setAttribute('src',u);}"
-        . "if(bu){bu.classList.toggle('s4u-dunkel',dk==='1');}}"
-        . "window.stats4uVorschau=neu;"
-        . "var f=d.querySelectorAll('#s4u_gr,#s4u_sprache,input[name$=\"[dark]\"],input[name$=\"[metrik]\"]');"
-        . "for(var i=0;i<f.length;i++){f[i].addEventListener('change',neu);}})();");
+    wp_add_inline_script('stats4u-admin', 'window.stats4uCmp=' . wp_json_encode($daten, JSON_HEX_TAG | JSON_HEX_AMP) . ';', 'before');
 
-    // Feedback: der Browser schickt an stats4u.net (STATS4U_RUECKMELDUNG) - als
-    // einfaches Formular (URLSearchParams), also ohne Vorabfrage und ohne
-    // Anmeldedaten. Die Saetze zu den Antwortcodes stehen hier, uebersetzt.
+    // Feedback: der Browser schickt erst auf "Send feedback" an stats4u.net
+    // (STATS4U_RUECKMELDUNG). Die Saetze zu den Antwortcodes stehen hier, uebersetzt.
     $e   = stats4u_einstellungen();
     $spr = strtolower(substr(get_user_locale(), 0, 2));
     wp_add_inline_script('stats4u-admin', 'window.stats4uFb=' . wp_json_encode(array(
@@ -1361,71 +1316,19 @@ function stats4u_admin_skript($seite) {
         'mail'    => __('This email address does not look right.', 'stats4u'),
         'zu_oft'  => __('Too many messages from here - please try again in an hour.', 'stats4u'),
         'netz'    => __('stats4u.net could not be reached. Please try again later.', 'stats4u'),
-    ), JSON_HEX_TAG | JSON_HEX_AMP) . ';'
-        . '(function(){var d=document,f=d.getElementById("s4u_fb_form"),T=window.stats4uFb;if(!f||!window.fetch||!window.URLSearchParams){return;}'
-        . 'var t=d.getElementById("s4u_fb_text"),m=d.getElementById("s4u_fb_mail"),h=d.getElementById("s4u_fb_seite"),k=d.getElementById("s4u_fb_knopf"),st=d.getElementById("s4u_fb_status");'
-        . 'function zeig(x,ok){st.textContent=x;st.className=ok?"s4u-ok":"s4u-fehler";}'
-        . 'f.addEventListener("submit",function(ev){ev.preventDefault();var x=t.value.trim(),y=m.value.trim();'
-        . 'if(x.length<10){zeig(T.kurz,false);t.focus();return;}'
-        . 'if(y!==""&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(y)){zeig(T.mail,false);m.focus();return;}'
-        . 'var q=new URLSearchParams();q.append("message",x);q.append("email",y);q.append("version",T.version);q.append("lang",T.lang);'
-        . 'if(h&&h.checked){q.append("siteurl",T.seite);if(T.zaehler){q.append("counterid",T.zaehler);}}'
-        . 'k.disabled=true;st.textContent="";st.className="";'
-        . 'fetch(T.ziel,{method:"POST",body:q,credentials:"omit"}).then(function(r){return r.json();}).then(function(a){k.disabled=false;'
-        . 'if(a&&a.ok){zeig(T.danke,true);t.value="";return;}zeig((a&&T[a.code])||T.netz,false);})'
-        . '.catch(function(){k.disabled=false;zeig(T.netz,false);});});})();');
+    ), JSON_HEX_TAG | JSON_HEX_AMP) . ';', 'before');
 
-    // Einstellungen: ein Teil zur Zeit, gewaehlt im Menue (Sprungmarke in der
-    // Adresse, damit Neuladen dort bleibt). Assistent: Schritte mit Zurueck/
-    // Weiter, Schritt 1 nur mit Zaehler, am Ende die Zusammenfassung. Ohne
-    // dieses Skript stehen alle Teile untereinander (s4u-js fehlt).
+    // Einstellungen (Menue) und Assistent (Schritte).
     wp_add_inline_script('stats4u-admin', 'window.stats4uAssi=' . wp_json_encode(array(
         /* translators: 1: number of the current step, 2: number of steps */
         'schritt' => __('Step %1$d of %2$d', 'stats4u'),
         'erst'    => __('Choose or create a counter first.', 'stats4u'),
         /* translators: 1: counter number, 2: design number */
         'zaehler' => __('Counter %1$s, design %2$s', 'stats4u'),
-    ), JSON_HEX_TAG | JSON_HEX_AMP) . ';'
-        // Das Code-Feld waechst mit dem Code - ungekuerzt sichtbar, auch auf dem Handy.
-        . '(function(){var c=document.getElementById("s4u_code");if(!c){return;}'
-        . 'function hoch(){if(!c.offsetParent){return;}c.style.height="auto";c.style.height=(c.scrollHeight+2)+"px";}'
-        . 'c.addEventListener("input",hoch);window.stats4uCodeHoch=hoch;hoch();window.addEventListener("resize",hoch);})();'
-        . '(function(){var d=document,R=d.getElementById("s4u_rahmen");if(!R){return;}R.classList.add("s4u-js");'
-        . 'var teile=[].slice.call(R.querySelectorAll(".s4u-teil")),A=R.getAttribute("data-ansicht"),T=window.stats4uAssi;'
-        . 'function zeige(el){teile.forEach(function(t){t.classList.toggle("s4u-aktiv",t===el);});if(window.stats4uCodeHoch){window.stats4uCodeHoch();}}'
-        . 'function fokus(el){var h=el&&el.querySelector("h2");if(h){h.setAttribute("tabindex","-1");h.focus({preventScroll:true});}'
-        . 'var r=R.getBoundingClientRect();if(r.top<0){window.scrollBy(0,r.top-50);}}'
-        . 'if(A==="eigen"){var links=[].slice.call(R.querySelectorAll(".s4u-menue a")),leiste=d.getElementById("s4u_leiste");'
-        . 'var waehle=function(id,f){var el=d.getElementById("s4u-teil-"+id)||teile[0];zeige(el);var t=el.id.replace("s4u-teil-","");'
-        . 'links.forEach(function(a){if(a.getAttribute("data-teil")===t){a.setAttribute("aria-current","page");}else{a.removeAttribute("aria-current");}});'
-        . 'if(leiste){leiste.hidden=(t==="feedback");}if(f){fokus(el);}};'
-        . 'links.forEach(function(a){a.addEventListener("click",function(ev){ev.preventDefault();var t=a.getAttribute("data-teil");'
-        . 'if(history.replaceState){history.replaceState(null,"","#s4u-teil-"+t);}waehle(t,true);});});'
-        . 'waehle((location.hash||"").replace("#s4u-teil-",""),false);return;}'
-        . 'var nr=1,max=teile.length,z=d.getElementById("s4u_zurueck"),w=d.getElementById("s4u_weiter"),fe=d.getElementById("s4u_fertig"),'
-        . 'st=d.getElementById("s4u_schritt_text"),hin=d.getElementById("s4u_assi_fehler"),li=[].slice.call(R.querySelectorAll(".s4u-schritte li"));'
-        . 'function text(sel){var x=d.querySelector(sel);return x?x.textContent.replace(/\s+/g," ").trim():"";}'
-        . 'function zusammen(){var c=(d.getElementById("s4u_code")||{}).value||"",i=c.match(/data-id="(\d+)"/)||c.match(/\/c\/(\d+)-/)||c.match(/^\s*#?(\d{1,12})\s*$/),'
-        . 's=c.match(/data-style="([0-9a-z_]+)"/i)||c.match(/\/c\/\d+-([0-9a-z_]+)\./i);'
-        . 'd.getElementById("s4u_z_zaehler").textContent=i?T.zaehler.replace("%1$s",i[1]).replace("%2$s",s?s[1]:"-"):text("#s4u_nr");'
-        . 'var p=d.querySelector("input[name$=\"[platz]\"]:checked");d.getElementById("s4u_z_platz").textContent=p?text("input[value=\""+p.value+"\"][name$=\"[platz]\"] + span"):"";'
-        . 'var o=d.getElementById("s4u_consent");d.getElementById("s4u_z_consent").textContent=o&&o.selectedIndex>=0?o.options[o.selectedIndex].text:"";'
-        . 'var v=d.getElementById("s4u_vorschau"),v2=d.getElementById("s4u_vorschau_2"),b2=d.getElementById("s4u_buehne_2");'
-        . 'if(v&&v2&&b2){v2.src=v.getAttribute("src");b2.hidden=false;b2.classList.toggle("s4u-dunkel",d.getElementById("s4u_buehne").classList.contains("s4u-dunkel"));}}'
-        . 'function schritt(n,f){nr=n;var el=teile[n-1];zeige(el);hin.hidden=true;'
-        . 'li.forEach(function(x,j){x.classList.toggle("s4u-jetzt",j===n-1);x.classList.toggle("s4u-erledigt",j<n-1);'
-        . 'if(j===n-1){x.setAttribute("aria-current","step");}else{x.removeAttribute("aria-current");}});'
-        . 'z.hidden=(n===1);w.hidden=(n===max);fe.hidden=(n!==max);st.textContent=T.schritt.replace("%1$d",n).replace("%2$d",max);'
-        . 'if(n===max){zusammen();}if(f){fokus(el);}}'
-        . 'w.addEventListener("click",function(){var c=d.getElementById("s4u_code");'
-        . 'if(nr===1&&!(c&&c.value.trim()!=="")){hin.textContent=T.erst;hin.hidden=false;if(c){c.focus();}return;}schritt(nr+1,true);});'
-        . 'z.addEventListener("click",function(){schritt(nr-1,true);});'
-        . 'li.forEach(function(x,j){x.addEventListener("click",function(){if(j<nr-1){schritt(j+1,true);}});});'
-        . 'schritt(1,false);})();');
+    ), JSON_HEX_TAG | JSON_HEX_AMP) . ';', 'before');
 
     // "Neue Zaehlernummer anfordern": eine freie Nummer von stats4u.net
-    // (action=wpneu, aus dem Browser). Sie ersetzt data-id im Code-Feld - der
-    // Entwurf bleibt - und gilt, sobald gespeichert wird (stats4u_code_geaendert).
+    // (action=wpneu, aus dem Browser, erst auf Klick).
     wp_add_inline_script('stats4u-admin', 'window.stats4uNeu=' . wp_json_encode(array(
         'ziel'    => STATS4U_NEUE_NUMMER,
         'lang'    => in_array($spr, stats4u_sprachen(), true) ? $spr : 'en',
@@ -1435,18 +1338,7 @@ function stats4u_admin_skript($seite) {
         'ok'      => __('New counter number %s - it is used as soon as you save.', 'stats4u'),
         'zu_oft'  => __('Too many new numbers from here - please try again in an hour.', 'stats4u'),
         'netz'    => __('stats4u.net could not be reached. Please try again later.', 'stats4u'),
-    ), JSON_HEX_TAG | JSON_HEX_AMP) . ';'
-        . '(function(){var d=document,k=d.getElementById("s4u_neu_nr"),N=window.stats4uNeu;if(!k||!window.fetch||!window.URLSearchParams){if(k){k.hidden=true;}return;}'
-        . 'var st=d.getElementById("s4u_neu_status"),c=d.getElementById("s4u_code");'
-        . 'k.addEventListener("click",function(){var q=new URLSearchParams();q.append("lang",N.lang);k.disabled=true;st.textContent="";st.className="s4u-status";'
-        . 'fetch(N.ziel,{method:"POST",body:q,credentials:"omit"}).then(function(r){return r.json();}).then(function(a){k.disabled=false;'
-        . 'if(!a||!a.ok||!/^\d{1,12}$/.test(a.id||"")){st.textContent=(a&&N[a.code])||N.netz;st.className="s4u-status s4u-fehler";return;}'
-        . 'c.value=/data-id="\d+"/.test(c.value)?c.value.replace(/data-id="\d+"/,"data-id=\""+a.id+"\""):N.vorlage.replace("data-id=\"0\"","data-id=\""+a.id+"\"");'
-        . 'var b=d.getElementById("s4u_vorschau");if(b){b.setAttribute("data-basis",b.getAttribute("data-basis").replace(/\/c\/\d+-/,"/c/"+a.id+"-"));if(window.stats4uVorschau){window.stats4uVorschau();}}'
-        . 'var z=d.getElementById("s4u_nr");if(z&&N.alt){z.textContent=z.textContent.replace(N.alt,a.id);}N.alt=a.id;'
-        . 'var h=d.getElementById("s4u_assi_fehler");if(h){h.hidden=true;}if(window.stats4uCodeHoch){window.stats4uCodeHoch();}'
-        . 'st.textContent=N.ok.replace("%s",a.id);st.className="s4u-status s4u-ok";})'
-        . '.catch(function(){k.disabled=false;st.textContent=N.netz;st.className="s4u-status s4u-fehler";});});})();');
+    ), JSON_HEX_TAG | JSON_HEX_AMP) . ';', 'before');
 }
 
 function stats4u_seite() {
@@ -1503,14 +1395,10 @@ function stats4u_seite() {
             <?php endif; ?>
         </div>
         <?php
-        // Die Leiste im Stats4U-Design - dieselbe Tapete wie auf stats4u.net
-        // (style.css, .hero2): Farbverlaeufe und Lichtkreise in CSS, kein Bild.
-        // Die Saetze sind die der Startseite dort, in allen Sprachen.
+        // Eine schlichte Zeile unter der Ueberschrift (bis 1.7.1 eine grosse
+        // Leiste im Design von stats4u.net).
         ?>
-        <div class="s4u-banner">
-            <p class="s4u-banner-titel"><?php echo esc_html__('Free hit counters and visitor stats for websites', 'stats4u'); ?></p>
-            <p class="s4u-banner-unter"><?php echo esc_html__('Simple, lightweight and secure analytics.', 'stats4u'); ?></p>
-        </div>
+        <p class="description s4u-unterzeile"><?php echo esc_html__('Your visitor counter from stats4u.net.', 'stats4u'); ?></p>
         <?php
         // Hierhin setzt WordPress seine Hinweise ("Settings saved."). Ohne den
         // Anker landeten sie hinter der Ueberschrift, mitten in der Kopfzeile
@@ -1871,7 +1759,7 @@ function stats4u_seite() {
         <?php
         // --- Rueckmeldung an stats4u.net. Ein eigenes Formular ausserhalb des
         // Einstellungsformulars (Formulare lassen sich nicht schachteln); es
-        // schickt der Browser per fetch (stats4u_admin_skript), nie der Server
+        // schickt der Browser per fetch (admin.js), nie der Server
         // der Seite - so steht es in der readme. Seitenadresse und Zaehler nur
         // mit Haken: ab Werk geht nichts mit, was niemand angeklickt hat.
         ?>

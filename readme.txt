@@ -4,7 +4,7 @@ Tags: counter, visitor counter, hit counter, statistics, consent
 Requires at least: 5.8
 Tested up to: 7.2
 Requires PHP: 7.4
-Stable tag: 1.7.1
+Stable tag: 1.7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -61,20 +61,43 @@ by itself once it is there.
 This plugin loads the script of Stats4U (https://www.stats4u.net/), the
 visitor counter service it is made for. Without it, the plugin does nothing.
 
-Optional WooCommerce reporting is off by default. Enable it both in the Stats4U
-owner settings and under Settings > Stats4U shop. Enter the counter number and
-shop secret there. Confirmed payments and refunds send paid/refunded amounts in
-minor currency units, currency and a keyed order reference to
-https://www.stats4u.net/index.php?action=insights_sale over HTTPS, signed with
-your shop secret. No customer fields or product details are sent. Duplicate
-reports are safe. Failed reports retry up to eight times through WP-Cron and
-show an admin notice; after that, check the integration and retry the order hook.
-Reporting requires WP-Cron to run. It does not backfill earlier orders.
+Optional WooCommerce reporting is off by default. It is switched on in two
+places: in the Stats4U owner settings, where you create a shop secret, and under
+Settings > Stats4U shop, where you enter the counter number and that secret.
+Only then does your WordPress server itself send data to Stats4U: a POST over
+HTTPS to `https://www.stats4u.net/index.php?action=insights_sale&s4uid=<counter number>`,
+signed with your shop secret. It contains the paid and the refunded amount in
+minor currency units, the currency, the time of payment and a keyed
+(pseudonymous) order reference - an HMAC of your site address and the order ID.
+No customer fields and no product details are sent. A report is sent:
 
-Optional contact/download categories and marked form submits are enabled in
-Stats4U owner settings. Contact Form 7 success events use wpcf7mailsent; custom
-forms call s4u.formSuccess only after successful server processing. A submit
-alone never means a successful form. No form values or contact addresses are sent.
+* when WooCommerce marks an order as paid (`woocommerce_payment_complete`,
+  usually during the customer's checkout or the payment provider's
+  confirmation),
+* when the status of an order changes to processing or completed - also when
+  you change it in the admin area,
+* when an order is refunded,
+* when a failed report is retried through WP-Cron (up to eight times, from
+  2 minutes to 6 hours apart; WP-Cron runs during any request to your site),
+* when you click "Retry failed reports" on the Stats4U shop page.
+
+Only orders paid within the last 400 days are sent. Switching reporting on does
+not send earlier orders in bulk; an order paid before that is sent only if one
+of the events above happens to it later. Duplicate reports are safe. Stats4U
+accepts EUR, PLN, USD, GBP, CHF, CZK, SEK, HUF and RON; an order in another
+currency, or with an amount that cannot be read, is not sent and is listed on
+the Stats4U shop page instead. Failed reports show a notice for administrators
+on the Dashboard, the plugin list, the Stats4U settings page and the order
+screens; it can be hidden and comes back only when another report fails.
+Deactivating the plugin removes pending retries.
+
+Contact and download categories and successful form submits are counted by the
+Stats4U script (s4u.js) in the visitor's browser, not by the plugin; the plugin
+has no code for them. They are switched on in your counter's owner settings on
+stats4u.net. For Contact Form 7 the script waits for its `wpcf7mailsent` event;
+other forms must call `s4u.formSuccess()` after successful server processing.
+A submit alone never counts as a successful form. No form values or contact
+addresses are sent.
 
 What is sent and when:
 
@@ -101,6 +124,10 @@ What is sent and when:
       marked with `data-s4u-event` - or, only if you switched this on for your
       counter on stats4u.net, any link. The event name is the link's target,
       shortened to its host or path.
+    * only if you switched these categories on for your counter on
+      stats4u.net: an event (`action=event`) when a visitor clicks a contact or
+      download link, or after a form was sent successfully (see above). Form
+      values and contact addresses are not sent.
     * only if the code you pasted contains `data-screen="1"` (a choice in the
       creator on stats4u.net): the screen size, the window size and the pixel
       ratio, sent together with the time on page.
@@ -124,9 +151,14 @@ What is sent and when:
   together with the plugin version and the language of your admin area - plus
   your email address if you enter one, and your site address and counter
   number only if you tick the box for them. The message is stored so that it
-  can be answered, and the operator is notified through Telegram. Nothing is
-  sent before you click "Send feedback".
-* Your WordPress server itself never contacts stats4u.net.
+  can be answered, and stats4u.net forwards it, with the details you entered,
+  to its operator through Telegram (terms: https://telegram.org/tos, privacy:
+  https://telegram.org/privacy). Neither the plugin nor your browser contacts
+  Telegram. Nothing is sent before you click "Send feedback".
+* Your WordPress server contacts stats4u.net only with WooCommerce reporting
+  switched on, as described above (paid, completed or refunded orders, WP-Cron
+  retries, "Retry failed reports"). Without it, every request listed here comes
+  from a browser.
 
 The Stats4U script links the counter to its statistics page,
 `https://www.stats4u.net/live/<counter number>` - as on every site that uses
@@ -231,8 +263,13 @@ number keeps the design and changes only the counter.
 
 = Does the plugin send anything to stats4u.net while I am in the admin area? =
 
-Your server does not. Your browser loads the preview image on the settings
-page and in the block editor, marked so that it is not counted.
+Your server does only with WooCommerce reporting switched on: when you set an
+order to processing or completed, refund an order or click "Retry failed
+reports", and when WP-Cron runs a pending retry during an admin request.
+Otherwise your server sends nothing. Your browser loads the preview image on
+the settings page and in the block editor, marked so that it is not counted,
+and contacts stats4u.net when you click "Send feedback" or "Request a new
+counter number".
 
 = What happens if stats4u.net is unreachable? =
 
@@ -249,9 +286,12 @@ instead of your numbers.
 
 = Does deleting the plugin delete my counter? =
 
-No. Deleting the plugin removes its option and the remembered view of its
-settings page from your database, and nothing else. The counter belongs to you and keeps its history - your numbers
-should not disappear because you tried a plugin and removed it again.
+No. Deleting the plugin removes from your database what the plugin stored:
+its settings, the shop settings and lists, pending retries, the remembered view
+of its settings page and a hidden shop notice, and the order reference and
+retry count it stored on WooCommerce orders. The counter belongs to you and
+keeps its history - your numbers should not disappear because you tried a
+plugin and removed it again.
 
 == Screenshots ==
 
@@ -261,6 +301,20 @@ should not disappear because you tried a plugin and removed it again.
 4. The counter right below the footer of a theme.
 
 == Changelog ==
+
+= 1.7.2 =
+* Readme and settings texts describe exactly what shop reporting sends, when
+  and to which address, and which events come from the Stats4U script rather
+  than from the plugin. Shop input is sanitized where it is read.
+* The notice about failed shop reports appears only on the Dashboard, the
+  plugin list, the Stats4U settings page and the order screens, and can be
+  hidden. Orders in an unsupported currency are listed on the shop page
+  instead of being treated as failed reports.
+* Order meta keys use the prefix `_stats4u_`; values stored by 1.7.0 and 1.7.1
+  are kept and moved. Uninstalling also removes this order meta, deactivating
+  removes pending retries.
+* The settings page script is a separate, readable file (admin.js); the large
+  banner on the settings page is replaced by one line.
 
 = 1.7.1 =
 * Tested with WordPress 7.2.
@@ -350,6 +404,9 @@ should not disappear because you tried a plugin and removed it again.
 * First release: shortcode, footer, dark mode, settings page.
 
 == Upgrade Notice ==
+
+= 1.7.2 =
+Exact texts about shop reporting, a shop notice that can be hidden, and order data from 1.7.x is kept. Your settings are kept.
 
 = 1.7.1 =
 Compatible with WordPress 7.2; the counter block is updated for the iframe editor. Your settings are kept.
