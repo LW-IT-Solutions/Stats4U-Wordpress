@@ -4,401 +4,789 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Stats4U 1.4.0\n"
 "Report-Msgid-Bugs-To: https://www.stats4u.net/\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-11-27T07:33:06+00:00\n"
+"PO-Revision-Date: 2026-11-27T07:33:06+00:00\n"
 "Language: pl_PL\n"
 
+#: stats4u.php:261
 msgid "This is a globe or map widget. The plugin shows image counters - pick an image design on stats4u.net."
 msgstr "To jest widżet globusa lub mapy. Wtyczka pokazuje liczniki graficzne – wybierz wzór graficzny na stats4u.net."
 
+#: stats4u.php:264
 msgid "This is a link to a statistics page with a custom name. Paste the counter code instead - or just the counter number."
 msgstr "To link do strony statystyk z własną nazwą. Wklej zamiast tego kod licznika – albo sam numer licznika."
 
+#: stats4u.php:266
 msgid "No Stats4U counter found in what you pasted. Paste the code from stats4u.net - or just the counter number."
 msgstr "We wklejonym tekście nie znaleziono licznika Stats4U. Wklej kod ze stats4u.net – albo sam numer licznika."
 
-msgid "Visitor counter"
-msgstr "Licznik odwiedzin"
-
+#: stats4u.php:767
 msgid "Stats4U counter"
 msgstr "Licznik Stats4U"
 
+#: stats4u.php:768
+#: stats4u.php:1442
 msgid "Your visitor counter from stats4u.net."
 msgstr "Twój licznik odwiedzin ze stats4u.net."
 
+#: stats4u.php:770
 msgid "Set up your counter first under Settings > Stats4U."
 msgstr "Najpierw skonfiguruj licznik w Ustawienia > Stats4U."
 
+#. Plugin Name of the plugin
+#: stats4u.php
+#: stats4u.php:1003
 msgid "Stats4U"
 msgstr "Stats4U"
 
+#: shop.php:223
+#: stats4u.php:1009
 msgid "Settings"
 msgstr "Ustawienia"
 
+#. translators: %s: name of the service to create in the consent tool
+#: stats4u.php:1119
+#, php-format
 msgid "Your consent tool decides per service: add a service named \"%s\" there, in its statistics category - or enter the name you already use."
 msgstr "Twoje narzędzie do zgód decyduje osobno dla każdej usługi: dodaj tam usługę o nazwie „%s” w kategorii statystyk – albo wpisz nazwę, której już używasz."
 
+#: stats4u.php:1124
 msgid "Enter the ID your consent tool uses for statistics - its settings show it. Until then the counter does not load."
 msgstr "Wpisz ID, którego Twoje narzędzie do zgód używa dla statystyk – znajdziesz je w jego ustawieniach. Do tego czasu licznik się nie wczyta."
 
+#. translators: %s: name of a consent category, e.g. statistics
+#: stats4u.php:1128
+#, php-format
 msgid "Uses the category \"%s\" of your consent tool. Change it only if yours is called differently."
 msgstr "Używa kategorii „%s” Twojego narzędzia do zgód. Zmień ją tylko wtedy, gdy u Ciebie nazywa się inaczej."
 
+#: stats4u.php:1430
 msgid "Stats4U Visitor Counter"
 msgstr "Stats4U Licznik odwiedzin"
 
+#. translators: %s: name of a consent tool
+#: stats4u.php:1460
+#, php-format
 msgid "%s needs the ID it uses for statistics (see \"Category or service\" below). Until you enter it, the counter does not load."
 msgstr "%s potrzebuje ID, którego używa dla statystyk (zob. „Kategoria lub usługa” poniżej). Dopóki go nie wpiszesz, licznik się nie wczyta."
 
+#. translators: 1: counter number, 2: design number
+#: stats4u.php:1473
+#, php-format
 msgid "Received from stats4u.net: counter %1$s, design %2$s. Click \"Save Changes\" to use it."
 msgstr "Odebrano ze stats4u.net: licznik %1$s, wzór %2$s. Kliknij „Zapisz zmiany”, aby go użyć."
 
+#: stats4u.php:1481
 msgid "Paste the code you got on stats4u.net below - or create a free counter there first. No sign-up."
 msgstr "Wklej poniżej kod otrzymany na stats4u.net – albo najpierw utwórz tam darmowy licznik. Bez rejestracji."
 
+#: stats4u.php:1502
+#: stats4u.php:1537
 msgid "Your counter"
 msgstr "Twój licznik"
 
+#: stats4u.php:1495
+#: stats4u.php:1811
 msgid "Counter"
 msgstr "Licznik"
 
+#. translators: 1: counter number, 2: design number
+#: stats4u.php:1359
+#: stats4u.php:1552
+#, php-format
 msgid "Counter %1$s, design %2$s"
 msgstr "Licznik %1$s, wzór %2$s"
 
+#: stats4u.php:772
+#: stats4u.php:1555
 msgid "Preview - not counted."
 msgstr "Podgląd – nie jest liczony."
 
+#: stats4u.php:1608
 msgid "Code from stats4u.net"
 msgstr "Kod ze stats4u.net"
 
+#: stats4u.php:1607
 msgid "Paste your code"
 msgstr "Wklej swój kod"
 
-msgid "Use a different counter or code"
-msgstr "Użyj innego licznika lub kodu"
-
+#: stats4u.php:1614
 msgid "Paste the HTML, BBCode or image address from stats4u.net - or just the counter number. Design, colors, size and everything else you set there come along."
 msgstr "Wklej HTML, BBCode lub adres obrazka ze stats4u.net – albo sam numer licznika. Wzór, kolory, rozmiar i wszystko inne, co tam ustawiono, zostaną przeniesione."
 
+#: stats4u.php:1589
 msgid "Create a free counter on stats4u.net"
 msgstr "Utwórz darmowy licznik na stats4u.net"
 
+#: stats4u.php:1594
 msgid "At the end, a button brings the code back here."
 msgstr "Na końcu przycisk przeniesie kod z powrotem tutaj."
 
+#: stats4u.php:1495
+#: stats4u.php:1502
+#: stats4u.php:1620
 msgid "Appearance"
 msgstr "Wygląd"
 
+#: stats4u.php:1623
 msgid "Size"
 msgstr "Rozmiar"
 
+#: stats4u.php:1630
 msgid "Sharp at any size for the modern designs. The classic pixel designs keep their original size."
 msgstr "Nowoczesne wzory są ostre w każdym rozmiarze. Klasyczne wzory pikselowe zachowują oryginalny rozmiar."
 
+#: stats4u.php:1634
 msgid "Language of the counter"
 msgstr "Język licznika"
 
+#: stats4u.php:1637
 msgid "as set on stats4u.net"
 msgstr "jak ustawiono na stats4u.net"
 
+#: stats4u.php:1638
 msgid "the language of each page"
 msgstr "język danej strony"
 
+#: stats4u.php:1646
 msgid "Dark mode"
 msgstr "Tryb ciemny"
 
+#: stats4u.php:1649
 msgid "follow the device"
 msgstr "zgodnie z urządzeniem"
 
+#: stats4u.php:1650
 msgid "always light"
 msgstr "zawsze jasny"
 
+#: stats4u.php:1651
 msgid "always dark"
 msgstr "zawsze ciemny"
 
+#: stats4u.php:1658
 msgid "Count"
 msgstr "Zliczanie"
 
+#: stats4u.php:1575
+#: stats4u.php:1660
 msgid "every page view"
 msgstr "każde wyświetlenie strony"
 
+#: stats4u.php:1575
+#: stats4u.php:1661
 msgid "unique visitors"
 msgstr "unikalni odwiedzający"
 
-msgid "Link"
-msgstr "Link"
-
-msgid "link the counter to its public statistics page on stats4u.net"
-msgstr "połącz licznik z jego publiczną stroną statystyk na stats4u.net"
-
-msgid "Off by default. Visitors who click the counter then see your statistics."
-msgstr "Domyślnie wyłączone. Po włączeniu kliknięcie licznika pokazuje odwiedzającym Twoje statystyki."
-
+#: stats4u.php:1495
+#: stats4u.php:1503
+#: stats4u.php:1674
 msgid "Placement"
 msgstr "Umiejscowienie"
 
+#: stats4u.php:1677
+#: stats4u.php:1812
 msgid "Where to show it"
 msgstr "Gdzie pokazać"
 
+#: stats4u.php:1681
 msgid "below your theme's footer (recommended)"
 msgstr "pod stopką motywu (zalecane)"
 
+#: stats4u.php:1682
 msgid "inside your theme's footer, at its end"
 msgstr "w stopce motywu, na jej końcu"
 
+#: stats4u.php:1683
 msgid "at the very end of the page"
 msgstr "na samym końcu strony"
 
+#: stats4u.php:1684
 msgid "below the content of posts and pages"
 msgstr "pod treścią wpisów i stron"
 
+#: stats4u.php:1685
 msgid "fixed in the bottom right corner"
 msgstr "na stałe w prawym dolnym rogu"
 
+#: stats4u.php:1686
 msgid "fixed in the bottom left corner"
 msgstr "na stałe w lewym dolnym rogu"
 
+#: stats4u.php:1687
 msgid "nowhere automatically - I place it myself"
 msgstr "nigdzie automatycznie – wstawię go ręcznie"
 
+#: stats4u.php:1696
 msgid "To place it yourself, use the block \"Stats4U counter\" or the shortcode [stats4u] - for example in a footer widget."
 msgstr "Aby umieścić go samodzielnie, użyj bloku „Licznik Stats4U” albo shortcode’u [stats4u] – na przykład w widżecie w stopce."
 
+#: stats4u.php:1713
 msgid "Alignment"
 msgstr "Wyrównanie"
 
+#: stats4u.php:1715
 msgid "left"
 msgstr "do lewej"
 
+#: stats4u.php:1715
 msgid "center"
 msgstr "do środka"
 
+#: stats4u.php:1715
 msgid "right"
 msgstr "do prawej"
 
+#: stats4u.php:1721
 msgid "On which pages"
 msgstr "Na których stronach"
 
+#: stats4u.php:1723
 msgid "on all pages"
 msgstr "na wszystkich stronach"
 
+#: stats4u.php:1723
 msgid "only on the front page"
 msgstr "tylko na stronie głównej"
 
+#: stats4u.php:1724
 msgid "only on single posts and pages"
 msgstr "tylko na pojedynczych wpisach i stronach"
 
+#: stats4u.php:1496
+#: stats4u.php:1503
+#: stats4u.php:1733
 msgid "Consent"
 msgstr "Zgoda"
 
+#: stats4u.php:1736
+#: stats4u.php:1813
 msgid "Load the counter"
 msgstr "Wczytuj licznik"
 
+#: stats4u.php:1739
 msgid "right away - I use no consent tool"
 msgstr "od razu – nie używam narzędzia do zgód"
 
+#: stats4u.php:1741
 msgid "Found on this site"
 msgstr "Znaleziono w tej witrynie"
 
+#. translators: %s: name of a consent tool
+#: stats4u.php:1568
+#: stats4u.php:1746
+#: stats4u.php:1757
+#, php-format
 msgid "after consent in %s"
 msgstr "po zgodzie w %s"
 
+#: stats4u.php:1752
 msgid "Consent tools"
 msgstr "Narzędzia do zgód"
 
+#: stats4u.php:1761
 msgid "after consent in another tool - enter its attributes"
 msgstr "po zgodzie w innym narzędziu – wpisz jego atrybuty"
 
+#: stats4u.php:1765
 msgid "With a consent tool, visitors who decline are not counted - your numbers will be lower."
 msgstr "Z narzędziem do zgód odwiedzający, którzy odmówią, nie są liczeni – Twoje liczby będą niższe."
 
+#: stats4u.php:1770
 msgid "Category or service"
 msgstr "Kategoria lub usługa"
 
+#: stats4u.php:1778
 msgid "Leave empty for the usual one of your tool. If your tool works with named services, enter the name you gave Stats4U there."
 msgstr "Zostaw puste, aby użyć zwykłej kategorii Twojego narzędzia. Jeśli Twoje narzędzie działa z nazwanymi usługami, wpisz nazwę nadaną tam Stats4U."
 
+#: stats4u.php:1783
 msgid "Attributes"
 msgstr "Atrybuty"
 
+#: stats4u.php:1788
 msgid "What your consent tool wants on a script it should only run after consent. Allowed: type, class and data-* attributes."
 msgstr "Czego Twoje narzędzie do zgód wymaga od skryptu, który ma działać dopiero po zgodzie. Dozwolone: atrybuty type, class i data-*."
 
+#. translators: %s: link to the ready-made privacy paragraph
+#: stats4u.php:1797
+#, php-format
 msgid "A paragraph for your privacy policy is at %s."
 msgstr "Akapit do Twojej polityki prywatności znajdziesz pod %s."
 
+#. Description of the plugin
+#: stats4u.php
 msgid "Puts a Stats4U visitor counter on your site. Paste the code from stats4u.net, choose where it appears and, if you use a consent banner, let it decide when the counter loads."
 msgstr "Dodaje licznik odwiedzin Stats4U do Twojej witryny. Wklej kod ze stats4u.net, wybierz, gdzie ma się pojawić, a jeśli używasz banera zgód – pozwól mu decydować, kiedy licznik się wczyta."
 
+#: stats4u.php:1607
 msgid "Your code"
 msgstr "Twój kod"
 
 #. translators: %s: a line of PHP code
+#: stats4u.php:1705
 #, php-format
 msgid "In a theme template (PHP): %s"
 msgstr "W szablonie motywu (PHP): %s"
 
+#: stats4u.php:1504
+#: stats4u.php:1841
 msgid "Feedback"
 msgstr "Twoja opinia"
 
+#: stats4u.php:1843
 msgid "Missing something, found a bug, or have an idea? Write to us - every message is read."
 msgstr "Czegoś brakuje, coś nie działa albo masz pomysł? Napisz do nas – czytamy każdą wiadomość."
 
+#: stats4u.php:1846
 msgid "Your message"
 msgstr "Twoja wiadomość"
 
+#: stats4u.php:1853
 msgid "Email for an answer (optional)"
 msgstr "E-mail do odpowiedzi (opcjonalnie)"
 
+#: stats4u.php:1859
 msgid "Also send my site address and counter number"
 msgstr "Wyślij też adres mojej strony i numer licznika"
 
+#: stats4u.php:1864
 msgid "Send feedback"
 msgstr "Wyślij opinię"
 
+#: stats4u.php:1346
 msgid "Thank you - your message has arrived."
 msgstr "Dziękujemy – Twoja wiadomość dotarła."
 
+#: stats4u.php:1347
 msgid "Please write a little more - at least a few words."
 msgstr "Napisz proszę trochę więcej – choć kilka słów."
 
+#: stats4u.php:1348
 msgid "This email address does not look right."
 msgstr "Ten adres e-mail wygląda na niepoprawny."
 
+#: stats4u.php:1349
 msgid "Too many messages from here - please try again in an hour."
 msgstr "Zbyt wiele wiadomości z tego adresu – spróbuj ponownie za godzinę."
 
+#: stats4u.php:1350
+#: stats4u.php:1378
 msgid "stats4u.net could not be reached. Please try again later."
 msgstr "Nie udało się połączyć ze stats4u.net. Spróbuj ponownie później."
 
 #. translators: %s: link "Privacy policy" to stats4u.net
+#: stats4u.php:1870
 #, php-format
 msgid "Your browser sends the message to stats4u.net, together with the plugin version and the language of this page. %s"
 msgstr "Twoja przeglądarka wysyła wiadomość do stats4u.net razem z wersją wtyczki i językiem tej strony. %s"
 
+#: stats4u.php:1871
 msgid "Privacy policy"
 msgstr "Polityka prywatności"
 
-msgid "Free hit counters and visitor stats for websites"
-msgstr "Darmowe liczniki odwiedzin i statystyki dla stron WWW"
-
-msgid "Simple, lightweight and secure analytics."
-msgstr "Prosta, lekka i bezpieczna analityka."
-
+#: stats4u.php:1433
 msgid "Restart wizard"
 msgstr "Uruchom kreator ponownie"
 
+#: stats4u.php:1435
+#: stats4u.php:1931
 msgid "Custom configuration"
 msgstr "Własna konfiguracja"
 
+#: stats4u.php:1496
+#: stats4u.php:1807
 msgid "Done"
 msgstr "Gotowe"
 
+#: stats4u.php:1501
 msgid "Settings sections"
 msgstr "Sekcje ustawień"
 
 #. translators: 1: counter number, 2: design number
+#: stats4u.php:1471
 #, php-format
 msgid "Received from stats4u.net: counter %1$s, design %2$s. Continue with \"Next\"."
 msgstr "Odebrano ze stats4u.net: licznik %1$s, wzór %2$s. Przejdź dalej przyciskiem „Dalej”."
 
+#: stats4u.php:1381
+#: stats4u.php:1591
 msgid "Request a new counter number"
 msgstr "Poproś o nowy numer licznika"
 
+#: stats4u.php:1822
 msgid "Back"
 msgstr "Wstecz"
 
+#: stats4u.php:1824
 msgid "Next"
 msgstr "Dalej"
 
+#: stats4u.php:1825
 msgid "Save and finish"
 msgstr "Zapisz i zakończ"
 
+#: stats4u.php:1816
 msgid "Save to put the counter on your site. You can change everything later - or run this wizard again."
 msgstr "Zapisz, aby umieścić licznik na swojej stronie. Wszystko możesz później zmienić – albo uruchomić ten kreator ponownie."
 
+#: stats4u.php:1920
 msgid "How do you want to set up your counter?"
 msgstr "Jak chcesz skonfigurować licznik?"
 
+#: stats4u.php:1923
 msgid "Recommended"
 msgstr "Polecane"
 
+#: stats4u.php:1925
 msgid "Wizard"
 msgstr "Kreator"
 
+#: stats4u.php:1926
 msgid "Step by step, with a live preview - about two minutes."
 msgstr "Krok po kroku, z podglądem na żywo – około dwóch minut."
 
+#: stats4u.php:1927
 msgid "Start the wizard"
 msgstr "Uruchom kreator"
 
+#: stats4u.php:1932
 msgid "All settings on one page, sorted in a menu."
 msgstr "Wszystkie ustawienia na jednej stronie, uporządkowane w menu."
 
+#: stats4u.php:1933
 msgid "Open the settings"
 msgstr "Otwórz ustawienia"
 
 #. translators: 1: number of the current step, 2: number of steps
+#: stats4u.php:1356
 #, php-format
 msgid "Step %1$d of %2$d"
 msgstr "Krok %1$d z %2$d"
 
+#: stats4u.php:1357
 msgid "Choose or create a counter first."
 msgstr "Najpierw wybierz lub utwórz licznik."
 
 #. translators: %s: the new counter number
+#: stats4u.php:1376
 #, php-format
 msgid "New counter number %s - it is used as soon as you save."
 msgstr "Nowy numer licznika %s – zacznie działać po zapisaniu."
 
+#: stats4u.php:1377
 msgid "Too many new numbers from here - please try again in an hour."
 msgstr "Zbyt wiele nowych numerów z tego adresu – spróbuj ponownie za godzinę."
 
-#: shop.php
+#: shop.php:64
+#: shop.php:65
+#: shop.php:195
 msgid "Stats4U shop"
 msgstr "Sklep Stats4U"
 
-#: shop.php
-msgid "Enable shop reporting in your Stats4U owner link, create a shop secret and enter it here. Only confirmed payments and refunds are sent, with currency and an anonymous order reference. No customer details are sent."
-msgstr "Włącz raportowanie sklepu przez swój link właściciela Stats4U, utwórz sekret sklepu i wpisz go tutaj. Przesyłane są wyłącznie potwierdzone płatności i zwroty, wraz z walutą i anonimową referencją zamówienia. Dane klientów nie są przesyłane."
-
-#: shop.php
+#: shop.php:199
 msgid "Check the counter number and shop secret."
 msgstr "Sprawdź numer licznika i sekret sklepu."
 
-#: shop.php
+#: shop.php:202
 msgid "WooCommerce is required for shop reporting."
 msgstr "Raportowanie sklepu wymaga WooCommerce."
 
-#: shop.php
+#: shop.php:205
 msgid "A shop report failed. Stats4U retries automatically; check your settings and the server connection."
 msgstr "Wysłanie raportu sklepu nie powiodło się. Stats4U automatycznie ponawia próbę; sprawdź ustawienia i połączenie z serwerem."
 
-#: shop.php
+#: shop.php:227
 msgid "Enable shop reporting"
 msgstr "Włącz raportowanie sklepu"
 
-#: shop.php
+#: shop.php:228
 msgid "Counter number"
 msgstr "Numer licznika"
 
-#: shop.php
+#: shop.php:211
+#: shop.php:229
 msgid "Shop secret"
 msgstr "Sekret sklepu"
 
-#: shop.php
+#: shop.php:233
 msgid "Leave the secret blank to keep the existing one."
 msgstr "Pozostaw pole sekretu puste, aby zachować dotychczasowy sekret."
 
-#: shop.php
+#: shop.php:264
 msgid "Integration guide"
 msgstr "Instrukcja integracji"
 
-#: shop.php
+#: shop.php:523
 msgid "Stats4U: shop reporting needs attention."
 msgstr "Stats4U: raportowanie sklepu wymaga uwagi."
 
-#: shop.php
+#: shop.php:242
 msgid "Retry failed reports"
 msgstr "Ponów wysyłanie nieudanych raportów"
+
+#. Plugin URI of the plugin
+#: stats4u.php
+msgid "https://github.com/LW-IT-Solutions/Stats4U-Wordpress"
+msgstr "https://github.com/LW-IT-Solutions/Stats4U-Wordpress"
+
+#. Author of the plugin
+#: stats4u.php
+msgid "LW IT Solutions Company"
+msgstr "LW IT Solutions Company"
+
+#. Author URI of the plugin
+#: stats4u.php
+msgid "https://www.stats4u.net/"
+msgstr "https://www.stats4u.net/"
+
+#: shop.php:86
+msgid "Sorry, you are not allowed to manage options for this site."
+msgstr "Niestety brak uprawnień do zarządzania opcjami tej witryny."
+
+#: shop.php:188
+msgid "Reporting on, needs attention"
+msgstr "Zgłaszanie włączone, wymaga uwagi"
+
+#: shop.php:188
+msgid "Reporting on"
+msgstr "Zgłaszanie włączone"
+
+#: shop.php:190
+msgid "Waiting for WooCommerce"
+msgstr "Oczekuje na WooCommerce"
+
+#: shop.php:192
+msgid "Reporting off"
+msgstr "Zgłaszanie wyłączone"
+
+#: shop.php:210
+msgid "Reporting"
+msgstr "Zgłaszanie"
+
+#: shop.php:210
+msgid "On"
+msgstr "Włączone"
+
+#: shop.php:210
+msgid "Off"
+msgstr "Wyłączone"
+
+#: shop.php:211
+#: shop.php:231
+msgid "Saved"
+msgstr "Zapisano"
+
+#: shop.php:211
+msgid "Missing"
+msgstr "Brak"
+
+#: shop.php:212
+#: shop.php:239
+msgid "Failed reports"
+msgstr "Nieudane zgłoszenia"
+
+#: shop.php:213
+#: shop.php:246
+msgid "Not sent"
+msgstr "Niewysłane"
+
+#: shop.php:224
+msgid "Enable shop reporting in your Stats4U owner link, create a shop secret and enter it here. When reporting is on, your server sends confirmed payments and refunds to stats4u.net under your counter number: paid and refunded amount, currency, payment time and a keyed (pseudonymous) order reference. No customer details and no product details are sent."
+msgstr "Należy włączyć raportowanie sklepu w linku właściciela Stats4U, utworzyć sekret sklepu i wpisać go tutaj. Gdy raportowanie jest włączone, serwer wysyła do stats4u.net pod numerem licznika potwierdzone płatności i zwroty: zapłaconą i zwróconą kwotę, walutę, czas płatności i kluczowany (pseudonimowy) identyfikator zamówienia. Dane klientów i produktów nie są wysyłane."
+
+#: shop.php:227
+msgid "Shop reporting"
+msgstr "Zgłaszanie ze sklepu"
+
+#. translators: %s: list of currency codes
+#: shop.php:250
+#, php-format
+msgid "These orders were not sent and are not retried: their currency is not supported or their amount could not be read. Stats4U accepts %s."
+msgstr "Te zamówienia nie zostały wysłane i nie będą ponawiane: ich waluta nie jest obsługiwana lub nie udało się odczytać kwoty. Stats4U przyjmuje %s."
+
+#: shop.php:256
+msgid "Clear the list of orders that were not sent? The orders themselves stay in WooCommerce; they are not sent to Stats4U."
+msgstr "Wyczyścić listę niewysłanych zamówień? Same zamówienia pozostają w WooCommerce; nie są wysyłane do Stats4U."
+
+#: shop.php:256
+#: shop.php:259
+msgid "Clear this list"
+msgstr "Wyczyść tę listę"
+
+#: shop.php:275
+msgid "report failed, retried automatically"
+msgstr "zgłoszenie nieudane, ponawiane automatycznie"
+
+#: shop.php:276
+msgid "currency not supported"
+msgstr "waluta nieobsługiwana"
+
+#: shop.php:277
+msgid "amount could not be read"
+msgstr "nie udało się odczytać kwoty"
+
+#: shop.php:279
+msgid "Order"
+msgstr "Zamówienie"
+
+#: shop.php:279
+msgid "Reason"
+msgstr "Powód"
+
+#: shop.php:297
+msgid "Paid amount"
+msgstr "Zapłacona kwota"
+
+#: shop.php:298
+msgid "Refunded amount"
+msgstr "Zwrócona kwota"
+
+#: shop.php:299
+msgid "Currency"
+msgstr "Waluta"
+
+#: shop.php:300
+msgid "Payment time"
+msgstr "Czas płatności"
+
+#: shop.php:301
+msgid "Keyed order reference (pseudonymous)"
+msgstr "Kluczowany identyfikator zamówienia (pseudonimowy)"
+
+#: shop.php:303
+msgid "What a report contains"
+msgstr "Co zawiera zgłoszenie"
+
+#: shop.php:305
+msgid "Confirmed payment or refund"
+msgstr "Potwierdzona płatność lub zwrot"
+
+#: shop.php:305
+msgid "in WooCommerce, only with reporting switched on"
+msgstr "w WooCommerce, tylko przy włączonym zgłaszaniu"
+
+#: shop.php:306
+msgid "Your server signs the report"
+msgstr "Serwer witryny podpisuje zgłoszenie"
+
+#: shop.php:306
+msgid "with the shop secret"
+msgstr "sekretem sklepu"
+
+#: shop.php:312
+msgid "under your counter number"
+msgstr "pod numerem licznika"
+
+#: shop.php:314
+msgid "Never sent: customer details and product details."
+msgstr "Nigdy nie są wysyłane: dane klientów i dane produktów."
+
+#: shop.php:330
+#: stats4u.php:1366
+msgid "Cancel"
+msgstr "Anuluj"
+
+#: shop.php:524
+msgid "Hide this notice"
+msgstr "Ukryj to powiadomienie"
+
+#: stats4u.php:771
+#: stats4u.php:1541
+#: stats4u.php:1809
+msgid "Preview of the Stats4U counter"
+msgstr "Podgląd licznika Stats4U"
+
+#: stats4u.php:773
+#: stats4u.php:1360
+msgid "The preview image could not be loaded from stats4u.net. The counter on your site is not affected."
+msgstr "Nie udało się załadować obrazu podglądu ze stats4u.net. Nie ma to wpływu na licznik w witrynie."
+
+#: stats4u.php:776
+msgid "Set up the counter"
+msgstr "Skonfiguruj licznik"
+
+#: stats4u.php:1361
+msgid "Copied"
+msgstr "Skopiowano"
+
+#: stats4u.php:1362
+msgid "Copying failed. The text is selected; press Ctrl+C to copy it."
+msgstr "Kopiowanie nie powiodło się. Tekst jest zaznaczony; Ctrl+C go skopiuje."
+
+#. translators: 1: number of characters typed, 2: maximum number of characters
+#: stats4u.php:1364
+#, php-format
+msgid "%1$s of %2$s characters"
+msgstr "%1$s z %2$s znaków"
+
+#. translators: %s: the current counter number
+#: stats4u.php:1380
+#, php-format
+msgid "Request a new counter number? It replaces counter %s in the code below and is used as soon as you save."
+msgstr "Poprosić o nowy numer licznika? Zastąpi on licznik %s w kodzie poniżej i obowiązuje od zapisania."
+
+#: stats4u.php:1509
+msgid "(needs attention)"
+msgstr "(wymaga uwagi)"
+
+#: stats4u.php:1559
+msgid "below the footer"
+msgstr "pod stopką"
+
+#: stats4u.php:1559
+msgid "in the footer"
+msgstr "w stopce"
+
+#: stats4u.php:1560
+msgid "end of the page"
+msgstr "koniec strony"
+
+#: stats4u.php:1560
+msgid "below the content"
+msgstr "pod treścią"
+
+#: stats4u.php:1561
+msgid "bottom right corner"
+msgstr "prawy dolny róg"
+
+#: stats4u.php:1561
+msgid "bottom left corner"
+msgstr "lewy dolny róg"
+
+#: stats4u.php:1562
+msgid "block or shortcode only"
+msgstr "tylko blok lub shortcode"
+
+#: stats4u.php:1565
+msgid "after consent in another tool"
+msgstr "po zgodzie w innym narzędziu"
+
+#: stats4u.php:1570
+msgid "right away"
+msgstr "od razu"
+
+#: stats4u.php:1573
+msgid "Shown:"
+msgstr "Wyświetlany:"
+
+#: stats4u.php:1574
+msgid "Loads:"
+msgstr "Ładuje się:"
+
+#: stats4u.php:1575
+msgid "Counts:"
+msgstr "Liczy:"
+
+#: stats4u.php:1578
+msgid "Current settings"
+msgstr "Bieżące ustawienia"
+
+#: stats4u.php:1944
+msgid "Copy"
+msgstr "Kopiuj"
