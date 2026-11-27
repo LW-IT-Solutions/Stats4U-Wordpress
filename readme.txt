@@ -8,13 +8,14 @@ Stable tag: 1.9.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-A visitor counter from stats4u.net. Paste the code, pick a place, and let your consent banner decide when it loads.
+Add a free visitor counter to WordPress with a block, shortcode, or automatic placement. Works with supported consent tools.
 
 == Description ==
 
-The plugin puts the official Stats4U script (s4u.js) on your site - the same
-code the creator on stats4u.net gives you, with every setting from it - right
-where you want the counter to appear.
+Add a free visitor counter to your WordPress site with the Stats4U block,
+the `[stats4u]` shortcode, or automatic placement below your footer. The
+plugin loads the official Stats4U script with the design and settings you
+choose. See the [Stats4U WordPress setup guide](https://www.stats4u.net/en/guide/wordpress).
 
 * **Paste what you copied.** Paste the code you got on stats4u.net - HTML,
   BBCode, Markdown, the script code or just the image address - or only the
@@ -295,10 +296,10 @@ plugin and removed it again.
 
 == Screenshots ==
 
-1. The start: a wizard that walks you through it, or all settings at once.
-2. The wizard: counter, appearance, placement and consent, one step at a time.
-3. Custom configuration: every setting, sorted in a menu.
-4. The counter right below the footer of a theme.
+1. Choose the setup wizard or open all Stats4U settings.
+2. Set up the counter, design, placement and consent step by step.
+3. Use the settings menu to manage your counter and its display options.
+4. See the visitor counter displayed below a WordPress theme’s footer.
 
 == Changelog ==
 
@@ -314,6 +315,8 @@ plugin and removed it again.
 * Shop page: an example report, line by line, explaining every field, and what
   never appears in a report.
 * Select fields no longer put their arrow right next to the text.
+* Readme: a shorter summary, a link to the Stats4U WordPress setup guide and
+  clearer screenshot captions.
 
 = 1.8.0 =
 * Shop page rebuilt as cards: a status badge, tiles for reporting, shop secret,
