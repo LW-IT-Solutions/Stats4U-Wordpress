@@ -282,6 +282,8 @@
 				var z = d.getElementById("s4u_nr");
 				if (z && N.alt) { z.textContent = z.textContent.replace(N.alt, a.id); }
 				N.alt = a.id;
+				// Counts as a change of the form (unsaved changes, code field height).
+				c.dispatchEvent(new Event("input", { bubbles: true }));
 				var h = d.getElementById("s4u_assi_fehler");
 				if (h) { h.hidden = true; }
 				if (window.stats4uCodeHoch) { window.stats4uCodeHoch(); }
@@ -454,4 +456,145 @@
 		new MutationObserver(function () { k.classList.toggle("s4u-laedt", k.disabled); neu(); })
 			.observe(k, { attributes: true, attributeFilter: ["disabled"] });
 	}
+})();
+
+// 1.9.0 - Placement preview: the counter glides to the chosen place, with the
+// alignment; below it, on which kinds of pages it appears (the same rule as
+// stats4u_seitenarten() in stats4u.php) and the preview as a sentence.
+(function () {
+	var d = document, pv = d.getElementById("s4u_pv"), A = window.stats4uAssi || {};
+	if (!pv || !A.kurz) { return; }
+	var arten = d.querySelectorAll("#s4u_pv_arten li"), satz = d.getElementById("s4u_pv_text"),
+		startSeite = pv.getAttribute("data-start-seite") === "1";
+	function wahl(n, vorgabe) {
+		var x = d.querySelector('input[name$="[' + n + ']"]:checked');
+		return x ? x.value : vorgabe;
+	}
+	function seitenarten(platz, wo) {
+		var an = { start: true, einzeln: true, archiv: true };
+		if (wo === "start") { an = { start: true, einzeln: false, archiv: false }; }
+		if (wo === "einzeln") { an = { start: startSeite, einzeln: true, archiv: false }; }
+		if (platz === "inhalt") { an.archiv = false; an.start = an.start && startSeite; }
+		if (platz === "aus") { an = { start: false, einzeln: false, archiv: false }; }
+		return an;
+	}
+	function neu() {
+		var platz = wahl("platz", "unter"), ausr = wahl("ausrichtung", "center"), wo = wahl("wo", "alle"),
+			an = seitenarten(platz, wo);
+		pv.setAttribute("data-platz", platz);
+		pv.setAttribute("data-ausrichtung", ausr);
+		[].forEach.call(arten, function (li) {
+			var ja = !!an[li.getAttribute("data-art")], i = li.querySelector(".dashicons"), s = li.querySelector(".s4u-pv-status");
+			li.className = ja ? "s4u-an" : "s4u-aus";
+			if (i) { i.className = "dashicons " + (ja ? "dashicons-yes" : "dashicons-no-alt"); }
+			if (s) { s.textContent = ja ? A.gezeigt : A.nichtGezeigt; }
+		});
+		if (satz && A.vorschauSatz) {
+			satz.textContent = A.vorschauSatz.replace("%1$s", A.kurz.platz[platz] || "")
+				.replace("%2$s", A.kurz.ausrichtung[ausr] || "").replace("%3$s", A.kurz.wo[wo] || "");
+		}
+	}
+	d.addEventListener("change", function (ev) {
+		var n = ev.target && ev.target.name ? ev.target.name : "";
+		if (/\[(platz|ausrichtung|wo)\]$/.test(n)) { neu(); }
+	});
+	neu();
+})();
+
+// 1.9.0 - What happens on a visit: page, consent tool, counter. Follows the
+// consent choice and warns when a tool needs an ID that is still empty.
+(function () {
+	var d = document, cf = d.getElementById("s4u_cf"), c = d.getElementById("s4u_consent"),
+		w = d.getElementById("s4u_consent_wert"), A = window.stats4uAssi || {}, C = window.stats4uCmp || {};
+	if (!cf || !c) { return; }
+	var name = cf.querySelector(".s4u-cf-name"), t = null;
+	function neu(anim) {
+		var k = c.value, x = C[k], art;
+		if (k === "") {
+			art = "sofort";
+		} else {
+			art = (x && x.pflicht && !x.wert && !(w && w.value.trim())) ? "fehlt" : "werkzeug";
+		}
+		if (name) { name.textContent = (k === "eigen" || !x) ? (A.deinWerkzeug || "") : x.name; }
+		if (cf.getAttribute("data-art") !== art && anim) {
+			cf.classList.remove("s4u-cf-neu");
+			void cf.offsetWidth;
+			cf.classList.add("s4u-cf-neu");
+			clearTimeout(t);
+			t = setTimeout(function () { cf.classList.remove("s4u-cf-neu"); }, 600);
+		}
+		cf.setAttribute("data-art", art);
+	}
+	c.addEventListener("change", function () { neu(true); });
+	if (w) { w.addEventListener("input", function () { neu(true); }); }
+	neu(false);
+})();
+
+// 1.9.0 - Custom configuration: which sections have unsaved changes (a dot in
+// the menu, a line in the button bar), "Discard changes" with the plugin's own
+// dialog, and a check mark after saving.
+(function () {
+	var d = document, R = d.getElementById("s4u_rahmen"), f = d.getElementById("s4u_form"), A = window.stats4uAssi || {};
+	if (!R || !f || R.getAttribute("data-ansicht") !== "eigen") { return; }
+	var offen = d.getElementById("s4u_offen"), weg = d.getElementById("s4u_verwerfen"), ok = d.getElementById("s4u_gespeichert");
+	function stand() {
+		var s = {};
+		[].forEach.call(f.elements, function (el) {
+			if (!el.name || el.type === "hidden" || el.type === "submit" || el.type === "button") { return; }
+			var teil = el.closest(".s4u-teil");
+			if (!teil) { return; }
+			var id = teil.id.replace("s4u-teil-", "");
+			s[id] = s[id] || [];
+			s[id].push(el.name + "=" + ((el.type === "radio" || el.type === "checkbox") ? (el.checked ? el.value : "") : el.value));
+		});
+		Object.keys(s).forEach(function (k) { s[k] = s[k].join("&"); });
+		return s;
+	}
+	var anfang = stand();
+	function pruefen() {
+		var jetzt = stand(), namen = [];
+		Object.keys(anfang).forEach(function (k) {
+			var a = R.querySelector('.s4u-menue a[data-teil="' + k + '"]'), geaendert = jetzt[k] !== anfang[k];
+			var p = a ? a.querySelector(".s4u-geaendert") : null;
+			if (p) { p.hidden = !geaendert; }
+			if (geaendert && a) { namen.push((a.querySelector("svg + span") || a).textContent.replace(/\s+/g, " ").trim()); }
+		});
+		if (offen) {
+			offen.classList.remove("s4u-neutral");
+			offen.textContent = namen.length && A.offen ? A.offen.replace("%s", namen.join(", ")) : "";
+		}
+		if (weg) { weg.hidden = !namen.length; }
+		if (namen.length && ok) { ok.hidden = true; }
+	}
+	f.addEventListener("input", pruefen);
+	f.addEventListener("change", pruefen);
+	if (weg) {
+		weg.addEventListener("click", function () {
+			if (!window.stats4uFrage) { return; }
+			window.stats4uFrage(A.verwerfenFrage, A.verwerfenKnopf, weg, function () {
+				f.reset();
+				// Previews, hidden rows and the code field follow the reset values.
+				["s4u_consent", "s4u_gr", "s4u_sprache"].forEach(function (id) {
+					var el = d.getElementById(id);
+					if (el) { el.dispatchEvent(new Event("change", { bubbles: true })); }
+				});
+				[].forEach.call(f.querySelectorAll("input[type=radio]:checked"), function (el) { el.dispatchEvent(new Event("change", { bubbles: true })); });
+				var c = d.getElementById("s4u_code");
+				if (c) { c.dispatchEvent(new Event("input", { bubbles: true })); }
+				pruefen();
+				if (offen && A.verworfen) { offen.textContent = A.verworfen; offen.classList.add("s4u-neutral"); }
+				// The button that opened the dialog is hidden now: focus the save button.
+				var knopf = f.querySelector("#s4u_leiste [type=submit]");
+				if (knopf) { knopf.focus(); }
+			});
+		});
+	}
+	// After saving, come back to the section that was open (the anchor is not
+	// part of the address WordPress returns to).
+	f.addEventListener("submit", function () {
+		var r = f.querySelector('input[name="_wp_http_referer"]');
+		if (r && /^#s4u-teil-[a-z]+$/.test(location.hash)) { r.value = r.value.replace(/#.*$/, "") + location.hash; }
+	});
+	// WordPress has just saved: a short check mark next to the button.
+	if (ok && d.getElementById("setting-error-settings_updated")) { ok.hidden = false; }
 })();

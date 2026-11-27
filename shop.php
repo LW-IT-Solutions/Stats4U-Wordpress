@@ -237,7 +237,7 @@ function stats4u_shop_page() {
 
 	if ( $fehler ) {
 		echo '<section class="s4u-karte"><h2>' . esc_html__( 'Failed reports', 'stats4u' ) . '</h2><div class="s4u-karte-innen">';
-		stats4u_shop_tabelle( array_fill_keys( array_keys( $fehler ), 'failed' ) );
+		stats4u_shop_tabelle( array_fill_keys( array_keys( $fehler ), 'failed' ), true );
 		stats4u_shop_formular_start( 'stats4u_shop_retry' );
 		echo '<p><button class="button" type="submit"><span class="dashicons dashicons-update" aria-hidden="true"></span>' . esc_html__( 'Retry failed reports', 'stats4u' ) . '</button></p></form></div></section>';
 	}
@@ -268,24 +268,115 @@ function stats4u_shop_page() {
 /**
  * Orders as a table: number (linked to the order with WooCommerce) and reason.
  *
- * @param array $liste Order ID => 'failed', 'currency' or 'amount'.
+ * @param array $liste    Order ID => 'failed', 'currency' or 'amount'.
+ * @param bool  $versuche Add the column with the automatic retries.
  */
-function stats4u_shop_tabelle( $liste ) {
+function stats4u_shop_tabelle( $liste, $versuche = false ) {
 	$gruende = array(
 		'failed'   => array( 'fehler', __( 'report failed, retried automatically', 'stats4u' ) ),
 		'currency' => array( 'warn', __( 'currency not supported', 'stats4u' ) ),
 		'amount'   => array( 'warn', __( 'amount could not be read', 'stats4u' ) ),
 	);
-	echo '<table class="widefat striped s4u-shop-tabelle"><thead><tr><th scope="col">' . esc_html__( 'Order', 'stats4u' ) . '</th><th scope="col">' . esc_html__( 'Reason', 'stats4u' ) . '</th></tr></thead><tbody>';
+	echo '<table class="widefat striped s4u-shop-tabelle"><thead><tr><th scope="col">' . esc_html__( 'Order', 'stats4u' ) . '</th><th scope="col">' . esc_html__( 'Reason', 'stats4u' ) . '</th>' . ( $versuche ? '<th scope="col">' . esc_html__( 'Automatic retries', 'stats4u' ) . '</th>' : '' ) . '</tr></thead><tbody>';
 	foreach ( $liste as $oid => $grund ) {
 		$oid   = absint( $oid );
 		$g     = isset( $gruende[ $grund ] ) ? $gruende[ $grund ] : $gruende['amount'];
 		$order = ( $oid && function_exists( 'wc_get_order' ) ) ? wc_get_order( $oid ) : false;
 		$nr    = '#' . ( $order ? $order->get_order_number() : $oid );
 		echo '<tr><td>' . ( $order ? '<a href="' . esc_url( $order->get_edit_order_url() ) . '">' . esc_html( $nr ) . '</a>' : esc_html( $nr ) ) . '</td>';
-		echo '<td><span class="s4u-pille s4u-pille-klein s4u-pille-' . esc_attr( $g[0] ) . '">' . esc_html( $g[1] ) . '</span></td></tr>';
+		echo '<td><span class="s4u-pille s4u-pille-klein s4u-pille-' . esc_attr( $g[0] ) . '">' . esc_html( $g[1] ) . '</span></td>';
+		if ( $versuche ) {
+			echo '<td>';
+			stats4u_shop_versuche( $oid, $order );
+			echo '</td>';
+		}
+		echo '</tr>';
 	}
 	echo '</tbody></table>';
+}
+
+/**
+ * The automatic retries of one failed order as a row of eight dots (made,
+ * next, still to come) with the time of the next attempt. Read from the order
+ * meta and WP-Cron, the same values stats4u_shop_report() uses: up to eight
+ * retries, the wait doubles each time (2, 4, 8 ... minutes, at most 6 hours).
+ *
+ * @param int            $oid   Order ID.
+ * @param WC_Order|false $order Order, if WooCommerce can load it.
+ */
+function stats4u_shop_versuche( $oid, $order ) {
+	$max     = 8;
+	$gemacht = 0;
+	if ( $order ) {
+		$gemacht = max( (int) $order->get_meta( STATS4U_SHOP_META_VERSUCHE ), (int) $order->get_meta( STATS4U_SHOP_META_VERSUCHE_ALT ) );
+	}
+	$naechster = wp_next_scheduled( 'stats4u_shop_retry', array( (int) $oid ) );
+	echo '<span class="s4u-versuche" aria-hidden="true">';
+	for ( $i = 1; $i <= $max; $i++ ) {
+		if ( $i < $gemacht ) {
+			$art = 'gemacht';
+		} elseif ( $i === $gemacht && $naechster ) {
+			$art = 'naechster';
+		} else {
+			$art = 'offen';
+		}
+		/* translators: 1: number of the retry, 2: waiting time before it, e.g. "16 mins" */
+		$titel = sprintf( __( 'Retry %1$d: about %2$s after the previous attempt', 'stats4u' ), $i, human_time_diff( 0, min( 21600, 60 * ( 2 ** $i ) ) ) );
+		echo '<i class="' . esc_attr( 's4u-v-' . $art ) . '" title="' . esc_attr( $titel ) . '"></i>';
+	}
+	echo '</span> <span class="s4u-versuche-text">';
+	$zahl = min( max( 0, $gemacht - 1 ), $max );
+	if ( $naechster ) {
+		$wann = $naechster > time()
+			/* translators: %s: time span, e.g. "14 mins" */
+			? sprintf( __( 'next in %s', 'stats4u' ), human_time_diff( time(), $naechster ) )
+			: __( 'next with the next WP-Cron run', 'stats4u' );
+		/* translators: 1: number of retries made, 2: maximum number of retries, 3: when the next one runs */
+		echo esc_html( sprintf( __( '%1$d of %2$d retries made, %3$s', 'stats4u' ), $zahl, $max, $wann ) );
+	} elseif ( $gemacht > $max ) {
+		echo esc_html__( 'No more automatic retries - use "Retry failed reports".', 'stats4u' );
+	} else {
+		/* translators: 1: number of retries made, 2: maximum number of retries */
+		echo esc_html( sprintf( __( '%1$d of %2$d retries made, none scheduled - use "Retry failed reports".', 'stats4u' ), $zahl, $max ) );
+	}
+	echo '</span>';
+}
+
+/**
+ * An example report as the server sends it, line by line, with what each
+ * field means (hover or focus) - and what never appears in one. The values
+ * are made up; the keys and the header are those of stats4u_shop_report().
+ */
+function stats4u_shop_beispiel() {
+	$waehrung = function_exists( 'get_woocommerce_currency' ) ? get_woocommerce_currency() : 'EUR';
+	if ( ! in_array( $waehrung, STATS4U_SHOP_WAEHRUNGEN, true ) ) {
+		$waehrung = 'EUR';
+	}
+	$zeilen = array(
+		array( 'order', '"9f3c…e1a7"', __( 'A keyed hash of the site address and the order ID. Stats4U can tell orders apart, but cannot read the order number.', 'stats4u' ) ),
+		array( 'paid', '4990', __( 'Paid amount in minor units (cents): 4990 = 49.90.', 'stats4u' ) ),
+		array( 'refunded', '0', __( 'Refunded amount in minor units. A refund sends the order again with this value.', 'stats4u' ) ),
+		array( 'currency', '"' . $waehrung . '"', __( 'The currency of the order.', 'stats4u' ) ),
+		array( 'paid_at', (string) ( (int) floor( time() / 3600 ) * 3600 ), __( 'When the order was paid, as a Unix timestamp.', 'stats4u' ) ),
+	);
+	echo '<details class="s4u-beispiel"><summary>' . esc_html__( 'Show an example report', 'stats4u' ) . '</summary>';
+	echo '<p class="description">' . esc_html__( 'Point at or focus a line to see what it means. The values are examples.', 'stats4u' ) . '</p>';
+	echo '<div class="s4u-beispiel-code">';
+	echo '<div class="s4u-beispiel-kopf">POST /index.php?action=insights_sale<br>X-S4U-Signature: <span class="s4u-b-wert">hmac-sha256(…)</span></div>';
+	echo '<div>{</div>';
+	$letzte = count( $zeilen ) - 1;
+	foreach ( $zeilen as $i => $z ) {
+		$id = 's4u_b_' . $z[0];
+		echo '<div class="s4u-b-zeile" tabindex="0" aria-describedby="' . esc_attr( $id ) . '">'
+			. '<span class="s4u-b-schluessel">"' . esc_html( $z[0] ) . '"</span>: <span class="s4u-b-wert">' . esc_html( $z[1] ) . '</span>' . ( $i < $letzte ? ',' : '' )
+			. '<span class="s4u-b-tipp" role="tooltip" id="' . esc_attr( $id ) . '">' . esc_html( $z[2] ) . '</span></div>';
+	}
+	echo '<div>}</div></div>';
+	echo '<p class="s4u-b-nie-titel">' . esc_html__( 'Never in a report:', 'stats4u' ) . '</p><ul class="s4u-b-nie">';
+	foreach ( array( __( 'customer name', 'stats4u' ), __( 'email address', 'stats4u' ), __( 'addresses', 'stats4u' ), __( 'products', 'stats4u' ), __( 'order number', 'stats4u' ) ) as $nie ) {
+		echo '<li><span class="dashicons dashicons-dismiss" aria-hidden="true"></span>' . esc_html( $nie ) . '</li>';
+	}
+	echo '</ul></details>';
 }
 
 /**
@@ -312,6 +403,7 @@ function stats4u_shop_fluss() {
 	echo '<li><span class="dashicons dashicons-chart-bar" aria-hidden="true"></span><strong>stats4u.net</strong><span>' . esc_html__( 'under your counter number', 'stats4u' ) . '</span></li>';
 	echo '</ol>';
 	echo '<p class="s4u-fluss-nie"><span class="dashicons dashicons-dismiss" aria-hidden="true"></span>' . esc_html__( 'Never sent: customer details and product details.', 'stats4u' ) . '</p>';
+	stats4u_shop_beispiel();
 	echo '</div></section>';
 }
 

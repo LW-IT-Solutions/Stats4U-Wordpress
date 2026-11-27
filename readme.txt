@@ -4,7 +4,7 @@ Tags: counter, visitor counter, hit counter, statistics, consent
 Requires at least: 5.8
 Tested up to: 7.2
 Requires PHP: 7.4
-Stable tag: 1.8.0
+Stable tag: 1.9.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -302,6 +302,19 @@ plugin and removed it again.
 
 == Changelog ==
 
+= 1.9.0 =
+* Placement: a live preview of the page in which the counter glides to the
+  chosen place and alignment, with the kinds of pages it appears on.
+* Consent: a diagram of what happens on a visit - with a consent tool, what
+  happens on accept and on decline, and a warning when a required ID is missing.
+* Custom configuration: a dot in the menu for every section with unsaved
+  changes, "Discard changes" (asks first) and a check mark after saving.
+* Shop page: the automatic retries of each failed report as a row of dots
+  with the time of the next attempt.
+* Shop page: an example report, line by line, explaining every field, and what
+  never appears in a report.
+* Select fields no longer put their arrow right next to the text.
+
 = 1.8.0 =
 * Shop page rebuilt as cards: a status badge, tiles for reporting, shop secret,
   failed reports and orders not sent, a switch for reporting and a diagram of
@@ -420,6 +433,9 @@ plugin and removed it again.
 * First release: shortcode, footer, dark mode, settings page.
 
 == Upgrade Notice ==
+
+= 1.9.0 =
+Live previews for placement and consent, unsaved-changes markers, retry timeline and an example report on the shop page. No change to what is sent. Your settings are kept.
 
 = 1.8.0 =
 Clearer shop page with a diagram of what a report contains, an overview on the settings page and copy buttons. No change to what is sent. Your settings are kept.

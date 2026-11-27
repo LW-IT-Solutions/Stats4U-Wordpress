@@ -206,7 +206,11 @@
 }
 
 .s4u-shop-tabelle th:first-child {
-	width: 30%;
+	width: 22%;
+}
+
+.s4u-shop-tabelle .s4u-pille {
+	border-radius: 8px;
 }
 
 /* Was gesendet wird */
@@ -303,6 +307,166 @@
 	gap: 4px;
 }
 
+/* 1.9.0: Wiederholungen je fehlgeschlagener Meldung */
+.s4u-versuche {
+	display: inline-flex;
+	gap: 4px;
+	vertical-align: middle;
+	margin-right: 4px;
+}
+
+.s4u-versuche i {
+	display: block;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	box-sizing: border-box;
+	border: 2px solid #c3c4c7;
+	background: #fff;
+}
+
+.s4u-versuche .s4u-v-gemacht {
+	border-color: #d63638;
+	background: #d63638;
+}
+
+.s4u-versuche .s4u-v-naechster {
+	border-color: var(--s4u-akzent);
+	background: #fff;
+	box-shadow: 0 0 0 3px rgba(56, 88, 233, .18);
+	animation: s4u-puls 1.6s ease-in-out 3;
+}
+
+@keyframes s4u-puls {
+	50% { box-shadow: 0 0 0 5px rgba(56, 88, 233, .05); }
+}
+
+.s4u-versuche-text {
+	color: #50575e;
+	font-size: 12px;
+}
+
+/* 1.9.0: Beispielbericht */
+.s4u-beispiel {
+	margin: 12px 0 0;
+}
+
+.s4u-beispiel summary {
+	cursor: pointer;
+	font-weight: 600;
+	color: var(--s4u-akzent);
+	padding: 4px 0;
+}
+
+.s4u-beispiel summary:focus-visible {
+	outline: 2px solid var(--s4u-akzent);
+	outline-offset: 2px;
+}
+
+.s4u-beispiel-code {
+	margin: 8px 0 0;
+	padding: 10px 12px;
+	border-radius: 6px;
+	background: #1d2327;
+	color: #f0f0f1;
+	font: 12px/1.7 Consolas, Monaco, monospace;
+	overflow-wrap: anywhere;
+}
+
+.s4u-beispiel-kopf {
+	margin: 0 0 6px;
+	padding: 0 0 6px;
+	border-bottom: 1px solid #3c434a;
+	color: #a7aaad;
+}
+
+.s4u-b-zeile {
+	position: relative;
+	margin: 0 -6px;
+	padding: 0 6px 0 22px;
+	border-radius: 4px;
+	cursor: help;
+}
+
+.s4u-b-zeile:hover,
+.s4u-b-zeile:focus {
+	background: #2c3338;
+	outline: none;
+}
+
+.s4u-b-zeile:focus-visible {
+	box-shadow: 0 0 0 2px var(--s4u-akzent);
+}
+
+.s4u-b-schluessel {
+	color: #9ec2e6;
+}
+
+.s4u-b-wert {
+	color: #f2d675;
+}
+
+.s4u-b-tipp {
+	position: absolute;
+	left: 6px;
+	right: 6px;
+	top: 100%;
+	z-index: 5;
+	margin-top: 4px;
+	padding: 6px 9px;
+	border-radius: 6px;
+	background: #fff;
+	color: #1d2327;
+	font: 12px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, .25);
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(-3px);
+	transition: opacity .15s, transform .15s, visibility .15s;
+	pointer-events: none;
+}
+
+.s4u-b-zeile:hover .s4u-b-tipp,
+.s4u-b-zeile:focus .s4u-b-tipp {
+	opacity: 1;
+	visibility: visible;
+	transform: none;
+}
+
+.s4u-b-nie-titel {
+	margin: 10px 0 4px;
+	font-weight: 600;
+}
+
+.s4u-b-nie {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.s4u-b-nie li {
+	display: inline-flex;
+	align-items: center;
+	gap: 3px;
+	margin: 0;
+	padding: 2px 10px 2px 6px;
+	border-radius: 999px;
+	background: #fcf0f1;
+	color: #8a2424;
+	font-size: 12px;
+	text-decoration: line-through;
+}
+
+.s4u-b-nie .dashicons {
+	width: 16px;
+	height: 16px;
+	font-size: 16px;
+	color: #d63638;
+}
+
 /* Rueckfrage (Dialog) */
 .s4u-dialog[hidden] {
 	display: none;
@@ -376,7 +540,12 @@
 
 @media (prefers-reduced-motion: reduce) {
 	.s4u-schalter-bahn,
-	.s4u-schalter-bahn::after {
+	.s4u-schalter-bahn::after,
+	.s4u-b-tipp {
 		transition: none;
+	}
+
+	.s4u-versuche .s4u-v-naechster {
+		animation: none;
 	}
 }

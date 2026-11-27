@@ -3,7 +3,7 @@
  * Plugin Name:       Stats4U
  * Plugin URI:        https://github.com/LW-IT-Solutions/Stats4U-Wordpress
  * Description:       Puts a Stats4U visitor counter on your site. Paste the code from stats4u.net, choose where it appears and, if you use a consent banner, let it decide when the counter loads.
- * Version:           1.8.0
+ * Version:           1.9.0
  * Requires at least: 5.8
  * Requires PHP:      7.4
  * Author:            LW IT Solutions Company
@@ -67,7 +67,7 @@ function stats4u_deaktivieren() {
 }
 
 const STATS4U_OPTION  = 'stats4u_einstellungen';
-const STATS4U_VERSION = '1.8.0';
+const STATS4U_VERSION = '1.9.0';
 /** Das offizielle Zaehlerskript - dasselbe, das der Assistent auf stats4u.net ausgibt. */
 const STATS4U_SKRIPT  = 'https://www.stats4u.net/s4u.js';
 /** Wohin das Feedback-Formular schickt - aus dem Browser, nie vom Server. */
@@ -1317,7 +1317,74 @@ function stats4u_admin_skript($seite) {
         '.s4u-dialog-box .dashicons-warning{width:28px;height:28px;font-size:28px;color:#dba617}',
         '.s4u-dialog-text{margin:8px 0 18px;font-size:14px}',
         '.s4u-dialog-knoepfe{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px}',
+        // 1.9.0: Pfeil der Auswahlfelder nicht mehr direkt am Text ("100 %v").
+        '.wp-core-ui .s4u-admin select{padding-right:36px;min-width:6.5em}',
+        // 1.9.0: Platzvorschau - der Zaehler gleitet an den gewaehlten Platz.
+        '.s4u-pv{position:relative;height:200px;max-width:420px;border:1px solid #c3c4c7;border-radius:8px;background:#fff;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.04)}',
+        '.s4u-pv>span{position:absolute;display:block}',
+        '.s4u-pv-leiste{left:0;right:0;top:0;height:16px;background:#f0f0f1;border-bottom:1px solid #dcdcde}',
+        '.s4u-pv-leiste i{display:inline-block;width:6px;height:6px;margin:5px 0 0 6px;border-radius:50%;background:#c3c4c7}',
+        '.s4u-pv-kopf{left:14px;right:14px;top:26px;height:10px;border-radius:3px;background:#dcdcde}',
+        '.s4u-pv-text{left:14px;right:30%;top:46px}',
+        '.s4u-pv-text i{display:block;height:5px;margin:0 0 6px;border-radius:3px;background:#e4e4e7}.s4u-pv-text i:nth-child(2){width:85%}.s4u-pv-text i:nth-child(3){width:60%}',
+        '.s4u-pv-fuss{left:0;right:0;top:110px;height:44px;background:#dcdcde;transition:box-shadow .3s}',
+        '.s4u-pv-fuss i{display:block;width:30%;height:5px;margin:10px 0 0 14px;border-radius:3px;background:#c3c4c7}.s4u-pv-fuss i+i{width:20%;margin-top:6px}',
+        '.s4u-pv-linie{left:8px;right:8px;top:177px;border-top:1px dashed #a7aaad}',
+        '.s4u-pv-selbst{left:14px;top:76px;padding:1px 8px;border:1px dashed var(--wp-admin-theme-color,#2271b1);border-radius:4px;font:11px/1.6 Consolas,Monaco,monospace;color:var(--wp-admin-theme-color,#2271b1);opacity:0;transition:opacity .3s}',
+        '.s4u-pv-zaehler{top:158px;left:50%;transform:translateX(-50%);display:flex!important;align-items:center;gap:4px;padding:1px 8px;border-radius:999px;background:#fff;border:1px solid var(--wp-admin-theme-color,#2271b1);',
+        'font-size:10px;font-weight:600;line-height:1.5;color:#1d2327;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.15);',
+        'transition:top .45s cubic-bezier(.2,.8,.2,1),left .45s cubic-bezier(.2,.8,.2,1),transform .45s cubic-bezier(.2,.8,.2,1),opacity .3s,box-shadow .3s}',
+        '.s4u-pv-zaehler b{width:6px;height:6px;border-radius:50%;background:var(--wp-admin-theme-color,#2271b1)}',
+        '.s4u-pv[data-ausrichtung=left] .s4u-pv-zaehler{left:14px;transform:none}',
+        '.s4u-pv[data-ausrichtung=right] .s4u-pv-zaehler{left:calc(100% - 14px);transform:translateX(-100%)}',
+        '.s4u-pv[data-platz=im] .s4u-pv-zaehler{top:132px}',
+        '.s4u-pv[data-platz=im] .s4u-pv-fuss{box-shadow:inset 0 0 0 2px var(--wp-admin-theme-color,#2271b1)}',
+        '.s4u-pv[data-platz=ende] .s4u-pv-zaehler{top:182px}',
+        '.s4u-pv[data-platz=inhalt] .s4u-pv-zaehler{top:78px}',
+        '.s4u-pv[data-platz^=ecke] .s4u-pv-zaehler{top:176px;box-shadow:0 3px 10px rgba(0,0,0,.25)}',
+        '.s4u-pv[data-platz=ecke_r] .s4u-pv-zaehler{left:calc(100% - 10px);transform:translateX(-100%)}',
+        '.s4u-pv[data-platz=ecke_l] .s4u-pv-zaehler{left:10px;transform:none}',
+        '.s4u-pv[data-platz=aus] .s4u-pv-zaehler{opacity:0}.s4u-pv[data-platz=aus] .s4u-pv-selbst{opacity:1}',
+        '.s4u-pv-arten{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 2px;padding:0;list-style:none}',
+        '.s4u-pv-arten li{display:inline-flex;align-items:center;gap:2px;margin:0;padding:2px 10px 2px 5px;border-radius:999px;font-size:12px;line-height:1.5;transition:background .3s,color .3s}',
+        '.s4u-pv-arten .dashicons{width:16px;height:16px;font-size:16px}',
+        '.s4u-pv-arten .s4u-an{background:#edfaef;color:#00691b}.s4u-pv-arten .s4u-aus{background:#f0f0f1;color:#50575e}',
+        // 1.9.0: Ablauf beim Besuch (Consent).
+        '.s4u-fluss-zeile{grid-template-columns:minmax(0,1fr)}',
+        '.s4u-cf{display:flex;flex-wrap:wrap;align-items:center;gap:10px 30px;margin:4px 0 0;padding:0;list-style:none}',
+        '.s4u-cf>li{position:relative;margin:0}',
+        '.s4u-cf>li+li::before{content:"\f344";position:absolute;left:-25px;top:50%;margin-top:-10px;font:normal 20px/1 dashicons;color:#8c8f94}',
+        '.s4u-cf-schritt{display:flex;align-items:center;gap:6px;padding:8px 12px;border:1px solid #dcdcde;border-radius:8px;background:#f6f7f7;font-size:13px;line-height:1.4}',
+        '.s4u-cf-schritt .dashicons{color:var(--wp-admin-theme-color,#2271b1)}',
+        '.s4u-cf-ende{display:flex;flex-direction:column;gap:6px;flex:1 1 100%;min-width:0;margin-top:16px!important}',
+        // Die Ergebnisse stehen unter den Schritten: Pfeil nach unten statt nach rechts.
+        '.s4u-cf>li.s4u-cf-ende::before{content:"\f347";left:14px;top:-24px;margin:0}',
+        '.s4u-cf-weg{display:flex;align-items:flex-start;gap:6px;padding:6px 10px;border-radius:8px;font-size:13px;line-height:1.45}',
+        '.s4u-cf-wenn{font-weight:600}',
+        '.s4u-cf-ja{background:#edfaef;color:#00521a}.s4u-cf-ja .dashicons{color:#00a32a}',
+        '.s4u-cf-nein{background:#f0f0f1;color:#3c434a}.s4u-cf-nein .dashicons{color:#787c82}',
+        '.s4u-cf-stopp{background:#fcf0f1;color:#8a2424}.s4u-cf-stopp .dashicons{color:#d63638}',
+        '.s4u-cf[data-art=sofort] .s4u-cf-banner,.s4u-cf[data-art=sofort] .s4u-cf-nein,.s4u-cf[data-art=sofort] .s4u-cf-wenn,',
+        '.s4u-cf:not([data-art=fehlt]) .s4u-cf-stopp,.s4u-cf[data-art=fehlt] .s4u-cf-ja,.s4u-cf[data-art=fehlt] .s4u-cf-nein{display:none}',
+        '.s4u-cf.s4u-cf-neu .s4u-cf-ende,.s4u-cf.s4u-cf-neu .s4u-cf-banner{animation:s4u-auf .4s ease-out}',
+        '@keyframes s4u-auf{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}',
+        // 1.9.0: ungespeicherte Aenderungen und der Haken nach dem Speichern.
+        '.s4u-menue a .s4u-geaendert{margin-left:auto;width:8px;height:8px;border-radius:50%;background:#dba617;box-shadow:0 0 0 2px #fff}',
+        '.s4u-menue a[aria-current] .s4u-geaendert{box-shadow:0 0 0 2px var(--wp-admin-theme-color,#2271b1)}',
+        '.s4u-menue a .s4u-punkt+.s4u-geaendert,.s4u-menue a .s4u-geaendert+.s4u-punkt{margin-left:4px}',
+        '.s4u-offen{display:inline-flex;align-items:center;gap:6px;color:#7a5600;font-weight:600}.s4u-offen:empty{display:none}',
+        '.s4u-offen::before{content:"";width:8px;height:8px;border-radius:50%;background:#dba617}',
+        '.s4u-offen.s4u-neutral{color:#3c434a}.s4u-offen.s4u-neutral::before{background:#00a32a}',
+        '.s4u-leiste .s4u-verwerfen{margin-left:auto}',
+        '.s4u-gespeichert{display:inline-flex;align-items:center;gap:6px;color:#00691b;font-weight:600}',
+        '.s4u-gespeichert svg{width:20px;height:20px;fill:none;stroke:#00a32a;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}',
+        '.s4u-gespeichert circle{stroke-dasharray:63;stroke-dashoffset:63;animation:s4u-zieh .6s ease-out forwards}',
+        '.s4u-gespeichert path{stroke-dasharray:16;stroke-dashoffset:16;animation:s4u-zieh .35s .45s ease-out forwards}',
+        '@keyframes s4u-zieh{to{stroke-dashoffset:0}}',
+        '@media (prefers-reduced-motion:reduce){.s4u-pv *,.s4u-pv-arten li{transition:none!important}.s4u-cf.s4u-cf-neu *{animation:none!important}',
+        '.s4u-gespeichert circle,.s4u-gespeichert path{animation:none;stroke-dashoffset:0}}',
         '@media (max-width:782px){.s4u-feld{grid-template-columns:minmax(0,1fr)}.s4u-lab{padding-top:0}.s4u-lab:empty{display:none}',
+        '.s4u-cf{flex-direction:column;align-items:stretch;gap:26px}.s4u-cf>li+li::before{content:"\f347";left:50%;top:-23px;margin:0 0 0 -10px}.s4u-cf-ende{flex-basis:auto;margin-top:0!important}',
         '.s4u-ansicht-eigen .s4u-rahmen{grid-template-columns:minmax(0,1fr);gap:14px}',
         // Auf dem Handy liegt das Menue oben und bricht um - keine Leiste, die seitlich schiebt.
         '.s4u-menue{position:static;flex-direction:row;flex-wrap:wrap}.s4u-menue a{padding:8px 10px}',
@@ -1330,7 +1397,9 @@ function stats4u_admin_skript($seite) {
     wp_register_script('stats4u-admin', plugins_url('admin.js', __FILE__), array(), STATS4U_VERSION, true);
     wp_enqueue_script('stats4u-admin');
     $daten = array();
-    foreach (stats4u_cmps() as $k => $c) { $daten[$k] = array('wert' => $c['wert'], 'hinweis' => stats4u_cmp_hinweis($c)); }
+    foreach (stats4u_cmps() as $k => $c) {
+        $daten[$k] = array('wert' => $c['wert'], 'hinweis' => stats4u_cmp_hinweis($c), 'name' => $c['name'], 'pflicht' => $c['art'] === 'pflicht');
+    }
     wp_add_inline_script('stats4u-admin', 'window.stats4uCmp=' . wp_json_encode($daten, JSON_HEX_TAG | JSON_HEX_AMP) . ';', 'before');
 
     // Feedback: der Browser schickt erst auf "Send feedback" an stats4u.net
@@ -1362,6 +1431,18 @@ function stats4u_admin_skript($seite) {
         'markiert' => __('Copying failed. The text is selected; press Ctrl+C to copy it.', 'stats4u'),
         /* translators: 1: number of characters typed, 2: maximum number of characters */
         'zeichen' => __('%1$s of %2$s characters', 'stats4u'),
+        // 1.9.0: Platzvorschau, Consent-Ablauf, ungespeicherte Aenderungen.
+        'kurz'    => stats4u_kurztexte(),
+        /* translators: 1: where the counter is shown, 2: alignment, 3: on which pages */
+        'vorschauSatz' => __('Preview: %1$s, %2$s, %3$s.', 'stats4u'),
+        'gezeigt' => __('shown:', 'stats4u'),
+        'nichtGezeigt' => __('not shown:', 'stats4u'),
+        'deinWerkzeug' => __('your consent tool', 'stats4u'),
+        /* translators: %s: list of settings sections, e.g. "Appearance, Placement" */
+        'offen'   => __('Unsaved changes in: %s', 'stats4u'),
+        'verwerfenFrage' => __('Discard all changes since the page was loaded? The saved settings stay as they are.', 'stats4u'),
+        'verwerfenKnopf' => __('Discard changes', 'stats4u'),
+        'verworfen' => __('Changes discarded.', 'stats4u'),
     ), JSON_HEX_TAG | JSON_HEX_AMP) . ';', 'before');
     wp_add_inline_script('stats4u-admin', 'window.stats4uDialog=' . wp_json_encode(array('abbrechen' => __('Cancel', 'stats4u')), JSON_HEX_TAG | JSON_HEX_AMP) . ';', 'before');
 
@@ -1504,7 +1585,7 @@ function stats4u_seite() {
                                      'feedback' => __('Feedback', 'stats4u')) as $teil => $name) : ?>
                 <a href="#s4u-teil-<?php echo esc_attr($teil); ?>" data-teil="<?php echo esc_attr($teil); ?>"><?php
                     echo wp_kses(stats4u_menue_bild($teil), stats4u_svg_erlaubt());
-                    ?><span><?php echo esc_html($name); ?></span><?php
+                    ?><span><?php echo esc_html($name); ?></span><span class="s4u-geaendert" hidden><span class="screen-reader-text"><?php echo esc_html__('(unsaved changes)', 'stats4u'); ?></span></span><?php
                     // Ein Punkt am Menuepunkt, solange dort etwas fehlt (wie der Hinweis oben).
                     if ($teil === 'consent' && $cmp_fehlt) : ?><span class="s4u-punkt" aria-hidden="true"></span><span class="screen-reader-text"><?php echo esc_html__('(needs attention)', 'stats4u'); ?></span><?php endif; ?></a>
                 <?php endforeach; ?>
@@ -1555,12 +1636,7 @@ function stats4u_seite() {
                         <p class="description"><?php echo esc_html__('Preview - not counted.', 'stats4u'); ?></p>
                         <?php if ($ansicht === 'eigen') :
                             // Ueberblick der gespeicherten Wahl - ein Blick statt vier Menuepunkte.
-                            $kurz_platz = array(
-                                'unter' => __('below the footer', 'stats4u'), 'im' => __('in the footer', 'stats4u'),
-                                'ende' => __('end of the page', 'stats4u'), 'inhalt' => __('below the content', 'stats4u'),
-                                'ecke_r' => __('bottom right corner', 'stats4u'), 'ecke_l' => __('bottom left corner', 'stats4u'),
-                                'aus' => __('block or shortcode only', 'stats4u'),
-                            );
+                            $kurz_platz = stats4u_kurztexte()['platz'];
                             if ($e['consent'] === 'eigen') {
                                 $kurz_laden = __('after consent in another tool', 'stats4u');
                             } elseif ($cmp_jetzt) {
@@ -1726,6 +1802,7 @@ function stats4u_seite() {
                             <label><input type="radio" name="<?php echo esc_attr($n); ?>[wo]" value="<?php echo esc_attr($wert); ?>" <?php checked($e['wo'], $wert); ?>><span><?php echo esc_html($beschriftung); ?></span></label>
                             <?php endforeach; ?></div>
                     </div>
+                    <?php stats4u_platz_vorschau($e); ?>
                 </div>
             </section>
 
@@ -1789,6 +1866,7 @@ function stats4u_seite() {
                             ?></p>
                         </div>
                     </div>
+                    <?php stats4u_consent_fluss($e, $cmp_jetzt, $cmp_fehlt); ?>
                 </div>
                 <?php if ($e['id'] !== '') : ?>
                 <p class="description s4u-karte-fuss"><?php
@@ -1825,6 +1903,10 @@ function stats4u_seite() {
                 <?php submit_button(__('Save and finish', 'stats4u'), 'primary', 'submit', false, array('id' => 's4u_fertig')); ?>
                 <?php else : ?>
                 <?php submit_button(null, 'primary', 'submit', false); ?>
+                <?php // Gespeichert-Haken und ungespeicherte Aenderungen - admin.js blendet sie ein. ?>
+                <span class="s4u-gespeichert" id="s4u_gespeichert" hidden><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M7 12.5l3.2 3.2L17 9"/></svg><?php echo esc_html__('Saved', 'stats4u'); ?></span>
+                <span class="s4u-offen" id="s4u_offen" role="status" aria-live="polite"></span>
+                <button type="button" class="button-link s4u-verwerfen" id="s4u_verwerfen" hidden><?php echo esc_html__('Discard changes', 'stats4u'); ?></button>
                 <?php endif; ?>
             </div>
         </form>
@@ -1933,6 +2015,116 @@ function stats4u_teil_start() {
                 <span class="button"><?php echo esc_html__('Open the settings', 'stats4u'); ?></span>
             </a>
         </div>
+    </div>
+    <?php
+}
+
+/**
+ * Die Kurztexte fuer Platz, Ausrichtung und Seiten - fuer den Ueberblick, die
+ * Platzvorschau und ihre Textfassung (admin.js zieht sie beim Umstellen nach).
+ */
+function stats4u_kurztexte() {
+    return array(
+        'platz' => array(
+            'unter' => __('below the footer', 'stats4u'), 'im' => __('in the footer', 'stats4u'),
+            'ende' => __('end of the page', 'stats4u'), 'inhalt' => __('below the content', 'stats4u'),
+            'ecke_r' => __('bottom right corner', 'stats4u'), 'ecke_l' => __('bottom left corner', 'stats4u'),
+            'aus' => __('block or shortcode only', 'stats4u'),
+        ),
+        'ausrichtung' => array('left' => __('left', 'stats4u'), 'center' => __('center', 'stats4u'), 'right' => __('right', 'stats4u')),
+        'wo' => array('alle' => __('on all pages', 'stats4u'), 'start' => __('only on the front page', 'stats4u'),
+                      'einzeln' => __('only on single posts and pages', 'stats4u')),
+    );
+}
+
+/**
+ * Welche Seitenarten den Zaehler automatisch zeigen - dieselbe Regel wie
+ * stats4u_auto_aktiv() und stats4u_nach_inhalt(): 'inhalt' nur auf einzelnen
+ * Beitraegen und Seiten (eine statische Startseite ist eine), 'aus' nirgends.
+ *
+ * @return array Seitenart => bool (start, einzeln, archiv).
+ */
+function stats4u_seitenarten($platz, $wo, $start_ist_seite) {
+    $an = array('start' => true, 'einzeln' => true, 'archiv' => true);
+    if ($wo === 'start')   { $an = array('start' => true, 'einzeln' => false, 'archiv' => false); }
+    if ($wo === 'einzeln') { $an = array('start' => $start_ist_seite, 'einzeln' => true, 'archiv' => false); }
+    if ($platz === 'inhalt') { $an['archiv'] = false; $an['start'] = $an['start'] && $start_ist_seite; }
+    if ($platz === 'aus') { $an = array('start' => false, 'einzeln' => false, 'archiv' => false); }
+    return $an;
+}
+
+/**
+ * Platzvorschau: eine Skizze der Seite, in der der Zaehler an den gewaehlten
+ * Platz gleitet, mit Ausrichtung - darunter, auf welchen Seitenarten er
+ * erscheint, und ein Satz als Textfassung. Der Server zeichnet den
+ * gespeicherten Stand; admin.js stellt nur data-* um. Feste Markup-Teile,
+ * keine Eingabe darin.
+ */
+function stats4u_platz_vorschau($e) {
+    $k      = stats4u_kurztexte();
+    $platz  = isset($k['platz'][$e['platz']]) ? $e['platz'] : 'unter';
+    $ausr   = stats4u_ausrichtung($e);
+    $wo     = isset($k['wo'][$e['wo']]) ? $e['wo'] : 'alle';
+    $seite  = get_option('show_on_front') === 'page';
+    $arten  = stats4u_seitenarten($platz, $wo, $seite);
+    $namen  = array('start' => __('Front page', 'stats4u'), 'einzeln' => __('Posts and pages', 'stats4u'), 'archiv' => __('Archives and blog', 'stats4u'));
+    ?>
+    <div class="s4u-feld s4u-pv-zeile">
+        <span class="s4u-lab"><?php echo esc_html__('Preview', 'stats4u'); ?></span>
+        <div>
+            <div class="s4u-pv" id="s4u_pv" data-platz="<?php echo esc_attr($platz); ?>" data-ausrichtung="<?php echo esc_attr($ausr); ?>" data-start-seite="<?php echo $seite ? '1' : '0'; ?>" aria-hidden="true">
+                <span class="s4u-pv-leiste"><i></i><i></i><i></i></span>
+                <span class="s4u-pv-kopf"></span>
+                <span class="s4u-pv-text"><i></i><i></i><i></i></span>
+                <span class="s4u-pv-fuss"><i></i><i></i></span>
+                <span class="s4u-pv-linie"></span>
+                <span class="s4u-pv-selbst">[stats4u]</span>
+                <span class="s4u-pv-zaehler"><b></b>12 345</span>
+            </div>
+            <ul class="s4u-pv-arten" id="s4u_pv_arten" aria-label="<?php echo esc_attr__('Where the counter appears automatically', 'stats4u'); ?>">
+                <?php foreach ($namen as $art => $name) : ?>
+                <li data-art="<?php echo esc_attr($art); ?>" class="<?php echo esc_attr($arten[$art] ? 's4u-an' : 's4u-aus'); ?>"><span class="dashicons <?php echo esc_attr($arten[$art] ? 'dashicons-yes' : 'dashicons-no-alt'); ?>" aria-hidden="true"></span><span class="screen-reader-text s4u-pv-status"><?php echo esc_html($arten[$art] ? __('shown:', 'stats4u') : __('not shown:', 'stats4u')); ?></span> <?php echo esc_html($name); ?></li>
+                <?php endforeach; ?>
+            </ul>
+            <p class="description" id="s4u_pv_text" aria-live="polite"><?php
+                echo esc_html(sprintf(
+                    /* translators: 1: where the counter is shown, 2: alignment, 3: on which pages */
+                    __('Preview: %1$s, %2$s, %3$s.', 'stats4u'),
+                    $k['platz'][$platz], $k['ausrichtung'][$ausr], $k['wo'][$wo]
+                ));
+            ?></p>
+        </div>
+    </div>
+    <?php
+}
+
+/**
+ * Was beim Besuch passiert, als Ablauf: Seite - (Einwilligung) - Zaehler.
+ * Mit Consent-Werkzeug zwei Wege (ja: laedt und zaehlt, nein: nichts), ohne
+ * eine Kennung, die das Werkzeug braucht, ein roter Schritt. Der Server zeigt
+ * den gespeicherten Stand, admin.js folgt der Auswahl.
+ */
+function stats4u_consent_fluss($e, $cmp, $fehlt) {
+    $art  = $e['consent'] === '' ? 'sofort' : ($fehlt ? 'fehlt' : 'werkzeug');
+    $name = ($e['consent'] === 'eigen' || !$cmp) ? __('your consent tool', 'stats4u') : $cmp['name'];
+    ?>
+    <div class="s4u-feld s4u-fluss-zeile">
+        <span class="s4u-lab"><?php echo esc_html__('What happens on a visit', 'stats4u'); ?></span>
+        <ol class="s4u-cf" id="s4u_cf" data-art="<?php echo esc_attr($art); ?>">
+            <li class="s4u-cf-schritt"><span class="dashicons dashicons-admin-site-alt3" aria-hidden="true"></span><?php echo esc_html__('A visitor opens a page', 'stats4u'); ?></li>
+            <li class="s4u-cf-schritt s4u-cf-banner"><span class="dashicons dashicons-shield" aria-hidden="true"></span><span><?php
+                echo wp_kses(sprintf(
+                    /* translators: %s: name of a consent tool */
+                    esc_html__('%s asks for consent', 'stats4u'),
+                    '<b class="s4u-cf-name">' . esc_html($name) . '</b>'
+                ), array('b' => array('class' => true)));
+            ?></span></li>
+            <li class="s4u-cf-ende">
+                <span class="s4u-cf-weg s4u-cf-ja"><span class="dashicons dashicons-yes-alt" aria-hidden="true"></span><span class="s4u-cf-wenn"><?php echo esc_html__('Accepted:', 'stats4u'); ?></span> <?php echo esc_html__('the counter loads from stats4u.net and counts the visit', 'stats4u'); ?></span>
+                <span class="s4u-cf-weg s4u-cf-nein"><span class="dashicons dashicons-dismiss" aria-hidden="true"></span><span class="s4u-cf-wenn"><?php echo esc_html__('Declined:', 'stats4u'); ?></span> <?php echo esc_html__('nothing loads, the visit is not counted', 'stats4u'); ?></span>
+                <span class="s4u-cf-weg s4u-cf-stopp"><span class="dashicons dashicons-warning" aria-hidden="true"></span><?php echo esc_html__('The ID for statistics is missing - the counter never loads, not even after consent', 'stats4u'); ?></span>
+            </li>
+        </ol>
     </div>
     <?php
 }
